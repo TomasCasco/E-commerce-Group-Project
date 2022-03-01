@@ -1,11 +1,11 @@
-const express = require("express");
+require("dotenv").config();
+const server = require("./src/app");
+const { conn } = require("./src/db");
 
-const app = express();
+conn.sync({ force: true }).then(() => {
+  server.listen(server.get("port"), () =>
+    console.log(`${server.serverName} listening on port ${server.get("port")}`)
+  );
+});
 
-app.set("port", process.env.PORT || 3002);
-
-app.listen(app.use(port), () =>
-  console.log(`Auth listening on port ${app.use(port)}`)
-);
-
-module.exports = app;
+module.exports = server;

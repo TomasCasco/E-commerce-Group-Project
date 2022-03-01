@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const errorHandler = require("./middlewares/errorHandler");
 const setHeaders = require("./middlewares/setHeaders");
-const routes= require("./routes")
+const routes = require("./routes");
 
 require("./db");
 
@@ -18,7 +18,7 @@ server.use(bodyParser.json({ limit: "50mb" }));
 server.use(cookieParser());
 server.use(morgan("dev"));
 server.use(setHeaders);
-server.use("/", routes)
+server.use("/", routes);
 
 server.use(errorHandler);
 

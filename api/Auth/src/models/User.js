@@ -4,6 +4,11 @@ const { DataTypes } = require("sequelize");
 //luego le injectamos la conexion sequelize
 module.exports = (sequelize) => {
   sequelize.define("user", {
+    id: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      primaryKey: true,
+    },
     username: {
       type: DataTypes.STRING,
       allowNull: false,

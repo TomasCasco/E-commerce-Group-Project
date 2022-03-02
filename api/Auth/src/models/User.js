@@ -1,36 +1,29 @@
-const { DataTypes } = require("sequelize");
+const mongoose = require("mongoose");
 
-//exporto una funcion que define el modelo,
-//luego le injectamos la conexion sequelize
-module.exports = (sequelize) => {
-  sequelize.define("user", {
-    id: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
-      primaryKey: true,
-    },
+const userSchema = new mongoose.Schema(
+  {
     username: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: {
-        msg: "Username in use",
-      },
+      type: String,
+      required: true,
+      unique: true,
     },
     email: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: {
-        msg: "Email in use",
-      },
-      validate: {
-        isEmail: {
-          msg: "Invalid email type",
-        },
-      },
+      type: String,
+      required: true,
+      unique: true,
     },
     password: {
-      type: DataTypes.STRING,
-      allowNull: false,
+      type: String,
+      required: true,
     },
-  });
-};
+    isAdmin: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
+
+module.exports=mongoose.model("User", userSchema)

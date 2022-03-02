@@ -1,40 +1,40 @@
 const { JWT_SECRET, JWT_EXPIRES } = process.env;
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { User } = require("../db");
+const User = require("../models/User");
 
-const login = (req, res, next) => {
+const login = async (req, res, next) => {
   let { email, password } = req.body;
 
-  User.findOne({
-    where: {
-      email: email,
-    },
-  })
-    .then((user) => {
-      if (!user) {
-        throw new Error("Invalid user or password");
-      } else {
-        if (bcrypt.compareSync(password, user.password)) {
-          let token = jwt.sign({ user: user }, JWT_SECRET, {
-            expiresIn: JWT_EXPIRES,
-          });
+  try {
+    const user = await User.findOne({ email });
 
-          res.cookie("userToken", token);
-          res.status(200).json({
-            id: user.id,
-            email:user.email,
+    if (!user) {
+      res.status(401).json({ error: "Invalid email or password" });
+    } else {
+      if (bcrypt.compareSync(password, user.password)) {
+        const token = jwt.sign(
+          {
+            userId: user._id,
             username: user.username,
-            token: token,
-          });
-        } else {
-          throw new Error("Invalid user or password");
-        }
+            email: user.email,
+            isAdmin: user.isAdmin,
+          },
+          JWT_SECRET,
+          {
+            expiresIn: JWT_EXPIRES,
+          }
+        );
+        const { password, ...others } = user._doc;
+        res.cookie("userToken", token);
+        res.status(200).json({ ...others, token });
+      } else {
+        res.status(401).json({ error: "Invalid email or password" });
       }
-    })
-    .catch((err) => {
-      next(err);
-    });
+    }
+  } catch (error) {
+    next(error);
+  }
 };
 
 module.exports = login;

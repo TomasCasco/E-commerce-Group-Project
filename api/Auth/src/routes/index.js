@@ -4,7 +4,7 @@ const authRouter = require("./authRouter");
 
 const router = Router();
 
-router.use("/", authRouter);
+router.use("/users", authRouter);
 
 
 module.exports = router;

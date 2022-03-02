@@ -4,36 +4,52 @@ const app = Router();
 const Product = require("./Product");
 
 // todos los productos
-app.get("/", async (req, res) => {
+app.get("/products", async (req, res) => {
   const { name } = req.query;
+  try {
+    if (!name) {
+      const products = await Product.find();
+      return res.json(products);
+    }
 
-  if (!name) {
-    const products = await Product.find();
-    return res.json(products);
+    function escapeRegExp(string) {
+      return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); // $& means the whole matched string
+    }
+
+    const product = await Product.find({
+      name: { $regex: escapeRegExp(name), $options: "i" },
+    });
+    return res.json(product);
+  } catch (err) {
+    console.log(err);
   }
-
-  const product = await Product.find({ name });
-  return res.json(product);
 });
 
 // trae un producto
-app.get("/id/:id", async (req, res) => {
+app.get("/products/:id", async (req, res) => {
   const { id } = req.params;
-
-  const products = await Product.findById(id);
-  res.json(products);
+  try {
+    const products = await Product.findById(id);
+    res.json(products);
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 // crea un producto
-app.post("/create", async (req, res) => {
-  const { name, price, brand, image, description } = req.body;
-  const product = new Product({ name, price, brand, image, description });
-  await product.save();
-  res.json(product);
+app.post("/products/create", async (req, res) => {
+  try {
+    const { name, price, brand, image, description } = req.body;
+    const product = new Product({ name, price, brand, image, description });
+    await product.save();
+    res.json(product);
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 // actualiza un producto
-app.put("/:id", async (req, res) => {
+app.put("/products/update/:id", async (req, res) => {
   const { id } = req.params;
   const { name, price, brand, image, description } = req.body;
 
@@ -55,10 +71,14 @@ app.put("/:id", async (req, res) => {
 });
 
 // elimina un producto
-app.delete("/:id", async (req, res) => {
-  const { id } = req.params;
-  await Product.findByIdAndDelete(id);
-  return res.json({ message: `product ${id} deleted` });
+app.delete("/products/delete/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    await Product.findByIdAndDelete(id);
+    return res.json({ message: `product ${id} deleted` });
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 module.exports = app;

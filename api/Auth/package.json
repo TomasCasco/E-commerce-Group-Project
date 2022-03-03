@@ -20,11 +20,10 @@
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "express-formidable": "^1.2.0",
+    "express-session": "^1.17.2",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.2.4",
-    "morgan": "^1.10.0",
-    "pg": "^8.7.3",
-    "sequelize": "^6.17.0"
+    "morgan": "^1.10.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"

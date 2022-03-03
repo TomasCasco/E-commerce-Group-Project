@@ -18,16 +18,14 @@ const login = async (req, res, next) => {
             userId: user._id,
             username: user.username,
             email: user.email,
-            isAdmin: user.isAdmin,
           },
           JWT_SECRET,
           {
             expiresIn: JWT_EXPIRES,
           }
         );
-        const { password, ...others } = user._doc;
-        res.cookie("userToken", token);
-        res.status(200).json({ ...others, token });
+        const { username } = user._doc;
+        res.status(200).json({ username, token });
       } else {
         res.status(401).json({ error: "Invalid email or password" });
       }

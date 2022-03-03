@@ -2,17 +2,21 @@ const express = require("express");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
+
+require("./config/db");
+
+const { adminJSRouter, rootPath } = require("./config/adminJS");
 const errorHandler = require("./middlewares/errorHandler");
 const setHeaders = require("./middlewares/setHeaders");
 const routes = require("./routes");
-
-require("./db");
 
 const server = express();
 
 server.serverName = "AUTH";
 
 server.set("port", process.env.PORT || 3002);
+
+server.use(rootPath, adminJSRouter);
 server.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 server.use(bodyParser.json({ limit: "50mb" }));
 server.use(cookieParser());

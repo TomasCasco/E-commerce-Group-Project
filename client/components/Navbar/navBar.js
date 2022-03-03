@@ -5,11 +5,18 @@ import {
     Text,
     Icon,
     Link,
+    useDisclosure,
+    MenuItem,
+    Menu,
+    MenuButton,
+    MenuList,
 } from '@chakra-ui/react'
 import { BsFillPersonFill, BsSearch } from "react-icons/bs";
+import { ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons'
 import { IoMdCart } from "react-icons/io";
  
 export default function NavBar() {
+    const { isOpen, onOpen, onClose } = useDisclosure()
   return (
     <>
     <Flex
@@ -84,17 +91,37 @@ export default function NavBar() {
         </Heading>
         <Flex alignItems='center' >
             <Flex className='nav-items'>
-                <Link _hover={{color: 'white'}}>
-                    <Text>PRODUCTS</Text>
-                </Link>
+            <Menu isOpen={isOpen}>
+                <MenuButton
+                    
+                    
+                    py={[1, 2, 2]}
+                    px={4}
+                    borderRadius={5}
+                    _hover={{color: 'white'}}
+                    aria-label="Courses"
+                    fontWeight="normal"
+                    onMouseEnter={onOpen}
+                    onMouseLeave={onClose}
+                >
+                    PRODUCTS {isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
+                </MenuButton>
+                <MenuList bgColor="#1606068a" onMouseEnter={onOpen} onMouseLeave={onClose} borderColor='#160606'>
+                    <MenuItem as='a' href='/products' _hover={{color: '#160606'}}>Gaming Keyboars</MenuItem>
+                    <MenuItem as='a' href='/products' _hover={{color: '#160606'}}>Gaming Mice</MenuItem>
+                    <MenuItem as='a' href='/products' _hover={{color: '#160606'}}>Headsets</MenuItem>
+                    <MenuItem as='a' href='/products' _hover={{color: '#160606'}}>Mouse Pads</MenuItem>
+                </MenuList>
+            </Menu>
+                
             </Flex>
             <Flex className='nav-items'>
-                <Link href='/support' _hover={{color: 'white'}}>
+                <Link href='/support' _hover={{color: 'white'}} py={[1, 2, 2]} mx={1}>
                     <Text>SUPPORT</Text>
                 </Link>
             </Flex>
             <Flex className='nav-items'>
-                <Link href='/aboutus' _hover={{color: 'white'}}>
+                <Link href='/aboutus' _hover={{color: 'white'}} py={[1, 2, 2]} mx={1}>
                     <Text>ABOUT US</Text>
                 </Link>
             </Flex>
@@ -110,6 +137,7 @@ export default function NavBar() {
 
 
     </Flex>
+    
     </>
   )
 }

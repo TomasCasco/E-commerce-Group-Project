@@ -2,13 +2,17 @@ todos los productos
 http://localhost:3004/products
 retorna un array de objetos [{}]
 
-busqueda por nombre (query)
-http://localhost:3004/products?name=value
-retorna un array de objetos con los nombres que incluyan la query [{}]
+busqueda por nombre o type (query)
+http://localhost:3004/products?name=value || http://localhost:3004/products?type=value
+retorna un array de objetos con los nombres o type que incluyan la query [{}]
 
 busqueda por id
 http://localhost:3004/products/:id
 retorna un objeto con el producto
+
+order asc o desc por nombre
+http://localhost:3004/products/order/:asc || http://localhost:3004/products/order/:desc
+returna on array ordenado (si no es "asc" o "desc" retorna ordenado por defecto)
 
 crear un producto
 http://localhost:3004/products/create

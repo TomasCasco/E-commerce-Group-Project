@@ -18,7 +18,7 @@ const userTypes = gql`
   }
 
   type responseRegister {
-    message: String
+    msg: String
     error: String
   }
 

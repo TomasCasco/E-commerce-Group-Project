@@ -7,7 +7,6 @@ const editCart = require("../controllers/editCart");
 const access = require("../controllers/access");
 const auth = require("../middlewares/auth");
 
-
 const router = Router();
 
 router.post("/login", login);

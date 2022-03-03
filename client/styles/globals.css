@@ -23,4 +23,5 @@ a {
 
 .nav-items:not(:last-child){
   margin-right: 1.5em;
+  background-color: #160606
 }

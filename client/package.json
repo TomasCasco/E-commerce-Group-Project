@@ -17,10 +17,13 @@
     "@react-icons/all-files": "^4.1.0",
     "framer-motion": "^6.2.8",
     "next": "12.1.0",
+    "next-redux-wrapper": "^7.0.5",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-icons": "^4.3.1",
-    "react-slick": "^0.28.1"
+    "react-redux": "^7.2.6",
+    "react-slick": "^0.28.1",
+    "redux": "^4.1.2"
   },
   "devDependencies": {
     "eslint": "8.10.0",

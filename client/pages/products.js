@@ -1,9 +1,8 @@
 import Head from 'next/head'
-import CaptionCarousel from '../components/Banner/banner.tsx'
-
+import Card from '../components/Card/card'
+import CardContainer from '../components/Card/cardContainer'
 import NavBar from '../components/Navbar/navBar'
 
-import styles from '../styles/Home.module.css'
 
 
 export default function Home() {
@@ -15,7 +14,8 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <NavBar/>
-      <CaptionCarousel/>
+      
+      <CardContainer/>
       
      
      

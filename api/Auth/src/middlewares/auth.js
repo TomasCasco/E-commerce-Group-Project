@@ -9,7 +9,6 @@ const auth = (req, res, next) => {
     if (err) {
      return next(err);
     } else {
-      //respondo true si la firma del token es correcta
       req.user=verifiedJwt.userId;
      return next();
     }

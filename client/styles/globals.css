@@ -14,3 +14,13 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.nav-items{
+  font-size: large;
+  color: lightgrey;
+}
+
+
+.nav-items:not(:last-child){
+  margin-right: 1.5em;
+}

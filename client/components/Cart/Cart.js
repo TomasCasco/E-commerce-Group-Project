@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Grid, Flex, Box, useColorModeValue } from "@chakra-ui/react";
+import { Grid, Flex, Box, useColorModeValue, Link } from "@chakra-ui/react";
 import CartItem from "./CartItem";
 
 export default function Cart() {
@@ -56,7 +56,11 @@ export default function Cart() {
             </Flex>
 
             <Box>
-                <Box w="20" border="1px solid black" borderRadius="20">COMPRAR</Box>
+                <Link href='/checkout' px='2' w="20" border="1px solid black" borderRadius="20" _hover={{bgColor:'gray.200', textDecoration:'none' }} >
+                  
+                  COMPRAR
+                 
+                </Link>
             </Box>
             </Grid>
         </Box>

@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
 const route = require("./Ruta");
 
 require("./db");
@@ -7,6 +8,7 @@ require("./db");
 app.set("port", process.env.PORT || 3004);
 
 app.use(express.json());
+app.use(cors("*"));
 
 // routes
 app.use("/", route);

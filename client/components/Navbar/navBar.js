@@ -10,11 +10,13 @@ import {
     Menu,
     MenuButton,
     MenuList,
+    
 } from '@chakra-ui/react'
 import { BsFillPersonFill, BsSearch } from "react-icons/bs";
 import { ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons'
 import { IoMdCart } from "react-icons/io";
- 
+import Cart from '../Cart/Cart'
+
 export default function NavBar() {
     const { isOpen, onOpen, onClose } = useDisclosure()
   return (
@@ -52,20 +54,30 @@ export default function NavBar() {
             mx='10px'
             fontSize='11px'
         >
-            <Link 
+            <Menu>
+                
+            <MenuButton 
                 display='flex'
                 alignItems='center'
                 p='2px'
                 href='/cart'
+                
                 _hover={{
                     color: 'white'
-                }} 
+                }
+            } 
             >
                 <Icon fontSize='medium' mt='5px'>
                 <IoMdCart/>
                 </Icon>
-                <Text>My Cart</Text>
-            </Link>
+                My Cart 
+            </MenuButton>
+                <MenuList bgColor="#1606068a"  borderColor='#160606'>
+                    <MenuList>
+                        <Cart/>
+                    </MenuList>
+                </MenuList>
+                </Menu>
             
                 
             

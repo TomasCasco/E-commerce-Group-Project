@@ -8,6 +8,8 @@ import CardContainer from '../components/Card/cardContainer'
 import Cart from '../components/Cart/Cart'
 
 
+
+
 export default function Home() {
   return (
     <>
@@ -20,6 +22,6 @@ export default function Home() {
       <CaptionCarousel/>
       <CardContainer />
       <Cart />
-    </>
+    </> 
   )
 }

@@ -6,6 +6,7 @@ const Product = require("./Product");
 
 // todos los productos
 app.get("/products", async (req, res) => {
+
   let { orderBy, sortBy, brands, categories, name } = req.query;
 
   //transformar querys a miniscula

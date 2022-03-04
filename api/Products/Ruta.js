@@ -6,113 +6,37 @@ const Product = require("./Product");
 
 // todos los productos
 app.get("/products", async (req, res) => {
-  let { name, price, category, order_name, brand } = req.query;
-  order_name = order_name?.toLowerCase();
-  brand = brand?.toLowerCase();
-
   try {
-    if (!name && !price && !category && !order_name && !brand) {
-      const products = await Product.find();
-      return res.json(products);
-    }
+    let { orderBy, sortBy, name, brands, categories } = req.query;
 
-    if (name && !price && !category && !order_name && !brand) {
-      const product = await Product.find({
-        name: { $regex: escapeRegExp(name), $options: "i" },
-      });
-      return res.json(product);
-    }
+    //transformar querys a miniscula
+    orderBy = orderBy?.toLowerCase();
+    sortBy = sortBy?.toLocaleLowerCase();
 
-    if (!name && price === "asc" && !category && !order_name && !brand) {
-      const products = await Product.find().sort({ price: 1 });
-      return res.json(products);
-    }
+    //crear array con regexp para filtrar categorias
+    categories = categories ? JSON.parse(categories) : null;
+    brands = brands ? JSON.parse(brands) : null;
 
-    if (!name && price === "desc" && !category && !order_name && !brand) {
-      const products = await Product.find().sort({ price: -1 });
-      return res.json(products);
-    }
+    const regex = (query) => {
+      if (Array.isArray(query)) {
+        query = query ? query.map((q) => new RegExp(q, "i")) : null;
+        return query;
+      } else {
+        query = query ? new RegExp(query, "i") : null;
+        return query;
+      }
+    };
 
-    if (!name && !price && category && !order_name && !brand) {
-      const product = await Product.find({
-        category: { $regex: escapeRegExp(category), $options: "i" },
-      });
-      return res.json(product);
-    }
+    categories = regex(categories);
+    brands = regex(brands);
+    name = regex(name);
 
-    if (!name && !price && !category && order_name === "asc" && !brand) {
-      const products = await Product.find();
-      return res.json(
-        products.sort((a, b) =>
-          a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
-        )
-      );
-    }
-
-    if (!name && !price && !category && order_name === "desc" && !brand) {
-      const products = await Product.find();
-      const desc = products.sort((a, b) =>
-        b.name.toLowerCase() > a.name.toLowerCase() ? 1 : -1
-      );
-      return res.json(desc);
-    }
-
-    if (!name && !price && !category && !order_name && brand) {
-      const products = await Product.find({
-        brand: { $regex: escapeRegExp(brand), $options: "i" },
-      });
-      return res.json(products);
-    }
-
-    // todo: ====================  combinando querys
-
-    if (!name && !price && category && order_name === "asc" && !brand) {
-      const products = await Product.find({
-        category: { $regex: escapeRegExp(category), $options: "i" },
-      });
-      const result = products.sort((a, b) =>
-        a.category.toLowerCase() > b.category.toLowerCase() ? 1 : -1
-      );
-      return res.json(result);
-    }
-
-    if (!name && !price && category && order_name === "desc" && !brand) {
-      const products = await Product.find({
-        category: { $regex: escapeRegExp(category), $options: "i" },
-      });
-      const result = products.sort((a, b) =>
-        a.category.toLowerCase() > b.category.toLowerCase() ? -1 : 1
-      );
-      return res.json(result);
-    }
-
-    if (!name && price === "asc" && category && !order_name && !brand) {
-      const products = await Product.find({
-        category: { $regex: escapeRegExp(category), $options: "i" },
-      });
-      const result = products.sort((a, b) => (a.price > b.price ? 1 : -1));
-      return res.json(result);
-    }
-
-    if (!name && price === "desc" && category && !order_name && !brand) {
-      const products = await Product.find({
-        category: { $regex: escapeRegExp(category), $options: "i" },
-      });
-      const result = products.sort((a, b) => (a.price > b.price ? -1 : 1));
-      return res.json(result);
-    }
-
-    if (!name && !price && category && !order_name && brand) {
-      const products = await Product.find({
-        category: { $regex: escapeRegExp(category), $options: "i" },
-        brand: { $regex: escapeRegExp(brand), $options: "i" },
-      });
-      return res.json(products);
-    }
-
-    function escapeRegExp(string) {
-      return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); // $& means the whole matched string
-    }
+    const products = await Product.find()
+      .where(name ? { name: name } : null)
+      .where(brands ? { brand: { $in: brands } } : null)
+      .where(categories ? { category: { $in: categories } } : null)
+      .sort({ [orderBy]: sortBy });
+    return res.json(products);
   } catch (err) {
     console.log(err);
   }

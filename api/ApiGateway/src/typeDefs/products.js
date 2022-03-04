@@ -8,6 +8,7 @@ const productTypes = gql`
     image: String
     description: String
     stock: Int
+    type: String
   }
 
   type updateResponse {
@@ -26,6 +27,7 @@ const productTypes = gql`
     image: String!
     description: String!
     stock: Int!
+    type: Int!
   }
 
   input mutateProduct {
@@ -36,11 +38,17 @@ const productTypes = gql`
     image: String
     description: String
     stock: Int
+    type: Int
+  }
+
+  input nameOrType {
+    name: String
+    type: String
   }
 
   type Query {
     getAllProducts: [product]
-    getProductByName(input: String): [product]
+    getProductsByNameOrType(input: nameOrType): [product]
     getProductById(input: String): product
   }
 

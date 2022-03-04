@@ -6,6 +6,34 @@ busqueda por nombre (query)
 http://localhost:3004/products?name=value
 retorna un array de objetos con los nombres que incluyan la query [{}]
 
+ordena por precio asc o desc (query)
+http://localhost:3004/products?price=(asc o desc)
+retorna un array de objetos con los precios ordenados [{}]
+
+busca por categoria
+http://localhost:3004/products?category=(ej: smartphones)
+retorna un array de objetos [{}]
+
+ordena por nombre asc o desc
+http://localhost:3004/products?name=(ej: asc)
+retorna un array de objetos [{}]
+
+busca por marca
+http://localhost:3004/products?brand=(ej: apple)
+retorna un array de objetos [{}]
+
+busca por categoria y ordena nombres asc o desc
+http://localhost:3004/products?category=(ej: smartphones)&&order_name=(ej:asc)
+retorna un array de objetos [{}]
+
+busca por categoria y ordena precio asc o desc
+http://localhost:3004/products?category=(ej: smartphones)&&price=(ej:asc)
+retorna un array de objetos [{}]
+
+busca por categoria y marca
+http://localhost:3004/products?category=(ej: smartphones)&&brand=(ej:apple)
+retorna un array de objetos [{}]
+
 busqueda por id
 http://localhost:3004/products/:id
 retorna un objeto con el producto

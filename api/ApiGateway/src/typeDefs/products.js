@@ -27,7 +27,7 @@ const productTypes = gql`
     image: String!
     description: String!
     stock: Int!
-    type: Int!
+    type: String!
   }
 
   input mutateProduct {
@@ -38,7 +38,7 @@ const productTypes = gql`
     image: String
     description: String
     stock: Int
-    type: Int
+    type: String
   }
 
   input nameOrType {

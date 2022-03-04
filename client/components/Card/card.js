@@ -43,7 +43,6 @@ export default function Card({p}) {
           {/* <Box position="absolute" onClick={() => alert("Add To Wish List")}>🧡</Box>  dispatch(addToWishList(p.id)) */}
         <Image
           src={p.image}
-          // alt={`Picture of ${data.name}`}
           roundedTop="lg"
         />
 

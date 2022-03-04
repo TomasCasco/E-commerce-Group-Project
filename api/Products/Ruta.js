@@ -52,6 +52,8 @@ app.post("/products/create", async (req, res) => {
     let { name, price, brand, image, stock, description, category } = req.body;
     name = name?.toLocaleLowerCase();
     brand = brand?.toLocaleLowerCase();
+    category=category?.toLocaleLowerCase();
+    price=parseInt(price);
 
     const product = new Product({
       name,
@@ -76,6 +78,8 @@ app.put("/products/update/:id", async (req, res) => {
   let { name, price, brand, image, stock, description, category } = req.body;
   name = name?.toLocaleLowerCase();
   brand = brand?.toLocaleLowerCase();
+  category=category?.toLocaleLowerCase();
+  price=parseInt(price);
 
   try {
     if (id) {

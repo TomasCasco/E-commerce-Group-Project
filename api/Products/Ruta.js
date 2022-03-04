@@ -6,11 +6,12 @@ const Product = require("./Product");
 
 // todos los productos
 app.get("/products", async (req, res) => {
-  let { orderBy, sortBy, brands, categories } = req.query;
+  let { orderBy, sortBy, brands, categories, name } = req.query;
 
   //transformar querys a miniscula
   orderBy = orderBy?.toLowerCase();
   sortBy = sortBy?.toLocaleLowerCase();
+  name = name?.toLocaleLowerCase();
 
   //crear array con regexp para filtrar categorias
   categories = categories ? JSON.parse(categories) : null;
@@ -18,17 +19,17 @@ app.get("/products", async (req, res) => {
     ? categories.map((category) => new RegExp(category, "i"))
     : null;
 
-  //crear array con regexp para filtrar brands  
+  //crear array con regexp para filtrar brands
   brands = brands ? JSON.parse(brands) : null;
   brands = brands ? brands.map((brand) => new RegExp(brand, "i")) : null;
 
   try {
     const products = await Product.find()
+      .where(name ? { name: { $regex: ".*" + name + ".*" } } : null)
       .where(brands ? { brand: { $in: brands } } : null)
       .where(categories ? { category: { $in: categories } } : null)
       .sort({ [orderBy]: sortBy });
     res.json(products);
-
   } catch (err) {
     console.log(err);
   }

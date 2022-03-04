@@ -6,113 +6,29 @@ const Product = require("./Product");
 
 // todos los productos
 app.get("/products", async (req, res) => {
-  let { name, price, category, order_name, brand } = req.query;
-  order_name = order_name?.toLowerCase();
-  brand = brand?.toLowerCase();
+  let { orderBy, sortBy, brands, categories } = req.query;
+
+  //transformar querys a miniscula
+  orderBy = orderBy?.toLowerCase();
+  sortBy = sortBy?.toLocaleLowerCase();
+
+  //crear array con regexp para filtrar categorias
+  categories = categories ? JSON.parse(categories) : null;
+  categories = categories
+    ? categories.map((category) => new RegExp(category, "i"))
+    : null;
+
+  //crear array con regexp para filtrar brands  
+  brands = brands ? JSON.parse(brands) : null;
+  brands = brands ? brands.map((brand) => new RegExp(brand, "i")) : null;
 
   try {
-    if (!name && !price && !category && !order_name && !brand) {
-      const products = await Product.find();
-      return res.json(products);
-    }
+    const products = await Product.find()
+      .where(brands ? { brand: { $in: brands } } : null)
+      .where(categories ? { category: { $in: categories } } : null)
+      .sort({ [orderBy]: sortBy });
+    res.json(products);
 
-    if (name && !price && !category && !order_name && !brand) {
-      const product = await Product.find({
-        name: { $regex: escapeRegExp(name), $options: "i" },
-      });
-      return res.json(product);
-    }
-
-    if (!name && price === "asc" && !category && !order_name && !brand) {
-      const products = await Product.find().sort({ price: 1 });
-      return res.json(products);
-    }
-
-    if (!name && price === "desc" && !category && !order_name && !brand) {
-      const products = await Product.find().sort({ price: -1 });
-      return res.json(products);
-    }
-
-    if (!name && !price && category && !order_name && !brand) {
-      const product = await Product.find({
-        category: { $regex: escapeRegExp(category), $options: "i" },
-      });
-      return res.json(product);
-    }
-
-    if (!name && !price && !category && order_name === "asc" && !brand) {
-      const products = await Product.find();
-      return res.json(
-        products.sort((a, b) =>
-          a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
-        )
-      );
-    }
-
-    if (!name && !price && !category && order_name === "desc" && !brand) {
-      const products = await Product.find();
-      const desc = products.sort((a, b) =>
-        b.name.toLowerCase() > a.name.toLowerCase() ? 1 : -1
-      );
-      return res.json(desc);
-    }
-
-    if (!name && !price && !category && !order_name && brand) {
-      const products = await Product.find({
-        brand: { $regex: escapeRegExp(brand), $options: "i" },
-      });
-      return res.json(products);
-    }
-
-    // todo: ====================  combinando querys
-
-    if (!name && !price && category && order_name === "asc" && !brand) {
-      const products = await Product.find({
-        category: { $regex: escapeRegExp(category), $options: "i" },
-      });
-      const result = products.sort((a, b) =>
-        a.category.toLowerCase() > b.category.toLowerCase() ? 1 : -1
-      );
-      return res.json(result);
-    }
-
-    if (!name && !price && category && order_name === "desc" && !brand) {
-      const products = await Product.find({
-        category: { $regex: escapeRegExp(category), $options: "i" },
-      });
-      const result = products.sort((a, b) =>
-        a.category.toLowerCase() > b.category.toLowerCase() ? -1 : 1
-      );
-      return res.json(result);
-    }
-
-    if (!name && price === "asc" && category && !order_name && !brand) {
-      const products = await Product.find({
-        category: { $regex: escapeRegExp(category), $options: "i" },
-      });
-      const result = products.sort((a, b) => (a.price > b.price ? 1 : -1));
-      return res.json(result);
-    }
-
-    if (!name && price === "desc" && category && !order_name && !brand) {
-      const products = await Product.find({
-        category: { $regex: escapeRegExp(category), $options: "i" },
-      });
-      const result = products.sort((a, b) => (a.price > b.price ? -1 : 1));
-      return res.json(result);
-    }
-
-    if (!name && !price && category && !order_name && brand) {
-      const products = await Product.find({
-        category: { $regex: escapeRegExp(category), $options: "i" },
-        brand: { $regex: escapeRegExp(brand), $options: "i" },
-      });
-      return res.json(products);
-    }
-
-    function escapeRegExp(string) {
-      return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); // $& means the whole matched string
-    }
   } catch (err) {
     console.log(err);
   }
@@ -132,7 +48,10 @@ app.get("/products/:id", async (req, res) => {
 // crea un producto
 app.post("/products/create", async (req, res) => {
   try {
-    const { name, price, brand, image, stock, description, type } = req.body;
+    let { name, price, brand, image, stock, description, category } = req.body;
+    name = name?.toLocaleLowerCase();
+    brand = brand?.toLocaleLowerCase();
+
     const product = new Product({
       name,
       price,
@@ -140,7 +59,7 @@ app.post("/products/create", async (req, res) => {
       image,
       stock,
       description,
-      type,
+      category,
     });
     await product.save();
     res.json(product);
@@ -153,13 +72,15 @@ app.post("/products/create", async (req, res) => {
 // actualiza un producto
 app.put("/products/update/:id", async (req, res) => {
   const { id } = req.params;
-  const { name, price, brand, image, description, type } = req.body;
+  let { name, price, brand, image, stock, description, category } = req.body;
+  name = name?.toLocaleLowerCase();
+  brand = brand?.toLocaleLowerCase();
 
   try {
     if (id) {
       await Product.findByIdAndUpdate(
         { _id: id },
-        { name, price, brand, image, description, type }
+        { name, price, brand, image, description, category, stock }
       );
       return res.json({
         message: `product ${id} updated successfully`,
@@ -183,23 +104,21 @@ app.delete("/products/delete/:id", async (req, res) => {
   }
 });
 
-//! crear productos falsos de prueba
-// app.post("/products/create-api", async (req, res) => {
-//   const { data } = await axios.get("https://dummyjson.com/products");
-//   const refactApi = data.products.map((product) => {
-//     return {
-//       name: product.title || "...",
-//       price: product.price || 000,
-//       brand: product.brand || "...",
-//       image: product.images[0] || "image.jpg",
-//       stock: product.stock || 000,
-//       description: product.description || "...",
-//       category: product.category,
-//     };
-//   });
+/* app.post("/products/create-api", async (req, res) => {
+   const { data } = await axios.get("https://dummyjson.com/products");
+   const refactApi = data.products.map((product) => {
+     return {
+      name: product.title.toLocaleLowerCase() || "...",
+       price: product.price || 000,
+       brand: product.brand.toLocaleLowerCase() || "...",
+       image: product.images[0] || "image.jpg",
+      description: product.description || "...",
+      category: product.category.toLocaleLowerCase(),
+    };
+  });
 
-//   await Product.collection.insertMany(refactApi);
-//   res.json("productos creados...");
-// });
-
+  await Product.collection.insertMany(refactApi);
+   res.json("productos creados...");
+ });
+ */
 module.exports = app;

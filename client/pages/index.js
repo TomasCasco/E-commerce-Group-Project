@@ -21,7 +21,7 @@ export default function Home() {
       <NavBar/>
       <CaptionCarousel/>
       <CardContainer />
-      <Cart />
+      
     </> 
   )
 }

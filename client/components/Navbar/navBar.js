@@ -14,6 +14,7 @@ import {
 import { BsFillPersonFill, BsSearch } from "react-icons/bs";
 import { ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons'
 import { IoMdCart } from "react-icons/io";
+
  
 export default function NavBar() {
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -52,11 +53,11 @@ export default function NavBar() {
             mx='10px'
             fontSize='11px'
         >
-            <Link 
+            <Link
                 display='flex'
                 alignItems='center'
                 p='2px'
-                href='/cart'
+                href="/cart"
                 _hover={{
                     color: 'white'
                 }} 

@@ -4,6 +4,8 @@ import CaptionCarousel from '../components/Banner/banner.tsx'
 import NavBar from '../components/Navbar/navBar'
 
 import styles from '../styles/Home.module.css'
+import CardContainer from '../components/Card/cardContainer'
+import Cart from '../components/Cart/Cart'
 
 
 export default function Home() {
@@ -16,10 +18,8 @@ export default function Home() {
       </Head>
       <NavBar/>
       <CaptionCarousel/>
-      
-     
-     
-
+      <CardContainer />
+      <Cart />
     </>
   )
 }

@@ -1,5 +1,8 @@
 import '../styles/globals.css'
+import React from "react"
+import { wrapper } from "../redux/store"
 import { ChakraProvider } from '@chakra-ui/react'
+import store from '../redux/store'
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -9,4 +12,4 @@ function MyApp({ Component, pageProps }) {
   )
 }
 
-export default MyApp
+export default wrapper.withRedux(MyApp);

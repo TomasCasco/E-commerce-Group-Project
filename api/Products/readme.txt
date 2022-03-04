@@ -1,38 +1,46 @@
-todos los productos
+TODOS LOS PRODUCTOS
 http://localhost:3004/products
 retorna un array de objetos [{}]
 
-busqueda por nombre (query)
-http://localhost:3004/products?name=value
-retorna un array de objetos con los nombres que incluyan la query [{}]
 
-ordena por precio asc o desc (query)
-http://localhost:3004/products?price=(asc o desc)
-retorna un array de objetos con los precios ordenados [{}]
+QUERIES DISPONIBLES
 
-busca por categoria
-http://localhost:3004/products?category=(ej: smartphones)
-retorna un array de objetos [{}]
+http://localhost:3004/products?...
 
-ordena por nombre asc o desc
-http://localhost:3004/products?name=(ej: asc)
-retorna un array de objetos [{}]
+--
 
-busca por marca
-http://localhost:3004/products?brand=(ej: apple)
-retorna un array de objetos [{}]
+Search:
 
-busca por categoria y ordena nombres asc o desc
-http://localhost:3004/products?category=(ej: smartphones)&&order_name=(ej:asc)
-retorna un array de objetos [{}]
+name=stringName
 
-busca por categoria y ordena precio asc o desc
-http://localhost:3004/products?category=(ej: smartphones)&&price=(ej:asc)
-retorna un array de objetos [{}]
+Ejemplo = http://localhost:3004/products?name=samsung galaxy
 
-busca por categoria y marca
-http://localhost:3004/products?category=(ej: smartphones)&&brand=(ej:apple)
-retorna un array de objetos [{}]
+--
+
+Order:
+
+orderBy=string_Propiedad_Producto ("name" | "price"...etc)
+
+sortBy=string_Order("asc" | "desc")
+
+Ejemplo = http://localhost:3004/products?orderBy=price&sortBy=desc
+
+--
+
+Filters:
+
+brands=array_Brands (["samsung","iphone"...etc])
+
+categories=array_Categories (["categoria1","categoria2"...etc])
+
+
+Ejemplo = http://localhost:3004/products?brands=["samsung"]&categories=["categoria1"]
+
+--
+
+Aclaracion: Ninguna de las queries es case sensitive, asi que se puede ingresar en miniscula o mayuscula sus respectivos parametros.
+Todas las queries pueden implementarse de forma simultanea.
+-----------------
 
 busqueda por id
 http://localhost:3004/products/:id

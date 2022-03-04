@@ -8,6 +8,7 @@ const Product = require("./Product");
 app.get("/products", async (req, res) => {
   let { orderBy, sortBy, brands, categories, name } = req.query;
 
+
   //transformar querys a miniscula
   orderBy = orderBy?.toLowerCase();
   sortBy = sortBy?.toLocaleLowerCase();
@@ -55,6 +56,7 @@ app.post("/products/create", async (req, res) => {
     category=category?.toLocaleLowerCase();
     price=parseInt(price);
 
+
     const product = new Product({
       name,
       price,
@@ -80,6 +82,7 @@ app.put("/products/update/:id", async (req, res) => {
   brand = brand?.toLocaleLowerCase();
   category=category?.toLocaleLowerCase();
   price=parseInt(price);
+
 
   try {
     if (id) {

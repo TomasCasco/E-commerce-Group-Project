@@ -6,28 +6,37 @@ const Product = require("./Product");
 
 // todos los productos
 app.get("/products", async (req, res) => {
-  let { orderBy, sortBy, brands, categories } = req.query;
-
-  //transformar querys a miniscula
-  orderBy = orderBy?.toLowerCase();
-  sortBy = sortBy?.toLocaleLowerCase();
-
-  //crear array con regexp para filtrar categorias
-  categories = categories ? JSON.parse(categories) : null;
-  categories = categories
-    ? categories.map((category) => new RegExp(category, "i"))
-    : null;
-
-  //crear array con regexp para filtrar brands
-  brands = brands ? JSON.parse(brands) : null;
-  brands = brands ? brands.map((brand) => new RegExp(brand, "i")) : null;
-
   try {
+    let { orderBy, sortBy, name, brands, categories } = req.query;
+
+    //transformar querys a miniscula
+    orderBy = orderBy?.toLowerCase();
+    sortBy = sortBy?.toLocaleLowerCase();
+
+    //crear array con regexp para filtrar categorias
+    categories = categories ? JSON.parse(categories) : null;
+    brands = brands ? JSON.parse(brands) : null;
+
+    const regex = (query) => {
+      if (Array.isArray(query)) {
+        query = query ? query.map((q) => new RegExp(q, "i")) : null;
+        return query;
+      } else {
+        query = query ? new RegExp(query, "i") : null;
+        return query;
+      }
+    };
+
+    categories = regex(categories);
+    brands = regex(brands);
+    name = regex(name);
+
     const products = await Product.find()
+      .where(name ? { name: name } : null)
       .where(brands ? { brand: { $in: brands } } : null)
       .where(categories ? { category: { $in: categories } } : null)
       .sort({ [orderBy]: sortBy });
-    res.json(products);
+    return res.json(products);
   } catch (err) {
     console.log(err);
   }

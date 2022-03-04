@@ -15,14 +15,14 @@ import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/cart/cartActions";
 // import { addToWishList } from "../../redux/Wishlist/WishlistActions";
 
-const data = {
-    id: 1,
-    stock: 0,
-    imageURL:'https://media.kingston.com/hyperx/features/hx-features-keyboard-alloyfpspro-litup.jpg',
-    name: 'HyperX Alloy FPS Pro Gaming Keyboard',
-    description: 'Mechnical Gaming Keyboard tenkeyless, with detachable USB-C cable, keys with radiant lighting effects.',
-    price: 45,
-};
+// const data = {
+//     id: 1,
+//     stock: 0,
+//     imageURL:'https://media.kingston.com/hyperx/features/hx-features-keyboard-alloyfpspro-litup.jpg',
+//     name: 'HyperX Alloy FPS Pro Gaming Keyboard',
+//     description: 'Mechnical Gaming Keyboard tenkeyless, with detachable USB-C cable, keys with radiant lighting effects.',
+//     price: 45,
+// };
 
 
 
@@ -42,8 +42,8 @@ export default function Card({p}) {
         
           {/* <Box position="absolute" onClick={() => alert("Add To Wish List")}>🧡</Box>  dispatch(addToWishList(p.id)) */}
         <Image
-          src={p.imageURL}
-          alt={`Picture of ${data.name}`}
+          src={p.image}
+          // alt={`Picture of ${data.name}`}
           roundedTop="lg"
         />
 
@@ -91,7 +91,7 @@ export default function Card({p}) {
             </Box>
           </Flex>
           <Box d="flex" alignItems="baseline">
-            {!data.stock && (
+            {!p.stock && (
               <Badge  mt='3' rounded="full" px="2" fontSize="0.8em" colorScheme="red">
                 No Stock
               </Badge>

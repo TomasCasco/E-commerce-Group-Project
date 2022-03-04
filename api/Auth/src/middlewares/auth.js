@@ -9,7 +9,6 @@ const auth = (req, res, next) => {
     if (err) {
      return next(err);
     } else {
-
       req.user=verifiedJwt.userId;
      return next();
     }

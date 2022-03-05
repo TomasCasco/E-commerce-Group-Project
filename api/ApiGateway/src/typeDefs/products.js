@@ -20,6 +20,21 @@ const productTypes = gql`
     message: String
   }
 
+  enum orderBy {
+    brand
+    description
+    image
+    name
+    price
+    stock
+    type
+  }
+
+  enum sortBy {
+    asc
+    desc
+  }
+
   input inputProduct {
     name: String!
     price: Float!
@@ -46,8 +61,16 @@ const productTypes = gql`
     type: String
   }
 
+  input filterAndSort {
+    orderBy: orderBy
+    sortBy: sortBy
+    categories: [String]
+    brands: [String]
+    name: String
+  }
+
   type Query {
-    getAllProducts: [product]
+    getAllProducts(input: filterAndSort): [product]
     getProductsByNameOrType(input: nameOrType): [product]
     getProductById(input: String): product
   }

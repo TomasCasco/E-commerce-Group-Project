@@ -8,20 +8,19 @@ const Product = require("./Product");
 app.get("/products", async (req, res) => {
   let { orderBy, sortBy, brands, categories, name } = req.query;
 
-
   //transformar querys a miniscula
   orderBy = orderBy?.toLowerCase();
   sortBy = sortBy?.toLocaleLowerCase();
   name = name?.toLocaleLowerCase();
 
   //crear array con regexp para filtrar categorias
-  categories = categories ? JSON.parse(categories) : null;
+  categories = categories ? categories.split(",") : null;
   categories = categories
     ? categories.map((category) => new RegExp(category, "i"))
     : null;
 
   //crear array con regexp para filtrar brands
-  brands = brands ? JSON.parse(brands) : null;
+  brands = brands ? brands.split(",") : null;
   brands = brands ? brands.map((brand) => new RegExp(brand, "i")) : null;
 
   try {
@@ -53,9 +52,8 @@ app.post("/products/create", async (req, res) => {
     let { name, price, brand, image, stock, description, category } = req.body;
     name = name?.toLocaleLowerCase();
     brand = brand?.toLocaleLowerCase();
-    category=category?.toLocaleLowerCase();
-    price=parseInt(price);
-
+    category = category?.toLocaleLowerCase();
+    price = parseInt(price);
 
     const product = new Product({
       name,
@@ -80,9 +78,8 @@ app.put("/products/update/:id", async (req, res) => {
   let { name, price, brand, image, stock, description, category } = req.body;
   name = name?.toLocaleLowerCase();
   brand = brand?.toLocaleLowerCase();
-  category=category?.toLocaleLowerCase();
-  price=parseInt(price);
-
+  category = category?.toLocaleLowerCase();
+  price = parseInt(price);
 
   try {
     if (id) {

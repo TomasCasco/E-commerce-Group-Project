@@ -11,18 +11,18 @@ const PORT = process.env.PORT || 3001;
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: async ({ req }) => {
-    const token = req.headers.authorization;
-    if (!token) return { UserAcess: null };
-    const response = await axios.post(`${serverUrls.users}/verifyToken`, null, {
-      headers: {
-        Authorization: token,
-      },
-    });
+  // context: async ({ req }) => {
+  //   const token = req.headers.authorization;
+  //   if (!token) return { userAccess: null };
+  //   const response = await axios.post(`${serverUrls.users}/access`, null, {
+  //     headers: {
+  //       Authorization: token,
+  //     },
+  //   });
 
-    if (response.status === 200) return response.data;
-    else throw new ApolloError();
-  },
+  //   if (response.status === 200) return response.data;
+  //   else throw new Error("Something went wrong!");
+  // },
   dataSources: () => ({
     UsersApi: new Apis.UsersApi(),
     ProductsApi: new Apis.ProductsApi(),

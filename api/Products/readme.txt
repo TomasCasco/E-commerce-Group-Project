@@ -1,10 +1,46 @@
-todos los productos
+TODOS LOS PRODUCTOS
 http://localhost:3004/products
 retorna un array de objetos [{}]
 
-busqueda por nombre (query)
-http://localhost:3004/products?name=value
-retorna un array de objetos con los nombres que incluyan la query [{}]
+
+QUERIES DISPONIBLES
+
+http://localhost:3004/products?...
+
+--
+
+Search:
+
+name=stringName
+
+Ejemplo = http://localhost:3004/products?name=samsung galaxy
+
+--
+
+Order:
+
+orderBy=string_Propiedad_Producto ("name" | "price"...etc)
+
+sortBy=string_Order("asc" | "desc")
+
+Ejemplo = http://localhost:3004/products?orderBy=price&sortBy=desc
+
+--
+
+Filters:
+
+brands=array_Brands (["samsung","iphone"...etc])
+
+categories=array_Categories (["categoria1","categoria2"...etc])
+
+
+Ejemplo = http://localhost:3004/products?brands=["samsung"]&categories=["categoria1"]
+
+--
+
+Aclaracion: Ninguna de las queries es case sensitive, asi que se puede ingresar en miniscula o mayuscula sus respectivos parametros.
+Todas las queries pueden implementarse de forma simultanea.
+-----------------
 
 busqueda por id
 http://localhost:3004/products/:id

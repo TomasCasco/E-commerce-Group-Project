@@ -1,3 +1,4 @@
+const { default: axios } = require("axios");
 const { Router } = require("express");
 const app = Router();
 // model
@@ -5,21 +6,30 @@ const Product = require("./Product");
 
 // todos los productos
 app.get("/products", async (req, res) => {
-  const { name } = req.query;
+  let { orderBy, sortBy, brands, categories, name } = req.query;
+
+  //transformar querys a miniscula
+  orderBy = orderBy?.toLowerCase();
+  sortBy = sortBy?.toLocaleLowerCase();
+  name = name?.toLocaleLowerCase();
+
+  //crear array con regexp para filtrar categorias
+  categories = categories ? categories.split(",") : null;
+  categories = categories
+    ? categories.map((category) => new RegExp(category, "i"))
+    : null;
+
+  //crear array con regexp para filtrar brands
+  brands = brands ? brands.split(",") : null;
+  brands = brands ? brands.map((brand) => new RegExp(brand, "i")) : null;
+
   try {
-    if (!name) {
-      const products = await Product.find();
-      return res.json(products);
-    }
-
-    function escapeRegExp(string) {
-      return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); // $& means the whole matched string
-    }
-
-    const product = await Product.find({
-      name: { $regex: escapeRegExp(name), $options: "i" },
-    });
-    return res.json(product);
+    const products = await Product.find()
+      .where(name ? { name: { $regex: ".*" + name + ".*" } } : null)
+      .where(brands ? { brand: { $in: brands } } : null)
+      .where(categories ? { category: { $in: categories } } : null)
+      .sort({ [orderBy]: sortBy });
+    res.json(products);
   } catch (err) {
     console.log(err);
   }
@@ -39,11 +49,25 @@ app.get("/products/:id", async (req, res) => {
 // crea un producto
 app.post("/products/create", async (req, res) => {
   try {
-    const { name, price, brand, image, description } = req.body;
-    const product = new Product({ name, price, brand, image, description });
+    let { name, price, brand, image, stock, description, category } = req.body;
+    name = name?.toLocaleLowerCase();
+    brand = brand?.toLocaleLowerCase();
+    category = category?.toLocaleLowerCase();
+    price = parseInt(price);
+
+    const product = new Product({
+      name,
+      price,
+      brand,
+      image,
+      stock,
+      description,
+      category,
+    });
     await product.save();
     res.json(product);
   } catch (err) {
+    cd;
     console.log(err);
   }
 });
@@ -51,19 +75,23 @@ app.post("/products/create", async (req, res) => {
 // actualiza un producto
 app.put("/products/update/:id", async (req, res) => {
   const { id } = req.params;
-  const { name, price, brand, image, description } = req.body;
+  let { name, price, brand, image, stock, description, category } = req.body;
+  name = name?.toLocaleLowerCase();
+  brand = brand?.toLocaleLowerCase();
+  category = category?.toLocaleLowerCase();
+  price = parseInt(price);
 
   try {
     if (id) {
-      const product = await Product.findByIdAndUpdate(
+      await Product.findByIdAndUpdate(
         { _id: id },
-        { name, price, brand, image, description }
+        { name, price, brand, image, description, category, stock }
       );
       return res.json({
         message: `product ${id} updated successfully`,
       });
     } else {
-      return res.json("id not found");
+      return res.json({ message: "id not found" });
     }
   } catch (err) {
     console.log(err);
@@ -81,4 +109,21 @@ app.delete("/products/delete/:id", async (req, res) => {
   }
 });
 
+/* app.post("/products/create-api", async (req, res) => {
+   const { data } = await axios.get("https://dummyjson.com/products");
+   const refactApi = data.products.map((product) => {
+     return {
+      name: product.title.toLocaleLowerCase() || "...",
+       price: product.price || 000,
+       brand: product.brand.toLocaleLowerCase() || "...",
+       image: product.images[0] || "image.jpg",
+      description: product.description || "...",
+      category: product.category.toLocaleLowerCase(),
+    };
+  });
+
+  await Product.collection.insertMany(refactApi);
+   res.json("productos creados...");
+ });
+ */
 module.exports = app;

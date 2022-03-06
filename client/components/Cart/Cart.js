@@ -5,14 +5,14 @@ import CartItem from "./CartItem";
 
 export default function Cart() {
   const dispatch = useDispatch();
-  const cartItems = useSelector((state) => state.cartReducer.cart);
+  const data = useSelector((state) => state.cartReducer.cart);
 
   return (
     <Flex direction="column" justify="center" align="center">
       <Box fontSize="xl"
               fontWeight="semibold"
               lineHeight='5'>Mis productos
-      {` (` + cartItems
+      {` (` + data
             .map((el) => el.qty)
             .reduce((prev, curr) => prev + curr, 0) + ` items) `}
         </Box>
@@ -20,11 +20,11 @@ export default function Cart() {
       <div>
         <Flex justify="center" align="center" direction="row">
           <Box w="72%">
-              {cartItems ? (
-                cartItems.map((p, index) => {
+              {data ? (
+                data.map((data, index) => {
                   return (
                     <Box  m="20" key={index}>
-                      <CartItem p={p} />
+                      <CartItem data={data} />
                     </Box>
                   );
                 })
@@ -44,12 +44,12 @@ export default function Cart() {
             <Box m="8">CARRITO</Box>
             <Flex>
                 <Box mb="8" mr="10">
-                    TOTAL{` (` + cartItems
+                    TOTAL{` (` + data
                     .map((el) => el.qty)
                     .reduce((prev, curr) => prev + curr, 0) + ` items) `}
                 </Box>
                 <Box>
-                    {`$` +  cartItems
+                    {`$` +  data
                     .map((el) => el.qty * el.price)
                     .reduce((prev, curr) => prev + curr, 0) + `.00 `}
                 </Box>

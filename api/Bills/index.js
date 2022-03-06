@@ -1,11 +1,10 @@
-const express = require("express");
+require("dotenv").config();
 
-const app = express();
+const server = require("./src/app");
 
-app.set("port", process.env.PORT || 3003);
-
-app.listen(app.use(port), () =>
-  console.log(`Bills listening on port ${app.use(port)}`)
+server.listen(server.get("port"), () =>
+  console.log(`${server.serverName} listening on port ${server.get("port")}`)
 );
 
-module.exports = app;
+module.exports = server;
+

@@ -25,23 +25,21 @@ app.put("/products/update-stock/:id", updateStock);
 //todo: eliminar producto
 app.delete("/products/delete/:id", deleteProduct);
 
-//! crear productos falsos de prueba
-// app.post("/products/create-api", async (req, res) => {
-//   const { data } = await axios.get("https://dummyjson.com/products");
-//   const refactApi = data.products.map((product) => {
-//     return {
-//       name: product.title || "...",
-//       price: product.price || 000,
-//       brand: product.brand || "...",
-//       image: product.images[0] || "image.jpg",
-//       stock: product.stock || 000,
-//       description: product.description || "...",
-//       category: product.category,
-//     };
-//   });
+/* app.post("/products/create-api", async (req, res) => {
+   const { data } = await axios.get("https://dummyjson.com/products");
+   const refactApi = data.products.map((product) => {
+     return {
+      name: product.title.toLocaleLowerCase() || "...",
+       price: product.price || 000,
+       brand: product.brand.toLocaleLowerCase() || "...",
+       image: product.images[0] || "image.jpg",
+      description: product.description || "...",
+      category: product.category.toLocaleLowerCase(),
+    };
+  });
 
-//   await Product.collection.insertMany(refactApi);
-//   res.json("productos creados...");
-// });
-
+  await Product.collection.insertMany(refactApi);
+   res.json("productos creados...");
+ });
+ */
 module.exports = app;

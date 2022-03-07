@@ -1,35 +1,37 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { Grid, Flex, Box, useColorModeValue, Link } from "@chakra-ui/react";
 import CartItem from "./CartItem";
+import { useSelector } from "react-redux";
+
 
 export default function Cart() {
-  const dispatch = useDispatch();
-  const cartItems = useSelector((state) => state.cartReducer.cart);
+
+  const data = useSelector(state=>state.cartReducer.cart)
+
 
   return (
-    <Flex direction="column" justify="center" align="center">
-      <Box fontSize="xl"
+    <Flex  display={"flex"} direction="column" justify="center" align="center" maxWidth="900px" padding={"50px"} paddingLeft="20px" paddingRight={"20px"}>
+      <Box fontSize="xx-large"
               fontWeight="semibold"
-              lineHeight='5'>My Products
-      {` (` + cartItems
+              paddingBottom="20px"
+              lineHeight='5'>Mis productos
+      {` (` + data
             .map((el) => el.qty)
             .reduce((prev, curr) => prev + curr, 0) + ` items) `}
         </Box>
 
-      <div>
-        <Flex justify="center" align="center" mt='3'>
-          <Box >
-              {cartItems ? (
-                cartItems.map((p, index) => {
+        <Flex justify="center" align="center" direction="column">
+          <Box w="100%">
+              {data.length!==0 ? (
+                data.map((product, index) => {
                   return (
-                    <Box  m="20" key={index}>
-                      <CartItem p={p} />
+                    <Box  m="20" key={index} margin="0" marginBottom={"20px"}>
+                      <CartItem itemProduct={product} />
                     </Box>
                   );
                 })
               ) : (
-                <p>The cart is empty</p>
+                null
               )}
           </Box>
           
@@ -40,24 +42,24 @@ export default function Cart() {
                 shadow="lg"
                 position="relative">
 
-        <Box m='auto'p='4' align="center" justify="center">
-            <Box fontSize="16"
+        <Box m='auto' p={"4"} align="center" justify="center">
+            <Box fontSize="x-large"
               fontWeight="semibold"
             >CART</Box>
             <Flex mt='6'>
-                <Box mb="8" mr="10">
-                    TOTAL{` (` + cartItems
+                <Box mb="8" mr="10" fontSize="x-large">
+                    TOTAL{` (` + data
                     .map((el) => el.qty)
                     .reduce((prev, curr) => prev + curr, 0) + ` items) `}
                 </Box>
-                <Box>
-                    {`$` +  cartItems
-                    .map((el) => el.qty * el.price)
+                <Box fontSize="x-large">
+                    {`$` +  data
+                    .map((el) => el.qty * el.product.price)
                     .reduce((prev, curr) => prev + curr, 0) + `.00 `}
                 </Box>
             </Flex>
-            <Box>
-                <Link href='/checkout' px='2'  border="1px solid black" borderRadius="20" _hover={{bgColor:'gray.200', textDecoration:'none' }} >
+            <Box fontSize="x-large">
+                <Link href='/checkout' px='2'  padding={"5px"} border="1px solid black" borderRadius="20" _hover={{bgColor:'gray.200', textDecoration:'none' }} >
                   
                   CHECKOUT
                  
@@ -67,7 +69,6 @@ export default function Cart() {
             </Box>
         </Box>
     </Flex>
-      </div>
       
 
     </Flex>

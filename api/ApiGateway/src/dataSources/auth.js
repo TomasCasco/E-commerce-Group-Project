@@ -14,6 +14,11 @@ class UsersApi extends RESTDataSource {
   async loginUser(credentials) {
     return await this.post("/login", credentials);
   }
+  async infoUser(token) {
+    return await this.get(`/userInfo`, null, {
+      headers: { Authorization: token },
+    });
+  }
 }
 
 module.exports = UsersApi;

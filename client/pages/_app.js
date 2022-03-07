@@ -1,25 +1,36 @@
 import '../styles/globals.css'
-import React from "react"
+import React, { useEffect } from "react"
 import { wrapper } from "../redux/store"
 import { ChakraProvider } from '@chakra-ui/react'
-import store from '../redux/store'
-import { ApolloClient, ApolloProvider, InMemoryCache, HttpLink, gql } from '@apollo/client'
+import { useDispatch, useSelector } from 'react-redux'
+import { setCartFromLocalStorage } from '../redux/cart/cartActions'
 
-const client = new ApolloClient({
-  connectToDevTools: true,
-  cache: new InMemoryCache(),
-  link: new HttpLink({
-    uri: "http://localhost:3001",
-  }),
-});
 
 function MyApp({ Component, pageProps }) {
+
+  const dispatch=useDispatch();
+  const cart=useSelector(state=>state.cartReducer.cart)
+
+  useEffect(()=>{
+    const cartLocalStorage=localStorage.getItem("cart")
+    if(cartLocalStorage){
+    dispatch(setCartFromLocalStorage(JSON.parse(cartLocalStorage)))
+    }
+    else {
+      localStorage.setItem("cart",JSON.stringify([]))
+    }
+  },[])
+
+  useEffect(()=>{
+      localStorage.setItem("cart",JSON.stringify(cart));
+  },[cart])
+
   return (
-    <ApolloProvider client={client} >
+
       <ChakraProvider>
         <Component {...pageProps} />
       </ChakraProvider>
-    </ApolloProvider>
+
   )
 }
 

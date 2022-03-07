@@ -8,91 +8,118 @@ import {
   Icon,
   chakra,
   Tooltip,
-} from '@chakra-ui/react';
+} from "@chakra-ui/react";
+
 import { IoMdCart } from "react-icons/io";
+import { useDispatch, useSelector } from "react-redux";
+import { addItemQty, addToCart } from "../../redux/cart/cartActions";
 
-import { useDispatch } from "react-redux";
-import { addToCart } from "../../redux/cart/cartActions";
-// import { addToWishList } from "../../redux/Wishlist/WishlistActions";
+import { addToFavorites } from "../../redux/favorites/favoritesActions";
 
-// const data = {
-//     id: 1,
-//     stock: 0,
-//     imageURL:'https://media.kingston.com/hyperx/features/hx-features-keyboard-alloyfpspro-litup.jpg',
-//     name: 'HyperX Alloy FPS Pro Gaming Keyboard',
-//     description: 'Mechnical Gaming Keyboard tenkeyless, with detachable USB-C cable, keys with radiant lighting effects.',
-//     price: 45,
-// };
+export default function Card({ data, setAlertHidden }) {
+  const cart = useSelector((state) => state.cartReducer.cart);
 
-
-
-export default function Card({p}) {
   const dispatch = useDispatch();
 
+  const addCart = () => {
+    if (cart.some((el) => el.product._id === data._id)) {
+      dispatch(addItemQty(data._id));
+      setAlertHidden(false);
+    } else {
+      dispatch(addToCart(data));
+      setAlertHidden(false);
+    }
+  };
+
   return (
-    <Flex  w="full" alignItems="center" justifyContent="center">
+    <Flex
+      w="full"
+      alignItems="center"
+      justifyContent="center"
+      position={"relative"}
+    >
       <Box
         m="5"
-        bg={useColorModeValue('white', 'gray.800')}
+        bg={useColorModeValue("white", "gray.800")}
         maxW="sm"
+        h={"400px"}
+        padding="15px"
         borderWidth="1px"
         rounded="lg"
         shadow="lg"
-        position="relative">
-        
-          {/* <Box position="absolute" onClick={() => alert("Add To Wish List")}>🧡</Box>  dispatch(addToWishList(p.id)) */}
-        <Image
-          src={p.image}
-          // alt={`Picture of ${data.name}`}
-          roundedTop="lg"
-        />
-
+        display={"flex"}
+        flexDirection="column"
+        justifyContent={"space-between"}
+        position="relative"
+      >
+        <Box
+          position="absolute"
+          onClick={() => dispatch(addToFavorites(data.id))}
+        >
+          🧡
+        </Box>{" "}
+        {/* alert("Add To Wish List") */}
+        <Image src={data.image} roundedTop="lg" maxH={"30%"} margin="0 auto" />
         <Box p="6">
           <Flex mt="1" justifyContent="space-between" alignContent="center">
             <Box
-              fontSize="xl"
-              fontWeight="semibold"
-              lineHeight='5'
-              >
-              {p.name}
-            </Box>
-            </Flex>
-            <Flex mt="6"  alignContent="center">
-            <Box
-              fontSize="xs"
-              fontWeight=""
-              
-              lineHeight="4"
-              >
-              {p.description} 
+              fontSize="x-large"
+              fontWeight={"bold"}
+              lineHeight="5"
+              fontFamily={"sans-serif"}
+              margin="10px auto"
+            >
+              {data.brand}
             </Box>
           </Flex>
 
-          <Flex mt='5' justifyContent="space-between" alignContent="center">
-            
-            <Box fontSize="xl" color={useColorModeValue('gray.800', 'white')}>
-              <Box as="span" color={'gray.600'} fontSize="sm">
+          <Flex
+            mt="1"
+            justifyContent="space-between"
+            alignContent="center"
+            textAlign={"center"}
+          >
+            <Box fontSize="xl" fontWeight="semibold" lineHeight="5">
+              {data.name}
+            </Box>
+          </Flex>
+
+          <Flex mt="6" alignContent="center">
+            <Box fontSize="xs" fontWeight="" lineHeight="4">
+              {data.description}
+            </Box>
+          </Flex>
+
+          <Flex mt="5" justifyContent="space-between" alignContent="center">
+            <Box fontSize="xl" color={useColorModeValue("gray.800", "white")}>
+              <Box as="span" color={"gray.600"} fontSize="sm">
                 $
               </Box>
-              {p.price.toFixed(2)}
+              {data.price}
             </Box>
-            <Box fontSize="xl" color={useColorModeValue('')}>
-            <Tooltip
-              label="Add to cart"
-              bg="white"
-              placement={'top'}
-              color={'gray.800'}
-              fontSize={'.8em'}>
-                  
-              <chakra.a onClick={() => dispatch(addToCart(p.id))} href={'#'} display={'flex'}>
-                <Icon   as={IoMdCart} h={5} w={5} alignSelf={'center'} />
-              </chakra.a>
-            </Tooltip>
+            <Box fontSize="xl" color={useColorModeValue("")}>
+              <Tooltip
+                label="Add to cart"
+                bg="white"
+                placement={"top"}
+                color={"gray.800"}
+                fontSize={".8em"}
+              >
+                <button onClick={addCart} href={"#"} display={"flex"}>
+                  <Icon as={IoMdCart} h={5} w={5} alignSelf={"center"} />
+                </button>
+              </Tooltip>
             </Box>
           </Flex>
           <Box d="flex" alignItems="baseline">
-            {!p.stock && (
-              <Badge  mt='3' rounded="full" px="2" fontSize="0.8em" colorScheme="red">
+            {!data.stock && (
+              <Badge
+                mt="3"
+                rounded="full"
+                px="2"
+                fontSize="0.8em"
+                colorScheme="red"
+              >
                 No Stock
               </Badge>
             )}

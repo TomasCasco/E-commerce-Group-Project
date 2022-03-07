@@ -1,10 +1,10 @@
 const productsResolvers = {
   Query: {
-    async getAllProducts(_, {}, { dataSources }) {
-      return await dataSources.ProductsApi.getAllProducts();
+    async getAllProducts(_, { input }, { dataSources }) {
+      return await dataSources.ProductsApi.getAllProducts(input);
     },
     async getProductsByNameOrType(_, { input }, { dataSources }) {
-      return await dataSources.ProductsApi.getProductsByName(input);
+      return await dataSources.ProductsApi.getProductsByNameOrType(input);
     },
     async getProductById(_, { input }, { dataSources }) {
       return await dataSources.ProductsApi.getProductById(input);

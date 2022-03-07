@@ -2,13 +2,14 @@ const { gql } = require("apollo-server");
 
 const productTypes = gql`
   type product {
+    _id: String!
     name: String
     price: Float
     brand: String
     image: String
     description: String
     stock: Int
-    type: String
+    category: String
   }
 
   type updateResponse {
@@ -27,7 +28,7 @@ const productTypes = gql`
     name
     price
     stock
-    type
+    category
   }
 
   enum sortBy {
@@ -36,24 +37,25 @@ const productTypes = gql`
   }
 
   input inputProduct {
+    _id: String!
     name: String!
     price: Float!
     brand: String!
     image: String!
     description: String!
     stock: Int!
-    type: String!
+    category: String!
   }
 
   input mutateProduct {
-    id: String!
+    _id: String!
     name: String
     price: Float
     brand: String
     image: String
     description: String
     stock: Int
-    type: String
+    category: String
   }
 
   input nameOrType {

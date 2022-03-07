@@ -109,21 +109,25 @@ app.delete("/products/delete/:id", async (req, res) => {
   }
 });
 
-/* app.post("/products/create-api", async (req, res) => {
-   const { data } = await axios.get("https://dummyjson.com/products");
-   const refactApi = data.products.map((product) => {
-     return {
+app.post("/products/create-api", async (req, res) => {
+  const { data } = await axios.get(
+    "https://api.mercadolibre.com/sites/MLA/search?q=hyperx microfono&limit=15"
+  );
+  let meliApi = data.results.map((product) => {
+    let {value_name}= product.attributes.find(el=>el.name==="Marca" || el.name==="marca")
+    return {
       name: product.title.toLocaleLowerCase() || "...",
-       price: product.price || 000,
-       brand: product.brand.toLocaleLowerCase() || "...",
-       image: product.images[0] || "image.jpg",
+      price: product.price || 000,
+      brand: value_name?value_name : "generic",
+      image: `https://http2.mlstatic.com/D_NQ_NP_2X_${product.thumbnail_id}-F.webp` || "image.jpg",
       description: product.description || "...",
-      category: product.category.toLocaleLowerCase(),
+      stock: product.available_quantity,
+      category: "microfono",
     };
   });
 
-  await Product.collection.insertMany(refactApi);
-   res.json("productos creados...");
- });
- */
+  await Product.collection.insertMany(meliApi);
+  res.json("productos creados...");
+});
+
 module.exports = app;

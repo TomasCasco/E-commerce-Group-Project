@@ -11,19 +11,27 @@ const userTypes = gql`
     email: String!
     password: String!
   }
-
+  
   type responseLogin {
-    username: String!
-    token: String!
+    token: String
+    error: String
   }
 
   type responseRegister {
-    msg: String
+    message: String
     error: String
+  }
+
+  type responseInfoUser {
+    error: String
+    username: String!
+    email: String!
+    id: String!
   }
 
   type Query {
     loginUser(input: userLogin): responseLogin
+    infoUser : responseInfoUser
   }
 
   type Mutation {

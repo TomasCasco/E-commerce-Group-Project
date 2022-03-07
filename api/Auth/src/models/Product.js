@@ -7,6 +7,7 @@ const Product = new Schema({
   image: { type: String, required: true },
   description: { type: String, required: true },
   stock: { type: Number, default: 100, required: true },
+  category: { type: String, required: true },
 });
 
 module.exports = model("Product", Product);

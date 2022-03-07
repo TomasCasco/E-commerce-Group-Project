@@ -16,6 +16,7 @@ import { BsFillPersonFill, BsSearch } from "react-icons/bs";
 import { ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons'
 import { IoMdCart } from "react-icons/io";
 import Cart from '../Cart/Cart'
+import Favorites from '../Favorites/Favorites'
 
 export default function NavBar() {
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -46,6 +47,33 @@ export default function NavBar() {
                 </Icon>
                 <Text>My Account</Text>
             </Link>
+            
+            |
+        </Flex>
+        <Flex alignItems='center'>
+        <Menu>
+            <MenuButton 
+                display='flex'
+                alignItems='center'
+                p='2px'
+                href='/favorites'
+                
+                _hover={{
+                    color: 'white'
+                }
+            } 
+            >
+                <Icon fontSize='medium' mt='5px'>
+                <IoMdCart/>
+                </Icon>
+                Favorites
+            </MenuButton>
+                <MenuList bgColor="#1606068a"  borderColor='#160606'>
+                    <MenuList>
+                        <Favorites/>
+                    </MenuList>
+                </MenuList>
+                </Menu>
             
             |
         </Flex>

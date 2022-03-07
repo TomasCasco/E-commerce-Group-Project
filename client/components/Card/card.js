@@ -13,20 +13,10 @@ import { IoMdCart } from "react-icons/io";
 
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/cart/cartActions";
-// import { addToWishList } from "../../redux/Wishlist/WishlistActions";
-
-// const data = {
-//     id: 1,
-//     stock: 0,
-//     imageURL:'https://media.kingston.com/hyperx/features/hx-features-keyboard-alloyfpspro-litup.jpg',
-//     name: 'HyperX Alloy FPS Pro Gaming Keyboard',
-//     description: 'Mechnical Gaming Keyboard tenkeyless, with detachable USB-C cable, keys with radiant lighting effects.',
-//     price: 45,
-// };
+import { addToFavorites } from "../../redux/favorites/favoritesActions";
 
 
-
-export default function Card({p}) {
+export default function Card({data}) {
   const dispatch = useDispatch();
 
   return (
@@ -40,10 +30,9 @@ export default function Card({p}) {
         shadow="lg"
         position="relative">
         
-          {/* <Box position="absolute" onClick={() => alert("Add To Wish List")}>🧡</Box>  dispatch(addToWishList(p.id)) */}
+        <Box position="absolute" onClick={() => dispatch(addToFavorites(data.id))}>🧡</Box>  {/* alert("Add To Wish List") */}
         <Image
-          src={p.image}
-          // alt={`Picture of ${data.name}`}
+          src={data.image}
           roundedTop="lg"
         />
 
@@ -54,7 +43,7 @@ export default function Card({p}) {
               fontWeight="semibold"
               lineHeight='5'
               >
-              {p.name}
+              {data.name}
             </Box>
             </Flex>
             <Flex mt="6"  alignContent="center">
@@ -64,7 +53,7 @@ export default function Card({p}) {
               
               lineHeight="4"
               >
-              {p.description} 
+              {data.description} 
             </Box>
           </Flex>
 
@@ -74,7 +63,7 @@ export default function Card({p}) {
               <Box as="span" color={'gray.600'} fontSize="sm">
                 $
               </Box>
-              {p.price.toFixed(2)}
+              {data.price.toFixed(2)}
             </Box>
             <Box fontSize="xl" color={useColorModeValue('')}>
             <Tooltip
@@ -84,14 +73,14 @@ export default function Card({p}) {
               color={'gray.800'}
               fontSize={'.8em'}>
                   
-              <chakra.a onClick={() => dispatch(addToCart(p.id))} href={'#'} display={'flex'}>
+              <chakra.a onClick={() => dispatch(addToCart(data.id))} href={'#'} display={'flex'}>
                 <Icon   as={IoMdCart} h={5} w={5} alignSelf={'center'} />
               </chakra.a>
             </Tooltip>
             </Box>
           </Flex>
           <Box d="flex" alignItems="baseline">
-            {!p.stock && (
+            {!data.stock && (
               <Badge  mt='3' rounded="full" px="2" fontSize="0.8em" colorScheme="red">
                 No Stock
               </Badge>

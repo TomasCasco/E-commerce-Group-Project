@@ -1,42 +1,41 @@
-export const addToCart = (itemID) => {
-    return {
-      type: 'ADD_TO_CART',
-      payload: {
-        id: itemID,
-      },
-    };
+export const addToCart = (product) => {
+  return {
+    type: "ADD_TO_CART",
+    payload: product,
   };
-  
-  export const removeFromCart = (itemID) => {
+};
+
+export const setCartFromLocalStorage= (cart)=>{
+  return {
+    type:"SET_CART_LOCAL_STORAGE",
+    payload:cart
+  }
+}
+
+  export const removeFromCart = (itemId) => {
     return {
       type: 'REMOVE_FROM_CART',
-      payload: {
-        id: itemID,
-      },
+      payload:itemId
     };
   };
   
-  export const addItemQty = (id) => {
+ export const addItemQty = (itemId) => {
     return {
-      type: 'ADJUST_ITEM_QTY',
-      payload: {
-        id: id
-        }
+      type: 'ADD_ITEM_QTY',
+      payload: itemId
     };
   };
 
-  export const subtractItemQty = (id) => {
+  export const subtractItemQty = (itemId) => {
     return {
       type: 'SUBTRACT_ITEM_QTY',
-      payload: {
-        id: id
-        }
+      payload:itemId
     };
   };
   
-  export const loadCurrentItem = (item) => {
+ /*  export const loadCurrentItem = (item) => {
     return {
       type: 'LOAD_CURRENT_ITEM',
       payload: item,
     };
-  };
+  };   */

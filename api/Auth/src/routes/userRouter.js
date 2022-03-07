@@ -13,8 +13,8 @@ const router = Router();
 router.post("/login", login);
 router.post("/register", register);
 router.post("/access",auth,access)
-router.get("/:userId/", getUserInfo);
-router.get("/:userId/cart", getCart);
-router.put("/:userId/cart", editCart);
+router.get("/userInfo",auth, getUserInfo);
+router.get("/:userId/cart",auth, getCart);
+router.put("/:userId/cart",auth, editCart);
 
 module.exports = router;

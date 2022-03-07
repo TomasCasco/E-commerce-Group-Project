@@ -12,7 +12,7 @@ app.get("/products", async (req, res) => {
   //transformar querys a miniscula
   orderBy = orderBy?.toLowerCase();
   sortBy = sortBy?.toLocaleLowerCase();
-  name = name?.toLocaleLowerCase();
+  name = name?.toLocaleLowerCase();git 
 
   //crear array con regexp para filtrar categorias
   categories = categories ? categories.split(",") : null;

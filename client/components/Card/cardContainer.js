@@ -24,23 +24,21 @@ export default function CardContainer() {
   const data = useSelector((state) => state.productsReducer.products);
   const searchValue = useSelector((state) => state.productsReducer.searchValue);
   const searchBoolean = useSelector((state) => state.productsReducer.search);
-  const [alertHidden,setAlertHidden]=useState(true)
+  const [alertHidden, setAlertHidden] = useState(true);
   const dispatch = useDispatch();
-  
 
-  useEffect(()=>{
+  useEffect(() => {
     return dispatch(resetSearch());
-  },[])
-
+  }, []);
 
   const dispatchResetSearch = () => {
     dispatch(resetSearch());
     dispatch(getAllProducts());
   };
 
-  const handleSetAlertHidden=()=>{
-    setAlertHidden(true)
-  }
+  const handleSetAlertHidden = () => {
+    setAlertHidden(true);
+  };
 
   if (loadingData)
     return (
@@ -81,7 +79,15 @@ export default function CardContainer() {
 
   return (
     <>
-      <Alert status="success" position={"fixed"} top="20" right={10} maxWidth={"250px"} zIndex="100" hidden={alertHidden}>
+      <Alert
+        status="success"
+        position={"fixed"}
+        top="20"
+        right={10}
+        maxWidth={"250px"}
+        zIndex="100"
+        hidden={alertHidden}
+      >
         <AlertIcon />
         <Box flex="1">
           <AlertTitle>Success!</AlertTitle>
@@ -89,7 +95,12 @@ export default function CardContainer() {
             Producto agregado correctamente al carrito!
           </AlertDescription>
         </Box>
-        <CloseButton position="absolute" right="8px" top="8px" onClick={handleSetAlertHidden}/>
+        <CloseButton
+          position="absolute"
+          right="8px"
+          top="8px"
+          onClick={handleSetAlertHidden}
+        />
       </Alert>
       <Flex
         justifyContent={"center"}
@@ -116,7 +127,7 @@ export default function CardContainer() {
               ? data.map((data) => {
                   return (
                     <div key={data._id}>
-                      <Card data={data} setAlertHidden={setAlertHidden}/>
+                      <Card data={data} setAlertHidden={setAlertHidden} />
                     </div>
                   );
                 })

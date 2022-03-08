@@ -14,3 +14,9 @@ export const queryProducts = gql`
     }
   }
 `;
+
+export const ALL_BRANDS = gql`
+  query {
+    getAllBrands
+  }
+`;

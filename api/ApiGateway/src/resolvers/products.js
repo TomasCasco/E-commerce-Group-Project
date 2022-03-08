@@ -9,6 +9,9 @@ const productsResolvers = {
     async getProductById(_, { input }, { dataSources }) {
       return await dataSources.ProductsApi.getProductById(input);
     },
+    async getAllBrands(_, { input }, { dataSources }) {
+      return await dataSources.ProductsApi.getAllBrands(input);
+    },
   },
 
   Mutation: {

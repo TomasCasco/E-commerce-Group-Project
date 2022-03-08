@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Flex,
   Heading,
@@ -12,7 +12,7 @@ import {
   Input,
   Box,
   Button,
-  useColorMode
+  useColorMode,
 } from "@chakra-ui/react";
 
 import { BsFillPersonFill } from "react-icons/bs";
@@ -21,18 +21,17 @@ import { IoMdCart } from "react-icons/io";
 import Cart from "../Cart/Cart";
 import Favorites from "../Favorites/Favorites";
 import Link from "next/link";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   getAllProducts,
   setSearch,
 } from "../../redux/products/productsActions";
 import DarkModeSwitch from "../DarkModeSwitch/DarkModeSwitch";
 
-
-
 export default function NavBar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const distpatch = useDispatch();
+  const brands = useSelector((state) => state.productsReducer.brands);
   const [inputSearch, setInputSearch] = useState("");
   const { toggleColorMode } = useColorMode();
 
@@ -44,6 +43,7 @@ export default function NavBar() {
     distpatch(setSearch(filterQuery.name));
     setInputSearch("");
   };
+
   return (
     <>
       <Flex
@@ -55,14 +55,18 @@ export default function NavBar() {
         fontSize="large"
       >
         <Flex alignItems="center">
-            <Link href={"/login"} as="/login">
-          <Box background={"none"} className="chakra-menu__menu-button css-ez1frj" cursor={"pointer"}>
+          <Link href={"/login"} as="/login">
+            <Box
+              background={"none"}
+              className="chakra-menu__menu-button css-ez1frj"
+              cursor={"pointer"}
+            >
               <Icon fontSize="medium" mt="5px">
                 <BsFillPersonFill />
               </Icon>
-            Login
-          </Box>
-            </Link>
+              Login
+            </Box>
+          </Link>
           |
         </Flex>
         <Flex alignItems="center">
@@ -132,12 +136,10 @@ export default function NavBar() {
           w="800px"
           pt={3}
           justify="space-between"
-          >
+        >
           <DarkModeSwitch />
-          </Flex>
-          {/* <Button marginLeft={6} onClick={toggleColorMode}>DarkMode</Button> */}
-
-
+        </Flex>
+        {/* <Button marginLeft={6} onClick={toggleColorMode}>DarkMode</Button> */}
 
         <Flex alignItems="center">
           <Flex className="nav-items">
@@ -182,6 +184,32 @@ export default function NavBar() {
               </MenuList>
             </Menu>
           </Flex>
+
+          {/* -------- FILTER BRANDS------ */}
+          <Flex className="nav-brands" justifyContent={"center"}>
+            <Menu>
+              <MenuButton
+                py={[1, 2, 3]}
+                color={"white"}
+                px={4}
+                borderRadius={5}
+                _hover={{ color: "white" }}
+                aria-label="Courses"
+                fontWeight="normal"
+              >
+                BRANDS <ChevronDownIcon />
+              </MenuButton>
+              <MenuList bgColor="#1606068a" borderColor="#160606">
+                {brands &&
+                  brands.map((b) => (
+                    <Link href={"/brand/[filterBrand]"} as={`/brand/${b}`}>
+                      <MenuItem _hover={{ color: "#160606" }}>{b}</MenuItem>
+                    </Link>
+                  ))}
+              </MenuList>
+            </Menu>
+          </Flex>
+
           <Flex className="nav-items">
             <Link
               href="/support"
@@ -189,7 +217,12 @@ export default function NavBar() {
               py={[1, 2, 2]}
               mx={1}
             >
-              <Text cursor={"pointer"} className="chakra-menu__menu-button css-ez1frj">SUPPORT</Text>
+              <Text
+                cursor={"pointer"}
+                className="chakra-menu__menu-button css-ez1frj"
+              >
+                SUPPORT
+              </Text>
             </Link>
           </Flex>
           <Flex className="nav-items">
@@ -199,7 +232,12 @@ export default function NavBar() {
               py={[1, 2, 2]}
               mx={1}
             >
-              <Text cursor={"pointer"} className="chakra-menu__menu-button css-ez1frj">ABOUT US</Text>
+              <Text
+                cursor={"pointer"}
+                className="chakra-menu__menu-button css-ez1frj"
+              >
+                ABOUT US
+              </Text>
             </Link>
           </Flex>
         </Flex>

@@ -12,6 +12,7 @@ import {
   Input,
   Box,
   Button,
+  useColorMode
 } from "@chakra-ui/react";
 
 import { BsFillPersonFill } from "react-icons/bs";
@@ -25,11 +26,15 @@ import {
   getAllProducts,
   setSearch,
 } from "../../redux/products/productsActions";
+import DarkModeSwitch from "../DarkModeSwitch/DarkModeSwitch";
+
+
 
 export default function NavBar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const distpatch = useDispatch();
   const [inputSearch, setInputSearch] = useState("");
+  const { toggleColorMode } = useColorMode();
 
   const dispatchSearchProducts = (e) => {
     const filterQuery = {
@@ -120,6 +125,20 @@ export default function NavBar() {
             Gamerland
           </Link>
         </Heading>
+
+        <Flex
+          direction="row"
+          marginLeft={6}
+          w="800px"
+          pt={3}
+          justify="space-between"
+          >
+          <DarkModeSwitch />
+          </Flex>
+          {/* <Button marginLeft={6} onClick={toggleColorMode}>DarkMode</Button> */}
+
+
+
         <Flex alignItems="center">
           <Flex className="nav-items">
             <Menu isOpen={isOpen}>

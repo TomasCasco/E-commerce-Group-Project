@@ -30,7 +30,7 @@ const login = async (req, res, next) => {
         res.status(200).json({token});
 
       } else {
-        res.status(401).json({ error: "Invalid email or password" });
+        res.status(200).json({ error: "Invalid email or password" });
       }
     }
   } catch (error) {

@@ -7,11 +7,12 @@ class ProductsApi extends RESTDataSource {
     this.baseURL = serverUrls.products;
   }
 
-  async getAllProducts() {
-    return await this.get("/");
+  async getAllProducts(input) {
+    const input_exist=input?true:false
+    return await this.get("/", input_exist?Object.assign(input):null);
   }
 
-  async getProductsByName({ name, query }) {
+  async getProductsByNameOrType({ name, query }) {
     return await this.get(`/`, { name, query });
   }
 

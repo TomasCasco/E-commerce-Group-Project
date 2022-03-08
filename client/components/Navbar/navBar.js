@@ -12,7 +12,7 @@ import {
   Input,
   Box,
   Button,
-  useColorMode
+  useColorMode,
 } from "@chakra-ui/react";
 
 import { BsFillPersonFill } from "react-icons/bs";
@@ -27,8 +27,6 @@ import {
   setSearch,
 } from "../../redux/products/productsActions";
 import DarkModeSwitch from "../DarkModeSwitch/DarkModeSwitch";
-
-
 
 export default function NavBar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -138,12 +136,10 @@ export default function NavBar() {
           w="800px"
           pt={3}
           justify="space-between"
-          >
+        >
           <DarkModeSwitch />
-          </Flex>
-          {/* <Button marginLeft={6} onClick={toggleColorMode}>DarkMode</Button> */}
-
-
+        </Flex>
+        {/* <Button marginLeft={6} onClick={toggleColorMode}>DarkMode</Button> */}
 
         <Flex alignItems="center">
           <Flex className="nav-items">
@@ -189,7 +185,7 @@ export default function NavBar() {
             </Menu>
           </Flex>
 
-          {/* --------BRANDS---------------------- */}
+          {/* -------- FILTER BRANDS------ */}
           <Flex className="nav-brands" justifyContent={"center"}>
             <Menu>
               <MenuButton

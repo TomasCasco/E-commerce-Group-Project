@@ -22,13 +22,14 @@ import {
 export default function CardContainer() {
   const loadingData = useSelector((state) => state.productsReducer.loading);
   const data = useSelector((state) => state.productsReducer.products);
+  const brands = useSelector((state) => state.productsReducer.brands);
   const searchValue = useSelector((state) => state.productsReducer.searchValue);
   const searchBoolean = useSelector((state) => state.productsReducer.search);
   const [alertHidden, setAlertHidden] = useState(true);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    return dispatch(resetSearch());
+    dispatch(resetSearch());
   }, []);
 
   const dispatchResetSearch = () => {

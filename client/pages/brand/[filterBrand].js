@@ -9,17 +9,18 @@ import {
   resetSearch,
 } from "../../redux/products/productsActions";
 
-export default function Home({ filterName }) {
+export default function Home({ filterBrand }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
     const filterQuery = {
-      categories: filterName,
+      brands: filterBrand,
     };
+
     dispatch(getAllProducts(filterQuery));
     dispatch(getAllBrands());
     dispatch(resetSearch());
-  }, [dispatch, filterName]);
+  }, [dispatch, filterBrand]);
 
   return (
     <>
@@ -36,7 +37,7 @@ export default function Home({ filterName }) {
 
 Home.getInitialProps = (context) => {
   const { query } = context;
-  const { filterName } = query;
+  const { filterBrand } = query;
 
-  return { filterName };
+  return { filterBrand };
 };

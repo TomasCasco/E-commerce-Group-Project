@@ -6,7 +6,8 @@ export default function Home() {
      return (
     <>
       <NavBar/>
-      <Checkout />      
+      <Checkout />       
     </>
   )
 }
+ 

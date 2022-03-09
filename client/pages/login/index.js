@@ -162,7 +162,7 @@ export default function Login() {
 }
 
 export function getServerSideProps(context){
-  if(context.req.headers.cookie.includes("token")){
+  if(context.req.headers.cookie?.includes("token")){
     context.res.writeHead(302, { Location: '/' });
     context.res.end();
     return {props:{}}

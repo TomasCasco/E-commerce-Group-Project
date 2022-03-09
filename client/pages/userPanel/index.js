@@ -1,9 +1,10 @@
 import { Container } from "@chakra-ui/react";
 import React from "react";
+import Footer from "../../components/Footer/Footer.tsx";
 import NavBar from "../../components/Navbar/NavBar";
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+
 import {
     Flex,
     Heading,
@@ -153,7 +154,7 @@ export default function UserPanel() {
         
         
         </Flex>
-
+    <Footer />
     </>
   );
 }

@@ -1,17 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Card from "./card";
-import {
-  Grid,
-  Flex,
-  Box,
-  Text,
-  Button,
-  Alert,
-  AlertIcon,
-  AlertTitle,
-  AlertDescription,
-  CloseButton,
-} from "@chakra-ui/react";
+import { Grid, Flex, Box, Text, Button } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { Spinner } from "@chakra-ui/react";
 import {
@@ -24,27 +13,21 @@ export default function CardContainer() {
   const data = useSelector((state) => state.productsReducer.products);
   const searchValue = useSelector((state) => state.productsReducer.searchValue);
   const searchBoolean = useSelector((state) => state.productsReducer.search);
-  const [alertHidden,setAlertHidden]=useState(true)
+
   const dispatch = useDispatch();
-  
 
-  useEffect(()=>{
-    return dispatch(resetSearch());
-  },[])
-
+  useEffect(() => {
+    return  dispatch(resetSearch());
+  }, []);
 
   const dispatchResetSearch = () => {
     dispatch(resetSearch());
     dispatch(getAllProducts());
   };
 
-  const handleSetAlertHidden=()=>{
-    setAlertHidden(true)
-  }
-
   if (loadingData)
     return (
-      <Flex justifyContent={"center"} marginTop="200px">
+      <Flex justifyContent={"center"} paddingTop="150px">
         {
           <Spinner
             thickness="4px"
@@ -59,38 +42,25 @@ export default function CardContainer() {
 
   if (searchBoolean && data.length === 0)
     return (
+      <Flex flexDirection="column" justify={"center"} align="center">
       <Flex
-        justifyContent={"center"}
-        flexDirection="column"
+        justify={"center"}
+        align="center"
         margin={"0 auto"}
         alignItems="center"
         padding={"10px"}
       >
-        <Text
-          padding={"10px"}
-          border={"2px solid black"}
-          borderRadius="1rem"
-          fontSize="x-large"
-        >
-          {searchValue}
+        <Text padding={"10px"} fontSize="x-large">
+          Resultados para: "{searchValue}"
           <Button onClick={dispatchResetSearch}>X</Button>
         </Text>
-        <Text fontSize="6xl">No se encontraron resultados</Text>
+      </Flex>
+        <Text fontSize="6xl">No se encontraron resultados.</Text>
       </Flex>
     );
 
   return (
     <>
-      <Alert status="success" position={"fixed"} top="20" right={10} maxWidth={"250px"} zIndex="100" hidden={alertHidden}>
-        <AlertIcon />
-        <Box flex="1">
-          <AlertTitle>Success!</AlertTitle>
-          <AlertDescription display="block">
-            Producto agregado correctamente al carrito!
-          </AlertDescription>
-        </Box>
-        <CloseButton position="absolute" right="8px" top="8px" onClick={handleSetAlertHidden}/>
-      </Alert>
       <Flex
         justifyContent={"center"}
         flexDirection="column"
@@ -99,24 +69,21 @@ export default function CardContainer() {
         padding={"10px"}
         hidden={!searchBoolean}
       >
-        <Text
-          padding={"10px"}
-          border={"2px solid black"}
-          borderRadius="1rem"
-          fontSize="x-large"
-        >
-          {searchValue}
+        <Flex align="center" justify={"center"}>
+          <Text padding={"10px"} fontSize="x-large">
+            Resultados para: "{searchValue}"
+          </Text>
           <Button onClick={dispatchResetSearch}>X</Button>
-        </Text>
+        </Flex>
       </Flex>
       <Flex justifyContent="center">
-        <Box w="90%">
+        <Box w="100%">
           <Grid templateColumns="repeat(3,1fr)" templateRows="repeat(2,1fr)">
             {data
               ? data.map((data) => {
                   return (
                     <div key={data._id}>
-                      <Card data={data} setAlertHidden={setAlertHidden}/>
+                      <Card data={data} />
                     </div>
                   );
                 })

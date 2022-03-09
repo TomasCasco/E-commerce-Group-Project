@@ -47,6 +47,16 @@ app.get("/products/:id", async (req, res) => {
   }
 });
 
+// traer todas las marcas
+app.get("/products/all/brands", async (req, res) => {
+  const products = await Product.find(null, { brand: true, _id: false });
+  const brands = new Set();
+  products.forEach(({ brand }) => {
+    brands.add(brand);
+  });
+  res.json([...brands]);
+});
+
 // crea un producto
 app.post("/products/create", async (req, res) => {
   try {
@@ -117,12 +127,16 @@ app.post("/products/create-api", async (req, res) => {
     "https://api.mercadolibre.com/sites/MLA/search?q=hyperx microfono&limit=15"
   );
   let meliApi = data.results.map((product) => {
-    let {value_name}= product.attributes.find(el=>el.name==="Marca" || el.name==="marca")
+    let { value_name } = product.attributes.find(
+      (el) => el.name === "Marca" || el.name === "marca"
+    );
     return {
       name: product.title.toLocaleLowerCase() || "...",
       price: product.price || 000,
-      brand: value_name?value_name : "generic",
-      image: `https://http2.mlstatic.com/D_NQ_NP_2X_${product.thumbnail_id}-F.webp` || "image.jpg",
+      brand: value_name ? value_name : "generic",
+      image:
+        `https://http2.mlstatic.com/D_NQ_NP_2X_${product.thumbnail_id}-F.webp` ||
+        "image.jpg",
       description: product.description || "...",
       stock: product.available_quantity,
       category: "microfono",

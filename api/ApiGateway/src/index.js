@@ -12,8 +12,8 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   context: ({ req }) => {
-    if (req.headers.authorization) return {token:req.headers.authorization}
-   },
+    if (req.headers.authorization) return { token: req.headers.authorization };
+  },
   dataSources: () => ({
     UsersApi: new Apis.UsersApi(),
     ProductsApi: new Apis.ProductsApi(),

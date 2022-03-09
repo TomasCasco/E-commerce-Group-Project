@@ -27,6 +27,7 @@ const userTypes = gql`
     username: String!
     email: String!
     id: String!
+    role: String!
   }
 
   type Query {

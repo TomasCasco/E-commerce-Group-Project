@@ -1,17 +1,13 @@
 import {
   Box,
   Button,
-  Checkbox,
   Container,
   Flex,
   FormControl,
   useToast,
   FormLabel,
-  Heading,
-  HStack,
   Input,
   Stack,
-  Text,
   useBreakpointValue,
   useColorModeValue,
 } from "@chakra-ui/react";
@@ -20,60 +16,60 @@ import { Logo } from "./Logo";
 import { OAuthButtonGroup } from "./OAuthButtonGroup.js";
 import { PasswordField } from "./PasswordField.js";
 import { client } from "../../apolloClient/apolloClient";
-import { queryInfoUser, queryLogin } from "../../apolloClient/querys";
-import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
-import { setLogged, setUser } from "../../redux/user/usersActions";
+import { mutationUserRegister } from "../../apolloClient/mutations";
 
-export default function Login() {
+export default function App() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
   const router = useRouter();
   const toast = useToast();
   const dispatch = useDispatch();
-  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const inputValue = {
       email: email,
       password: password,
+      username: username,
     };
-    const response = await client.query({
-      query: queryLogin,
+    const response = await client.mutate({
+      mutation: mutationUserRegister,
       variables: {
         input: inputValue,
       },
     });
-    const token = response.data.loginUser.token;
-    const errorResponse = response.data.loginUser.error;
-    if (token) {
-      Cookies.set("token", token, { expires: 3 });
-      router.push("/");
-      const user = await client.query({
-        query: queryInfoUser,
-        context: {
-          headers: {
-            authorization: `Bearer ${token}`,
-          },
-        },
-      });
-      Cookies.set("user", JSON.stringify(user.data.infoUser), { expires: 3 });
-      dispatch(setUser(user.data.infoUser));
-      dispatch(setLogged(true));
-    } else if (errorResponse) {
+
+    const errorResponse = response.data.registerUser.error;
+    const messageResponse = response.data.registerUser.message;
+    if (errorResponse) {
       toast({
-        title: "Error",
+        title: "Error!",
         position: "top",
         description: errorResponse,
         status: "error",
         duration: 2000,
         isClosable: true,
       });
-      setEmail("");
-      setPassword("");
     }
+    if (messageResponse) {
+      toast({
+        title: "Success!",
+        position: "top",
+        description: messageResponse,
+        status: "success",
+        duration: 1000,
+        isClosable: true,
+      });
+      setTimeout(()=>{
+        router.push("/")
+      },1000)
+    }
+    setEmail("");
+    setPassword("");
+    setUsername("");
   };
   return (
     <Container bgColor={"lightsteelblue"} maxWidth="100vw" height={"100vh"}>
@@ -88,21 +84,6 @@ export default function Login() {
             <Flex align={"center"} justify="center">
               <Logo />
             </Flex>
-            <Stack spacing={{ base: "2", md: "3" }} textAlign="center">
-              <Heading size={useBreakpointValue({ base: "xs", md: "sm" })}>
-                Log in to your account
-              </Heading>
-              <HStack spacing="1" justify="center">
-                <Text color="muted">Don't have an account?</Text>
-                <Button
-                  variant="link"
-                  colorScheme="blue"
-                  onClick={() => router.push("/register")}
-                >
-                  Sign up
-                </Button>
-              </HStack>
-            </Stack>
           </Stack>
           <Box
             py={{ base: "0", sm: "8" }}
@@ -124,20 +105,24 @@ export default function Login() {
                       onChange={(e) => setEmail(e.target.value)}
                       required
                     />
+                    <FormLabel htmlFor="email">Username</FormLabel>
+                    <Input
+                      id="username"
+                      type="text"
+                      borderColor={"gray"}
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
+                      required
+                    />
                     <PasswordField
                       borderColor={"gray"}
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                     />
                   </FormControl>
-                  <HStack justify="space-between">
-                    <Button variant="link" colorScheme="blue" size="sm">
-                      Forgot password?
-                    </Button>
-                  </HStack>
                   <Stack spacing="6">
                     <Button variant="primary" type="submit">
-                      Sign in
+                      Sign up
                     </Button>
                     <Button variant="primary" onClick={() => router.push("/")}>
                       Back to home
@@ -159,13 +144,4 @@ export default function Login() {
       </Container>
     </Container>
   );
-}
-
-export function getServerSideProps(context){
-  if(context.req.headers.cookie.includes("token")){
-    context.res.writeHead(302, { Location: '/' });
-    context.res.end();
-    return {props:{}}
-  }
-  return {props:{}}
 }

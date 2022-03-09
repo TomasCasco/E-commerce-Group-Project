@@ -10,7 +10,7 @@ const login = async (req, res, next) => {
     const user = await User.findOne({ email });
 
     if (!user) {
-      res.status(401).json({ error: "Invalid email or password" });
+      res.status(200).json({ error: "Invalid email or password" });
     } else {
       if (bcrypt.compareSync(password, user.password)) {
         const token = jwt.sign(

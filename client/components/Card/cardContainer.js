@@ -29,7 +29,7 @@ export default function CardContainer() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    return dispatch(resetSearch());
+    dispatch(resetSearch());
   }, []);
 
   const dispatchResetSearch = () => {

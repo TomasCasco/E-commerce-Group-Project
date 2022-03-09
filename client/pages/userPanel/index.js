@@ -1,7 +1,9 @@
 import { Container } from "@chakra-ui/react";
-import React from "React";
+import React from "react";
 import NavBar from "../../components/Navbar/NavBar";
-import { useState } from 'react'
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import {
     Flex,
     Heading,
@@ -18,7 +20,10 @@ import {
     FiUser,
 } from "react-icons/fi"
 
+
 export default function UserPanel() {
+
+
   return (
     <>
       <NavBar />
@@ -121,11 +126,14 @@ export default function UserPanel() {
                         <Heading as="h2" size="lg" letterSpacing="tight">Dashboard</Heading>
                     </Flex>
                 </Flex>
+
+                <favoritesContainer />
+
                 <Flex justifyContent="center" mt={8} className="sidebar-items">
                     <Heading mt={50} as="h3" size="lg" letterSpacing="normal">
                         Start shopping now...  
                     </Heading> 
-                    <Link _hover={{ textDecor: 'none' }} display={["flex", "flex", "none", "flex", "flex"]}>
+                    <Link href='/' _hover={{ textDecor: 'none' }} display={["flex", "flex", "none", "flex", "flex"]}>
                         <Heading mt={50} ml={10} as="h3" size="lg" letterSpacing="normal">Store</Heading>
                     </Link>
                     <Link href='/' mt={55} display={["none", "none", "flex", "flex", "flex"]}>
@@ -133,8 +141,15 @@ export default function UserPanel() {
                     </Link>
                 </Flex>
             </Flex>
-        
-        
+{/* Column 3 */}
+          <Flex
+                w={["100%", "100%", "30%"]}
+                bgColor="#F5F5F5" p="3%"
+                flexDir="column"
+                overflow="auto"
+                minW={[null, null, "300px", "300px", "400px"]}
+            >
+          </Flex>
         
         
         </Flex>

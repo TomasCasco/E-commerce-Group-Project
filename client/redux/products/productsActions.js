@@ -68,3 +68,22 @@ export const getAllBrands = () => {
     });
   };
 };
+
+export const getProductSuggestion = (query) => {
+  return async function (dispatch) {
+    const { data } = await client.query({
+      query: queryProducts,
+      variables: { input: { name: query } },
+    });
+    const suggestions = data.getAllProducts.map(({ name }) => {
+      const len = name.length;
+      const mostrar = Math.floor((50 * len) / 100);
+      const resultado = name.slice(0, mostrar) + "...";
+      return resultado;
+    });
+    dispatch({
+      type: "SUGGESTION",
+      payload: suggestions.slice(0, 5),
+    });
+  };
+};

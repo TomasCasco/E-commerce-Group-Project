@@ -40,3 +40,18 @@ export const ALL_BRANDS = gql`
     getAllBrands
   }
 `;
+
+export const getById = gql`
+  query ($input: String) {
+    getProductById(input: $input) {
+      _id
+      brand
+      category
+      name
+      price
+      image
+      description
+      stock
+    }
+  }
+`;

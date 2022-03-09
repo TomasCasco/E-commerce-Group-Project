@@ -3,7 +3,10 @@ import CaptionCarousel from "../components/Banner/banner.tsx";
 import NavBar from "../components/Navbar/navBar";
 import CardContainer from "../components/Card/cardContainer";
 import { useDispatch } from "react-redux";
-import { getAllProducts } from "../redux/products/productsActions";
+import {
+  getAllProducts,
+  getAllBrands,
+} from "../redux/products/productsActions";
 import { useEffect } from "react";
 
 export default function Home() {
@@ -11,6 +14,7 @@ export default function Home() {
 
   useEffect(() => {
     dispatch(getAllProducts());
+    dispatch(getAllBrands());
   }, []);
 
   return (

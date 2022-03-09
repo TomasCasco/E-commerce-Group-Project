@@ -1,0 +1,39 @@
+[
+    {
+      "id": 1,
+      "question": "What can I do here?",
+      "answer": "This is the E-commerce Support's frequently asked questions. You can ask questions about creating an account, order payment options, checking the status of your order or return requests."
+    },
+    {
+      "id": 2,
+      "question": "How do I create an account?",
+      "answer": "You can create your account by clicking on the Login section."
+    },
+    {
+      "id": 3,
+      "question": "How can I pay for my order?",
+      "answer": "We support Mercado Pago as a unique pay metod."
+    },
+    {
+      "id": 4,
+      "question": "How can I check delivery to my PIN Code?",
+      "answer": "You can find out if we deliver to your PIN Code using the courier serviceability tool available on the product page."
+    },
+    {
+      "id": 5,
+      "question": "How do I check the status of my order?",
+      "answer": "Tap on \"My Account\" section, there are all the infomation about your orders."
+    },
+    {
+      "id": 6,
+      "question": "What is the Cancellation Policy?",
+      "answer": "You can cancel an order when it is in packed or shipped status, as long as the cancel option is available on App or Website."
+    },
+    {
+      "id": 7,
+      "question": "How do I cancel my Order?",
+      "answer": "Tap on \"My Orders\" section under the main menu of your App or Website and then select the item or order you want to cancel"
+    }
+   
+    
+  ]

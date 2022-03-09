@@ -7,6 +7,7 @@ import {
   getAllProducts,
 } from "../redux/products/productsActions";
 import { useEffect } from "react";
+import Footer from "../components/Footer/Footer.tsx";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ export default function Home() {
       <NavBar />
       <CaptionCarousel />
       <CardContainer />
+      <Footer/>
     </>
   );
 }

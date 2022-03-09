@@ -1,4 +1,5 @@
 import React, { useState }  from 'react'
+import Footer from '../../components/Footer/Footer.tsx';
 import NavBar from "../../components/Navbar/NavBar"
 import { Faqs } from '../../components/Support/Faqs'
 
@@ -15,6 +16,7 @@ export default function Support() {
         currentFaqId={currentFaqId}
         setCurrentFaqId={setCurrentFaqId}
       />
+      <Footer/>
     </>
   )
 }

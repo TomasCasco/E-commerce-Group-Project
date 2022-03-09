@@ -25,3 +25,39 @@ a {
   background-color: #160606
 }
 
+
+.sidebar-items:not(:last-child) {
+  margin-bottom: 1.5em;
+}
+
+@media only screen and (max-width: 767px) {
+  .sidebar-items {
+    margin-bottom: 0 !important;
+  }
+}
+
+.sidebar-items {
+  color: gray;
+  font-size: large;
+}
+
+.sidebar-items p {
+  margin-left: 1em;
+}
+
+.sidebar-items:hover svg {
+  color: #6036f8;
+}
+
+.sidebar-items:hover p {
+  color: #fff;
+}
+
+.active {
+  color: #fff;
+}
+
+.active-icon {
+  color: #6036f8 !important;
+}
+

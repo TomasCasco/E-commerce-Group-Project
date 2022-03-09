@@ -1,3 +1,10 @@
-export default function AboutUs(){
-    return <div>AboutUs</div>
+import React from 'react'
+import NavBar from '../../components/Navbar/NavBar'
+
+export default function index() {
+  return (
+    <>
+    <NavBar/>
+    </>
+  )
 }

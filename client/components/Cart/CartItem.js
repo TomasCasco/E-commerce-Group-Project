@@ -22,23 +22,20 @@ export default function CartItem({ itemProduct }) {
 
   const { product, qty } = itemProduct;
 
-  const dispatchRemoveFromCart=()=>{
-    dispatch(removeFromCart(product._id))
-  }
+  const dispatchRemoveFromCart = () => {
+    dispatch(removeFromCart(product._id));
+  };
 
-  const dispatchAddItemQty=()=>{
-    dispatch(addItemQty(product._id))
-  }
+  const dispatchAddItemQty = () => {
+    dispatch(addItemQty(product._id));
+  };
 
-  const dispatchSubstracItemQty=()=>{
-    dispatch(subtractItemQty(product._id))
-  }
-
-
+  const dispatchSubstracItemQty = () => {
+    dispatch(subtractItemQty(product._id));
+  };
 
   return (
     <Flex
-      w="full"
       alignItems="center"
       justifyContent="space-between"
       bg={useColorModeValue("white", "gray.800")}
@@ -47,13 +44,20 @@ export default function CartItem({ itemProduct }) {
       shadow="lg"
       padding={"30px"}
       textAlign="center"
+      maxWidth={"1000px"}
     >
       <Box>
-        <Image src={product.image} maxWidth={"300px"} maxHeight="200px"/>
+        <Image src={product.image} maxWidth={"300px"} maxHeight="200px" />
       </Box>
 
       <Box>
-        <Box m="10" fontSize="xl" fontWeight="semibold" lineHeight="5">
+        <Box
+          m="10"
+          fontSize="xl"
+          fontWeight="semibold"
+          lineHeight="5"
+          maxWidth={"200px"}
+        >
           {product.name}
         </Box>
         <Box m="10" fontSize="xs" fontWeight="" lineHeight="4">
@@ -101,7 +105,9 @@ export default function CartItem({ itemProduct }) {
           </Flex>
         </div>
         <div>
-          <Box onClick={dispatchRemoveFromCart} fontSize="large"><button>Delete</button></Box>
+          <Box onClick={dispatchRemoveFromCart} fontSize="large">
+            <button>Delete</button>
+          </Box>
         </div>
       </Grid>
     </Flex>

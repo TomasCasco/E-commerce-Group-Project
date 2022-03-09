@@ -10,7 +10,7 @@ export default function Cart() {
 
 
   return (
-    <Flex  display={"flex"} direction="column" justify="center" align="center" maxWidth="900px" padding={"50px"} paddingLeft="20px" paddingRight={"20px"}>
+    <Flex  display={"flex"} direction="column" justify="center" align="center" maxWidth="100%" padding={"50px"} paddingLeft="20px" paddingRight={"20px"}>
       <Box fontSize="xx-large"
               fontWeight="semibold"
               paddingBottom="20px"

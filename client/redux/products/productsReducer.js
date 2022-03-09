@@ -35,7 +35,6 @@ const productsReducer = (state = initialState, action) => {
       };
 
     case "GET_ALL_BRANDS":
-      console.log(action.payload);
       return {
         ...state,
         brands: action.payload,

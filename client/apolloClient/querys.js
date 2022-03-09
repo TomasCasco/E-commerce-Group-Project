@@ -15,6 +15,26 @@ export const queryProducts = gql`
   }
 `;
 
+export const queryLogin = gql`
+  query LoginUser($input: userLogin) {
+    loginUser(input: $input) {
+      error
+      token
+    }
+  }
+`;
+export const queryInfoUser = gql`
+  query InfoUser {
+    infoUser {
+      error
+      username
+      email
+      id
+      role
+    }
+  }
+`;
+
 export const ALL_BRANDS = gql`
   query {
     getAllBrands

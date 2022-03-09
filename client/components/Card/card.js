@@ -1,13 +1,12 @@
 import {
   Flex,
-  Grid,
   Box,
   Image,
   Badge,
   useColorModeValue,
   Icon,
-  chakra,
   Tooltip,
+  useToast,
 } from "@chakra-ui/react";
 
 import { IoMdCart } from "react-icons/io";
@@ -16,18 +15,30 @@ import { addItemQty, addToCart } from "../../redux/cart/cartActions";
 
 import { addToFavorites } from "../../redux/favorites/favoritesActions";
 
-export default function Card({ data, setAlertHidden }) {
+export default function Card({ data }) {
   const cart = useSelector((state) => state.cartReducer.cart);
+  const toast=useToast();
 
   const dispatch = useDispatch();
+
+  const showToast=()=>{
+    return  toast({
+      title:"Success!",
+      position:"top-right",
+      description:"Item added to cart!",
+      status:"success",
+      duration:2000,
+      isClosable:true
+    })
+  }
 
   const addCart = () => {
     if (cart.some((el) => el.product._id === data._id)) {
       dispatch(addItemQty(data._id));
-      setAlertHidden(false);
+      showToast();
     } else {
       dispatch(addToCart(data));
-      setAlertHidden(false);
+      showToast();
     }
   };
 
@@ -57,8 +68,7 @@ export default function Card({ data, setAlertHidden }) {
           onClick={() => dispatch(addToFavorites(data.id))}
         >
           🧡
-        </Box>{" "}
-        {/* alert("Add To Wish List") */}
+        </Box>
         <Image src={data.image} roundedTop="lg" maxH={"30%"} margin="0 auto" />
         <Box p="6">
           <Flex mt="1" justifyContent="space-between" alignContent="center">

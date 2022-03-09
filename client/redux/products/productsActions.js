@@ -25,7 +25,11 @@ export const getAllProducts = (inputFilter) => {
           type: "SET_LOADING_PRODUCTS",
           payload: false,
         });
-      }, 1000);
+      }, 500);
+      /* return dispatch({
+        type: "SET_LOADING_PRODUCTS",
+        payload: false,
+      }); */
     } catch (error) {
       console.log(error);
     }

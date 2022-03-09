@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   Flex,
   Heading,
@@ -13,6 +13,9 @@ import {
   Box,
   Button,
   useColorMode,
+  color,
+  UnorderedList,
+  ListItem,
 } from "@chakra-ui/react";
 
 import { BsFillPersonFill } from "react-icons/bs";
@@ -25,6 +28,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getAllProducts,
   setSearch,
+  getProductSuggestion,
 } from "../../redux/products/productsActions";
 import DarkModeSwitch from "../DarkModeSwitch/DarkModeSwitch";
 
@@ -32,6 +36,7 @@ export default function NavBar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const distpatch = useDispatch();
   const brands = useSelector((state) => state.productsReducer.brands);
+  const suggestions = useSelector((state) => state.productsReducer.suggestions);
   const [inputSearch, setInputSearch] = useState("");
   const { toggleColorMode } = useColorMode();
 
@@ -42,6 +47,17 @@ export default function NavBar() {
     distpatch(getAllProducts(filterQuery));
     distpatch(setSearch(filterQuery.name));
     setInputSearch("");
+  };
+
+  const handleInputSearch = (e) => {
+    setInputSearch(e.target.value);
+    distpatch(getProductSuggestion(e.target.value));
+  };
+
+  const selectSuggestion = (e) => {
+    const value = e.target[Object.keys(e.target)[1]].children;
+    setInputSearch(value);
+    dispatchSearchProducts(value);
   };
 
   return (
@@ -153,6 +169,7 @@ export default function NavBar() {
                 fontWeight="normal"
                 onMouseEnter={onOpen}
                 onMouseLeave={onClose}
+                flexDirection={"row"}
               >
                 PRODUCTS {isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
               </MenuButton>
@@ -241,26 +258,45 @@ export default function NavBar() {
             </Link>
           </Flex>
         </Flex>
-        <Flex alignItems="center" color="white" mr="4em">
-          <Input
-            onChange={(e) => setInputSearch(e.target.value)}
-            value={inputSearch}
-            border={"2px solid white"}
-            borderRight="none"
-            borderRadius={"none"}
-            borderTopLeftRadius={"1rem"}
-            borderBottomLeftRadius="1rem"
-          ></Input>
-          <Button
-            onClick={dispatchSearchProducts}
-            background="none"
-            border={"2px solid white"}
-            borderRadius={"none"}
-            borderBottomRightRadius={"1rem"}
-            borderTopRightRadius="1rem"
-          >
-            <SearchIcon />
-          </Button>
+        <Flex alignItems="center" color="white" position={"relative"}>
+          <Flex>
+            <Input
+              onChange={handleInputSearch}
+              value={inputSearch}
+              border={"2px solid white"}
+              borderRight="none"
+              borderRadius={"none"}
+              borderTopLeftRadius={"1rem"}
+              borderBottomLeftRadius="1rem"
+            ></Input>
+            <Button
+              onClick={dispatchSearchProducts}
+              background="none"
+              border={"2px solid white"}
+              borderRadius={"none"}
+              borderBottomRightRadius={"1rem"}
+              borderTopRightRadius="1rem"
+            >
+              <SearchIcon />
+            </Button>
+          </Flex>
+          <Box position={"absolute"} top={"60px"} zIndex={100}>
+            {suggestions &&
+              inputSearch.length > 0 &&
+              suggestions.map((s) => (
+                <Box
+                  bg="#eee"
+                  w="100%"
+                  p={2}
+                  my="4px"
+                  color="#000"
+                  cursor="pointer"
+                  onClick={selectSuggestion}
+                >
+                  {s}
+                </Box>
+              ))}
+          </Box>
         </Flex>
       </Flex>
     </>

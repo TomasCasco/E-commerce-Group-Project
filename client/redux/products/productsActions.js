@@ -87,3 +87,10 @@ export const getProductSuggestion = (query) => {
     });
   };
 };
+
+export const resetProductSuggestion = ()=>{
+  return {
+    type:"SUGGESTION",
+    payload:[]
+  }
+}

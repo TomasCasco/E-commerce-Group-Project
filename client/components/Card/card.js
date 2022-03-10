@@ -10,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 
 import { IoMdCart } from "react-icons/io";
+import { FiHeart } from "react-icons/fi"
 import { useDispatch, useSelector } from "react-redux";
 import { addItemQty, addToCart } from "../../redux/cart/cartActions";
 
@@ -63,12 +64,7 @@ export default function Card({ data }) {
         justifyContent={"space-between"}
         position="relative"
       >
-        <Box
-          position="absolute"
-          onClick={() => dispatch(addToFavorites(data.id))}
-        >
-          🧡
-        </Box>
+        
         <Image src={data.image} roundedTop="lg" maxH={"30%"} margin="0 auto" />
         <Box p="6">
           <Flex mt="1" justifyContent="space-between" alignContent="center">
@@ -107,6 +103,13 @@ export default function Card({ data }) {
               </Box>
               {data.price}
             </Box>
+            <Box fontSize="xl" color={useColorModeValue("")} >
+          
+         <button onClick={() => dispatch(addToFavorites(data.id))} href={"#"} display={"flex"} >
+          <Icon as={FiHeart} h={5} w={5} />
+          </button>
+         
+        </Box>
             <Box fontSize="xl" color={useColorModeValue("")}>
               <Tooltip
                 label="Add to cart"

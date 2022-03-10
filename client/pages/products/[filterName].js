@@ -2,6 +2,7 @@ import Head from "next/head";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CardContainer from "../../components/Card/cardContainer";
+import Footer from "../../components/Footer/Footer.tsx";
 import NavBar from "../../components/Navbar/NavBar";
 import {
   getAllProducts,
@@ -23,6 +24,7 @@ export default function Home({ filterName }) {
     <>
       <NavBar />
       <CardContainer />
+      <Footer/>
     </>
   );
 }

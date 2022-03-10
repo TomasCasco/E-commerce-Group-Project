@@ -4,13 +4,15 @@ import {
   Grid,
   Box,
   Image,
+  Button,
   Badge,
   useColorModeValue,
   Icon,
   chakra,
   Tooltip,
 } from "@chakra-ui/react";
-import { FaTrash, FaChevronUp, FaChevronDown, FaMinus, FaPlus } from 'react-icons/fa'
+import { FaTrash } from 'react-icons/fa'
+import { Divider } from '@chakra-ui/react'
 
 import { useDispatch } from "react-redux";
 import {
@@ -19,47 +21,38 @@ import {
   subtractItemQty,
 } from "../../redux/cart/cartActions";
 
-export default function CartItem({ itemProduct }) {
+export default function CheckoutItem({ itemProduct }) {
   const dispatch = useDispatch();
 
   const { product, qty } = itemProduct;
 
-  const dispatchRemoveFromCart = () => {
-    dispatch(removeFromCart(product._id));
-  };
+  const dispatchRemoveFromCart=()=>{
+    dispatch(removeFromCart(product._id))
+  }
 
-  const dispatchAddItemQty = () => {
-    dispatch(addItemQty(product._id));
-  };
+  const dispatchAddItemQty=()=>{
+    dispatch(addItemQty(product._id))
+  }
 
-  const dispatchSubstracItemQty = () => {
-    dispatch(subtractItemQty(product._id));
-  };
+  const dispatchSubstracItemQty=()=>{
+    dispatch(subtractItemQty(product._id))
+  }
 
   return (
-    <Flex
-      alignItems="center"
-      justifyContent="space-between"
-      bg={useColorModeValue("white", "gray.800")}
-      borderWidth="1px"
-      rounded="lg"
-      shadow="lg"
-      textAlign="center"
-      maxWidth={"500px"} maxHeight="270px"
-    >
-      <Box>
-        <Image src={product.image} maxWidth={"200px"} maxHeight="100px"/>
+    <Flex align="center" ml="1" pr={"30px"} pt="30px" textAlign="center">
+      <Box minWidth={"220px"}>
+        <Image src={product.image} maxWidth={"220px"} maxHeight="120px"/>
       </Box>
 
-      <Box mr="10px" maxWidth={"270px"}>
-        <Box  fontSize="15px" fontWeight="semibold" lineHeight="5" textAlign="left">
+        <Box fontSize="19px" fontWeight="semibold" lineHeight="5" maxWidth={"250px"} minWidth={"250px"}>
           {product.name}
         </Box>
-        <Box mt="2" fontWeight="semibold" fontSize={"large"}>
-          ${product.price * qty}
+        <Box ml="4" mr="6" mb="18px" fontWeight="semibold" fontSize={"m"}>
+          ${product.price}
         </Box>
-        <Flex direction="colum" justifyContent="center" mt="4" mb="2">
-            <Box
+        
+          <Flex direction="colum" justifyContent="center" mt="4" mb="8">
+            <Box 
               cursor="pointer"
               onClick={dispatchAddItemQty}
               fontSize="x-large"
@@ -72,23 +65,22 @@ export default function CartItem({ itemProduct }) {
               borderBottomLeftRadius="10px"
               color="white"
               backgroundColor={"#c53030"}
-              height="35px"
             >
-              <FaChevronUp />
-            </Box>
+              +
+            </Box >
             <Box
               pl="3"
               pr="3"
-              pt="-2"
+              pt="1"
+              pb="1"
               border="1px solid rgba(197, 48, 48, .3)"
               type="text"
               value={qty}
               fontSize="x-large"
-              height="35px"
             >
               {qty}
             </Box>
-            <Box
+            <Box 
               cursor="pointer"
               onClick={dispatchSubstracItemQty}
               fontSize="x-large"
@@ -101,15 +93,14 @@ export default function CartItem({ itemProduct }) {
               borderBottomRightRadius="10px"
               color="white"
               backgroundColor={"#c53030"}
-              height="35px"
             >
-              <FaChevronDown />
+              -
             </Box>
           </Flex>
-          <Box onClick={dispatchRemoveFromCart} color="#c53030" fontSize="large">
-            <button><Box>Delete</Box></button>
-          </Box>
-      </Box>
+          <Box m="10" fontWeight="semibold" fontSize={"m"} mb="50px">
+          ${product.price * qty}
+           </Box>
+          <Box onClick={dispatchRemoveFromCart} fontSize="large" mb="12px"><FaTrash _hover={{color:'red'}}/> </Box>
     </Flex>
   );
 }

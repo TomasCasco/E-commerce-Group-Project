@@ -11,7 +11,7 @@ const userTypes = gql`
     email: String!
     password: String!
   }
-  
+
   type responseLogin {
     token: String
     error: String
@@ -32,7 +32,7 @@ const userTypes = gql`
 
   type Query {
     loginUser(input: userLogin): responseLogin
-    infoUser : responseInfoUser
+    infoUser: responseInfoUser
   }
 
   type Mutation {

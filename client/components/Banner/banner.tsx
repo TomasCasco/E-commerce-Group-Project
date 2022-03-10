@@ -8,7 +8,7 @@ import Slider from 'react-slick';
 // Settings for the slider
 const settings = {
   dots: true,
-  arrows: false,
+  arrows: true,
   fade: true,
   infinite: true,
   autoplay: true,
@@ -25,8 +25,8 @@ export default function Carousel() {
 
   // These are the breakpoints which changes the position of the
   // buttons as the screen size changes
-  const top = useBreakpointValue({ base: '90%', md: '50%' });
-  const side = useBreakpointValue({ base: '30%', md: '10px' });
+  const top = useBreakpointValue({ base: '2000px', md: '50%' });
+  const side = useBreakpointValue({ base: '2000px', md: '20px' });
 
   // These are the images used in the slide
   const cards = [
@@ -38,8 +38,8 @@ export default function Carousel() {
   return (
     <Box
       position={'relative'}
-      height={'600px'}
       width={'full'}
+      height="480px"
       alignContent="center"
       alignItems={"center"}
       overflow={'hidden'}>
@@ -59,45 +59,54 @@ export default function Carousel() {
       <IconButton
         aria-label="left-arrow"
         colorScheme="transparent"
-        h='87%'
+        h='50%'
         position="absolute"
         left={side}
         top={top}
         transform={'translate(0%, -50%)'}
+        _focus={
+          {
+            border:"none"
+          }
+        }  
+
         zIndex={2}
         onClick={() => slider?.slickPrev()}>
         <BiLeftArrowAlt />
       </IconButton>
-      {/* Right Icon */}
-      <IconButton
-        aria-label="right-arrow"
-        colorScheme="transparent"
-        h='87%'
-        position="absolute"
-        right={side}
-        top={top}
-        transform={'translate(0%, -50%)'}
-        zIndex={2}
-        onClick={() => slider?.slickNext()}>
-        <BiRightArrowAlt />
-      </IconButton>
-      {/* Slider */}
-      <Slider {...settings} ref={(slider) => setSlider(slider)}>
+      <Slider {...settings} ref={(slider) => setSlider(slider)}  heigth="100px !important">
         {cards.map((url, index) => (
           <Box
             key={index}
-            height={'xl'}
             position="relative"
             backgroundPosition="center"
             backgroundRepeat="no-repeat"
             /* backgroundImage={`url(${url})`} */
           >
-          <Image src={url} width="100%" height={"100%"}>
-
+          <Image src={url} width="100%" height={"450px"}>
           </Image>
           </Box>
         ))}
       </Slider>
+      {/* Right Icon */}
+      <IconButton
+        aria-label="right-arrow"
+        colorScheme="transparent"
+        h='50%'
+        position="absolute"
+        right={side}
+        top={top}
+        transform={'translate(0%, -50%)'}
+        zIndex={2}
+        _focus={
+          {
+            border:"none"
+          }
+        }  
+        onClick={() => slider?.slickNext()}>
+        <BiRightArrowAlt />
+      </IconButton>
+      {/* Slider */}
     </Box>
   );
 }

@@ -1,33 +1,45 @@
 import {
   Flex,
-  Grid,
   Box,
   Image,
   Badge,
   useColorModeValue,
   Icon,
-  chakra,
   Tooltip,
+  useToast,
 } from "@chakra-ui/react";
 
 import { IoMdCart } from "react-icons/io";
+import { FiHeart } from "react-icons/fi"
 import { useDispatch, useSelector } from "react-redux";
 import { addItemQty, addToCart } from "../../redux/cart/cartActions";
 
 import { addToFavorites } from "../../redux/favorites/favoritesActions";
 
-export default function Card({ data, setAlertHidden }) {
+export default function Card({ data }) {
   const cart = useSelector((state) => state.cartReducer.cart);
+  const toast=useToast();
 
   const dispatch = useDispatch();
+
+  const showToast=()=>{
+    return  toast({
+      title:"Success!",
+      position:"top-right",
+      description:"Item added to cart!",
+      status:"success",
+      duration:2000,
+      isClosable:true
+    })
+  }
 
   const addCart = () => {
     if (cart.some((el) => el.product._id === data._id)) {
       dispatch(addItemQty(data._id));
-      setAlertHidden(false);
+      showToast();
     } else {
       dispatch(addToCart(data));
-      setAlertHidden(false);
+      showToast();
     }
   };
 
@@ -52,13 +64,7 @@ export default function Card({ data, setAlertHidden }) {
         justifyContent={"space-between"}
         position="relative"
       >
-        <Box
-          position="absolute"
-          onClick={() => dispatch(addToFavorites(data.id))}
-        >
-          🧡
-        </Box>{" "}
-        {/* alert("Add To Wish List") */}
+        
         <Image src={data.image} roundedTop="lg" maxH={"30%"} margin="0 auto" />
         <Box p="6">
           <Flex mt="1" justifyContent="space-between" alignContent="center">
@@ -97,6 +103,13 @@ export default function Card({ data, setAlertHidden }) {
               </Box>
               {data.price}
             </Box>
+            <Box fontSize="xl" color={useColorModeValue("")} >
+          
+         <button onClick={() => dispatch(addToFavorites(data.id))} href={"#"} display={"flex"} >
+          <Icon as={FiHeart} h={5} w={5} />
+          </button>
+         
+        </Box>
             <Box fontSize="xl" color={useColorModeValue("")}>
               <Tooltip
                 label="Add to cart"

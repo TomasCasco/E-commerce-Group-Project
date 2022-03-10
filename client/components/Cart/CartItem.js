@@ -10,6 +10,8 @@ import {
   chakra,
   Tooltip,
 } from "@chakra-ui/react";
+import { FaTrash, FaChevronUp, FaChevronDown, FaMinus, FaPlus } from 'react-icons/fa'
+
 import { useDispatch } from "react-redux";
 import {
   removeFromCart,
@@ -45,65 +47,72 @@ export default function CartItem({ itemProduct }) {
       borderWidth="1px"
       rounded="lg"
       shadow="lg"
-      padding={"30px"}
       textAlign="center"
+      maxWidth={"500px"} maxHeight="270px"
     >
       <Box>
-        <Image src={product.image} maxWidth={"300px"} maxHeight="200px"/>
+        <Image src={product.image} maxWidth={"200px"} maxHeight="100px"/>
       </Box>
 
-      <Box>
-        <Box m="10" fontSize="xl" fontWeight="semibold" lineHeight="5">
+      <Box mr="10px" maxWidth={"270px"}>
+        <Box  fontSize="15px" fontWeight="semibold" lineHeight="5" textAlign="left">
           {product.name}
         </Box>
-        <Box m="10" fontSize="xs" fontWeight="" lineHeight="4">
-          {product.description}
-        </Box>
-        <Box m="10" fontWeight="semibold" fontSize={"large"}>
+        <Box mt="2" fontWeight="semibold" fontSize={"large"}>
           ${product.price * qty}
         </Box>
-      </Box>
-
-      <Grid align="center" mr="4">
-        <div>
-          <Flex direction="colum" justifyContent="center" mt="4" mb="16">
+        <Flex direction="colum" justifyContent="center" mt="4" mb="2">
             <Box
-              mt="2"
-              mr="2"
               cursor="pointer"
               onClick={dispatchAddItemQty}
               fontSize="x-large"
-            >
-              +
-            </Box>
-            <Box
               pl="3"
               pr="3"
               pt="1"
               pb="1"
-              border="1px solid black"
-              borderRadius="100"
+              border="1px solid rgba(197, 48, 48, .3)"
+              borderTopLeftRadius="10px"
+              borderBottomLeftRadius="10px"
+              color="white"
+              backgroundColor={"#c53030"}
+              height="35px"
+            >
+              <FaChevronUp />
+            </Box>
+            <Box
+              pl="3"
+              pr="3"
+              pt="-2"
+              border="1px solid rgba(197, 48, 48, .3)"
               type="text"
               value={qty}
               fontSize="x-large"
+              height="35px"
             >
               {qty}
             </Box>
             <Box
-              mt="2"
-              ml="2"
               cursor="pointer"
               onClick={dispatchSubstracItemQty}
               fontSize="x-large"
+              pl="3"
+              pr="3"
+              pt="1"
+              pb="1"
+              border="1px solid rgba(197, 48, 48, .3)"
+              borderTopRightRadius="10px"
+              borderBottomRightRadius="10px"
+              color="white"
+              backgroundColor={"#c53030"}
+              height="35px"
             >
-              -
+              <FaChevronDown />
             </Box>
           </Flex>
-        </div>
-        <div>
-          <Box onClick={dispatchRemoveFromCart} fontSize="large"><button>Delete</button></Box>
-        </div>
-      </Grid>
+          <Box onClick={dispatchRemoveFromCart} color="#c53030" fontSize="large">
+            <button><Box>Delete</Box></button>
+          </Box>
+      </Box>
     </Flex>
   );
 }

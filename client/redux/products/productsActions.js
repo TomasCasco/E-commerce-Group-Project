@@ -25,7 +25,11 @@ export const getAllProducts = (inputFilter) => {
           type: "SET_LOADING_PRODUCTS",
           payload: false,
         });
-      }, 1000);
+      }, 500);
+      /* return dispatch({
+        type: "SET_LOADING_PRODUCTS",
+        payload: false,
+      }); */
     } catch (error) {
       console.log(error);
     }
@@ -83,3 +87,10 @@ export const getProductSuggestion = (query) => {
     });
   };
 };
+
+export const resetProductSuggestion = ()=>{
+  return {
+    type:"SUGGESTION",
+    payload:[]
+  }
+}

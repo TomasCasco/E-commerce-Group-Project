@@ -2,7 +2,8 @@ import Head from "next/head";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CardContainer from "../../components/Card/cardContainer";
-import NavBar from "../../components/Navbar/navBar";
+import Footer from "../../components/Footer/Footer.tsx";
+import NavBar from "../../components/Navbar/NavBar";
 import {
   getAllProducts,
   getAllBrands,
@@ -16,9 +17,7 @@ export default function Home({ filterBrand }) {
     const filterQuery = {
       brands: filterBrand,
     };
-
     dispatch(getAllProducts(filterQuery));
-    dispatch(getAllBrands());
     dispatch(resetSearch());
   }, [dispatch, filterBrand]);
 
@@ -31,6 +30,7 @@ export default function Home({ filterBrand }) {
       </Head>
       <NavBar />
       <CardContainer />
+      <Footer/>
     </>
   );
 }

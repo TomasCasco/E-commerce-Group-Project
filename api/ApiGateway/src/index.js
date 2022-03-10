@@ -17,6 +17,7 @@ const server = new ApolloServer({
   dataSources: () => ({
     UsersApi: new Apis.UsersApi(),
     ProductsApi: new Apis.ProductsApi(),
+    EmailsApi: new Apis.EmailsApi(),
   }),
   introspection: true,
   playground: true,

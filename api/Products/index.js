@@ -5,7 +5,7 @@ const route = require("./Ruta");
 
 require("./db");
 
-app.set("port", process.env.PORT || 3004);
+app.set("port", process.env.PORT || 4000);
 
 app.use(express.json());
 app.use(cors("*"));

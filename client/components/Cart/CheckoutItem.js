@@ -11,7 +11,7 @@ import {
   chakra,
   Tooltip,
 } from "@chakra-ui/react";
-import { FaTrash } from 'react-icons/fa'
+import { FaTrash, FaChevronUp, FaChevronDown } from 'react-icons/fa'
 import { Divider } from '@chakra-ui/react'
 
 import { useDispatch } from "react-redux";
@@ -58,22 +58,21 @@ export default function CheckoutItem({ itemProduct }) {
               fontSize="x-large"
               pl="3"
               pr="3"
-              pt="1"
-              pb="1"
-              border="1px solid rgba(197, 48, 48, .3)"
+              pt="2"
+              border="1px solid #44B8FC"
               borderTopLeftRadius="10px"
               borderBottomLeftRadius="10px"
               color="white"
-              backgroundColor={"#c53030"}
+              backgroundColor={"#44B8FC"}
             >
-              +
+              <FaChevronUp />
             </Box >
             <Box
               pl="3"
               pr="3"
               pt="1"
               pb="1"
-              border="1px solid rgba(197, 48, 48, .3)"
+              border="1px solid #44B8FC"
               type="text"
               value={qty}
               fontSize="x-large"
@@ -86,21 +85,20 @@ export default function CheckoutItem({ itemProduct }) {
               fontSize="x-large"
               pl="3"
               pr="3"
-              pt="1"
-              pb="1"
-              border="1px solid rgba(197, 48, 48, .3)"
+              pt="3"
+              border="1px solid #44B8FC"
               borderTopRightRadius="10px"
               borderBottomRightRadius="10px"
               color="white"
-              backgroundColor={"#c53030"}
+              backgroundColor={"#44B8FC"}
             >
-              -
+              <FaChevronDown />
             </Box>
           </Flex>
           <Box m="10" fontWeight="semibold" fontSize={"m"} mb="50px">
           ${product.price * qty}
            </Box>
-          <Box onClick={dispatchRemoveFromCart} fontSize="large" mb="12px"><FaTrash _hover={{color:'red'}}/> </Box>
+          <Box onClick={dispatchRemoveFromCart} fontSize="large" mb="12px" cursor="pointer"><FaTrash /> </Box>
     </Flex>
   );
 }

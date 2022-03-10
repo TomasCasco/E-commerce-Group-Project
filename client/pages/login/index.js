@@ -51,7 +51,7 @@ export default function Login() {
     if (token) {
       Cookies.set("token", token, { expires: 3 });
       router.push("/");
-      const user = await client.query({
+      const user = await client.query({ 
         query: queryInfoUser,
         context: {
           headers: {
@@ -59,6 +59,7 @@ export default function Login() {
           },
         },
       });
+      
       Cookies.set("user", JSON.stringify(user.data.infoUser), { expires: 3 });
       dispatch(setUser(user.data.infoUser));
       dispatch(setLogged(true));

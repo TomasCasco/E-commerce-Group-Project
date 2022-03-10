@@ -80,7 +80,7 @@ export default function Search() {
       <Box position={"absolute"} top={"150px"} zIndex={100}>
         {suggestions &&
           inputSearch.length > 0 &&
-          suggestions.map((s,index) => (
+          suggestions.map((s, index) => (
             <Box
               key={s + index + "id"}
               bg="#eee"

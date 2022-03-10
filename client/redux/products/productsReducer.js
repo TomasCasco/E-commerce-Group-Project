@@ -4,7 +4,7 @@ const initialState = {
   search: false,
   searchValue: null,
   brands: [],
-  suggestions: [],
+  suggestions: []
 };
 
 const productsReducer = (state = initialState, action) => {
@@ -14,7 +14,7 @@ const productsReducer = (state = initialState, action) => {
         ...state,
         products: action.payload.products,
       };
-
+      
     case "SET_LOADING_PRODUCTS":
       return {
         ...state,

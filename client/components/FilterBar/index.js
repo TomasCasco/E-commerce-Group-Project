@@ -11,7 +11,7 @@ import {
 import { FaFilter } from "react-icons/fa";
 import Router from "next/router";
 
-export default function FilterBar({ title, values, defaultValue,setUrl }) {
+export default function FilterBar({ title, values, defaultValue, setUrl }) {
   const setFilter = (value) => {
     const query = Router.query;
     query[title] = value;
@@ -32,9 +32,10 @@ export default function FilterBar({ title, values, defaultValue,setUrl }) {
             {values.map((value) => {
               return (
                 <MenuItemOption
+                  key={value + 20}
                   textTransform={"capitalize"}
                   value={value}
-                  onClick={()=>setUrl(value,title)}
+                  onClick={() => setUrl(value, title)}
                 >
                   {value}
                 </MenuItemOption>

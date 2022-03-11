@@ -6,6 +6,7 @@ import {
   Menu,
   MenuButton,
   MenuList,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 
@@ -18,7 +19,8 @@ export default function Products() {
     onOpen: onOpenProducts,
     onClose: onCloseProducts,
   } = useDisclosure();
-  const categories = useSelector(state=>state.productsReducer.categories);
+  const categories = useSelector((state) => state.productsReducer.categories);
+  const colorMode = useColorModeValue("black", "white");
 
   return (
     <Flex className="nav-items" bg={"none !important"}>
@@ -47,13 +49,23 @@ export default function Products() {
           color={"black"}
           padding="15px"
         >
-          {
-            categories.map((category,index)=>{
-              return <Link href={`/products?category=${category}`} key={index+category}>
-              <MenuItem>{category}</MenuItem>
-            </Link>
-            })
-          }
+          <Link href={`/products`} key={20 + 500}>
+            <MenuItem borderRadius={"1rem"} color={colorMode}>
+              All
+            </MenuItem>
+          </Link>
+          {categories.map((category, index) => {
+            return (
+              <Link
+                href={`/products?category=${category}`}
+                key={index + category}
+              >
+                <MenuItem borderRadius={"1rem"} color={colorMode}>
+                  {category}
+                </MenuItem>
+              </Link>
+            );
+          })}
         </MenuList>
       </Menu>
     </Flex>

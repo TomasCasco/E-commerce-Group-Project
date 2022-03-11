@@ -12,6 +12,7 @@ import {
     Container,
   } from "@chakra-ui/react";
 import { MdFavorite } from 'react-icons/md';
+import Favorites from '../Favorites/Favorites';
 
 export default function FavoritesButton() {
   return (
@@ -53,7 +54,7 @@ export default function FavoritesButton() {
           <PopoverCloseButton />
           <PopoverBody>
             <Container>
-                Favorites
+                <Favorites/>
             </Container>
           </PopoverBody>
         </PopoverContent>

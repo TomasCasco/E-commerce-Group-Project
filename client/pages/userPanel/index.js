@@ -1,10 +1,17 @@
-
-import React from "react";
+import React, { useState } from "react";
 import Footer from "../../components/Footer/Footer.tsx";
 import NavBar from "../../components/Navbar/NavBar";
 
-
-import { Flex, Heading, Avatar, Text, Icon, Link, Box } from "@chakra-ui/react";
+import {
+  Flex,
+  Heading,
+  Avatar,
+  Text,
+  Icon,
+  Link,
+  Box,
+  Button,
+} from "@chakra-ui/react";
 import {
   FiHome,
   FiHeart,
@@ -18,15 +25,18 @@ import LinkNext from "next/link";
 import Orders from "../../components/Dashboard/Orders";
 import MyProfile from "../../components/Dashboard/MyProfile";
 import Favorites from "../../components/Dashboard/Favorites";
+import { useSelector } from "react-redux";
+import Router from "next/router";
 
 export default function UserPanel() {
   const [render, setRender] = useState("profile");
+  const user = useSelector((state) => state.usersReducer.user);
 
   return (
     <>
       <NavBar />
       <Flex
-        h={[null, null, "100vh"]}
+        maxH={[null, null, "100vh"]}
         maxW="2000px"
         flexDir={["column", "column", "row"]}
         overflow="hidden"
@@ -36,7 +46,7 @@ export default function UserPanel() {
           w={["100%", "100%", "10%", "15%", "15%"]}
           flexDir="column"
           alignItems="center"
-          backgroundColor="#020202"
+          backgroundColor="#252a2b"
           color="#fff"
         >
           <Flex
@@ -71,7 +81,11 @@ export default function UserPanel() {
                     href="/"
                     display={["none", "none", "flex", "flex", "flex"]}
                   >
-                    <Icon as={FiHome} fontSize="2xl" className="active-icon" />
+                    <Icon
+                      as={FiHome}
+                      fontSize="2xl"
+                      color={"#44b8fc !important"}
+                    />
                   </Link>
                   <LinkNext href="/">
                     <Box as="button">
@@ -80,17 +94,23 @@ export default function UserPanel() {
                   </LinkNext>
                 </Flex>
                 <Flex className="sidebar-items" mr={[2, 6, 0, 0, 0]}>
-                  <Link display={["none", "none", "flex", "flex", "flex"]}>
-                    <Icon as={FiShoppingCart} fontSize="2xl" />
-                  </Link>
-                  {/* -------render -------------- */}
+                  <Icon
+                    as={FiShoppingCart}
+                    fontSize="2xl"
+                    color={"#44b8fc !important"}
+                  />
                   <Box as="button" onClick={() => setRender("orders")}>
                     <Text>Orders</Text>
                   </Box>
+                  {/* -------render -------------- */}
                 </Flex>
                 <Flex className="sidebar-items" mr={[2, 6, 0, 0, 0]}>
                   <Link display={["none", "none", "flex", "flex", "flex"]}>
-                    <Icon as={FiHeart} fontSize="2xl" />
+                    <Icon
+                      as={FiHeart}
+                      fontSize="2xl"
+                      color={"#44b8fc !important"}
+                    />
                   </Link>
                   <Box as="button" onClick={() => setRender("favorites")}>
                     <Text>Favorites</Text>
@@ -98,7 +118,11 @@ export default function UserPanel() {
                 </Flex>
                 <Flex className="sidebar-items" mr={[2, 6, 0, 0, 0]}>
                   <Link display={["none", "none", "flex", "flex", "flex"]}>
-                    <Icon as={FiUser} fontSize="2xl" />
+                    <Icon
+                      as={FiUser}
+                      fontSize="2xl"
+                      color={"#44b8fc !important"}
+                    />
                   </Link>
                   <Box as="button" onClick={() => setRender("profile")}>
                     <Text>Your Profile</Text>
@@ -108,7 +132,34 @@ export default function UserPanel() {
             </Flex>
             <Flex flexDir="column" alignItems="center" mb={10} mt={5}>
               <Avatar my={2} src="" />
-              <Text textAlign="center">Your Name</Text>
+              <Text
+                textAlign="center"
+                fontSize={"1.5rem"}
+                textTransform="uppercase"
+                color={"gray"}
+              >
+                {user.username}
+              </Text>
+              <Text textAlign="center" fontSize={"1.5rem"} color={"gray"}>
+                {user.role}
+              </Text>
+              <Button
+                onClick={() => Router.push("http://localhost:3002/admin")}
+                mt={"10px"}
+                background="#44B8FC"
+                color="white "
+                _hover={{
+                  background: "white",
+                  color: "#44B8FC",
+                  border: "2px solid",
+                  borderColor: "#44B8FC",
+                }}
+                fontWeight="bold"
+                size="md"
+                fontSize="md"
+              >
+                PANEL ADMIN
+              </Button>
             </Flex>
           </Flex>
         </Flex>
@@ -134,40 +185,7 @@ export default function UserPanel() {
               </Heading>
             </Flex>
           </Flex>
-
-          <favoritesContainer />
-
-          <Flex justifyContent="center" mt={8} className="sidebar-items">
-            <Heading mt={50} as="h3" size="lg" letterSpacing="normal">
-              Start shopping now...
-            </Heading>
-            <Link
-              href="/"
-              _hover={{ textDecor: "none" }}
-              display={["flex", "flex", "none", "flex", "flex"]}
-            >
-              <Heading mt={50} ml={10} as="h3" size="lg" letterSpacing="normal">
-                Store
-              </Heading>
-            </Link>
-            <Link
-              href="/"
-              mt={55}
-              display={["none", "none", "flex", "flex", "flex"]}
-            >
-              <Icon as={FiShoppingCart} fontSize="4xl" />
-            </Link>
-          </Flex>
         </Flex>
-        {/* Column 3 */}
-        <Flex
-          w={["100%", "100%", "30%"]}
-          bgColor="#F5F5F5"
-          p="3%"
-          flexDir="column"
-          overflow="auto"
-          minW={[null, null, "300px", "300px", "400px"]}
-        ></Flex>
       </Flex>
       <Footer />
     </>

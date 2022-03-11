@@ -46,13 +46,14 @@ export default function CartItem({ itemProduct }) {
       shadow="lg"
       textAlign="center"
       maxWidth={"500px"} maxHeight="270px"
+      padding={"40px"}
     >
       <Box>
-        <Image src={product.image} maxWidth={"200px"} maxHeight="100px"/>
+        <Image src={product.image} maxWidth={"200px"} maxHeight="100px" borderRadius={"1rem"}/>
       </Box>
 
       <Box mr="10px" maxWidth={"270px"}>
-        <Box  fontSize="15px" fontWeight="semibold" lineHeight="5" textAlign="left">
+        <Box  fontSize="15px" fontWeight="semibold" lineHeight="5" textAlign="left" textTransform={"capitalize"}>
           {product.name}
         </Box>
         <Box mt="2" fontWeight="semibold" fontSize={"large"}>

@@ -1,57 +1,62 @@
-import React from "react";
+import React, { useState } from "react";
 import Card from "./card";
-import { Grid, Flex, Box, Text, Button, Container } from "@chakra-ui/react";
-import { useDispatch, useSelector } from "react-redux";
+import { Grid, Flex, Box, Button } from "@chakra-ui/react";
+import { useSelector } from "react-redux";
 
 import SpinnerComponent from "../Spinner/Spinner";
-import Router  from "next/router";
+import FilterBar from "../FilterBar";
+import Router from "next/router";
 
-export default function CardContainer({searchValue}) {
+export default function CardContainer() {
   const loadingData = useSelector((state) => state.productsReducer.loading);
   const data = useSelector((state) => state.productsReducer.products);
+  const [url, setStateUrl] = useState({});
 
-  if (loadingData)
-    return (
-      <SpinnerComponent/>
-    );
+  const setUrl = (value, title) => {
+    setStateUrl({
+      ...url,
+      [title]: value,
+    });
+    console.log(url)
+  };
 
-  if (searchValue && data.length === 0)
-    return (
-      <Flex flexDirection="column" justify={"center"} align="center" padding={"100px"}>
-      <Flex
-        justify={"center"}
-        align="center"
-        margin={"0 auto"}
-        alignItems="center"
-        padding={"10px"}
-      >
-        <Text padding={"10px"} fontSize="x-large" display={"flex"}>
-          Resultados para: "{searchValue}"
-          <Button onClick={()=>Router.push("/products")} marginLeft="20px">X</Button>
-        </Text>
-      </Flex>
-        <Text fontSize="6xl">No se encontraron resultados.</Text>
-      </Flex>
-    );
+  const handleSetUrl=()=>{
+    console.log(url)
+    const orderBy=url.orderBy?url.orderBy:null
+    const sortBy=url.sortBy?url.sortBy:null
+    Router.push(`/products?orderBy=${orderBy}&sortBy=${sortBy}`)
+  }
+
+  if (loadingData) {
+    return <SpinnerComponent />;
+  }
 
   return (
     <Box padding={"100px"}>
-      <Flex
-        justifyContent={"center"}
-        flexDirection="column"
-        margin={"0 auto"}
-        alignItems="center"
-        paddingBottom={"30px"}
-        hidden={!searchValue?true:false}
-      >
-        <Flex align="center" justify={"center"}>
-          <Text padding={"10px"} fontSize="x-large">
-            Resultados para: "{searchValue}"
-          </Text>
-          <Button onClick={()=>Router.push("/products")} marginLeft="20px">X</Button>
+      <Flex justify={"center"} flexDir={"column"} align="flex-end">
+        <Flex>
+          <FilterBar
+            setUrl={setUrl}
+            title={"sortBy"}
+            values={["desc", "asc"]}
+            defaultValue={"asc"}
+          />
+          <FilterBar
+            setUrl={setUrl}
+            title={"orderBy"}
+            values={["name", "price"]}
+            defaultValue={"name"}
+          />
+          <Button
+            colorScheme={"blue"}
+            p="20px"
+            width={"300px"}
+            onClick={handleSetUrl}
+            disabled={!url.sortBy && !url.orderBy}
+          >
+            Apply
+          </Button>
         </Flex>
-      </Flex>
-      <Flex justifyContent="center">
         <Box w="100%">
           <Grid templateColumns="repeat(3,1fr)" templateRows="repeat(2,1fr)">
             {data

@@ -1,7 +1,10 @@
 import { client } from "../../apolloClient/apolloClient";
-import { queryProducts, ALL_BRANDS, queryCategories, queryProductById} from "../../apolloClient/querys";
-
-
+import {
+  queryProducts,
+  ALL_BRANDS,
+  queryCategories,
+  queryProductById,
+} from "../../apolloClient/querys";
 
 export const getAllProducts = (inputFilter) => {
   return async (dispatch) => {
@@ -28,31 +31,26 @@ export const getAllProducts = (inputFilter) => {
           payload: false,
         });
       }, 500);
-      /* return dispatch({
-        type: "SET_LOADING_PRODUCTS",
-        payload: false,
-      }); */
     } catch (error) {
       console.log(error);
     }
   };
 };
 
-
-export const getProductById=(id)=>{
+export const getProductById = (id) => {
   return async function (dispatch) {
-    const product=await client.query({
-      query:queryProductById,
-      variables:{
-        input:id
-      }
-    })
-    return dispatch ({
-      type:"GET_PRODUCT_BY_ID",
-      payload:product.data.getProductById
-    })
-  }
-}
+    const product = await client.query({
+      query: queryProductById,
+      variables: {
+        input: id,
+      },
+    });
+    return dispatch({
+      type: "GET_PRODUCT_BY_ID",
+      payload: product.data.getProductById,
+    });
+  };
+};
 
 export const getAllBrands = () => {
   return async function (dispatch) {
@@ -67,7 +65,7 @@ export const getAllBrands = () => {
   };
 };
 
-export const getAllCategories=()=>{
+export const getAllCategories = () => {
   return async function (dispatch) {
     const categories = await client.query({
       query: queryCategories,
@@ -78,7 +76,7 @@ export const getAllCategories=()=>{
       payload: categories.data.getAllCategories,
     });
   };
-}
+};
 
 export const getProductSuggestion = (query) => {
   return async function (dispatch) {
@@ -99,9 +97,9 @@ export const getProductSuggestion = (query) => {
   };
 };
 
-export const resetProductSuggestion = ()=>{
+export const resetProductSuggestion = () => {
   return {
-    type:"SUGGESTION",
-    payload:[]
-  }
-}
+    type: "SUGGESTION",
+    payload: [],
+  };
+};

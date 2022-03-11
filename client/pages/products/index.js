@@ -4,19 +4,20 @@ import CardContainer from "../../components/Card/cardContainer";
 import Footer from "../../components/Footer/Footer.tsx";
 import NavBar from "../../components/Navbar/NavBar";
 import {
-  getAllProducts, getProductById,
+  getAllProducts,
 } from "../../redux/products/productsActions";
 
-
-export default function Home({ category }) {
+export default function Home({ category, orderBy, sortBy }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
     const filterQuery = {
       categories: category,
+      orderBy:orderBy,
+      sortBy:sortBy
     };
-      dispatch(getAllProducts(filterQuery));
-  }, [dispatch, category]);
+    dispatch(getAllProducts(filterQuery));
+  }, [dispatch, category,orderBy,sortBy]);
 
   return (
     <>
@@ -29,6 +30,6 @@ export default function Home({ category }) {
 
 Home.getInitialProps = (context) => {
   const { query } = context;
-  const { category } = query;
-  return { category };
+  const { category, orderBy, sortBy } = query;
+  return { category, orderBy, sortBy };
 };

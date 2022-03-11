@@ -65,7 +65,13 @@ export default function Card({ data }) {
         justifyContent={"space-between"}
         position="relative"
       >
-        <Image src={data.image} roundedTop="lg" maxH={"30%"} margin="0 auto" />
+        <Image
+          src={data.image}
+          roundedTop="lg"
+          maxH={"30%"}
+          margin="0 auto"
+          borderRadius={"1rem"}
+        />
         <Button
           onClick={() => Router.push(`/products/${data._id}`)}
           maxWidth={"100px"}

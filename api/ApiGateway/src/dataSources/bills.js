@@ -4,7 +4,7 @@ const serverUrls = require("../serverUrls");
 class BillsApi extends RESTDataSource {
   constructor() {
     super();
-    this.baseURL = serverUrls.BillsApi;
+    this.baseURL = serverUrls.BILLS;
   }
 
   getBillsByUserId(userId) {

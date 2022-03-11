@@ -1,7 +1,9 @@
 const billResolvers = {
   Query: {
-    getBillByUserId(_, { input }, { dataSources }) {
+    getBillsByUserId(_, { input }, { dataSources }) {
       return dataSources.BillsApi.getBillsByUserId(input);
     },
   },
 };
+
+module.exports = billResolvers;

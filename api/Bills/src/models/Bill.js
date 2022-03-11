@@ -14,6 +14,11 @@ const billSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    success: {
+      type: Boolean,
+      default: false,
+      required: true,
+    },
   },
   {
     timestamps: true,

@@ -1,5 +1,6 @@
 const { Router } = require("express");
 const mercadopago = require("../config/mercadopago");
+const Bill = require("../models/Bill");
 
 const router = Router();
 
@@ -31,6 +32,16 @@ router.post("/mercadopago", async (req, res, next) => {
   }
 });
 
+router.get("/:userId", (req, res) => {
+  const { userId } = req.params;
 
+  try {
+    const billsOfUser = await Bill.find({ userId });
+    if (!billsOfUser) return { message: "This user didn't make any purchase" };
+    res.json(billsOfUser);
+  } catch (error) {
+    next(error);
+  }
+});
 
 module.exports = router;

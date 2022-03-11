@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Footer from "../../components/Footer/Footer.tsx";
 import NavBar from "../../components/Navbar/NavBar";
+import Dashboard from "../../components/Dashboard/Dashboard";
 
 import {
   Flex,
@@ -178,7 +179,7 @@ export default function UserPanel() {
           mb="-2.5"
         >
             <Heading
-                mt={50}
+                mt={3}
                 mb={[10, 10, 10]}
                 fontSize={["4xl", "4xl", "2xl", "3xl", "4xl"]}
                 alignSelf="center"
@@ -196,6 +197,9 @@ export default function UserPanel() {
               </Heading>
             </Flex>
           </Flex>
+
+          <Dashboard />
+
         </Flex>
       </Flex>
       <Footer />

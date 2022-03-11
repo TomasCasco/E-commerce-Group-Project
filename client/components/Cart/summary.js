@@ -73,11 +73,13 @@ const summary = () => {
                       ml="30px"
                       mr="20px"
                       w="150px"
-                      focusBorderColor='red.400'
+                      borderColor="#44B8FC"
+                      _hover={{borderColor:"#44B8FC"}}
+                      focusBorderColor='#44B8FC'
                       placeholder='Discount code'
                       onChange={onChange}
                   />
-                  <Button onClick={onClick} colorScheme='red' variant='outline' mb="8px" _focus={{boxShadow: '0 0 1px 2px rgba(197, 48, 48, .3), 0 1px 1px rgba(0, 0, 0, .15)'}}>
+                  <Button onClick={onClick} variant='outline' mb="8px" color="#44B8FC" border="1px solid" borderColor="#44B8FC">
                     Apply
                   </Button>
 
@@ -118,13 +120,12 @@ const summary = () => {
 
                   <Box fontSize="x-large">
                       <Link href='/checkout' px='2'  _hover={{textDecoration:'none'}}>
-                        <Button colorScheme="red" ml="12px" w="300px" size="lg" fontSize="md" rightIcon={<FaArrowRight />}>Checkout</Button>  
+                        <Button background="#44B8FC" color="white" _hover={{background: 'transparent', color: "#44B8FC", border: "2px solid", borderColor: "#44B8FC"}} ml="12px" w="300px" size="lg" fontSize="md" rightIcon={<FaArrowRight />}>Checkout</Button>  
                       </Link>
                   </Box>
 
-                  <Flex mt="13px" align="center" justify="center" fontWeight="semibold">
-                      {/* <p>or</p> */}
-                      <Link href={"/products/[filterName]"} as={"/products/teclado"} color='red'>or Continue shopping</Link>
+                  <Flex mt="20px" align="center" justify="center" fontWeight="semibold">
+                      <Link href={"/products/[filterName]"} as={"/products/teclado"}>or Continue shopping</Link>
                   </Flex>
               </Box>
     </Box>

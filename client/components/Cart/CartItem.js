@@ -67,11 +67,11 @@ export default function CartItem({ itemProduct }) {
               pr="3"
               pt="1"
               pb="1"
-              border="1px solid rgba(197, 48, 48, .3)"
+              border="1px solid #44B8FC"
               borderTopLeftRadius="10px"
               borderBottomLeftRadius="10px"
               color="white"
-              backgroundColor={"#c53030"}
+              backgroundColor={"#44B8FC"}
               height="35px"
             >
               <FaChevronUp />
@@ -80,7 +80,7 @@ export default function CartItem({ itemProduct }) {
               pl="3"
               pr="3"
               pt="-2"
-              border="1px solid rgba(197, 48, 48, .3)"
+              border="1px solid #44B8FC"
               type="text"
               value={qty}
               fontSize="x-large"
@@ -96,18 +96,18 @@ export default function CartItem({ itemProduct }) {
               pr="3"
               pt="1"
               pb="1"
-              border="1px solid rgba(197, 48, 48, .3)"
+              border="1px solid #44B8FC"
               borderTopRightRadius="10px"
               borderBottomRightRadius="10px"
               color="white"
-              backgroundColor={"#c53030"}
+              backgroundColor={"#44B8FC"}
               height="35px"
             >
               <FaChevronDown />
             </Box>
           </Flex>
           <Box onClick={dispatchRemoveFromCart} color="#c53030" fontSize="large">
-            <button><Box>Delete</Box></button>
+            <button><Box rightIcon={<FaTrash />}>Delete</Box></button>
           </Box>
       </Box>
     </Flex>

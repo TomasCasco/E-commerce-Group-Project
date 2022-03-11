@@ -59,7 +59,7 @@ export default function Cart() {
             </Flex>
             <Box fontSize="x-large">
                 <Link href='/checkout'   _hover={{textDecoration:'none'}}>
-                  <Button colorScheme="red" w="300px" size="md" fontSize="md" rightIcon={<FaArrowRight />}>Go to Cart</Button>  
+                  <Button background="#44B8FC" color="white" _hover={{background: 'transparent', color: "#44B8FC", border: "2px solid", borderColor: "#44B8FC"}} w="300px" size="md" fontSize="md" rightIcon={<FaArrowRight />}>Go to Cart</Button>  
                 </Link>
               </Box>
             </Box>

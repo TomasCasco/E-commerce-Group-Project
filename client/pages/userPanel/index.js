@@ -97,14 +97,14 @@ export default function UserPanel() {
                                     <Text>Your Profile</Text>
                                 </Link>
                             </Flex>
-                        </Flex>
                     </Flex>
+                </Flex>
                     <Flex flexDir="column" alignItems="center" mb={10} mt={5}>
                         <Avatar my={2} src="" />
                         <Text textAlign="center">Your Name</Text>
                     </Flex>
-                </Flex>
             </Flex>
+        </Flex>
 
 {/* Column 2 */}
             <Flex

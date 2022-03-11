@@ -1,4 +1,3 @@
-import { Container } from "@chakra-ui/react";
 import React from "react";
 import Footer from "../../components/Footer/Footer.tsx";
 import NavBar from "../../components/Navbar/NavBar";
@@ -30,12 +29,13 @@ export default function UserPanel() {
       <Flex
         h={[null, null, "100vh"]}
         maxW="2000px"
+        maxH={"-moz-min-content"}
         flexDir={["column", "column", "row"]}
         overflow="hidden"
       >
         {/* Column 1 */}
         <Flex
-          w={["100%", "100%", "10%", "15%", "15%"]}
+          w={["100%", "100%", "20%", "25%", "25%"]}
           flexDir="column"
           alignItems="center"
           backgroundColor="#020202"
@@ -117,7 +117,7 @@ export default function UserPanel() {
 
         {/* Column 2 */}
         <Flex
-          w={["100%", "100%", "60%", "60%", "55%"]}
+          w={["100%", "100%", "100%", "100%", "100%"]}
           p="3%"
           flexDir="column"
           overflow="auto"
@@ -125,13 +125,20 @@ export default function UserPanel() {
           alignContent={"center"}
           align="center"
           alignItems={"center"}
+          mb="-2.5"
         >
-          <Heading fontWeight="normal" mb={4} letterSpacing="tight">
-            We are glad you are here... <Icon as={FiSmile} fontSize="4xl" />
-          </Heading>
-
-          <Flex justifyContent="space-between" mt={8}>
-            <Flex align="flex-end">
+            <Heading
+                mt={50}
+                mb={[10, 10, 10]}
+                fontSize={["4xl", "4xl", "2xl", "3xl", "4xl"]}
+                alignSelf="center"
+                letterSpacing="tight"
+              >
+                 We are glad you are here... <Icon as={FiSmile} fontSize="4xl" />
+              </Heading>
+          
+          <Flex justifyContent="space-between">
+            <Flex align="flex-end" w={"-moz-min-content"}>
               <Heading as="h2" size="lg" letterSpacing="tight">
                 {render === "orders" && <Orders />}
                 {render === "favorites" && <Favorites />}
@@ -143,6 +150,8 @@ export default function UserPanel() {
           <Dashboard />
 
         </Flex>
+
+        
       </Flex>
       <Footer />
     </>

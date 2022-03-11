@@ -1,10 +1,14 @@
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
+import { Flex, Heading, Avatar, Text, Icon, Link, Box, useColorModeValue, Button, Center} from "@chakra-ui/react";
+
 import {
-  Flex,
-  Box,
-  useColorModeValue,
-} from "@chakra-ui/react";
+  FiHome,
+  FiHeart,
+  FiShoppingCart,
+  FiSmile,
+  FiUser,
+} from "react-icons/fi";
 
 
 export default function MyProfile() {
@@ -24,18 +28,18 @@ export default function MyProfile() {
         >
           <Box
             m="50"
-            bg={useColorModeValue("white", "gray.800")}
-            maxW="sm"
-            h={"300px"}
+            bg={useColorModeValue("white", "blue")}
+            maxW="lg"
+            h={"-webkit-fit-content"}
             w={"-webkit-fit-content"}
             padding="100px"
-            borderWidth="1px"
+            borderWidth="3px"
             rounded="lg"
             shadow="lg"
             display={"flex"}
             flexDirection="column"
             justifyContent={"center"}
-            position="relative"
+            
           >
             <Flex
                 mt="1"
@@ -44,13 +48,21 @@ export default function MyProfile() {
                 textAlign={"center"}
                 flexDir="column"
                 alignItems="center"
+                w={"-webkit-max-content"}
+                height="-webkit-fit-content"
               >
                 <Box fontSize="xl" fontWeight="semibold" lineHeight="10" >
-                  <text>
-                    <h1>Username: {username}</h1>
-                    <p>ID: {id}</p>
-                    <p>email: {email}</p>
-                  </text>  
+                  <Center>
+                  <Button mb="10" color="blue.200" display={["none", "none", "flex", "flex", "flex"]} align="center">
+                    <Icon as={FiUser} fontSize="4xl" />
+                  </Button>
+                  </Center>
+                    <Text as='u' color="blue.500" >Username:</Text> <Text>{username}</Text>
+                    
+                    <Text as='u' color="blue.500" >ID:</Text> <Text>{id}</Text>
+                    
+                    <Text as='u' color="blue.500" >email:</Text> <Text>{email}</Text>
+                                     
                 </Box>
             </Flex>
       </Box>

@@ -43,7 +43,7 @@ const summary = () => {
         if (subtotal === 0) {
             setdiscountToShow(0)
         }
-        
+
         setDiscountCode('')
     }
 
@@ -77,6 +77,7 @@ const summary = () => {
                       _hover={{borderColor:"#44B8FC"}}
                       focusBorderColor='#44B8FC'
                       placeholder='Discount code'
+                      value={discountCode}
                       onChange={onChange}
                   />
                   <Button onClick={onClick} variant='outline' mb="8px" color="#44B8FC" border="1px solid" borderColor="#44B8FC">

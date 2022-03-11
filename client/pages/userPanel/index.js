@@ -19,6 +19,7 @@ import LinkNext from "next/link";
 import Orders from "../../components/Dashboard/Orders";
 import MyProfile from "../../components/Dashboard/MyProfile";
 import Favorites from "../../components/Dashboard/Favorites";
+import Dashboard from "../../components/Dashboard/Dashboard";
 
 export default function UserPanel() {
   const [render, setRender] = useState("profile");
@@ -121,6 +122,9 @@ export default function UserPanel() {
           flexDir="column"
           overflow="auto"
           minH="100vh"
+          alignContent={"center"}
+          align="center"
+          alignItems={"center"}
         >
           <Heading fontWeight="normal" mb={4} letterSpacing="tight">
             We are glad you are here... <Icon as={FiSmile} fontSize="4xl" />
@@ -136,39 +140,9 @@ export default function UserPanel() {
             </Flex>
           </Flex>
 
-          <favoritesContainer />
+          <Dashboard />
 
-          <Flex justifyContent="center" mt={8} className="sidebar-items">
-            <Heading mt={50} as="h3" size="lg" letterSpacing="normal">
-              Start shopping now...
-            </Heading>
-            <Link
-              href="/"
-              _hover={{ textDecor: "none" }}
-              display={["flex", "flex", "none", "flex", "flex"]}
-            >
-              <Heading mt={50} ml={10} as="h3" size="lg" letterSpacing="normal">
-                Store
-              </Heading>
-            </Link>
-            <Link
-              href="/"
-              mt={55}
-              display={["none", "none", "flex", "flex", "flex"]}
-            >
-              <Icon as={FiShoppingCart} fontSize="4xl" />
-            </Link>
-          </Flex>
         </Flex>
-        {/* Column 3 */}
-        <Flex
-          w={["100%", "100%", "30%"]}
-          bgColor="#F5F5F5"
-          p="3%"
-          flexDir="column"
-          overflow="auto"
-          minW={[null, null, "300px", "300px", "400px"]}
-        ></Flex>
       </Flex>
       <Footer />
     </>

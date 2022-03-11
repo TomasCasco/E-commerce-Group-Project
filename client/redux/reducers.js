@@ -1,16 +1,14 @@
-import { combineReducers } from "redux";
-import cartReducer from "./cart/cartReducer";
-import favoritesReducer from "./favorites/favoritesReducer";
-import productsReducer from "./products/productsReducer";
-import usersReducer from "./user/usersReducer";
-import detailReducer from "./detail/detailReducer";
+import { combineReducers } from "redux"
+import cartReducer from "./cart/cartReducer"
+import favoritesReducer from "./favorites/favoritesReducer"
+import productsReducer from "./products/productsReducer"
+import usersReducer from "./user/usersReducer"
 
 const rootReducer = combineReducers({
   cartReducer,
   favoritesReducer,
   productsReducer,
-  usersReducer,
-  detailReducer,
-});
+  usersReducer
+})
 
 export default rootReducer;

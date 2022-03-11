@@ -7,31 +7,32 @@ import {
   Icon,
   Tooltip,
   useToast,
+  Button,
 } from "@chakra-ui/react";
 
 import { IoMdCart } from "react-icons/io";
-import { FiHeart } from "react-icons/fi"
+import { FiHeart } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { addItemQty, addToCart } from "../../redux/cart/cartActions";
 
-import { addToFavorites } from "../../redux/favorites/favoritesActions";
+import Router from "next/router";
 
 export default function Card({ data }) {
   const cart = useSelector((state) => state.cartReducer.cart);
-  const toast=useToast();
+  const toast = useToast();
 
   const dispatch = useDispatch();
 
-  const showToast=()=>{
-    return  toast({
-      title:"Success!",
-      position:"top-right",
-      description:"Item added to cart!",
-      status:"success",
-      duration:2000,
-      isClosable:true
-    })
-  }
+  const showToast = () => {
+    return toast({
+      title: "Success!",
+      position: "top-right",
+      description: "Item added to cart!",
+      status: "success",
+      duration: 2000,
+      isClosable: true,
+    });
+  };
 
   const addCart = () => {
     if (cart.some((el) => el.product._id === data._id)) {
@@ -64,8 +65,22 @@ export default function Card({ data }) {
         justifyContent={"space-between"}
         position="relative"
       >
-        
-        <Image src={data.image} roundedTop="lg" maxH={"30%"} margin="0 auto" />
+        <Image
+          src={data.image}
+          roundedTop="lg"
+          maxH={"30%"}
+          margin="0 auto"
+          borderRadius={"1rem"}
+        />
+        <Button
+          onClick={() => Router.push(`/products/${data._id}`)}
+          maxWidth={"100px"}
+          m="auto"
+          mt={"30px"}
+          padding="10px"
+        >
+          +Info
+        </Button>
         <Box p="6">
           <Flex mt="1" justifyContent="space-between" alignContent="center">
             <Box
@@ -90,26 +105,18 @@ export default function Card({ data }) {
             </Box>
           </Flex>
 
-          <Flex mt="6" alignContent="center">
-            <Box fontSize="xs" fontWeight="" lineHeight="4">
-              {data.description}
+          <Flex mt="5" justify={"space-between"} alignContent="center">
+            <Box fontSize="xl" color={useColorModeValue("")}>
+              <button href={"#"} display={"flex"}>
+                <Icon as={FiHeart} h={5} w={5} alignSelf={"center"} />
+              </button>
             </Box>
-          </Flex>
-
-          <Flex mt="5" justifyContent="space-between" alignContent="center">
             <Box fontSize="xl" color={useColorModeValue("gray.800", "white")}>
               <Box as="span" color={"gray.600"} fontSize="sm">
                 $
               </Box>
               {data.price}
             </Box>
-            <Box fontSize="xl" color={useColorModeValue("")} >
-          
-         <button onClick={() => dispatch(addToFavorites(data.id))} href={"#"} display={"flex"} >
-          <Icon as={FiHeart} h={5} w={5} />
-          </button>
-         
-        </Box>
             <Box fontSize="xl" color={useColorModeValue("")}>
               <Tooltip
                 label="Add to cart"

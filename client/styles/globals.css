@@ -2,7 +2,25 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: 'Poppins', sans-serif !important;
+  font-family: "Poppins", sans-serif !important;
+}
+
+body::-webkit-scrollbar {
+  max-width: 1em;
+  min-width: 0.8em;
+  border-radius: "2rem";
+}
+ 
+body::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  width: "6px";
+}
+ 
+body::-webkit-scrollbar-thumb {
+  background-color: #44B8FC;
+  border: 4px solid transparent;
+  border-radius: 8px;
+  background-clip: padding-box;  
 }
 
 a {
@@ -14,17 +32,15 @@ a {
   box-sizing: border-box;
 }
 
-.nav-items{
+.nav-items {
   font-size: large;
   color: lightgrey;
 }
 
-
-.nav-items:not(:last-child){
+.nav-items:not(:last-child) {
   margin-right: 1.5em;
-  background-color: #160606
+  background-color: #160606;
 }
-
 
 .sidebar-items:not(:last-child) {
   margin-bottom: 1.5em;
@@ -61,3 +77,4 @@ a {
   color: #6036f8 !important;
 }
 
+@import "../components/Carousel/Carousel.css";

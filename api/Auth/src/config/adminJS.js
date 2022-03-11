@@ -30,6 +30,13 @@ const adminJS = new AdminJS({
     },
     {
       resource: Product,
+      options: {
+        properties: {
+          description: {
+            isVisible:{show:true, edit:true,list:false}
+          }
+        }
+      }
     },
   ],
   branding:{

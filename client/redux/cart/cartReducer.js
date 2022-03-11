@@ -37,11 +37,11 @@ const cartReducer = (state = initialState, action) => {
         ...state,
         cart: cartAddItemQty,
       };
-    case 'SUBTRACT_ITEM_QTY':
+    case "SUBTRACT_ITEM_QTY":
       const cartSubstractItemQty = [
         ...state.cart.map((el) => {
           if (el.product._id === action.payload) {
-            el.qty!==1?el.qty=el.qty-1:null
+            el.qty !== 1 ? (el.qty = el.qty - 1) : null;
             return el;
           }
           return el;
@@ -49,8 +49,8 @@ const cartReducer = (state = initialState, action) => {
       ];
       return {
         ...state,
-        cart:cartSubstractItemQty
-      }  
+        cart: cartSubstractItemQty,
+      };
 
     default:
       return state;

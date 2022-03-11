@@ -1,82 +1,62 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import Card from "./card";
-import { Grid, Flex, Box, Text, Button } from "@chakra-ui/react";
-import { useDispatch, useSelector } from "react-redux";
-import { Spinner } from "@chakra-ui/react";
-import {
-  getAllProducts,
-  resetSearch,
-} from "../../redux/products/productsActions";
+import { Grid, Flex, Box, Button } from "@chakra-ui/react";
+import { useSelector } from "react-redux";
+
+import SpinnerComponent from "../Spinner/Spinner";
+import FilterBar from "../FilterBar";
+import Router from "next/router";
 
 export default function CardContainer() {
   const loadingData = useSelector((state) => state.productsReducer.loading);
   const data = useSelector((state) => state.productsReducer.products);
-  const searchValue = useSelector((state) => state.productsReducer.searchValue);
-  const searchBoolean = useSelector((state) => state.productsReducer.search);
+  const [url, setStateUrl] = useState({});
 
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    return  dispatch(resetSearch());
-  }, []);
-
-  const dispatchResetSearch = () => {
-    dispatch(resetSearch());
-    dispatch(getAllProducts());
+  const setUrl = (value, title) => {
+    setStateUrl({
+      ...url,
+      [title]: value,
+    });
+    console.log(url)
   };
 
-  if (loadingData)
-    return (
-      <Flex justifyContent={"center"} paddingTop="150px">
-        {
-          <Spinner
-            thickness="4px"
-            speed="0.65s"
-            emptyColor="gray.200"
-            color="blue.500"
-            size="xl"
-          />
-        }
-      </Flex>
-    );
+  const handleSetUrl=()=>{
+    console.log(url)
+    const orderBy=url.orderBy?url.orderBy:null
+    const sortBy=url.sortBy?url.sortBy:null
+    Router.push(`/products?orderBy=${orderBy}&sortBy=${sortBy}`)
+  }
 
-  if (searchBoolean && data.length === 0)
-    return (
-      <Flex flexDirection="column" justify={"center"} align="center">
-      <Flex
-        justify={"center"}
-        align="center"
-        margin={"0 auto"}
-        alignItems="center"
-        padding={"10px"}
-      >
-        <Text padding={"10px"} fontSize="x-large">
-          Resultados para: "{searchValue}"
-          <Button onClick={dispatchResetSearch}>X</Button>
-        </Text>
-      </Flex>
-        <Text fontSize="6xl">No se encontraron resultados.</Text>
-      </Flex>
-    );
+  if (loadingData) {
+    return <SpinnerComponent />;
+  }
 
   return (
-    <>
-      <Flex
-        justifyContent={"center"}
-        flexDirection="column"
-        margin={"0 auto"}
-        alignItems="center"
-        padding={"10px"}
-        hidden={!searchBoolean}
-      >
-        <Flex align="center" justify={"center"}>
-          <Text padding={"10px"} fontSize="x-large">
-            Resultados para: "{searchValue}"
-          </Text>
-          <Button onClick={dispatchResetSearch}>X</Button>
+    <Box padding={"100px"}>
+      <Flex justify={"center"} flexDir={"column"} align="flex-end">
+        <Flex>
+          <FilterBar
+            setUrl={setUrl}
+            title={"sortBy"}
+            values={["desc", "asc"]}
+            defaultValue={"asc"}
+          />
+          <FilterBar
+            setUrl={setUrl}
+            title={"orderBy"}
+            values={["name", "price"]}
+            defaultValue={"name"}
+          />
+          <Button
+            colorScheme={"blue"}
+            p="20px"
+            width={"300px"}
+            onClick={handleSetUrl}
+            disabled={!url.sortBy && !url.orderBy}
+          >
+            Apply
+          </Button>
         </Flex>
-      </Flex>
-      <Flex justifyContent="center">
         <Box w="100%">
           <Grid templateColumns="repeat(3,1fr)" templateRows="repeat(2,1fr)">
             {data
@@ -91,6 +71,6 @@ export default function CardContainer() {
           </Grid>
         </Box>
       </Flex>
-    </>
+    </Box>
   );
 }

@@ -40,3 +40,22 @@ export const ALL_BRANDS = gql`
     getAllBrands
   }
 `;
+
+export const queryBillsOfUser = gql`
+  query BillsById($input: String) {
+    getBillsByUserId {
+      products {
+        _id
+        brand
+        category
+        description
+        image
+        name
+        price
+        stock
+      }
+      success
+      total
+    }
+  }
+`;

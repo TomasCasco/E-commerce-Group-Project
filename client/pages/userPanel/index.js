@@ -2,8 +2,7 @@ import { Container } from "@chakra-ui/react";
 import React from "react";
 import Footer from "../../components/Footer/Footer.tsx";
 import NavBar from "../../components/Navbar/NavBar";
-import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import {
     Flex,
@@ -23,14 +22,14 @@ import {
 
 
 export default function UserPanel() {
-
+    const user=useSelector(state=>state.usersReducer.user)
 
   return (
     <>
       <NavBar />
       <Flex
-            h={[null, null, "100vh"]}
-            maxW="2000px"
+            maxH={"700px"}
+            maxW="100%"
             flexDir={["column", "column", "row"]}
             overflow="hidden"
         >
@@ -101,7 +100,7 @@ export default function UserPanel() {
                     </Flex>
                     <Flex flexDir="column" alignItems="center" mb={10} mt={5}>
                         <Avatar my={2} src="" />
-                        <Text textAlign="center">Your Name</Text>
+                        <Text textAlign="center">{user.username}</Text>
                     </Flex>
                 </Flex>
             </Flex>
@@ -112,7 +111,7 @@ export default function UserPanel() {
                 p="3%"
                 flexDir="column"
                 overflow="auto"
-                minH="100vh"
+                maxH="100%"
             >
                 <Heading
                     fontWeight="normal"
@@ -143,14 +142,14 @@ export default function UserPanel() {
                 </Flex>
             </Flex>
 {/* Column 3 */}
-          <Flex
+          {/* <Flex
                 w={["100%", "100%", "30%"]}
                 bgColor="#F5F5F5" p="3%"
                 flexDir="column"
                 overflow="auto"
                 minW={[null, null, "300px", "300px", "400px"]}
             >
-          </Flex>
+          </Flex> */}
         
         
         </Flex>

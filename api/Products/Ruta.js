@@ -8,7 +8,6 @@ const Product = require("./Product");
 app.get("/products", async (req, res) => {
   let { orderBy, sortBy, brands, categories, name } = req.query;
 
-
   //transformar querys a miniscula
   orderBy = orderBy?.toLowerCase();
   sortBy = sortBy?.toLocaleLowerCase();
@@ -56,6 +55,15 @@ app.get("/products/all/brands", async (req, res) => {
   });
   res.json([...brands]);
 });
+//traer categorias
+app.get("/products/all/categories", async (req, res) => {
+  const products = await Product.find(null, { category: true, _id: false });
+  const categories = new Set();
+  products.forEach(({ category }) => {
+    categories.add(category);
+  });
+  res.json([...categories]);
+});
 
 // crea un producto
 app.post("/products/create", async (req, res) => {
@@ -63,9 +71,8 @@ app.post("/products/create", async (req, res) => {
     let { name, price, brand, image, stock, description, category } = req.body;
     name = name?.toLocaleLowerCase();
     brand = brand?.toLocaleLowerCase();
-    category=category?.toLocaleLowerCase();
-    price=parseInt(price);
-
+    category = category?.toLocaleLowerCase();
+    price = parseInt(price);
 
     const product = new Product({
       name,
@@ -90,9 +97,8 @@ app.put("/products/update/:id", async (req, res) => {
   let { name, price, brand, image, stock, description, category } = req.body;
   name = name?.toLocaleLowerCase();
   brand = brand?.toLocaleLowerCase();
-  category=category?.toLocaleLowerCase();
-  price=parseInt(price);
-
+  category = category?.toLocaleLowerCase();
+  price = parseInt(price);
 
   try {
     if (id) {
@@ -124,24 +130,38 @@ app.delete("/products/delete/:id", async (req, res) => {
 
 app.post("/products/create-api", async (req, res) => {
   const { data } = await axios.get(
-    "https://api.mercadolibre.com/sites/MLA/search?q=hyperx microfono&limit=15"
+    "https://api.mercadolibre.com/sites/MLA/search?limit=15&q=monitor 4k"
   );
-  let meliApi = data.results.map((product) => {
-    let { value_name } = product.attributes.find(
-      (el) => el.name === "Marca" || el.name === "marca"
-    );
-    return {
-      name: product.title.toLocaleLowerCase() || "...",
-      price: product.price || 000,
-      brand: value_name ? value_name : "generic",
-      image:
-        `https://http2.mlstatic.com/D_NQ_NP_2X_${product.thumbnail_id}-F.webp` ||
-        "image.jpg",
-      description: product.description || "...",
-      stock: product.available_quantity,
-      category: "microfono",
-    };
-  });
+  let meliApi = await Promise.all(
+    data.results.map(async (product) => {
+      let productData
+      try {
+        productData = await axios.get(
+          `https://api.mercadolibre.com/items/${product.id}/description`
+        );
+      } catch (error) {
+        productData={
+          data:{
+            plain_text:"..."
+          }
+        }
+      }
+      const { value_name } = product.attributes.find(
+        (el) => el.name === "Marca"
+      );
+      return {
+        name: product.title.toLocaleLowerCase() || "...",
+        price: product.price || 000,
+        brand: value_name ? value_name : "generic",
+        image:
+          `https://http2.mlstatic.com/D_NQ_NP_2X_${product.thumbnail_id}-F.webp` ||
+          "image.jpg",
+        description: productData.data.plain_text,
+        stock: product.available_quantity,
+        category: "Monitors",
+      };
+    })
+  );
 
   await Product.collection.insertMany(meliApi);
   res.json("productos creados...");

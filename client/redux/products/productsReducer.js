@@ -1,9 +1,11 @@
 const initialState = {
   products: [],
+  productById:{},
   loading: false,
   search: false,
   searchValue: null,
   brands: [],
+  categories:[],
   suggestions: [],
 };
 
@@ -20,26 +22,21 @@ const productsReducer = (state = initialState, action) => {
         ...state,
         loading: action.payload,
       };
-
-    case "RESET_SEARCH":
-      return {
-        ...state,
-        search: action.payload.search,
-        searchValue: action.payload.searchValue,
-      };
-
-    case "SET_SEARCH":
-      return {
-        ...state,
-        search: action.payload.search,
-        searchValue: action.payload.searchValue,
-      };
-
     case "GET_ALL_BRANDS":
       return {
         ...state,
         brands: action.payload,
       };
+    case "GET_PRODUCT_BY_ID":
+      return {
+        ...state,
+        productById:action.payload
+      }    
+      case "GET_ALL_CATEGORIES":
+        return {
+          ...state,
+          categories: action.payload,
+        };  
 
     case "SUGGESTION":
       return {

@@ -1,48 +1,23 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Card from "./card";
-import { Grid, Flex, Box, Text, Button } from "@chakra-ui/react";
+import { Grid, Flex, Box, Text, Button, Container } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
-import { Spinner } from "@chakra-ui/react";
-import {
-  getAllProducts,
-  resetSearch,
-} from "../../redux/products/productsActions";
 
-export default function CardContainer() {
+import SpinnerComponent from "../Spinner/Spinner";
+import Router  from "next/router";
+
+export default function CardContainer({searchValue}) {
   const loadingData = useSelector((state) => state.productsReducer.loading);
   const data = useSelector((state) => state.productsReducer.products);
-  const searchValue = useSelector((state) => state.productsReducer.searchValue);
-  const searchBoolean = useSelector((state) => state.productsReducer.search);
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    return  dispatch(resetSearch());
-  }, []);
-
-  const dispatchResetSearch = () => {
-    dispatch(resetSearch());
-    dispatch(getAllProducts());
-  };
 
   if (loadingData)
     return (
-      <Flex justifyContent={"center"} paddingTop="150px">
-        {
-          <Spinner
-            thickness="4px"
-            speed="0.65s"
-            emptyColor="gray.200"
-            color="blue.500"
-            size="xl"
-          />
-        }
-      </Flex>
+      <SpinnerComponent/>
     );
 
-  if (searchBoolean && data.length === 0)
+  if (searchValue && data.length === 0)
     return (
-      <Flex flexDirection="column" justify={"center"} align="center">
+      <Flex flexDirection="column" justify={"center"} align="center" padding={"100px"}>
       <Flex
         justify={"center"}
         align="center"
@@ -50,9 +25,9 @@ export default function CardContainer() {
         alignItems="center"
         padding={"10px"}
       >
-        <Text padding={"10px"} fontSize="x-large">
+        <Text padding={"10px"} fontSize="x-large" display={"flex"}>
           Resultados para: "{searchValue}"
-          <Button onClick={dispatchResetSearch}>X</Button>
+          <Button onClick={()=>Router.push("/products")} marginLeft="20px">X</Button>
         </Text>
       </Flex>
         <Text fontSize="6xl">No se encontraron resultados.</Text>
@@ -60,20 +35,20 @@ export default function CardContainer() {
     );
 
   return (
-    <>
+    <Box padding={"100px"}>
       <Flex
         justifyContent={"center"}
         flexDirection="column"
         margin={"0 auto"}
         alignItems="center"
-        padding={"10px"}
-        hidden={!searchBoolean}
+        paddingBottom={"30px"}
+        hidden={!searchValue?true:false}
       >
         <Flex align="center" justify={"center"}>
           <Text padding={"10px"} fontSize="x-large">
             Resultados para: "{searchValue}"
           </Text>
-          <Button onClick={dispatchResetSearch}>X</Button>
+          <Button onClick={()=>Router.push("/products")} marginLeft="20px">X</Button>
         </Flex>
       </Flex>
       <Flex justifyContent="center">
@@ -91,6 +66,6 @@ export default function CardContainer() {
           </Grid>
         </Box>
       </Flex>
-    </>
+    </Box>
   );
 }

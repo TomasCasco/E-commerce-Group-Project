@@ -12,6 +12,9 @@ const productsResolvers = {
     async getAllBrands(_, { input }, { dataSources }) {
       return await dataSources.ProductsApi.getAllBrands(input);
     },
+    async getAllCategories(_, { input }, { dataSources }) {
+      return await dataSources.ProductsApi.getAllCategories(input);
+    },
   },
 
   Mutation: {

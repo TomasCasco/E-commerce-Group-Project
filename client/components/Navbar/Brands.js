@@ -6,6 +6,7 @@ import {
   Menu,
   MenuButton,
   MenuList,
+  Grid,
 } from "@chakra-ui/react";
 
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
@@ -45,13 +46,16 @@ export default function Brands() {
           onMouseEnter={onOpenBrands}
           onMouseLeave={onCloseBrands}
           color={"black"}
+          padding="15px"
         >
+          <Grid templateColumns='repeat(5, 1fr)'>
           {brands &&
             brands.map((b) => (
-              <Link key={b+"id"} href={"/brand/[filterBrand]"} as={`/brand/${b}`}>
-                <MenuItem _hover={{ color: "#160606" }}>{b}</MenuItem>
+              <Link key={b+"id"} href={`/brand?brand=${b}`}>
+                <MenuItem _hover={{ color: "#160606" }} >{b}</MenuItem>
               </Link>
             ))}
+          </Grid>
         </MenuList>
       </Menu>
     </Flex>

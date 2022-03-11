@@ -3,11 +3,10 @@ import { Flex, Input, Button, Box } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  getAllProducts,
   getProductSuggestion,
   resetProductSuggestion,
-  setSearch,
 } from "../../redux/products/productsActions";
+import Router from "next/router";
 
 export default function Search() {
   const distpatch = useDispatch();
@@ -21,13 +20,9 @@ export default function Search() {
   };
 
   const dispatchSearchProducts = (value) => {
-    const filterQuery = {
-      name: value?value:inputSearch,
-    };
-    distpatch(getAllProducts(filterQuery));
-    distpatch(setSearch(filterQuery.name));
-    setInputSearch("");
-    distpatch(resetProductSuggestion()) 
+    distpatch(resetProductSuggestion());
+    setInputSearch("")
+    Router.push(`/search?q=${inputSearch}`);
   };
 
   const selectSuggestion = (e) => {
@@ -61,7 +56,7 @@ export default function Search() {
         }}
       />
       <Button
-        onClick={dispatchSearchProducts}
+        onClick={() => dispatchSearchProducts()}
         background="none"
         className="chakra-input css-1y5j02c"
         border={"none"}
@@ -80,7 +75,7 @@ export default function Search() {
       <Box position={"absolute"} top={"150px"} zIndex={100}>
         {suggestions &&
           inputSearch.length > 0 &&
-          suggestions.map((s,index) => (
+          suggestions.map((s, index) => (
             <Box
               key={s + index + "id"}
               bg="#eee"

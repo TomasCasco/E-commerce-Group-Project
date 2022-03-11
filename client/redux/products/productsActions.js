@@ -1,5 +1,7 @@
 import { client } from "../../apolloClient/apolloClient";
-import { queryProducts, ALL_BRANDS } from "../../apolloClient/querys";
+import { queryProducts, ALL_BRANDS, queryCategories, queryProductById} from "../../apolloClient/querys";
+
+
 
 export const getAllProducts = (inputFilter) => {
   return async (dispatch) => {
@@ -36,25 +38,21 @@ export const getAllProducts = (inputFilter) => {
   };
 };
 
-export const resetSearch = () => {
-  return {
-    type: "RESET_SEARCH",
-    payload: {
-      search: false,
-      searchValue: null,
-    },
-  };
-};
 
-export const setSearch = (value) => {
-  return {
-    type: "SET_SEARCH",
-    payload: {
-      search: true,
-      searchValue: value,
-    },
-  };
-};
+export const getProductById=(id)=>{
+  return async function (dispatch) {
+    const product=await client.query({
+      query:queryProductById,
+      variables:{
+        input:id
+      }
+    })
+    return dispatch ({
+      type:"GET_PRODUCT_BY_ID",
+      payload:product.data.getProductById
+    })
+  }
+}
 
 export const getAllBrands = () => {
   return async function (dispatch) {
@@ -68,6 +66,19 @@ export const getAllBrands = () => {
     });
   };
 };
+
+export const getAllCategories=()=>{
+  return async function (dispatch) {
+    const categories = await client.query({
+      query: queryCategories,
+    });
+
+    dispatch({
+      type: "GET_ALL_CATEGORIES",
+      payload: categories.data.getAllCategories,
+    });
+  };
+}
 
 export const getProductSuggestion = (query) => {
   return async function (dispatch) {

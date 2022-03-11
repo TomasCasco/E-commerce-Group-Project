@@ -1,18 +1,15 @@
-import Cookies from "js-cookie";
-import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { Container, Heading,Text } from "@chakra-ui/react";
 
 export default function MyProfile() {
-  const [{ username, email, id }, setUserInfo] = useState({});
-
-  useEffect(() => {
-    setUserInfo(JSON.parse(Cookies.get("user")));
-  }, []);
+  const user = useSelector(state=>state.usersReducer.user);
 
   return (
-    <div>
-      <h1>{username}</h1>
-      <p>ID {id}</p>
-      <p>email: {email}</p>
-    </div>
+    <Container>
+      <Heading>
+      <Text>Username: {user.username}</Text>
+      <Text>Email: {user.email}</Text>
+      </Heading>
+    </Container>
   );
 }

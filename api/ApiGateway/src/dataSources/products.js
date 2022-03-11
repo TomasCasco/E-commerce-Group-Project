@@ -15,6 +15,9 @@ class ProductsApi extends RESTDataSource {
   async getAllBrands(input) {
     return await this.get("/all/brands");
   }
+  async getAllCategories(input) {
+    return await this.get("/all/categories");
+  }
 
   async getProductsByNameOrType({ name, query }) {
     return await this.get(`/`, { name, query });

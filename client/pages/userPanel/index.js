@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Footer from "../../components/Footer/Footer.tsx";
 import NavBar from "../../components/Navbar/NavBar";
-import Dashboard from "../../components/Dashboard/Dashboard";
 
 import {
   Flex,
@@ -26,6 +25,7 @@ import LinkNext from "next/link";
 import Orders from "../../components/Dashboard/Orders";
 import MyProfile from "../../components/Dashboard/MyProfile";
 import Favorites from "../../components/Dashboard/Favorites";
+
 import { useSelector } from "react-redux";
 import Router from "next/router";
 
@@ -39,7 +39,6 @@ export default function UserPanel() {
       <Flex
         maxH={[null, null, "100vh"]}
         maxW="2000px"
-        maxH={"-moz-min-content"}
         flexDir={["column", "column", "row"]}
         overflow="hidden"
       >
@@ -177,17 +176,18 @@ export default function UserPanel() {
           align="center"
           alignItems={"center"}
           mb="-2.5"
+
         >
-            <Heading
+          <Heading
                 mt={3}
                 mb={[10, 10, 10]}
                 fontSize={["4xl", "4xl", "2xl", "3xl", "4xl"]}
                 alignSelf="center"
                 letterSpacing="tight"
               >
-                 We are glad you are here... <Icon as={FiSmile} fontSize="4xl" />
-              </Heading>
-          
+            We are glad you are here... 
+          </Heading>
+
           <Flex justifyContent="space-between">
             <Flex align="flex-end" w={"-moz-min-content"}>
               <Heading as="h2" size="lg" letterSpacing="tight">
@@ -197,9 +197,6 @@ export default function UserPanel() {
               </Heading>
             </Flex>
           </Flex>
-
-          <Dashboard />
-
         </Flex>
       </Flex>
       <Footer />

@@ -1,13 +1,11 @@
-import Head from "next/head";
-import CaptionCarousel from "../components/Banner/banner.tsx";
+import CaptionCarousel from "../components/Carousel/Carousel.js";
 import NavBar from "../components/Navbar/NavBar";
-import CardContainer from "../components/Card/cardContainer";
 import { useDispatch } from "react-redux";
-import {
-  getAllProducts,
-} from "../redux/products/productsActions";
+import { getAllProducts } from "../redux/products/productsActions";
 import { useEffect } from "react";
 import Footer from "../components/Footer/Footer.tsx";
+import { bannerCards } from "../assets/images.js";
+import ProductsHome from "../components/ProductsHome/index.js";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -19,9 +17,9 @@ export default function Home() {
   return (
     <>
       <NavBar />
-      <CaptionCarousel />
-      <CardContainer />
-      <Footer/>
+      <CaptionCarousel slides={bannerCards} />
+      <ProductsHome />
+      <Footer />
     </>
   );
 }

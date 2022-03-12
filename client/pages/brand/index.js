@@ -1,37 +1,32 @@
-import Head from "next/head";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import CardContainer from "../../components/Card/cardContainer";
 import Footer from "../../components/Footer/Footer.tsx";
 import NavBar from "../../components/Navbar/NavBar";
-import {
-  getAllProducts,
-  resetSearch,
-} from "../../redux/products/productsActions";
+import { getAllProducts } from "../../redux/products/productsActions";
 
-export default function Home({ filterName }) {
+export default function Home({ brand }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
     const filterQuery = {
-      categories: filterName,
+      brands: brand,
     };
     dispatch(getAllProducts(filterQuery));
-    dispatch(resetSearch());
-  }, [dispatch, filterName]);
+  }, [dispatch, brand]);
 
   return (
     <>
       <NavBar />
       <CardContainer />
-      <Footer/>
+      <Footer />
     </>
   );
 }
 
 Home.getInitialProps = (context) => {
   const { query } = context;
-  const { filterName } = query;
+  const { brand } = query;
 
-  return { filterName };
+  return { brand };
 };

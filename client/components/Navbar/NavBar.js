@@ -1,17 +1,16 @@
 import React from "react";
 import { Flex } from "@chakra-ui/react";
-
 import DarkModeSwitch from "../DarkModeSwitch/DarkModeSwitch";
 import Products from "./Products";
 import Brands from "./Brands";
 import Logo from "./Logo";
 import Support from "./Support";
 import AboutUs from "./AboutUs";
-import Search from "./Search";
 import PanelLogin from "./PanelLogin";
 import CartButton from "./CartButton";
 import FavoritesButton from "./FavoritesButton";
 import Home from "./Home";
+import SearchModal from "../Search/SearchModal";
 
 export default function NavBar() {
   return (
@@ -50,7 +49,7 @@ export default function NavBar() {
           <Brands />
           <Support />
           <AboutUs />
-          <Search />
+          <SearchModal />
         </Flex>
       </Flex>
     </>

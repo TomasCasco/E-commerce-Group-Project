@@ -76,6 +76,7 @@ const productTypes = gql`
     getProductsByNameOrType(input: nameOrType): [product]
     getProductById(input: String): product
     getAllBrands: [String]
+    getAllCategories: [String]
   }
 
   type Mutation {

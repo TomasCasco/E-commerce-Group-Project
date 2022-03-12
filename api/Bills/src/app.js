@@ -4,10 +4,9 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const setHeaders = require("./middlewares/setHeaders");
 const errorHandler = require("./middlewares/errorHandler");
-const router=require("./routes")
+const router = require("./routes");
 
 require("./config/db");
-
 
 const server = express();
 
@@ -21,7 +20,7 @@ server.use(cookieParser());
 server.use(morgan("dev"));
 server.use(setHeaders);
 
-server.use("/bills",router)
+server.use("/bills", router);
 
 server.use(errorHandler);
 

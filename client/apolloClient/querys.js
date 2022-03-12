@@ -36,12 +36,18 @@ export const queryInfoUser = gql`
 `;
 
 export const ALL_BRANDS = gql`
-  query {
+  query getAllBrands {
     getAllBrands
   }
 `;
 
-export const getById = gql`
+export const queryCategories = gql`
+  query getAllCategories {
+    getAllCategories
+  }
+`;
+
+export const queryProductById = gql`
   query ($input: String) {
     getProductById(input: $input) {
       _id
@@ -51,7 +57,6 @@ export const getById = gql`
       price
       image
       description
-      stock
     }
   }
 `;

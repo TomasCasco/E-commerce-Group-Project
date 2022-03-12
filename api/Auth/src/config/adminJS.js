@@ -25,17 +25,24 @@ const adminJS = new AdminJS({
           delete: { isAccessible: canModifyUsers },
           new: { isAccessible: canModifyUsers },
           list: { isAccessible: canModifyUsers },
-        },  
+        },
       },
     },
     {
       resource: Product,
+      options: {
+        properties: {
+          description: {
+            isVisible: { show: true, edit: true, list: false },
+          },
+        },
+      },
     },
   ],
-  branding:{
+  branding: {
     companyName: "Gamerland",
-    softwareBrothers:false,
-    logo:false
+    softwareBrothers: false,
+    logo: false,
   },
   rootPath: "/admin",
 });

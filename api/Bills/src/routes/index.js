@@ -31,6 +31,4 @@ router.post("/mercadopago", async (req, res, next) => {
   }
 });
 
-
-
 module.exports = router;

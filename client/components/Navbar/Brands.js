@@ -6,24 +6,21 @@ import {
   Menu,
   MenuButton,
   MenuList,
+  Grid,
+  useColorModeValue,
 } from "@chakra-ui/react";
-
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 import Link from "next/link";
 import { useSelector } from "react-redux";
 
 export default function Brands() {
-  const {
-    isOpen: isOpenBrands,
-    onOpen: onOpenBrands,
-    onClose: onCloseBrands,
-  } = useDisclosure();
-
   const brands = useSelector((state) => state.productsReducer.brands);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const colorMode = useColorModeValue("black", "white");
 
   return (
     <Flex className="nav-items" bg={"none !important"}>
-      <Menu isOpen={isOpenBrands}>
+      <Menu isOpen={isOpen}>
         <MenuButton
           py={[1, 2, 2]}
           px={4}
@@ -36,22 +33,27 @@ export default function Brands() {
           fontStyle={"inherit"}
           letterSpacing={"0.56px"}
           fontWeight="600"
-          onMouseEnter={onOpenBrands}
-          onMouseLeave={onCloseBrands}
+          onMouseEnter={onOpen}
+          onMouseLeave={onClose}
         >
-          BRANDS {isOpenBrands ? <ChevronUpIcon /> : <ChevronDownIcon />}
+          BRANDS {isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
         </MenuButton>
         <MenuList
-          onMouseEnter={onOpenBrands}
-          onMouseLeave={onCloseBrands}
+          onMouseEnter={onOpen}
+          onMouseLeave={onClose}
           color={"black"}
+          padding="15px"
         >
-          {brands &&
-            brands.map((b) => (
-              <Link key={b+"id"} href={"/brand/[filterBrand]"} as={`/brand/${b}`}>
-                <MenuItem _hover={{ color: "#160606" }}>{b}</MenuItem>
-              </Link>
-            ))}
+          <Grid templateColumns="repeat(5, 1fr)">
+            {brands &&
+              brands.map((b) => (
+                <Link key={b + "id"} href={`/brand?brand=${b}`}>
+                  <MenuItem borderRadius={"1rem"} color={colorMode}>
+                    {b}
+                  </MenuItem>
+                </Link>
+              ))}
+          </Grid>
         </MenuList>
       </Menu>
     </Flex>

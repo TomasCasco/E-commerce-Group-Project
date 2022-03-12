@@ -6,7 +6,9 @@ import {
   Menu,
   MenuButton,
   MenuList,
+  useColorModeValue,
 } from "@chakra-ui/react";
+import { useSelector } from "react-redux";
 
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 import Link from "next/link";
@@ -17,9 +19,12 @@ export default function Products() {
     onOpen: onOpenProducts,
     onClose: onCloseProducts,
   } = useDisclosure();
+  const categories = useSelector((state) => state.productsReducer.categories);
+  const colorMode = useColorModeValue("black", "white");
+
   return (
     <Flex className="nav-items" bg={"none !important"}>
-      <Menu isOpen={isOpenProducts}  >
+      <Menu isOpen={isOpenProducts}>
         <MenuButton
           py={[1, 2, 2]}
           px={4}
@@ -42,19 +47,25 @@ export default function Products() {
           onMouseEnter={onOpenProducts}
           onMouseLeave={onCloseProducts}
           color={"black"}
+          padding="15px"
         >
-          <Link href={"/products/[filterName]"} as={"/products/teclado"}>
-            <MenuItem >Gaming Keyboards</MenuItem>
+          <Link href={`/products`} key={20 + 500}>
+            <MenuItem borderRadius={"1rem"} color={colorMode}>
+              All
+            </MenuItem>
           </Link>
-          <Link href={"/products/[filterName]"} as={"/products/microfono"}>
-            <MenuItem >Microphones</MenuItem>
-          </Link>
-          <Link href={"/products/[filterName]"} as={"/products/mouse"}>
-            <MenuItem >Gaming Mouse</MenuItem>
-          </Link>
-          <Link href={"/products/[filterName]"} as={"/products/mousepad"}>
-            <MenuItem >Mouse Pads</MenuItem>
-          </Link>
+          {categories.map((category, index) => {
+            return (
+              <Link
+                href={`/products?category=${category}`}
+                key={index + category}
+              >
+                <MenuItem borderRadius={"1rem"} color={colorMode}>
+                  {category}
+                </MenuItem>
+              </Link>
+            );
+          })}
         </MenuList>
       </Menu>
     </Flex>

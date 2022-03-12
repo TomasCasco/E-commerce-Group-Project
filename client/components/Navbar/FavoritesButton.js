@@ -1,17 +1,18 @@
-import React from 'react'
+import React from "react";
 import {
-    Popover,
-    PopoverTrigger,
-    PopoverContent,
-    PopoverBody,
-    PopoverArrow,
-    PopoverCloseButton,
-    Button,
-    Portal,
-    Icon,
-    Container,
-  } from "@chakra-ui/react";
-import { MdFavorite } from 'react-icons/md';
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverBody,
+  PopoverArrow,
+  PopoverCloseButton,
+  Button,
+  Portal,
+  Icon,
+  Container,
+} from "@chakra-ui/react";
+import { MdFavorite } from "react-icons/md";
+import Favorites from "../Favorites/Favorites";
 
 export default function FavoritesButton() {
   return (
@@ -35,7 +36,7 @@ export default function FavoritesButton() {
           }}
         >
           <Icon fontSize="large" mt="5px">
-            <MdFavorite/>
+            <MdFavorite />
           </Icon>
           Favorites
         </Button>
@@ -53,11 +54,11 @@ export default function FavoritesButton() {
           <PopoverCloseButton />
           <PopoverBody>
             <Container>
-                Favorites
+              <Favorites />
             </Container>
           </PopoverBody>
         </PopoverContent>
       </Portal>
     </Popover>
-  )
+  );
 }

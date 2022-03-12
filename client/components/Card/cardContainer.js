@@ -17,15 +17,15 @@ export default function CardContainer() {
       ...url,
       [title]: value,
     });
-    console.log(url)
+    console.log(url);
   };
 
-  const handleSetUrl=()=>{
-    console.log(url)
-    const orderBy=url.orderBy?url.orderBy:null
-    const sortBy=url.sortBy?url.sortBy:null
-    Router.push(`/products?orderBy=${orderBy}&sortBy=${sortBy}`)
-  }
+  const handleSetUrl = () => {
+    console.log(url);
+    const orderBy = url.orderBy ? url.orderBy : null;
+    const sortBy = url.sortBy ? url.sortBy : null;
+    Router.push(`/products?orderBy=${orderBy}&sortBy=${sortBy}`);
+  };
 
   if (loadingData) {
     return <SpinnerComponent />;

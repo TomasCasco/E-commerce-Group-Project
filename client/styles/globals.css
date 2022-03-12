@@ -10,17 +10,17 @@ body::-webkit-scrollbar {
   min-width: 0.8em;
   border-radius: "2rem";
 }
- 
+
 body::-webkit-scrollbar-track {
   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   width: "6px";
 }
- 
+
 body::-webkit-scrollbar-thumb {
-  background-color: #44B8FC;
+  background-color: #44b8fc;
   border: 4px solid transparent;
   border-radius: 8px;
-  background-clip: padding-box;  
+  background-clip: padding-box;
 }
 
 a {

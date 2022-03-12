@@ -13,11 +13,9 @@ import {
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { Logo } from "./Logo";
-import { OAuthButtonGroup } from "./OAuthButtonGroup.js";
 import { PasswordField } from "./PasswordField.js";
 import { client } from "../../apolloClient/apolloClient";
 import { useRouter } from "next/router";
-import { useDispatch } from "react-redux";
 import { mutationUserRegister } from "../../apolloClient/mutations";
 
 export default function App() {
@@ -26,7 +24,6 @@ export default function App() {
   const [username, setUsername] = useState("");
   const router = useRouter();
   const toast = useToast();
-  const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -63,9 +60,9 @@ export default function App() {
         duration: 1000,
         isClosable: true,
       });
-      setTimeout(()=>{
-        router.push("/")
-      },1000)
+      setTimeout(() => {
+        router.push("/");
+      }, 1000);
     }
     setEmail("");
     setPassword("");

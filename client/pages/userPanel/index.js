@@ -26,6 +26,7 @@ import LinkNext from "next/link";
 import Orders from "../../components/Dashboard/Orders";
 import MyProfile from "../../components/Dashboard/MyProfile";
 import Favorites from "../../components/Dashboard/Favorites";
+
 import { useSelector } from "react-redux";
 import Router from "next/router";
 
@@ -44,7 +45,7 @@ export default function UserPanel() {
       >
         {/* Column 1 */}
         <Flex
-          w={["100%", "100%", "10%", "15%", "15%"]}
+          w={["100%", "100%", "20%", "25%", "25%"]}
           flexDir="column"
           alignItems="center"
           backgroundColor="#252a2b"
@@ -167,18 +168,29 @@ export default function UserPanel() {
 
         {/* Column 2 */}
         <Flex
-          w={["100%", "100%", "60%", "60%", "55%"]}
+          w={["100%", "100%", "100%", "100%", "100%"]}
           p="3%"
           flexDir="column"
           overflow="auto"
           minH="100vh"
+          alignContent={"center"}
+          align="center"
+          alignItems={"center"}
+          mb="-2.5"
+
         >
-          <Heading fontWeight="normal" mb={4} letterSpacing="tight">
-            We are glad you are here... <Icon as={FiSmile} fontSize="4xl" />
+          <Heading
+                mt={3}
+                mb={[10, 10, 10]}
+                fontSize={["4xl", "4xl", "2xl", "3xl", "4xl"]}
+                alignSelf="center"
+                letterSpacing="tight"
+              >
+            We are glad you are here... 
           </Heading>
 
-          <Flex justifyContent="space-between" mt={8}>
-            <Flex align="flex-end">
+          <Flex justifyContent="space-between">
+            <Flex align="flex-end" w={"-moz-min-content"}>
               <Heading as="h2" size="lg" letterSpacing="tight">
                 {render === "orders" && <Orders />}
                 {render === "favorites" && <Favorites />}

@@ -49,7 +49,7 @@ export default function Login() {
     if (token) {
       Cookies.set("token", token, { expires: 3 });
       router.push("/");
-      const user = await client.query({ 
+      const user = await client.query({
         query: queryInfoUser,
         context: {
           headers: {
@@ -129,7 +129,12 @@ export default function Login() {
                     />
                   </FormControl>
                   <HStack justify="space-between">
-                    <Button variant="link" colorScheme="blue" size="sm">
+                    <Button
+                      variant="link"
+                      colorScheme="blue"
+                      size="sm"
+                      onClick={() => router.push("/forget")}
+                    >
                       Forgot password?
                     </Button>
                   </HStack>

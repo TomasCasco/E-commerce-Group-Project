@@ -11,6 +11,9 @@ const userResolvers = {
     registerUser(_, { input }, { dataSources }) {
       return dataSources.UsersApi.registerUser(input);
     },
+    forgetPassword(_, { input }, { dataSources }) {
+      return dataSources.UsersApi.forget(input);
+    },
   },
 };
 

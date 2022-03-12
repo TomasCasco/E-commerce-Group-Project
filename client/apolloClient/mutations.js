@@ -8,3 +8,11 @@ export const mutationUserRegister = gql`
     }
   }
 `;
+
+export const FORGET = gql`
+  mutation ($input: Forget) {
+    forgetPassword(input: $input) {
+      message
+    }
+  }
+`;

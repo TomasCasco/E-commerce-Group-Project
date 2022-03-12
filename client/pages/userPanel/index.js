@@ -2,10 +2,8 @@ import React, { useState } from "react";
 import Footer from "../../components/Footer/Footer.tsx";
 import NavBar from "../../components/Navbar/NavBar";
 
-import { Flex, Heading, Avatar, Text, Icon, Link, Box } from "@chakra-ui/react";
+// import { Flex, Heading, Avatar, Text, Icon, Link, Box } from "@chakra-ui/react";
 import {
-<<<<<<< HEAD
-=======
   Flex,
   Heading,
   Avatar,
@@ -16,7 +14,6 @@ import {
   Button,
 } from "@chakra-ui/react";
 import {
->>>>>>> c3a89758a5607dd120027b0565baad9706251675
   FiHome,
   FiHeart,
   FiShoppingCart,
@@ -29,28 +26,18 @@ import LinkNext from "next/link";
 import Orders from "../../components/Dashboard/Orders";
 import MyProfile from "../../components/Dashboard/MyProfile";
 import Favorites from "../../components/Dashboard/Favorites";
-<<<<<<< HEAD
-
-export default function UserPanel() {
-  const [render, setRender] = useState("profile");
-=======
 import { useSelector } from "react-redux";
 import Router from "next/router";
 
 export default function UserPanel() {
   const [render, setRender] = useState("profile");
   const user = useSelector((state) => state.usersReducer.user);
->>>>>>> c3a89758a5607dd120027b0565baad9706251675
 
   return (
     <>
       <NavBar />
       <Flex
-<<<<<<< HEAD
-        h={[null, null, "100vh"]}
-=======
         maxH={[null, null, "100vh"]}
->>>>>>> c3a89758a5607dd120027b0565baad9706251675
         maxW="2000px"
         flexDir={["column", "column", "row"]}
         overflow="hidden"
@@ -60,11 +47,7 @@ export default function UserPanel() {
           w={["100%", "100%", "10%", "15%", "15%"]}
           flexDir="column"
           alignItems="center"
-<<<<<<< HEAD
-          backgroundColor="#020202"
-=======
           backgroundColor="#252a2b"
->>>>>>> c3a89758a5607dd120027b0565baad9706251675
           color="#fff"
         >
           <Flex
@@ -99,15 +82,11 @@ export default function UserPanel() {
                     href="/"
                     display={["none", "none", "flex", "flex", "flex"]}
                   >
-<<<<<<< HEAD
-                    <Icon as={FiHome} fontSize="2xl" className="active-icon" />
-=======
                     <Icon
                       as={FiHome}
                       fontSize="2xl"
                       color={"#44b8fc !important"}
                     />
->>>>>>> c3a89758a5607dd120027b0565baad9706251675
                   </Link>
                   <LinkNext href="/">
                     <Box as="button">
@@ -116,19 +95,6 @@ export default function UserPanel() {
                   </LinkNext>
                 </Flex>
                 <Flex className="sidebar-items" mr={[2, 6, 0, 0, 0]}>
-<<<<<<< HEAD
-                  <Link display={["none", "none", "flex", "flex", "flex"]}>
-                    <Icon as={FiShoppingCart} fontSize="2xl" />
-                  </Link>
-                  {/* -------render -------------- */}
-                  <Box as="button" onClick={() => setRender("orders")}>
-                    <Text>Orders</Text>
-                  </Box>
-                </Flex>
-                <Flex className="sidebar-items" mr={[2, 6, 0, 0, 0]}>
-                  <Link display={["none", "none", "flex", "flex", "flex"]}>
-                    <Icon as={FiHeart} fontSize="2xl" />
-=======
                   <Icon
                     as={FiShoppingCart}
                     fontSize="2xl"
@@ -146,7 +112,6 @@ export default function UserPanel() {
                       fontSize="2xl"
                       color={"#44b8fc !important"}
                     />
->>>>>>> c3a89758a5607dd120027b0565baad9706251675
                   </Link>
                   <Box as="button" onClick={() => setRender("favorites")}>
                     <Text>Favorites</Text>
@@ -154,15 +119,11 @@ export default function UserPanel() {
                 </Flex>
                 <Flex className="sidebar-items" mr={[2, 6, 0, 0, 0]}>
                   <Link display={["none", "none", "flex", "flex", "flex"]}>
-<<<<<<< HEAD
-                    <Icon as={FiUser} fontSize="2xl" />
-=======
                     <Icon
                       as={FiUser}
                       fontSize="2xl"
                       color={"#44b8fc !important"}
                     />
->>>>>>> c3a89758a5607dd120027b0565baad9706251675
                   </Link>
                   <Box as="button" onClick={() => setRender("profile")}>
                     <Text>Your Profile</Text>
@@ -172,9 +133,6 @@ export default function UserPanel() {
             </Flex>
             <Flex flexDir="column" alignItems="center" mb={10} mt={5}>
               <Avatar my={2} src="" />
-<<<<<<< HEAD
-              <Text textAlign="center">Your Name</Text>
-=======
               <Text
                 textAlign="center"
                 fontSize={"1.5rem"}
@@ -203,7 +161,6 @@ export default function UserPanel() {
               >
                 PANEL ADMIN
               </Button>
->>>>>>> c3a89758a5607dd120027b0565baad9706251675
             </Flex>
           </Flex>
         </Flex>
@@ -229,44 +186,7 @@ export default function UserPanel() {
               </Heading>
             </Flex>
           </Flex>
-<<<<<<< HEAD
-
-          <favoritesContainer />
-
-          <Flex justifyContent="center" mt={8} className="sidebar-items">
-            <Heading mt={50} as="h3" size="lg" letterSpacing="normal">
-              Start shopping now...
-            </Heading>
-            <Link
-              href="/"
-              _hover={{ textDecor: "none" }}
-              display={["flex", "flex", "none", "flex", "flex"]}
-            >
-              <Heading mt={50} ml={10} as="h3" size="lg" letterSpacing="normal">
-                Store
-              </Heading>
-            </Link>
-            <Link
-              href="/"
-              mt={55}
-              display={["none", "none", "flex", "flex", "flex"]}
-            >
-              <Icon as={FiShoppingCart} fontSize="4xl" />
-            </Link>
-          </Flex>
         </Flex>
-        {/* Column 3 */}
-        <Flex
-          w={["100%", "100%", "30%"]}
-          bgColor="#F5F5F5"
-          p="3%"
-          flexDir="column"
-          overflow="auto"
-          minW={[null, null, "300px", "300px", "400px"]}
-        ></Flex>
-=======
-        </Flex>
->>>>>>> c3a89758a5607dd120027b0565baad9706251675
       </Flex>
       <Footer />
     </>

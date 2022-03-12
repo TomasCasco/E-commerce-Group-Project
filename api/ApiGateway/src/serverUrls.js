@@ -1,7 +1,8 @@
-const { PRODUCTS, USERS, BILLS } = process.env;
+const { PRODUCTS, USERS, BILLS, EMAILS } = process.env;
 
 module.exports = {
   PRODUCTS,
   USERS,
   BILLS,
+  EMAILS,
 };

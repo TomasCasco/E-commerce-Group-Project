@@ -42,7 +42,7 @@ const Index = () => {
           Enter your email to get a new password or{" "}
           <Box
             as="button"
-            borderBottom="1px solid #000"
+            borderBottom="1px solid #999"
             onClick={() => router.push("/")}
           >
             back to home

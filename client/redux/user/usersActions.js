@@ -5,9 +5,9 @@ export const setUser = (user) => {
   };
 };
 
-export const setLogged=(value)=>{
-    return {
-        type:"SET_LOGGED",
-        payload:value
-    }
-}
+export const setLogged = (value) => {
+  return {
+    type: "SET_LOGGED",
+    payload: value,
+  };
+};

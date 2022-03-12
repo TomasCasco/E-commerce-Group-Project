@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
-import { Container, Flex, Box, Grid, Heading } from "@chakra-ui/react";
+import { Box, Heading, Flex } from "@chakra-ui/react";
 import Card from "../Card/card";
 import SpinnerComponent from "../Spinner/Spinner";
 

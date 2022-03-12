@@ -1,8 +1,6 @@
 import { Box, Button, Flex, Icon } from "@chakra-ui/react";
-import Link from "next/link";
 import React from "react";
 import { MdLogin, MdLogout } from "react-icons/md";
-
 import { useDispatch, useSelector } from "react-redux";
 import { setLogged, setUser } from "../../redux/user/usersActions";
 import Cookies from "js-cookie";
@@ -42,12 +40,12 @@ export default function PanelLogin() {
           _focus={{
             bgColor: "none",
           }}
-          onClick={()=>router.push("/userPanel")}
+          onClick={() => router.push("/userPanel")}
         >
-            <Icon fontSize="large" mt="5px">
-              <BsPersonFill />
-            </Icon>
-            {`Hi, ${userInfo.username}`}
+          <Icon fontSize="large" mt="5px">
+            <BsPersonFill />
+          </Icon>
+          {`Hi, ${userInfo.username}`}
         </Button>
         |
         <Button
@@ -68,10 +66,10 @@ export default function PanelLogin() {
           }}
           onClick={handleLogOut}
         >
-            <Icon fontSize="large" mt="5px">
-              <MdLogout />
-            </Icon>
-            Logout
+          <Icon fontSize="large" mt="5px">
+            <MdLogout />
+          </Icon>
+          Logout
         </Button>
       </Flex>
     );
@@ -95,12 +93,12 @@ export default function PanelLogin() {
         _focus={{
           bgColor: "none",
         }}
-        onClick={()=>router.push("/login")}
+        onClick={() => router.push("/login")}
       >
         <Icon fontSize="large" mt="5px">
           <MdLogin />
         </Icon>
-          Login
+        Login
       </Button>
     );
   }

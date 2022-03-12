@@ -1,14 +1,10 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React from "react";
+import { useSelector } from "react-redux";
 
-import {
-  Flex,
-  Box,
-} from '@chakra-ui/react';
-
+import { Flex, Box } from "@chakra-ui/react";
 
 const Favorites = () => {
-    const data = useSelector((state) => state.favoritesReducer.favorites);
+  const data = useSelector((state) => state.favoritesReducer.favorites);
 
   return (
     <Flex
@@ -61,7 +57,7 @@ const Favorites = () => {
         </Box>
       </Flex>
     </Flex>
-  )
-}
+  );
+};
 
-export default Favorites
+export default Favorites;

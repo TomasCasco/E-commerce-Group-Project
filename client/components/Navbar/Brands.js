@@ -16,8 +16,7 @@ import { useSelector } from "react-redux";
 export default function Brands() {
   const brands = useSelector((state) => state.productsReducer.brands);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const colorMode=useColorModeValue("black", "white")
-
+  const colorMode = useColorModeValue("black", "white");
 
   return (
     <Flex className="nav-items" bg={"none !important"}>
@@ -49,10 +48,7 @@ export default function Brands() {
             {brands &&
               brands.map((b) => (
                 <Link key={b + "id"} href={`/brand?brand=${b}`}>
-                  <MenuItem
-                    borderRadius={"1rem"}
-                    color={colorMode}
-                  >
+                  <MenuItem borderRadius={"1rem"} color={colorMode}>
                     {b}
                   </MenuItem>
                 </Link>

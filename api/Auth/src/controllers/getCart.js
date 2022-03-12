@@ -7,8 +7,8 @@ const getCart = async (req, res, next) => {
     if (userId && (await User.findById(userId))) {
       let cart = await Cart.findOne({ userId });
       !cart ? (cart = await Cart.create({ userId })) : null;
-      const {products}= cart
-      res.status(200).json({userId,products});
+      const { products } = cart;
+      res.status(200).json({ userId, products });
     } else {
       throw new Error("User not found");
     }

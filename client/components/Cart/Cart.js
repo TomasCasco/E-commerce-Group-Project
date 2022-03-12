@@ -1,18 +1,6 @@
 import React from "react";
-import {
-  Button,
-  Grid,
-  Flex,
-  Box,
-  useColorModeValue,
-  MenuItem,
-  Menu,
-  Text,
-  MenuButton,
-  Icon,
-  MenuList,
-} from "@chakra-ui/react";
-import { FaArrowRight, FaAngleRight, FaTrash, IoMdCart } from "react-icons/fa";
+import { Button, Flex, Box, useColorModeValue } from "@chakra-ui/react";
+import { FaArrowRight } from "react-icons/fa";
 import Link from "next/link";
 import CartItem from "./CartItem";
 import { useSelector } from "react-redux";
@@ -84,7 +72,6 @@ export default function Cart() {
             justify="center"
             minWidth={"500px"}
             maxHeight="190px"
-            
           >
             <Box fontSize="20px" fontWeight="bolder">
               Order Summary

@@ -4,7 +4,7 @@ const serverUrls = require("../serverUrls");
 class UsersApi extends RESTDataSource {
   constructor() {
     super();
-    this.baseURL = serverUrls.users;
+    this.baseURL = serverUrls.USERS;
   }
 
   async registerUser(credentials) {

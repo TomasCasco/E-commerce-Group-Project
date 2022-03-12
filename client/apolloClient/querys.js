@@ -41,11 +41,11 @@ export const ALL_BRANDS = gql`
   }
 `;
 
-export const queryCategories= gql`
-query getAllCategories {
-  getAllCategories
-}
-`
+export const queryCategories = gql`
+  query getAllCategories {
+    getAllCategories
+  }
+`;
 
 export const queryProductById = gql`
   query ($input: String) {
@@ -57,7 +57,6 @@ export const queryProductById = gql`
       price
       image
       description
-      stock
     }
   }
 `;

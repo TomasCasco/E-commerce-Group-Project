@@ -18,7 +18,7 @@ export default function Home() {
     <>
       <NavBar />
       <CaptionCarousel slides={bannerCards} />
-      <ProductsHome/>
+      <ProductsHome />
       <Footer />
     </>
   );

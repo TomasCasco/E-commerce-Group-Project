@@ -8,7 +8,12 @@ const getUserInfo = async (req, res, next) => {
       user
         ? res
             .status(200)
-            .json({ id: user._id, username: user.username, email: user.email, role:user.role })
+            .json({
+              id: user._id,
+              username: user.username,
+              email: user.email,
+              role: user.role,
+            })
         : res.status(200).json({ error: "User not found" });
     }
   } catch (error) {

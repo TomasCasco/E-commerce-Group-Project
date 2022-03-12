@@ -134,17 +134,17 @@ app.post("/products/create-api", async (req, res) => {
   );
   let meliApi = await Promise.all(
     data.results.map(async (product) => {
-      let productData
+      let productData;
       try {
         productData = await axios.get(
           `https://api.mercadolibre.com/items/${product.id}/description`
         );
       } catch (error) {
-        productData={
-          data:{
-            plain_text:"..."
-          }
-        }
+        productData = {
+          data: {
+            plain_text: "...",
+          },
+        };
       }
       const { value_name } = product.attributes.find(
         (el) => el.name === "Marca"

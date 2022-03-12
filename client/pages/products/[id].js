@@ -1,4 +1,4 @@
-import { Container, Flex, Heading, Text,Image } from "@chakra-ui/react";
+import { Container, Flex, Heading, Text, Image } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Footer from "../../components/Footer/Footer.tsx";
@@ -22,29 +22,31 @@ export default function Home({ id }) {
     }, 1000);
   }, [product]);
 
-  if (!product._id){
-      return <Container alignContent={"center"} justifyContent="center">
-          Not found
+  if (!product._id) {
+    return (
+      <Container alignContent={"center"} justifyContent="center">
+        Not found
       </Container>
+    );
   }
 
   return (
     <>
       <NavBar />
       <Flex align={"center"} justify="center" padding={"100px"}>
-        {loading ? <SpinnerComponent /> : 
-        <Container>
-          <Flex flexDir={"column"}>
-            <Heading>
-              {product.name}
-              <Image src={product.image} maxW="50%" maxH={"50%"}/>
-            </Heading>
-           <Text>
-              {product.description}
-            </Text>
-          </Flex>
-        </Container>
-        }
+        {loading ? (
+          <SpinnerComponent />
+        ) : (
+          <Container>
+            <Flex flexDir={"column"}>
+              <Heading>
+                {product.name}
+                <Image src={product.image} maxW="50%" maxH={"50%"} />
+              </Heading>
+              <Text>{product.description}</Text>
+            </Flex>
+          </Container>
+        )}
       </Flex>
       <Footer />
     </>

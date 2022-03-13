@@ -1,9 +1,7 @@
-export const addToFavorites = (itemID) => {
+export const addToFavorites = (product) => {
   return {
     type: "ADD_TO_FAVORITES",
-    payload: {
-      id: itemID,
-    },
+    payload: product
   };
 };
 

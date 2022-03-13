@@ -31,9 +31,9 @@ const forgetPassword = async (req, res, next) => {
         email: user.email,
         newPassword: userNewPassword,
       });
-      return res.json({ message: "password changed" });
+      return res.json({ message: "password changed", status: "success" });
     } else {
-      return res.json({ message: "user not found" });
+      return res.json({ message: "user not found", status: "error" });
     }
   } catch (error) {
     next(error);

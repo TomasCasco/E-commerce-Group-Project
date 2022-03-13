@@ -35,6 +35,7 @@ const userTypes = gql`
 
   type ResponseForget {
     message: String!
+    status: String!
   }
 
   type Query {

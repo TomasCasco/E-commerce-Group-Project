@@ -30,7 +30,7 @@ const Index = () => {
       variables: { input: { email } },
     });
     setEmail("");
-    setMsg(data.forgetPassword.message);
+    setMsg(data.forgetPassword);
     setShowAlert(true);
   };
 
@@ -62,14 +62,14 @@ const Index = () => {
           </Button>
         </Flex>
         <Alert
-          status="success"
+          status={msg.status}
           maxW={"300px"}
           display={showAlert ? "block" : "none"}
         >
           <AlertIcon />
           <Box flex="1">
-            <AlertTitle>Success!</AlertTitle>
-            <AlertDescription>{msg} (chech your email)</AlertDescription>
+            <AlertTitle>{msg.status}</AlertTitle>
+            <AlertDescription>{msg.message}</AlertDescription>
           </Box>
           <CloseButton
             position="absolute"

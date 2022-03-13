@@ -12,7 +12,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
-import { Logo } from "../../components/Logo";
+import { Logo } from "../../components/Login/Logo";
 import { PasswordField } from "../../components/Login/PasswordField.js";
 import { client } from "../../apolloClient/apolloClient";
 import { useRouter } from "next/router";

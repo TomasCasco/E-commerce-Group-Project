@@ -16,8 +16,8 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
-import { Logo } from "./Logo";
-import { PasswordField } from "./PasswordField.js";
+import Logo from "../../components/Login/Logo";
+import { PasswordField } from "../../components/Login/PasswordField.js";
 import { client } from "../../apolloClient/apolloClient";
 import { queryInfoUser, queryLogin } from "../../apolloClient/querys";
 import Cookies from "js-cookie";

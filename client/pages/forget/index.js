@@ -15,7 +15,7 @@ import {
 import { useState } from "react";
 import { FORGET } from "../../apolloClient/mutations";
 import { client } from "../../apolloClient/apolloClient";
-import { Logo } from "../login/Logo";
+import Logo from "../../components/Login/Logo";
 import { useRouter } from "next/router";
 
 const Index = () => {

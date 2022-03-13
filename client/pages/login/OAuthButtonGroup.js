@@ -7,7 +7,7 @@ const providers = [
   { name: "GitHub", icon: <GitHubIcon boxSize="5" /> },
 ];
 
-export const OAuthButtonGroup = () => (
+export default OAuthButtonGroup = () => (
   <ButtonGroup variant="outline" spacing="4" width="full">
     {providers.map(({ name, icon }) => (
       <Button key={name} isFullWidth>

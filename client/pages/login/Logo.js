@@ -1,6 +1,6 @@
 import { chakra } from "@chakra-ui/react";
 
-export const Logo = (props) => (
+export default Logo = (props) => (
   <chakra.svg {...props}>
     <svg
       height="100"

@@ -4,6 +4,7 @@ import {
   IconButton,
   Input,
   InputGroup,
+  InputProps,
   InputRightElement,
   useDisclosure,
   useMergeRefs,
@@ -11,7 +12,7 @@ import {
 import * as React from "react";
 import { HiEye, HiEyeOff } from "react-icons/hi";
 
-export default PasswordField = React.forwardRef((props, ref) => {
+export const PasswordField = React.forwardRef((props, ref) => {
   const { isOpen, onToggle } = useDisclosure();
   const inputRef = React.useRef(null);
 

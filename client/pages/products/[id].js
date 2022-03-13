@@ -21,7 +21,7 @@ import SpinnerComponent from "../../components/Spinner/Spinner";
 import { getProductById } from "../../redux/products/productsActions";
 import { addItemQty, addToCart } from "../../redux/cart/cartActions";
 
-export default function Home(data) {
+export default function Home({ id }) {
   const product = useSelector((state) => state.productsReducer.productById);
   const [loading, setLoading] = useState(false);
   const cart = useSelector((state) => state.cartReducer.cart);
@@ -47,21 +47,21 @@ export default function Home(data) {
     );
   }
   const addCart = () => {
-    if (cart.some((el) => el.product._id === data._id)) {
-      dispatch(addItemQty(data._id));
+    if (cart.some((el) => el.product._id === id)) {
+      dispatch(addItemQty(id));
     } else {
-      dispatch(addToCart(data));
+      dispatch(addToCart(product));
     }
   };
 
   return (
     <>
       <NavBar />
-      <Flex align={"center"} justify="center" padding={"100px"}>
+      <Flex align={"center"} justify="center">
         {loading ? (
           <SpinnerComponent />
         ) : (
-          <Container maxW={"7xl"}>
+          <Container maxW={"7xl"} w="90%">
             <SimpleGrid
               columns={{ base: 1, lg: 2 }}
               spacing={{ base: 8, md: 10 }}
@@ -70,6 +70,7 @@ export default function Home(data) {
               <Flex>
                 <Image
                   rounded={"md"}
+                  bg="white"
                   alt={"product image"}
                   src={`${product.image}`}
                   fit={"contain"}
@@ -93,7 +94,24 @@ export default function Home(data) {
                   </Heading>
                 </Box>
 
-                <Stack spacing={{ base: 4, sm: 6 }} direction={"column"}>
+                <Stack
+                  spacing={{ base: 4, sm: 6 }}
+                  direction={"column"}
+                  overflowY="scroll"
+                  maxH="25vh"
+                  css={{
+                    "&::-webkit-scrollbar": {
+                      width: "4px",
+                    },
+                    "&::-webkit-scrollbar-track": {
+                      width: "6px",
+                    },
+                    "&::-webkit-scrollbar-thumb": {
+                      background: "#44b8fc",
+                      borderRadius: "24px",
+                    },
+                  }}
+                >
                   <VStack
                     spacing={{ base: 4, sm: 6 }}
                     divider={
@@ -149,9 +167,7 @@ export default function Home(data) {
                   borderColor={useColorModeValue("gray.200", "gray.600")}
                 />
               }
-            >
-              <ProductsHome />
-            </Stack>
+            ></Stack>
           </Container>
         )}
       </Flex>

@@ -17,3 +17,7 @@
 /api/Users/node_modules
 /api/Users/package-lock.json
 /api/Users/.env
+
+/api/Emails/node_modules
+/api/Emails/package-lock.json
+/api/Emails/.env

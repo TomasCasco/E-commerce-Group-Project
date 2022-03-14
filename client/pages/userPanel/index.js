@@ -25,7 +25,7 @@ import LinkNext from "next/link";
 // components
 import Orders from "../../components/Dashboard/Orders";
 import MyProfile from "../../components/Dashboard/MyProfile";
-import Favorites from "../../components/Dashboard/Favorites";
+import Favorite from "../../components/Dashboard/Favorite";
 
 import { useSelector } from "react-redux";
 import Router from "next/router";
@@ -114,7 +114,7 @@ export default function UserPanel() {
                       color={"#44b8fc !important"}
                     />
                   </Link>
-                  <Box as="button" onClick={() => setRender("favorites")}>
+                  <Box as="button" onClick={() => setRender("favorite")}>
                     <Text>Favorites</Text>
                   </Box>
                 </Flex>
@@ -193,7 +193,7 @@ export default function UserPanel() {
             <Flex align="flex-end" w={"-moz-min-content"}>
               <Heading as="h2" size="lg" letterSpacing="tight">
                 {render === "orders" && <Orders />}
-                {render === "favorites" && <Favorites />}
+                {render === "favorite" && <Favorite />}
                 {render === "profile" && <MyProfile />}
               </Heading>
             </Flex>

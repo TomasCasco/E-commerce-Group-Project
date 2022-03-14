@@ -14,10 +14,13 @@ import { IoMdCart } from "react-icons/io";
 import { FiHeart } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { addItemQty, addToCart } from "../../redux/cart/cartActions";
+import { removeFromFavorites, addToFavorites } from "../../redux/favorites/favoritesActions";
+
 
 import Router from "next/router";
 
 export default function Card({ data }) {
+  const favorite = useSelector((state) => state.favoritesReducer.favorites);
   const cart = useSelector((state) => state.cartReducer.cart);
   const toast = useToast();
 
@@ -41,6 +44,14 @@ export default function Card({ data }) {
     } else {
       dispatch(addToCart(data));
       showToast();
+    }
+  };
+
+  const addFavourites = () => {
+    if (favorite.some((el) => el.data?._id === data._id)) {
+      dispatch(removeFromFavorites(data._id));
+    } else {
+      dispatch(addToFavorites(data));
     }
   };
 
@@ -107,7 +118,7 @@ export default function Card({ data }) {
 
           <Flex mt="5" justify={"space-between"} alignContent="center">
             <Box fontSize="xl" color={useColorModeValue("")}>
-              <button href={"#"} display={"flex"}>
+              <button onClick={addFavourites} href={"#"} display={"flex"}>
                 <Icon as={FiHeart} h={5} w={5} alignSelf={"center"} />
               </button>
             </Box>

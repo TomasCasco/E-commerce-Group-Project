@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import FavoritesItem from "./FavoritesItem";
 
 import { Flex, Box } from "@chakra-ui/react";
 
@@ -22,9 +23,6 @@ const Favorites = () => {
         lineHeight="5"
       >
         Favorites
-        {` (` +
-          data.map((el) => el.qty).reduce((prev, curr) => prev + curr, 0) +
-          ` items) `}
       </Box>
 
       <Flex justify="center" align="center" direction="column">
@@ -49,7 +47,7 @@ const Favorites = () => {
             ? data.map((product, index) => {
                 return (
                   <Box m="20" key={index} margin="0" marginBottom={"20px"}>
-                    <CartItem itemProduct={product} />
+                      <FavoritesItem itemProduct={product} />
                   </Box>
                 );
               })
@@ -61,3 +59,4 @@ const Favorites = () => {
 };
 
 export default Favorites;
+

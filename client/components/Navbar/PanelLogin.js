@@ -6,6 +6,7 @@ import { setLogged, setUser } from "../../redux/user/usersActions";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import { BsPersonFill } from "react-icons/bs";
+import { client } from "../../apolloClient/apolloClient";
 
 export default function PanelLogin() {
   const userInfo = useSelector((state) => state.usersReducer.user);
@@ -18,6 +19,7 @@ export default function PanelLogin() {
     dispatch(setUser({}));
     Cookies.remove("token");
     Cookies.remove("user");
+    client.resetStore();
     router.push("/");
   };
 

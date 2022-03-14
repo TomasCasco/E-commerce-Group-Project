@@ -57,7 +57,6 @@ export default function Login() {
           },
         },
       });
-
       Cookies.set("user", JSON.stringify(user.data.infoUser), { expires: 3 });
       dispatch(setUser(user.data.infoUser));
       dispatch(setLogged(true));
@@ -130,7 +129,12 @@ export default function Login() {
                     />
                   </FormControl>
                   <HStack justify="space-between">
-                    <Button variant="link" colorScheme="blue" size="sm">
+                    <Button
+                      variant="link"
+                      colorScheme="blue"
+                      size="sm"
+                      onClick={() => router.push("/forget")}
+                    >
                       Forgot password?
                     </Button>
                   </HStack>

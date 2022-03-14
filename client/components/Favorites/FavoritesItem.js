@@ -51,3 +51,4 @@ export default function FavoritesItem({itemProduct}) {
     </Flex>
   );
 }
+

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Footer from "../../components/Footer/Footer.tsx";
 import NavBar from "../../components/Navbar/NavBar";
 
+// import { Flex, Heading, Avatar, Text, Icon, Link, Box } from "@chakra-ui/react";
 import {
   Flex,
   Heading,

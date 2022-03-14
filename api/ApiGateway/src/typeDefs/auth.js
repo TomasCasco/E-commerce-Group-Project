@@ -29,6 +29,14 @@ const userTypes = gql`
     id: String!
     role: String!
   }
+  input Forget {
+    email: String!
+  }
+
+  type ResponseForget {
+    message: String!
+    status: String!
+  }
 
   type Query {
     loginUser(input: userLogin): responseLogin
@@ -37,6 +45,7 @@ const userTypes = gql`
 
   type Mutation {
     registerUser(input: userData): responseRegister
+    forgetPassword(input: Forget): ResponseForget
   }
 `;
 

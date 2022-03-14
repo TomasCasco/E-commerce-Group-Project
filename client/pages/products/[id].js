@@ -30,7 +30,7 @@ export default function Home(data) {
 
   useEffect(() => {
     setLoading(true);
-    dispatch(getProductById(data.id));
+    dispatch(getProductById(id));
   }, []);
 
   useEffect(() => {

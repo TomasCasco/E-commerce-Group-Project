@@ -61,6 +61,8 @@ const summary = () => {
     .map((el) => el.qty * el.product.price)
     .reduce((prev, curr) => prev + curr, 0);
 
+  const handleCheckout = (e) => {};
+
   // console.log(subtotal)
 
   const discountValue = subtotal * discountPercent;
@@ -139,25 +141,24 @@ const summary = () => {
         </Flex>
 
         <Box fontSize="x-large">
-          <Link href="/checkout" px="2" _hover={{ textDecoration: "none" }}>
-            <Button
-              background="#44B8FC"
-              color="white"
-              _hover={{
-                background: "transparent",
-                color: "#44B8FC",
-                border: "2px solid",
-                borderColor: "#44B8FC",
-              }}
-              ml="12px"
-              w="300px"
-              size="lg"
-              fontSize="md"
-              rightIcon={<FaArrowRight />}
-            >
-              Checkout
-            </Button>
-          </Link>
+          <Button
+            background="#44B8FC"
+            color="white"
+            _hover={{
+              background: "transparent",
+              color: "#44B8FC",
+              border: "2px solid",
+              borderColor: "#44B8FC",
+            }}
+            ml="12px"
+            w="300px"
+            size="lg"
+            fontSize="md"
+            rightIcon={<FaArrowRight />}
+            onClick={handleCheckout}
+          >
+            Checkout
+          </Button>
         </Box>
 
         <Flex mt="20px" align="center" justify="center" fontWeight="semibold">

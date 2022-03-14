@@ -14,6 +14,12 @@ const billSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    status: {
+      type: String,
+      enum: ["Pending", "Rejected", "Approved"],
+      default: "Pending",
+      required: true,
+    },
   },
   {
     timestamps: true,

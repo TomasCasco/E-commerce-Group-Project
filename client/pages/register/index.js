@@ -12,8 +12,8 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
-import { Logo } from "./Logo";
-import { PasswordField } from "./PasswordField.js";
+import { Logo } from "../../components/Register/Logo";
+import { PasswordField } from "../../components/Register/PasswordField.js";
 import { client } from "../../apolloClient/apolloClient";
 import { useRouter } from "next/router";
 import { mutationUserRegister } from "../../apolloClient/mutations";

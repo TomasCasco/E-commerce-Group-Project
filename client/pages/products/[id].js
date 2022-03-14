@@ -49,7 +49,7 @@ export default function Home({ id }) {
     );
   }
   const addCart = () => {
-    if (cart.some((el) => el.product._id === id)) {
+    if (cart.some((el) => el.product?._id === id)) {
       dispatch(addItemQty(id));
     } else {
       dispatch(addToCart(product));

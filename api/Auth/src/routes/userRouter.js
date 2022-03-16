@@ -15,11 +15,11 @@ const router = Router();
 router.post("/login", login);
 router.post("/register", register);
 router.post("/access", auth, access);
-router.post("/change-password", changePassword);
+router.post("/confirm-change-password", confirmChangePassword);
 router.get("/userInfo", auth, getUserInfo);
 router.get("/:userId/cart", auth, getCart);
 router.get("/confirm-email/:token", confirmEmail);
-router.get("/confirm-change-password/:token", confirmChangePassword);
+router.get("/change-password/:token", changePassword);
 router.put("/:userId/cart", auth, editCart);
 
 module.exports = router;

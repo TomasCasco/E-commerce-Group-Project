@@ -29,8 +29,9 @@ const register = async (req, res, next) => {
       code: `${newUser.code}`,
     });
 
+    // enviamos email confirmacion de cuenta
     await axios.post("http://localhost:5000/emails/signup", {
-      name: `${newUser.name}`,
+      name: `${newUser.username}`,
       email: `${newUser.email}`,
       token,
     });

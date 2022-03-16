@@ -4,17 +4,18 @@ const { transporter } = require("./config");
 // cuando se registra
 const Signup = async (req, res) => {
   // obtenemos datos del usuario
-  const { name, email } = req.body;
+  const { name, email, token } = req.body;
 
   // reemplazamos plantilla con datos del usuario
   let template = fs.readFileSync(__dirname + "/templates/signup.html", "utf8");
   template = template.replace("{name}", name ? name : "Guest");
+  template = template.replace("{token}", token);
 
   try {
     // el email no debe estar vacio
     if (!email) {
       return res.json({
-        error: { message: "email required", received: email ? email : null },
+        error: "email required",
       });
     }
 

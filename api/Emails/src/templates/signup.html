@@ -1,7 +1,8 @@
 <h1 style="text-align: center">Hi {name}, Welcome to Gamerland!</h1>
 <div>
   <p style="display: block; text-align: center; padding: 15px 0">
-    your registrations was successful!
+    Your registrations was successful!<br />
+    To verify your email, click the button below.
   </p>
   <button
     style="
@@ -11,6 +12,10 @@
       margin: 0 auto;
     "
   >
-    <a href="#" style="text-decoration: none">Go to website</a>
+    <a
+      href="http://localhost:4000/users/confirm-email/{token}"
+      style="text-decoration: none"
+      >CONFIRM EMAIL</a
+    >
   </button>
 </div>

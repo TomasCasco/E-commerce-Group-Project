@@ -1,14 +1,11 @@
 import React from "react";
 import Link from "next/link";
-import { Text, Flex, Box } from "@chakra-ui/react";
+import { Text, Flex } from "@chakra-ui/react";
 
 export default function Support() {
   return (
     <Flex className="nav-items" bg={"none !important"}>
-      <Link
-        href="/support"
-        
-      >
+      <Link href="/support">
         <Text
           py={[1, 2, 2]}
           px={4}

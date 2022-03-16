@@ -11,8 +11,8 @@ const editCart = async (req, res, next) => {
       cart.products = arrayProducts;
       await cart.save();
 
-      const {products}=cart
-      res.status(200).json({userId,products});
+      const { products } = cart;
+      res.status(200).json({ userId, products });
     } else {
       throw new Error("User not found");
     }

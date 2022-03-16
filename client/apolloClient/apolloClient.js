@@ -1,24 +1,13 @@
-import {
-    ApolloClient,
-    InMemoryCache,
-    HttpLink,
-  } from "@apollo/client";
-  import { ApolloLink } from "apollo-link";
-  
-  const myApi = new HttpLink({
-    uri: "http://localhost:3001",
-  });
-  
-  const cartApi = new HttpLink({
-    uri: "https://api.cartql.com",
-  });
-  
-  export const client = new ApolloClient({
-    connectToDevTools: true,
-    cache: new InMemoryCache(),
-    link: ApolloLink.split(
-      (operation) => operation.getContext().clientName === "cartApi",
-      cartApi,
-      myApi
-    ),
-  });
+import { ApolloClient, HttpLink, InMemoryCache } from "@apollo/client";
+export const API_URL =
+  process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:3001";
+
+const myApi = new HttpLink({
+  uri: API_URL,
+});
+
+export const client = new ApolloClient({
+  connectToDevTools: true,
+  cache: new InMemoryCache(),
+  link: myApi,
+});

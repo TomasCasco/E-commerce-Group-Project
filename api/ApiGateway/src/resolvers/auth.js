@@ -1,11 +1,14 @@
 const userResolvers = {
   Query: {
-    loginUser(_, { input },{ dataSources }) {
+    loginUser(_, { input }, { dataSources }) {
       return dataSources.UsersApi.loginUser(input);
     },
-    infoUser(_,_a, {token,dataSources}) {
+    infoUser(_, {}, { token, dataSources }) {
       return dataSources.UsersApi.infoUser(token);
-    }
+    },
+    confirmChangePassword(_, { email }, { dataSources }) {
+      return dataSources.UsersApi.confirmChangePassword(email);
+    },
   },
   Mutation: {
     registerUser(_, { input }, { dataSources }) {

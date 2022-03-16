@@ -6,13 +6,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { setCartFromLocalStorage } from "../redux/cart/cartActions";
 import Cookie from "js-cookie";
 import { setLogged, setUser } from "../redux/user/usersActions";
-import { getAllBrands } from "../redux/products/productsActions";
+import {
+  getAllBrands,
+  getAllCategories,
+} from "../redux/products/productsActions";
 import Head from "next/head";
-
 
 function MyApp({ Component, pageProps }) {
   const dispatch = useDispatch();
-  const cart = useSelector((state) => state.cartReducer.cart);
 
   useEffect(() => {
     const cartLocalStorage = localStorage.getItem("cart");
@@ -28,11 +29,8 @@ function MyApp({ Component, pageProps }) {
       dispatch(setUser(JSON.parse(user)));
     }
     dispatch(getAllBrands());
+    dispatch(getAllCategories());
   }, []);
-
-  useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cart));
-  }, [cart]);
 
   return (
     <ChakraProvider>

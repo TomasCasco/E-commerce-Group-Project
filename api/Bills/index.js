@@ -7,4 +7,3 @@ server.listen(server.get("port"), () =>
 );
 
 module.exports = server;
-

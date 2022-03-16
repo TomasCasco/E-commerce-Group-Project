@@ -6,5 +6,4 @@ const router = Router();
 
 router.use("/users", userRouter);
 
-
 module.exports = router;

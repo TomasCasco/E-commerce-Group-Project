@@ -7,7 +7,7 @@ const login = async (req, res, next) => {
   let { email, password } = req.body;
 
   try {
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email, status: true });
 
     if (!user) {
       res.status(200).json({ error: "Invalid email or password" });

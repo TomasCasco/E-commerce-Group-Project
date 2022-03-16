@@ -6,7 +6,7 @@ const { JWT_SECRET, JWT_EXPIRES } = process.env;
 const confirmChangePassword = async (req, res, next) => {
   // obtenemos el email
   const { email } = req.body;
-
+  console.log(req.body);
   try {
     // verificamos que exista el usuario
     const user = await User.findOne({ email });
@@ -22,6 +22,7 @@ const confirmChangePassword = async (req, res, next) => {
       email: `${user.email}`,
       token,
     });
+    res.json({ message: "confirmation email sent" });
   } catch (error) {
     next(error);
   }

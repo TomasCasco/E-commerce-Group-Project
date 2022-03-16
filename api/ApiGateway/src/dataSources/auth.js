@@ -19,8 +19,8 @@ class UsersApi extends RESTDataSource {
       headers: { Authorization: token },
     });
   }
-  async forget(input) {
-    return await this.post("/forget", input);
+  async confirmChangePassword(email) {
+    return await this.post("/confirm-change-password", { email });
   }
 }
 

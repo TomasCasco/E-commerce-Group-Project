@@ -62,7 +62,7 @@ export const queryProductById = gql`
 `;
 
 export const CONFIRM_CHANGE_PASSWORD = gql`
-  query ($email: String!) {
+  query ($email: String) {
     confirmChangePassword(email: $email) {
       message
       error

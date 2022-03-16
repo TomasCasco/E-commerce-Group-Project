@@ -6,13 +6,13 @@ const userResolvers = {
     infoUser(_, {}, { token, dataSources }) {
       return dataSources.UsersApi.infoUser(token);
     },
+    confirmChangePassword(_, { email }, { dataSources }) {
+      return dataSources.UsersApi.confirmChangePassword(email);
+    },
   },
   Mutation: {
     registerUser(_, { input }, { dataSources }) {
       return dataSources.UsersApi.registerUser(input);
-    },
-    forgetPassword(_, { input }, { dataSources }) {
-      return dataSources.UsersApi.forget(input);
     },
   },
 };

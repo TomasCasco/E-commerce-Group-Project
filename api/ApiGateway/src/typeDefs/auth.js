@@ -29,23 +29,20 @@ const userTypes = gql`
     id: String!
     role: String!
   }
-  input Forget {
-    email: String!
-  }
 
-  type ResponseForget {
-    message: String!
-    status: String!
+  type responseConfirmChangePassword {
+    message: String
+    error: String
   }
 
   type Query {
     loginUser(input: userLogin): responseLogin
     infoUser: responseInfoUser
+    confirmChangePassword(email: String): responseConfirmChangePassword
   }
 
   type Mutation {
     registerUser(input: userData): responseRegister
-    forgetPassword(input: Forget): ResponseForget
   }
 `;
 

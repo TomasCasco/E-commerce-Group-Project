@@ -23,6 +23,15 @@ const userSchema = new mongoose.Schema(
       enum: ["admin", "client", "superadmin"],
       default: "client",
     },
+    status: {
+      type: Boolean,
+      default: false,
+      required: true,
+    },
+    code: {
+      type: String,
+      required: true,
+    },
   },
   {
     timestamps: true,

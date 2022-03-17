@@ -13,15 +13,23 @@ import {
 import { IoMdCart } from "react-icons/io";
 import { FiHeart } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
-import { addItemQty, addToCart } from "../../redux/cart/cartActions";
+import { addItemQty, addToCart, editCart } from "../../redux/cart/cartActions";
 import {
   removeFromFavorites,
   addToFavorites,
 } from "../../redux/favorites/favoritesActions";
 
+import jwtDecode from 'jwt-decode'
+import Cookie from "js-cookie";
+
 import Router from "next/router";
 
 import { useEffect } from "react";
+
+const token = Cookie.get('token')
+if (token) {
+  const { userId } = jwtDecode(token)
+}
 
 export default function Card({ data }) {
   const favorite = useSelector((state) => state.favoritesReducer.favorites);
@@ -61,6 +69,7 @@ export default function Card({ data }) {
       showToastCart();
     } else {
       dispatch(addToCart(data));
+      dispatch(editCart(userId, cart));
       showToastCart();
     }
   };

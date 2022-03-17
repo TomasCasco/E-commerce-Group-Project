@@ -14,6 +14,9 @@ const userResolvers = {
     registerUser(_, { input }, { dataSources }) {
       return dataSources.UsersApi.registerUser(input);
     },
+    editCart(_, { userId, products }, { dataSources }) {
+      return dataSources.UsersApi.editCart(userId, products)
+    }
   },
 };
 

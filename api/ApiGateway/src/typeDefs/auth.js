@@ -30,6 +30,41 @@ const userTypes = gql`
     role: String!
   }
 
+  input Product {
+    image: String
+    name: String
+    brand: String
+    price: Float
+    stock: Int
+    description: String
+    category: String
+  }
+
+  input Products {
+    product: Product
+    qty: Int
+  }
+
+  type ProductsResponse {
+    product: ProductType
+    qty: Int
+  }
+
+  type ProductResponse {
+    userId: ID
+    products: [ProductsResponse]
+  }
+
+  type ProductType {
+    image: String
+    name: String
+    brand: String
+    price: Float
+    stock: Int
+    description: String
+    category: String
+  }
+
   type responseConfirmChangePassword {
     message: String
     error: String
@@ -43,6 +78,7 @@ const userTypes = gql`
 
   type Mutation {
     registerUser(input: userData): responseRegister
+    editCart(userId: ID, products: [Products]) : ProductResponse
   }
 `;
 

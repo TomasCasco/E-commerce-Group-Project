@@ -22,6 +22,9 @@ class UsersApi extends RESTDataSource {
   async confirmChangePassword(email) {
     return await this.post("/confirm-change-password", { email });
   }
+  async editCart(userId, producto) {
+    return await this.put(`/${userId}/cart`, producto)
+  }
 }
 
 module.exports = UsersApi;

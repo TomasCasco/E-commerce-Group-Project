@@ -32,7 +32,7 @@ export const getAllProducts = (inputFilter) => {
         });
       }, 500);
     } catch (error) {
-      console.log(error);
+      console.log(JSON.stringify(error, null, 2));
     }
   };
 };

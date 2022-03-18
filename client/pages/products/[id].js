@@ -20,11 +20,16 @@ import ProductsHome from "../../components/ProductsHome";
 import SpinnerComponent from "../../components/Spinner/Spinner";
 import { getProductById } from "../../redux/products/productsActions";
 import { addItemQty, addToCart } from "../../redux/cart/cartActions";
+import {
+  removeFromFavorites,
+  addToFavorites,
+} from "../../redux/favorites/favoritesActions";
 
 export default function Home({ id }) {
   const product = useSelector((state) => state.productsReducer.productById);
   const [loading, setLoading] = useState(false);
   const cart = useSelector((state) => state.cartReducer.cart);
+  const favorite = useSelector((state) => state.favoritesReducer.favorites);
 
   const dispatch = useDispatch();
 
@@ -47,10 +52,18 @@ export default function Home({ id }) {
     );
   }
   const addCart = () => {
-    if (cart.some((el) => el.product._id === id)) {
+    if (cart.some((el) => el.product?._id === id)) {
       dispatch(addItemQty(id));
     } else {
       dispatch(addToCart(product));
+    }
+  };
+
+  const addFavourites = () => {
+    if (favorite.some((el) => el.product?._id === id)) {
+      dispatch(removeFromFavorites(id));
+    } else {
+      dispatch(addToFavorites(product));
     }
   };
 
@@ -138,7 +151,9 @@ export default function Home({ id }) {
                   >
                     $ {product.price}
                   </Text>
-                  <Button>add to favorites</Button>
+                  <Button onClick={addFavourites} href={"#"} display={"flex"}>
+                    add to favorites
+                  </Button>
                 </SimpleGrid>
                 <Button
                   rounded={"none"}

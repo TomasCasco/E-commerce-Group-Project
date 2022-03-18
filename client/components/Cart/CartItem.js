@@ -15,15 +15,15 @@ export default function CartItem({ itemProduct }) {
   const { product, qty } = itemProduct;
 
   const dispatchRemoveFromCart = () => {
-    dispatch(removeFromCart(product._id));
+    dispatch(removeFromCart(product?._id));
   };
 
   const dispatchAddItemQty = () => {
-    dispatch(addItemQty(product._id));
+    dispatch(addItemQty(product?._id));
   };
 
   const dispatchSubstracItemQty = () => {
-    dispatch(subtractItemQty(product._id));
+    dispatch(subtractItemQty(product?._id));
   };
 
   return (
@@ -41,7 +41,7 @@ export default function CartItem({ itemProduct }) {
     >
       <Box>
         <Image
-          src={product.image}
+          src={product?.image}
           maxWidth={"200px"}
           maxHeight="100px"
           borderRadius={"1rem"}
@@ -56,10 +56,10 @@ export default function CartItem({ itemProduct }) {
           textAlign="left"
           textTransform={"capitalize"}
         >
-          {product.name}
+          {product?.name}
         </Box>
         <Box mt="2" fontWeight="semibold" fontSize={"large"}>
-          ${product.price * qty}
+          ${product?.price * qty}
         </Box>
         <Flex direction="colum" justifyContent="center" mt="4" mb="2">
           <Box

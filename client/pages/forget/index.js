@@ -13,24 +13,24 @@ import {
   CloseButton,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { FORGET } from "../../apolloClient/mutations";
+import { CONFIRM_CHANGE_PASSWORD } from "../../apolloClient/querys";
 import { client } from "../../apolloClient/apolloClient";
-import { Logo } from "../login/Logo";
+import { Logo } from "../../components/Login/Logo";
 import { useRouter } from "next/router";
 
 const Index = () => {
   const router = useRouter();
   const [email, setEmail] = useState("");
-  const [msg, setMsg] = useState("");
+  const [msg, setMsg] = useState(null);
   const [showAlert, setShowAlert] = useState(false);
 
   const handleSubmit = async () => {
-    const { data } = await client.mutate({
-      mutation: FORGET,
-      variables: { input: { email } },
+    const { data } = await client.query({
+      query: CONFIRM_CHANGE_PASSWORD,
+      variables: { email },
     });
     setEmail("");
-    setMsg(data.forgetPassword);
+    setMsg(data.confirmChangePassword);
     setShowAlert(true);
   };
 
@@ -62,14 +62,16 @@ const Index = () => {
           </Button>
         </Flex>
         <Alert
-          status={msg.status}
+          status={msg?.message ? "success" : "error"}
           maxW={"300px"}
           display={showAlert ? "block" : "none"}
         >
           <AlertIcon />
           <Box flex="1">
-            <AlertTitle>{msg.status}</AlertTitle>
-            <AlertDescription>{msg.message}</AlertDescription>
+            <AlertTitle>{msg?.message ? "success" : "error"}</AlertTitle>
+            <AlertDescription>
+              {msg?.message ? msg.message : msg?.error}
+            </AlertDescription>
           </Box>
           <CloseButton
             position="absolute"

@@ -9,6 +9,9 @@ const userResolvers = {
     confirmChangePassword(_, { email }, { dataSources }) {
       return dataSources.UsersApi.confirmChangePassword(email);
     },
+    getCart(_, { userId }, { dataSources }) {
+      return dataSources.UsersApi.getCart(userId, products)
+    }
   },
   Mutation: {
     registerUser(_, { input }, { dataSources }) {

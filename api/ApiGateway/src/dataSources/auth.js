@@ -22,8 +22,11 @@ class UsersApi extends RESTDataSource {
   async confirmChangePassword(email) {
     return await this.post("/confirm-change-password", { email });
   }
-  async editCart(userId, producto) {
-    return await this.put(`/${userId}/cart`, producto)
+  async editCart(userId, products) {
+    return await this.put(`/${userId}/cart`, products)
+  }
+  async getCart(userId, products) {
+    return await this.put(`/${userId}/cart`, products)
   }
 }
 

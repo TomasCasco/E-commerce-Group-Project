@@ -19,12 +19,12 @@ import {
   addToFavorites,
 } from "../../redux/favorites/favoritesActions";
 
-import jwtDecode from 'jwt-decode'
-import Cookie from "js-cookie";
-
 import Router from "next/router";
 
 import { useEffect } from "react";
+
+import jwtDecode from 'jwt-decode'
+import Cookie from "js-cookie";
 
 const token = Cookie.get('token')
 if (token) {

@@ -70,15 +70,61 @@ const userTypes = gql`
     error: String
   }
 
+  input Product {
+    image: String
+    name: String
+    brand: String
+    price: Float
+    stock: Int
+    description: String
+    category: String
+  }
+
+  input ProductsCart {
+    product: ProductInput
+    qty: Int
+  }
+
+  type ProductsResponse {
+    product: ProductType
+    qty: Int
+  }
+
+  type ProductResponse {
+    userId: ID
+    products: [ProductsResponse]
+  }
+
+  type ProductType {
+    image: String
+    name: String
+    brand: String
+    price: Float
+    stock: Int
+    description: String
+    category: String
+  }
+
+  input ProductInput {
+    image: String
+    name: String
+    brand: String
+    price: Float
+    stock: Int
+    description: String
+    category: String
+  }
+
   type Query {
     loginUser(input: userLogin): responseLogin
     infoUser: responseInfoUser
     confirmChangePassword(email: String): responseConfirmChangePassword
+    getCart(userId: ID, products: [ProductsCart]) : ProductResponse
   }
 
   type Mutation {
     registerUser(input: userData): responseRegister
-    editCart(userId: ID, products: [Products]) : ProductResponse
+    editCart(userId: ID, products: [ProductsCart]) : ProductResponse
   }
 `;
 

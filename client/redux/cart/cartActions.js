@@ -43,7 +43,7 @@ export const subtractItemQty = (itemId) => {
     };
   };   */
 
-export const editCart = (userId, products) => async () => {
+  export const editCart = (userId, products) => async () => {
   try {
     await client.mutate({
       mutation: mutationEditCart,
@@ -57,3 +57,19 @@ export const editCart = (userId, products) => async () => {
     console.log(JSON.stringify(e, null, 2));
   }
 }
+
+export const getCart = (userId, productss) => {
+  return async function (dispatch) {
+    const products = await client.query({
+      query: queryGetCart,
+      variables: {
+        userId: userId,
+        products: productss
+      },
+    });
+    return dispatch({
+      type: "GET_CART",
+      payload: products.data.getCart,
+    });
+  };
+};

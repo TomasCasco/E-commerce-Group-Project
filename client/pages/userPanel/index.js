@@ -25,7 +25,7 @@ import LinkNext from "next/link";
 // components
 import Orders from "../../components/Dashboard/Orders";
 import MyProfile from "../../components/Dashboard/MyProfile";
-import Favorites from "../../components/Dashboard/Favorites";
+import Favorite from "../../components/Dashboard/Favorite";
 
 import { useSelector } from "react-redux";
 import Router from "next/router";
@@ -114,7 +114,7 @@ export default function UserPanel() {
                       color={"#44b8fc !important"}
                     />
                   </Link>
-                  <Box as="button" onClick={() => setRender("favorites")}>
+                  <Box as="button" onClick={() => setRender("favorite")}>
                     <Text>Favorites</Text>
                   </Box>
                 </Flex>
@@ -146,7 +146,9 @@ export default function UserPanel() {
                 {user.role}
               </Text>
               <Button
-                onClick={() => Router.push("http://localhost:3002/admin")}
+                onClick={() =>
+                  Router.push("https://users-gamerland.herokuapp.com/admin")
+                }
                 mt={"10px"}
                 background="#44B8FC"
                 color="white "
@@ -159,6 +161,7 @@ export default function UserPanel() {
                 fontWeight="bold"
                 size="md"
                 fontSize="md"
+                hidden={user.role === "client"}
               >
                 PANEL ADMIN
               </Button>
@@ -177,23 +180,22 @@ export default function UserPanel() {
           align="center"
           alignItems={"center"}
           mb="-2.5"
-
         >
           <Heading
-                mt={3}
-                mb={[10, 10, 10]}
-                fontSize={["4xl", "4xl", "2xl", "3xl", "4xl"]}
-                alignSelf="center"
-                letterSpacing="tight"
-              >
-            We are glad you are here... 
+            mt={3}
+            mb={[10, 10, 10]}
+            fontSize={["4xl", "4xl", "2xl", "3xl", "4xl"]}
+            alignSelf="center"
+            letterSpacing="tight"
+          >
+            We are glad you are here...
           </Heading>
 
           <Flex justifyContent="space-between">
             <Flex align="flex-end" w={"-moz-min-content"}>
               <Heading as="h2" size="lg" letterSpacing="tight">
                 {render === "orders" && <Orders />}
-                {render === "favorites" && <Favorites />}
+                {render === "favorite" && <Favorite />}
                 {render === "profile" && <MyProfile />}
               </Heading>
             </Flex>

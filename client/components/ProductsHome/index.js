@@ -1,8 +1,9 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Box, Heading, Flex } from "@chakra-ui/react";
 import Card from "../Card/card";
 import SpinnerComponent from "../Spinner/Spinner";
+import { getAllProducts } from "../../redux/products/productsActions";
 
 function getRandom(arr, n) {
   var result = new Array(n),
@@ -21,6 +22,11 @@ function getRandom(arr, n) {
 export default function ProductsHome() {
   const data = useSelector((state) => state.productsReducer.products);
   const loadingData = useSelector((state) => state.productsReducer.loading);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllProducts());
+  }, []);
 
   if (loadingData) {
     return <SpinnerComponent />;

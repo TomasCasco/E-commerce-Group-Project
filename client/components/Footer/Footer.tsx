@@ -22,7 +22,7 @@ const ListHeader = ({ children }: { children: ReactNode }) => {
   );
 };
 
-const SocialButton = ({
+export  const SocialButton = ({
   children,
   label,
   href,
@@ -41,6 +41,7 @@ const SocialButton = ({
       as={"a"}
       href={href}
       display={"inline-flex"}
+      target='_blank'
       alignItems={"center"}
       justifyContent={"center"}
       transition={"background 0.3s ease"}
@@ -73,30 +74,30 @@ export default function Footer() {
           </Stack>
           <Stack align={"flex-start"}>
             <ListHeader>Products</ListHeader>
-            <Link href={"/products/[filterName]"} as={"/products/teclado"}>
+            <Link href={"/products/[filterName]"} as={"/products?category=Gaming%20Keyboards"}>
               Gaming Keyboards
             </Link>
-            <Link href={"/products/[filterName]"} as={"/products/microfono"}>
+            <Link href={"/products/[filterName]"} as={"/products?category=Microphone"}>
               Microphones
             </Link>
-            <Link href={"/products/[filterName]"} as={"/products/mouse"}>
+            <Link href={"/products/[filterName]"} as={"/products?category=Gaming%20Mouses"}>
               Gaming Mouse
             </Link>
-            <Link href={"/products/[filterName]"} as={"/products/mousepad"}>
+            <Link href={"/products/[filterName]"} as={"/products?category=Mouse%20Pads"}>
               Mouse Pads
             </Link>
           </Stack>
           <Stack align={"flex-start"}>
             <ListHeader>Company</ListHeader>
-            <Link href={"#"}>About Us</Link>
-            <Link href={"#"}>Developers</Link>
-            <Link href={"#"}>Contact Us</Link>
+            <Link href={"/aboutUs"}>About Us</Link>
+            <Link href={"/aboutUs"}>Developers</Link>
+            
           </Stack>
           <Stack align={"flex-start"}>
             <ListHeader>Support</ListHeader>
-            <Link href={"#"}>Help Center</Link>
-            <Link href={"#"}>Safety Center</Link>
-            <Link href={"#"}>Community Guidelines</Link>
+            <Link href={"support"}>Help Center</Link>
+            <Link href={"support"}>Contact Us</Link>
+            
           </Stack>
         </SimpleGrid>
       </Container>

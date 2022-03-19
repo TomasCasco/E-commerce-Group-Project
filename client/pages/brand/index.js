@@ -1,12 +1,9 @@
-import Head from "next/head";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import CardContainer from "../../components/Card/cardContainer";
 import Footer from "../../components/Footer/Footer.tsx";
 import NavBar from "../../components/Navbar/NavBar";
-import {
-  getAllProducts,
-} from "../../redux/products/productsActions";
+import { getAllProducts } from "../../redux/products/productsActions";
 
 export default function Home({ brand }) {
   const dispatch = useDispatch();
@@ -22,7 +19,7 @@ export default function Home({ brand }) {
     <>
       <NavBar />
       <CardContainer />
-      <Footer/>
+      <Footer />
     </>
   );
 }

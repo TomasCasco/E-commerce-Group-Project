@@ -1,42 +1,54 @@
-import {
-    Flex,
-    Grid,
-    Box,
-    Image,
-    Badge,
-    useColorModeValue,
-    Icon,
-    chakra,
-    Tooltip,
-  } from '@chakra-ui/react';
-  import { IoMdCart } from "react-icons/io";
-  
-  import { useDispatch } from "react-redux";
-  import { removeFromFavorites } from "../../redux/favorites/favoritesActions";
-  
-  
-  export default function FavoritesItem({data}) {
-    const dispatch = useDispatch();
+import { Flex, Box, Image, Button, useColorModeValue } from "@chakra-ui/react";
+import { useDispatch, useSelector} from "react-redux";
+import { removeFromFavorites } from "../../redux/favorites/favoritesActions";
+import { FaTrash } from "react-icons/fa";
 
+export default function FavoritesItem({itemProduct}) {
+  const dispatch = useDispatch();
+
+  const dispatchRemoveFromFavorites = () => {
+    dispatch(removeFromFavorites(itemProduct._id));
+  };
+ 
   return (
-      <Flex
-        w="full" alignItems="center" justifyContent="center"
-        bg={useColorModeValue("white", "gray.800")}
-        borderWidth="1px"
-        rounded="lg"
-        shadow="lg"
+    <Flex
+    alignItems="center"
+    justifyContent="space-between"
+    bg={useColorModeValue("white", "gray.800")}
+    borderWidth="1px"
+    rounded="lg"
+    shadow="lg"
+    textAlign="center"
+    maxWidth={"500px"}
+    maxHeight="270px"
+    padding={"40px"}
+    >
+    <Box>
+      <Image
+        src={itemProduct.image}
+        maxWidth={"200px"}
+        maxHeight="100px"
+        borderRadius={"1rem"}
+      />
+    </Box>
+
+    <Box mr="10px" maxWidth={"270px"}>
+      <Box
+        fontSize="15px"
+        fontWeight="semibold"
+        lineHeight="5"
+        textAlign="left"
+        textTransform={"capitalize"}
       >
-          <Box>
-            <Image src={data.image} />
-          </Box>
-
-           <Box>     {/*Grid justify="center" align="center" */}
-            <Box m="10" fontSize="xl" fontWeight="semibold" lineHeight="5">{data.name}</Box>
-            <Box m="10" fontWeight="semibold">${data.price}.00</Box>
-            <Box onClick={() => dispatch(removeFromFavorites(data.id))}>Borrar</Box>
-          </Box>
-
+        {itemProduct.name}
+      </Box>
+      <Flex direction="colum" justifyContent="center" mt="4" mb="2">
       </Flex>
+      <Box onClick={dispatchRemoveFromFavorites} color="#c53030" fontSize="large">
+        <Button rightIcon={<FaTrash />}>Delete</Button>
+      </Box>
+    </Box>
+    </Flex>
   );
-  }
-  
+}
+

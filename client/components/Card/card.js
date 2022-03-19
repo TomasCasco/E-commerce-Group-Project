@@ -14,16 +14,27 @@ import { IoMdCart } from "react-icons/io";
 import { FiHeart } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { addItemQty, addToCart } from "../../redux/cart/cartActions";
+import {
+  removeFromFavorites,
+  addToFavorites,
+} from "../../redux/favorites/favoritesActions";
 
 import Router from "next/router";
 
+import { useEffect } from "react";
+
 export default function Card({ data }) {
+  const favorite = useSelector((state) => state.favoritesReducer.favorites);
   const cart = useSelector((state) => state.cartReducer.cart);
   const toast = useToast();
 
   const dispatch = useDispatch();
 
-  const showToast = () => {
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
+
+  const showToastCart = () => {
     return toast({
       title: "Success!",
       position: "top-right",
@@ -33,14 +44,34 @@ export default function Card({ data }) {
       isClosable: true,
     });
   };
+  const showToastFav = (action) => {
+    return toast({
+      title: "Success!",
+      position: "top-right",
+      description: `Item ${action} to favorites!`,
+      status: "success",
+      duration: 2000,
+      isClosable: true,
+    });
+  };
 
   const addCart = () => {
     if (cart.some((el) => el.product._id === data._id)) {
       dispatch(addItemQty(data._id));
-      showToast();
+      showToastCart();
     } else {
       dispatch(addToCart(data));
-      showToast();
+      showToastCart();
+    }
+  };
+
+  const addFavourites = () => {
+    if (favorite.some((el) => el._id === data._id)) {
+      dispatch(removeFromFavorites(data._id));
+      showToastFav("removed");
+    } else {
+      dispatch(addToFavorites(data));
+      showToastFav("added");
     }
   };
 
@@ -107,7 +138,7 @@ export default function Card({ data }) {
 
           <Flex mt="5" justify={"space-between"} alignContent="center">
             <Box fontSize="xl" color={useColorModeValue("")}>
-              <button href={"#"} display={"flex"}>
+              <button onClick={addFavourites} href={"#"} display={"flex"}>
                 <Icon as={FiHeart} h={5} w={5} alignSelf={"center"} />
               </button>
             </Box>

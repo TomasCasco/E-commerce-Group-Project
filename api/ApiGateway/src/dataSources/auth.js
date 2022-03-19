@@ -4,7 +4,7 @@ const serverUrls = require("../serverUrls");
 class UsersApi extends RESTDataSource {
   constructor() {
     super();
-    this.baseURL = serverUrls.users;
+    this.baseURL = serverUrls.USERS;
   }
 
   async registerUser(credentials) {
@@ -18,6 +18,9 @@ class UsersApi extends RESTDataSource {
     return await this.get(`/userInfo`, null, {
       headers: { Authorization: token },
     });
+  }
+  async confirmChangePassword(email) {
+    return await this.post("/confirm-change-password", { email });
   }
 }
 

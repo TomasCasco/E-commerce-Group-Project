@@ -1,13 +1,10 @@
-import React from 'react'
+import React from "react";
 
 export default function Index() {
-  return (
-    <div>Hola</div>
-  )
+  return <div>Hola</div>;
 }
 
-
-Index.getInitialProps=({query})=>{
-console.log(query)
-return {}
-}
+Index.getInitialProps = ({ query }) => {
+  console.log(query);
+  return {};
+};

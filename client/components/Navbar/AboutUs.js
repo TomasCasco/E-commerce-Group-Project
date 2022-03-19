@@ -5,9 +5,7 @@ import { Text, Flex } from "@chakra-ui/react";
 export default function AboutUs() {
   return (
     <Flex className="nav-items" bg={"none !important"}>
-      <Link
-        href="/aboutUs"
-      >
+      <Link href="/aboutus">
         <Text
           py={[1, 2, 2]}
           px={4}

@@ -16,9 +16,8 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
-import { Logo } from "./Logo";
-import { OAuthButtonGroup } from "./OAuthButtonGroup.js";
-import { PasswordField } from "./PasswordField.js";
+import { Logo } from "../../components/Login/Logo";
+import { PasswordField } from "../../components/Login/PasswordField.js";
 import { client } from "../../apolloClient/apolloClient";
 import { queryInfoUser, queryLogin } from "../../apolloClient/querys";
 import Cookies from "js-cookie";
@@ -32,7 +31,6 @@ export default function Login() {
   const router = useRouter();
   const toast = useToast();
   const dispatch = useDispatch();
-  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -51,7 +49,7 @@ export default function Login() {
     if (token) {
       Cookies.set("token", token, { expires: 3 });
       router.push("/");
-      const user = await client.query({ 
+      const user = await client.query({
         query: queryInfoUser,
         context: {
           headers: {
@@ -59,7 +57,6 @@ export default function Login() {
           },
         },
       });
-      
       Cookies.set("user", JSON.stringify(user.data.infoUser), { expires: 3 });
       dispatch(setUser(user.data.infoUser));
       dispatch(setLogged(true));
@@ -132,7 +129,12 @@ export default function Login() {
                     />
                   </FormControl>
                   <HStack justify="space-between">
-                    <Button variant="link" colorScheme="blue" size="sm">
+                    <Button
+                      variant="link"
+                      colorScheme="blue"
+                      size="sm"
+                      onClick={() => router.push("/forget")}
+                    >
                       Forgot password?
                     </Button>
                   </HStack>
@@ -162,11 +164,11 @@ export default function Login() {
   );
 }
 
-export function getServerSideProps(context){
-  if(context.req.headers.cookie?.includes("token")){
-    context.res.writeHead(302, { Location: '/' });
+export function getServerSideProps(context) {
+  if (context.req.headers.cookie?.includes("token")) {
+    context.res.writeHead(302, { Location: "/" });
     context.res.end();
-    return {props:{}}
+    return { props: {} };
   }
-  return {props:{}}
+  return { props: {} };
 }

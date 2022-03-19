@@ -33,7 +33,7 @@ function MyApp({ Component, pageProps }) {
     dispatch(getAllBrands());
     dispatch(getAllCategories());
 
-    return () => { dispatch(getCart(user, cartLocalStorage)) };
+    return () => { dispatch(editCart(JSON.parse(user), cartLocalStorage)) };
   }, []);
 
   return (

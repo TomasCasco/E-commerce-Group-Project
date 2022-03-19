@@ -20,6 +20,6 @@ router.get("/userInfo", auth, getUserInfo);
 router.get("/:userId/cart", auth, getCart);
 router.get("/confirm-email/:token", confirmEmail);
 router.get("/change-password/:token", changePassword);
-router.put("/:userId/cart", auth, editCart);
+router.put("/:userId/cart", editCart);
 
 module.exports = router;

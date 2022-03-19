@@ -3,6 +3,7 @@ import { createAutocomplete } from "@algolia/autocomplete-core";
 import { client } from "../../apolloClient/apolloClient";
 import {
   Box,
+  Button,
   Container,
   Flex,
   Heading,
@@ -12,6 +13,8 @@ import {
 } from "@chakra-ui/react";
 import { queryProducts } from "../../apolloClient/querys";
 import Link from "next/link";
+import Router from "next/router"
+
 
 const AutocompleteItem = ({ _id, name, price, image }) => {
   return (
@@ -37,6 +40,7 @@ const AutocompleteItem = ({ _id, name, price, image }) => {
   );
 };
 
+
 export default function Search(props) {
   const [autocompleteState, setAutoCompleteState] = useState({
     collections: [],
@@ -46,6 +50,7 @@ export default function Search(props) {
     () =>
       createAutocomplete({
         placeholder: "Search",
+        autoFocus:"true",
         onStateChange: ({ state }) => setAutoCompleteState(state),
         getSources: () => [
           {
@@ -67,7 +72,7 @@ export default function Search(props) {
                     }
                     return returnValue;
                   });
-                  return items.slice(0, 20);
+                  return items.slice(0, 10);
                 });
             },
           },
@@ -85,10 +90,18 @@ export default function Search(props) {
     inputElement: inputRef.current,
   });
 
+  const handleSearch=()=>{
+    props.onClose();
+    Router.push(`/search?q=${inputRef.current.value}`);
+  }
+
   return (
     <Flex justify="stretch" {...autocomplete.getRootProps()} w="100%">
       <Box {...formProps} ref={formRef} width="100%">
-        <Input width={"100%"} {...inputProps} ref={inputRef} />
+        <Flex>
+        <Input width={"100%"} {...inputProps} ref={inputRef} type="text" />
+        <Button onClick={handleSearch}>Search</Button>
+        </Flex>
         {autocompleteState.isOpen && (
           <div
             position={"absolute"}

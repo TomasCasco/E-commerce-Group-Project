@@ -18,36 +18,29 @@ import Footer from "../../components/Footer/Footer.tsx";
 import NavBar from "../../components/Navbar/NavBar";
 import ProductsHome from "../../components/ProductsHome";
 import SpinnerComponent from "../../components/Spinner/Spinner";
-import { getProductById } from "../../redux/products/productsActions";
+import { getProductById, resetProductById } from "../../redux/products/productsActions";
 import { addItemQty, addToCart } from "../../redux/cart/cartActions";
 import { removeFromFavorites, addToFavorites } from "../../redux/favorites/favoritesActions";
 
 export default function Home({ id }) {
   const product = useSelector((state) => state.productsReducer.productById);
-  const [loading, setLoading] = useState(false);
   const cart = useSelector((state) => state.cartReducer.cart);
   const favorite = useSelector((state) => state.favoritesReducer.favorites);
+  const loading=useSelector((state)=>state.productsReducer.loading)
+
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setLoading(true);
     dispatch(getProductById(id));
-  }, []);
+  }, [dispatch,getProductById]);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-  }, [product]);
+  useEffect(()=>{
+    return ()=> dispatch(resetProductById())
+  },[])
 
-  if (!product._id) {
-    return (
-      <Container alignContent={"center"} justifyContent="center">
-        Product Not found
-      </Container>
-    );
-  }
+
+  
   const addCart = () => {
     if (cart.some((el) => el.product?._id === id)) {
       dispatch(addItemQty(id));
@@ -64,13 +57,19 @@ export default function Home({ id }) {
     }
   };
 
+  if(loading){
+    return <SpinnerComponent/>
+  }
+
+  if(!loading && !product?._id) {
+    return <div>Product not found</div>
+  }
+  
   return (
     <>
       <NavBar />
       <Flex align={"center"} justify="center">
-        {loading ? (
-          <SpinnerComponent />
-        ) : (
+        {(
           <Container maxW={"7xl"} w="90%">
             <SimpleGrid
               columns={{ base: 1, lg: 2 }}

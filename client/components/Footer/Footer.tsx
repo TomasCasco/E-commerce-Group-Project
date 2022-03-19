@@ -100,8 +100,8 @@ export default function Footer() {
           </Stack>
           <Stack align={"flex-start"}>
             <ListHeader>Support</ListHeader>
-            <Link href={"support"}>Help Center</Link>
-            <Link href={"support"}>Contact Us</Link>
+            <Link href={"/support"}>Help Center</Link>
+            <Link href={"/support"}>Contact Us</Link>
             
           </Stack>
         </SimpleGrid>

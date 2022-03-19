@@ -1,28 +1,25 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import CardContainer from "../../components/Card/cardContainer";
-import FilterBar from "../../components/FilterBar/filterBar";
 import Footer from "../../components/Footer/Footer.tsx";
 import NavBar from "../../components/Navbar/NavBar";
-import NavResponsive from "../../components/Navbar/NavResponsive.js";
-import { getAllProducts } from "../../redux/products/productsActions";
+import {
+  getAllProducts,
+} from "../../redux/products/productsActions";
 
-export default function Home({ category, orderBy, sortBy }) {
+export default function Home({ q }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
     const filterQuery = {
-      categories: category,
-      orderBy: orderBy,
-      sortBy: sortBy,
+      name:q
     };
     dispatch(getAllProducts(filterQuery));
-  }, [dispatch, category, orderBy, sortBy]);
+  }, [dispatch, q]);
 
   return (
     <>
       <NavBar />
-      <NavResponsive />
       <CardContainer />
       <Footer />
     </>
@@ -31,6 +28,6 @@ export default function Home({ category, orderBy, sortBy }) {
 
 Home.getInitialProps = (context) => {
   const { query } = context;
-  const { category, orderBy, sortBy } = query;
-  return { category, orderBy, sortBy };
+  const { q } = query;
+  return { q };
 };

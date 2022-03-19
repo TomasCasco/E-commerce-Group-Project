@@ -14,6 +14,7 @@ import {
 import { SearchIcon } from "@chakra-ui/icons";
 import Search from "./Search";
 
+
 export default function SearchModal() {
   const OverlayOne = () => (
     <ModalOverlay
@@ -56,7 +57,7 @@ export default function SearchModal() {
           <ModalHeader>Search products:</ModalHeader>
           <ModalCloseButton />
           <ModalBody width={"100%"}>
-            <Search />
+            <Search onClose={onClose}/>
           </ModalBody>
         </ModalContent>
       </Modal>

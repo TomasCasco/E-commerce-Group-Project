@@ -103,7 +103,12 @@ export default function Card({ data }) {
         </Button>
         <Box p="6">
           <Flex mt="1" justifyContent="space-between" overflowY="clip">
-            <Box fontSize="xl" fontWeight="semibold" lineHeight="5">
+            <Box
+              fontSize="xl"
+              fontWeight="semibold"
+              lineHeight="5"
+              textTransform="capitalize"
+            >
               {data.name}
             </Box>
           </Flex>

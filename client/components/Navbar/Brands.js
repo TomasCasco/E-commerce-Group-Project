@@ -27,7 +27,7 @@ export default function Brands() {
           borderRadius={5}
           _hover={{ color: "white" }}
           aria-label="Courses"
-          fontSize={"15px"}
+          fontSize={"20px"}
           color="white"
           lineHeight="21px"
           fontStyle={"inherit"}

@@ -32,12 +32,31 @@ export default function SearchModal() {
           onOpen();
         }}
       >
-        <Flex alignItems="center" color="white">
+        <Flex
+          alignItems="center"
+          color="white"
+          mr="4rem"
+          border={"2px solid white"}
+          borderRadius="2rem"
+        >
+          <Box
+            border="none"
+            _active={{
+              bgColor: "none",
+            }}
+            _hover={{
+              bgColor: "none",
+            }}
+            _focus={{
+              bgColor: "none",
+            }}
+            minW={"300px"}
+          />
           <Button
             background="none"
             className="chakra-input css-1y5j02c"
             border={"none"}
-            size="large"
+            borderLeft="2px solid white"
             borderRadius={"none"}
             _active={{
               bgColor: "none",

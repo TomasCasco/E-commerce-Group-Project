@@ -3,6 +3,7 @@ import NavBar from "../components/Navbar/NavBar";
 import Footer from "../components/Footer/Footer.tsx";
 import { bannerCards } from "../assets/images.js";
 import ProductsHome from "../components/ProductsHome/index.js";
+import NavResponsive from "../components/Navbar/NavResponsive.js";
 
 export default function Home() {
 
@@ -12,6 +13,8 @@ export default function Home() {
   return (
     <>
       <NavBar />
+      <NavResponsive />
+
       <CaptionCarousel slides={bannerCards} />
       <ProductsHome />
       <Footer />

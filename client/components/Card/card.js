@@ -76,12 +76,7 @@ export default function Card({ data }) {
   };
 
   return (
-    <Flex
-      w="full"
-      alignItems="center"
-      justifyContent="center"
-      position={"relative"}
-    >
+    <Flex w="100%" alignItems="center" justifyContent="center">
       <Box
         m="5"
         bg={useColorModeValue("white", "gray.800")}
@@ -96,13 +91,7 @@ export default function Card({ data }) {
         justifyContent={"space-between"}
         position="relative"
       >
-        <Image
-          src={data.image}
-          roundedTop="lg"
-          maxH={"30%"}
-          margin="0 auto"
-          borderRadius={"1rem"}
-        />
+        <Image src={data.image} maxH={"30%"} margin="auto" />
         <Button
           onClick={() => Router.push(`/products/${data._id}`)}
           maxWidth={"100px"}
@@ -113,34 +102,30 @@ export default function Card({ data }) {
           +Info
         </Button>
         <Box p="6">
-          <Flex mt="1" justifyContent="space-between" alignContent="center">
+          <Flex mt="1" justifyContent="space-between" overflowY="clip">
             <Box
-              fontSize="x-large"
-              fontWeight={"bold"}
+              fontSize="xl"
+              fontWeight="semibold"
               lineHeight="5"
-              fontFamily={"sans-serif"}
-              margin="10px auto"
+              textTransform="capitalize"
             >
-              {data.brand}
-            </Box>
-          </Flex>
-
-          <Flex
-            mt="1"
-            justifyContent="space-between"
-            alignContent="center"
-            textAlign={"center"}
-          >
-            <Box fontWeight="semibold" lineHeight="5" maxH={"70%"}>
               {data.name}
             </Box>
           </Flex>
 
           <Flex mt="5" justify={"space-between"} alignContent="center">
             <Box fontSize="xl" color={useColorModeValue("")}>
-              <button onClick={addFavourites} href={"#"} display={"flex"}>
-                <Icon as={FiHeart} h={5} w={5} alignSelf={"center"} />
-              </button>
+              <Tooltip
+                label="Add to favorite"
+                bg="white"
+                placement={"top"}
+                color={"gray.800"}
+                fontSize={".8em"}
+              >
+                <button onClick={addFavourites} href={"#"} display={"flex"}>
+                  <Icon as={FiHeart} h={5} w={5} alignSelf={"center"} />
+                </button>
+              </Tooltip>
             </Box>
             <Box fontSize="xl" color={useColorModeValue("gray.800", "white")}>
               <Box as="span" color={"gray.600"} fontSize="sm">

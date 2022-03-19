@@ -11,7 +11,7 @@ export default function AboutUs() {
           px={4}
           borderRadius={5}
           aria-label="Courses"
-          fontSize={"20px"}
+          fontSize={"15px"}
           color="white"
           lineHeight="21px"
           fontStyle={"inherit"}

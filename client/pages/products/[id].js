@@ -219,21 +219,7 @@ export default function Home({ id }) {
                     Add to Favorites
                   </Button>
                 </SimpleGrid>
-                {/* <Button
-                  rounded={"none"}
-                  w={"full"}
-                  size={"lg"}
-                  bg={useColorModeValue("gray.900", "gray.300")}
-                  color={useColorModeValue("white", "gray.900")}
-                  textTransform={"uppercase"}
-                  onClick={stockValidate() ? addToCart : noStockToast}
-                  _hover={{
-                    transform: "translateY(1px)",
-                    boxShadow: "md",
-                  }}
-                >
-                  Add to cart
-                </Button> */}
+
                 <Popover>
                   <PopoverTrigger>
                     <Button
@@ -245,12 +231,10 @@ export default function Home({ id }) {
                         boxShadow: "md",
                       }}
                     >
-                      AddtoCart
+                      Add to Cart
                     </Button>
                   </PopoverTrigger>
                   {stockValidate() ? (
-                    addCart
-                  ) : (
                     <PopoverContent>
                       <PopoverArrow />
                       <PopoverCloseButton />
@@ -268,6 +252,8 @@ export default function Home({ id }) {
                         </Flex>
                       </PopoverBody>
                     </PopoverContent>
+                  ) : (
+                    addCart
                   )}
                 </Popover>
               </Stack>

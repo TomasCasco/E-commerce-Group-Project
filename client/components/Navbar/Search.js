@@ -22,12 +22,12 @@ export default function Search() {
 
   const dispatchSearchProducts = (value) => {
     const filterQuery = {
-      name: value?value:inputSearch,
+      name: value ? value : inputSearch,
     };
     distpatch(getAllProducts(filterQuery));
     distpatch(setSearch(filterQuery.name));
     setInputSearch("");
-    distpatch(resetProductSuggestion()) 
+    distpatch(resetProductSuggestion());
   };
 
   const selectSuggestion = (e) => {
@@ -62,6 +62,7 @@ export default function Search() {
       />
       <Button
         onClick={dispatchSearchProducts}
+        autoFocus={false}
         background="none"
         className="chakra-input css-1y5j02c"
         border={"none"}

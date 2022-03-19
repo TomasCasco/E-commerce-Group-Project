@@ -9,8 +9,16 @@ import {
   VStack,
   Button,
   SimpleGrid,
+  useToast,
   StackDivider,
   useColorModeValue,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverArrow,
+  PopoverCloseButton,
+  PopoverHeader,
+  PopoverBody,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -30,7 +38,7 @@ export default function Home({ id }) {
   const [loading, setLoading] = useState(false);
   const cart = useSelector((state) => state.cartReducer.cart);
   const favorite = useSelector((state) => state.favoritesReducer.favorites);
-
+  const toast = useToast();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -51,20 +59,66 @@ export default function Home({ id }) {
       </Container>
     );
   }
+
+  const showToastCart = () => {
+    return toast({
+      title: "Success!",
+      position: "top-right",
+      description: "Item added to cart!",
+      status: "success",
+      duration: 2000,
+      isClosable: true,
+    });
+  };
+  const showToastFav = (action) => {
+    return toast({
+      title: "Success!",
+      position: "top-right",
+      description: `Item ${action} to favorites!`,
+      status: "success",
+      duration: 2000,
+      isClosable: true,
+    });
+  };
+
   const addCart = () => {
     if (cart.some((el) => el.product?._id === id)) {
       dispatch(addItemQty(id));
+      showToastCart();
     } else {
       dispatch(addToCart(product));
+      showToastCart();
     }
   };
 
   const addFavourites = () => {
     if (favorite.some((el) => el.product?._id === id)) {
       dispatch(removeFromFavorites(id));
+      showToastFav("removed");
     } else {
       dispatch(addToFavorites(product));
+      showToastFav("added");
     }
+  };
+  const stockValidate = () => {
+    if (product.stock) {
+      return product.stock;
+    } else {
+      return false;
+    }
+  };
+  const noStockToast = () => {
+    return toast({
+      title: "No stock!",
+      position: "top-right",
+      description: `This product is out of stock!`,
+      status: "error",
+      duration: 2000,
+      isClosable: true,
+    });
+  };
+  const noStockBox = () => {
+    return <Box>no hay stock quieres resivir un mail?</Box>;
   };
 
   return (
@@ -143,7 +197,7 @@ export default function Home({ id }) {
                     <Text></Text>
                   </VStack>
                 </Stack>
-                <SimpleGrid columns={{ base: 2 }}>
+                <SimpleGrid columns={{ base: 3 }}>
                   <Text
                     color={useColorModeValue("gray.900", "gray.400")}
                     fontWeight={300}
@@ -151,27 +205,71 @@ export default function Home({ id }) {
                   >
                     $ {product.price}
                   </Text>
+
+                  <Text
+                    color={useColorModeValue("gray.900", "gray.400")}
+                    fontWeight={700}
+                    fontSize={"xl"}
+                    alignSelf="center"
+                  >
+                    {product.stock} In Stock
+                  </Text>
+
                   <Button onClick={addFavourites} href={"#"} display={"flex"}>
-                    add to favorites
+                    Add to Favorites
                   </Button>
                 </SimpleGrid>
-                <Button
+                {/* <Button
                   rounded={"none"}
                   w={"full"}
-                  mt={8}
                   size={"lg"}
-                  py={"7"}
                   bg={useColorModeValue("gray.900", "gray.300")}
                   color={useColorModeValue("white", "gray.900")}
                   textTransform={"uppercase"}
-                  onClick={addCart}
+                  onClick={stockValidate() ? addToCart : noStockToast}
                   _hover={{
-                    transform: "translateY(2px)",
-                    boxShadow: "lg",
+                    transform: "translateY(1px)",
+                    boxShadow: "md",
                   }}
                 >
                   Add to cart
-                </Button>
+                </Button> */}
+                <Popover>
+                  <PopoverTrigger>
+                    <Button
+                      onClick={stockValidate() ? addCart : null}
+                      bg={useColorModeValue("gray.900", "gray.300")}
+                      color={useColorModeValue("white", "gray.900")}
+                      _hover={{
+                        transform: "translateY(1px)",
+                        boxShadow: "md",
+                      }}
+                    >
+                      AddtoCart
+                    </Button>
+                  </PopoverTrigger>
+                  {stockValidate() ? (
+                    addCart
+                  ) : (
+                    <PopoverContent>
+                      <PopoverArrow />
+                      <PopoverCloseButton />
+                      <PopoverHeader>No Stock available!</PopoverHeader>
+                      <PopoverBody>
+                        <Flex justify="space-evenly" direction="column">
+                          Do you want to be notified if it becomes available
+                          again?
+                          <Box mt={5}>
+                            <Button colorScheme="blue">yes</Button>
+                            <Button ml={3} colorScheme="orange">
+                              no
+                            </Button>
+                          </Box>
+                        </Flex>
+                      </PopoverBody>
+                    </PopoverContent>
+                  )}
+                </Popover>
               </Stack>
             </SimpleGrid>
             <Stack
@@ -186,6 +284,7 @@ export default function Home({ id }) {
           </Container>
         )}
       </Flex>
+      <ProductsHome />
       <Footer />
     </>
   );

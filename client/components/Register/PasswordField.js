@@ -23,10 +23,10 @@ export const PasswordField = React.forwardRef((props, ref) => {
       inputRef.current.focus({ preventScroll: true });
     }
   };
-
+  console.log(props)
   return (
     <FormControl>
-      <FormLabel htmlFor="password">Password</FormLabel>
+      <FormLabel htmlFor="password">{props.labelName}</FormLabel>
       <InputGroup>
         <InputRightElement>
           <IconButton

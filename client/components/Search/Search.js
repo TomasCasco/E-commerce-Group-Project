@@ -16,29 +16,7 @@ import Link from "next/link";
 import Router from "next/router"
 
 
-const AutocompleteItem = ({ _id, name, price, image }) => {
-  return (
-    <Container>
-      <Link href={`/products/${_id}`}>
-        <Box
-          _hover={{ bgColor: "blue.300" }}
-          bgColor="white"
-          display="flex"
-          gap={"4"}
-          p="4"
-        >
-          <Image src={image} alt="not" w={"12"} h="12" objectFit={"contain"} />
-          <Container>
-            <Heading fontSize={"sm"}>{name}</Heading>
-            <Text fontSize={"xs"} color="gray.600">
-              ${price}
-            </Text>
-          </Container>
-        </Box>
-      </Link>
-    </Container>
-  );
-};
+
 
 
 export default function Search(props) {
@@ -46,6 +24,34 @@ export default function Search(props) {
     collections: [],
     isOpen: false,
   });
+
+  const AutocompleteItem = ({ _id, name, price, image }) => {
+
+    const handleSearch=()=>{
+      props.onClose();
+      Router.push(`/products/${_id}`)
+    }
+    return (
+      <Container cursor={"pointer"} onClick={handleSearch}> 
+          <Box
+            _hover={{ bgColor: "blue.300" }}
+            bgColor="white"
+            display="flex"
+            gap={"4"}
+            p="4"
+          >
+            <Image src={image} alt="not" w={"12"} h="12" objectFit={"contain"} />
+            <Container>
+              <Heading fontSize={"sm"}>{name}</Heading>
+              <Text fontSize={"xs"} color="gray.600">
+                ${price}
+              </Text>
+            </Container>
+          </Box>
+      </Container>
+    );
+  };
+
   const autocomplete = useMemo(
     () =>
       createAutocomplete({

@@ -1,33 +1,60 @@
 const { Router } = require("express");
 const mercadopago = require("../config/mercadopago");
+const Bill = require("../models/Bill");
+const axios = require("axios");
 
 const router = Router();
 
 router.post("/mercadopago", async (req, res, next) => {
-  const { total } = req.body;
   try {
+    const { items, userId, email } = req.body;
     const preference = {
-      items: [
-        {
-          title: "Order gamerland",
-          currency_id: "ARS",
-          picture_url:
-            "https://www.mercadopago.com/org-img/MP3/home/logomp3.gif",
-          quantity: 1,
-          unit_price: parseInt(total),
-        },
-      ],
-      back_urls: {
-        success: "http://localhost:3000/mercadopago/success",
-        failure: "http://localhost:3000/mercadopago/failure",
-        pending: "http://localhost:3000/mercadopago/pending",
+      items,
+      payer: {
+        id: userId,
+        email,
       },
     };
-
+    console.log(preference);
     const response = await mercadopago.preferences.create(preference);
     res.json({ url: response.body.init_point });
   } catch (error) {
     next(error);
+  }
+});
+
+router.post("/hook", async (req, res, next) => {
+  try {
+    const {
+      data: { id },
+    } = req.body;
+    const request = await axios.get(
+      `https://api.mercadopago.com/v1/payments/${id}`,
+      {
+        headers: {
+          Authorization: "Bearer " + process.env.ACCESS_TOKEN,
+        },
+      }
+    );
+
+    const data = request.data;
+
+    const products = data.additional_info.items;
+    const total = data.transaction_amount;
+    const userId = data.payer.id;
+    const { status } = data;
+
+    const newBill = new Bill({
+      userId,
+      products,
+      total,
+      status,
+    });
+
+    await newBill.save();
+    res.sendStatus(200);
+  } catch (e) {
+    next(e);
   }
 });
 

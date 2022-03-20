@@ -43,6 +43,7 @@ export default function Login() {
       variables: {
         input: inputValue,
       },
+      fetchPolicy: "network-only",
     });
     const token = response.data.loginUser.token;
     const errorResponse = response.data.loginUser.error;

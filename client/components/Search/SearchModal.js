@@ -14,7 +14,6 @@ import {
 import { SearchIcon } from "@chakra-ui/icons";
 import Search from "./Search";
 
-
 export default function SearchModal() {
   const OverlayOne = () => (
     <ModalOverlay
@@ -32,32 +31,13 @@ export default function SearchModal() {
           onOpen();
         }}
       >
-        <Flex
-          alignItems="center"
-          color="white"
-          mr="4rem"
-          border={"2px solid white"}
-          borderRadius="2rem"
-        >
-          <Box
-            border="none"
-            _active={{
-              bgColor: "none",
-            }}
-            _hover={{
-              bgColor: "none",
-            }}
-            _focus={{
-              bgColor: "none",
-            }}
-            minW={"300px"}
-          />
+        <Flex alignItems="center" color="white">
           <Button
             background="none"
             className="chakra-input css-1y5j02c"
             border={"none"}
-            borderLeft="2px solid white"
             borderRadius={"none"}
+            size="large"
             _active={{
               bgColor: "none",
             }}
@@ -76,7 +56,7 @@ export default function SearchModal() {
           <ModalHeader>Search products:</ModalHeader>
           <ModalCloseButton />
           <ModalBody width={"100%"}>
-            <Search onClose={onClose}/>
+            <Search onClose={onClose} />
           </ModalBody>
         </ModalContent>
       </Modal>

@@ -4,6 +4,7 @@ import CardContainer from "../../components/Card/cardContainer";
 import FilterBar from "../../components/FilterBar/filterBar";
 import Footer from "../../components/Footer/Footer.tsx";
 import NavBar from "../../components/Navbar/NavBar";
+import Nav from "../../components/Navbar/NavResponsive.js";
 import { getAllProducts } from "../../redux/products/productsActions";
 
 export default function Home({ category, orderBy, sortBy }) {
@@ -21,7 +22,8 @@ export default function Home({ category, orderBy, sortBy }) {
   return (
     <>
       <NavBar />
-      <FilterBar category={category} sortBy={sortBy} orderBy={orderBy}/>
+      <Nav />
+      <FilterBar category={category} sortBy={sortBy} orderBy={orderBy} />
       <CardContainer />
       <Footer />
     </>

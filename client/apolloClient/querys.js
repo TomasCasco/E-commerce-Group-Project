@@ -57,6 +57,7 @@ export const queryProductById = gql`
       price
       image
       description
+      stock
     }
   }
 `;

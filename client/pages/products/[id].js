@@ -24,7 +24,6 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Footer from "../../components/Footer/Footer.tsx";
 import NavBar from "../../components/Navbar/NavBar";
-import ProductsHome from "../../components/ProductsHome";
 import SpinnerComponent from "../../components/Spinner/Spinner";
 import {
   getProductById,
@@ -46,7 +45,11 @@ export default function Home({ id }) {
 
   useEffect(() => {
     dispatch(getProductById(id));
-  }, [dispatch, getProductById]);
+  }, [id]);
+
+  useEffect(() => {
+    return () => dispatch(resetProductById());
+  }, []);
 
   useEffect(() => {
     return () => dispatch(resetProductById());

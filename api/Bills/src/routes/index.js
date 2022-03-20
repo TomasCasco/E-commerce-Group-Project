@@ -2,7 +2,6 @@ const { Router } = require("express");
 const mercadopago = require("../config/mercadopago");
 const Bill = require("../models/Bill");
 const axios = require("axios");
-
 const router = Router();
 
 router.post("/mercadopago", async (req, res, next) => {
@@ -42,6 +41,7 @@ router.post("/hook", async (req, res, next) => {
     const products = data.additional_info.items;
     const total = data.transaction_amount;
     const userId = data.payer.id;
+    const email = data.payer.email;
     const { status } = data;
 
     const newBill = new Bill({
@@ -52,6 +52,12 @@ router.post("/hook", async (req, res, next) => {
     });
 
     await newBill.save();
+    await axios.post("http://localhost:5000/emails/bills", {
+      email,
+      products,
+      total,
+      status,
+    });
     res.sendStatus(200);
   } catch (e) {
     next(e);

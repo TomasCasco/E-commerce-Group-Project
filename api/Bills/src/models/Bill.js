@@ -16,8 +16,6 @@ const billSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: ["Pending", "Rejected", "Approved"],
-      default: "Pending",
       required: true,
     },
   },

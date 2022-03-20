@@ -1,5 +1,5 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import {
   Button,
@@ -11,17 +11,23 @@ import {
 } from "@chakra-ui/react";
 import { FaArrowRight } from "react-icons/fa";
 import Link from "next/link";
+import { buyFromCheckout } from "../../redux/checkout/checkoutActions";
+import jwtDecode from "jwt-decode";
+import Cookie from "js-cookie";
+
+const token = Cookie.get("token");
+const { userId, email } = jwtDecode(token);
 
 const summary = () => {
   const [discountCode, setDiscountCode] = useState();
   const [discountPercent, setDiscountPercent] = useState();
   const [discountToShow, setdiscountToShow] = useState(0);
 
+  const dispatch = useDispatch();
+
   const onChange = (e) => {
     setDiscountCode(e.target.value);
   };
-
-  // console.log(discountCode)
 
   const onClick = (e) => {
     e.preventDefault();
@@ -53,17 +59,17 @@ const summary = () => {
     setDiscountCode("");
   };
 
-  // console.log(discountPercent)
+  const cart = useSelector((state) => state.cartReducer.cart);
 
-  const data = useSelector((state) => state.cartReducer.cart);
-
-  const subtotal = data
+  const subtotal = cart
     .map((el) => el.qty * el.product.price)
     .reduce((prev, curr) => prev + curr, 0);
 
-  const handleCheckout = (e) => {};
-
-  // console.log(subtotal)
+  const handleCheckout = async (e) => {
+    e.preventDefault();
+    const response = await dispatch(buyFromCheckout({ cart, userId, email }));
+    window.open(response.data.buyFromCheckout.url);
+  };
 
   const discountValue = subtotal * discountPercent;
   const total = subtotal - discountValue;
@@ -114,7 +120,7 @@ const summary = () => {
           <Box fontSize="22px">
             Subtotal
             {` (` +
-              data.map((el) => el.qty).reduce((prev, curr) => prev + curr, 0) +
+              cart.map((el) => el.qty).reduce((prev, curr) => prev + curr, 0) +
               ` items) `}
           </Box>
           <Box fontSize="22px" fontWeight="bold">

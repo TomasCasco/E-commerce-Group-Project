@@ -7,8 +7,12 @@ class BillsApi extends RESTDataSource {
     this.baseURL = serverUrls.BILLS;
   }
 
-  async buyFromCheckout(cart) {
-    return this.post("/mercadopago", cart);
+  async buyFromCheckout(items, userId, email) {
+    return await this.post("/mercadopago", { items, userId, email });
+  }
+
+  async getBills(id) {
+    return await this.get(`/${id}`);
   }
 }
 

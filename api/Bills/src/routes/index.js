@@ -7,19 +7,23 @@ const router = Router();
 
 router.post("/mercadopago", async (req, res, next) => {
   try {
+    const { items, userId, email } = req.body;
     const preference = {
-      items: req.body,
+      items,
+      payer: {
+        id: userId,
+        email,
+      },
     };
     console.log(preference);
     const response = await mercadopago.preferences.create(preference);
-    console.log(response);
     res.json({ url: response.body.init_point });
   } catch (error) {
     next(error);
   }
 });
 
-router.post("/hook", async (req, res) => {
+router.post("/hook", async (req, res, next) => {
   try {
     const {
       data: { id },
@@ -32,14 +36,16 @@ router.post("/hook", async (req, res) => {
         },
       }
     );
+
     const data = request.data;
-    console.log(data);
+
     const products = data.additional_info.items;
     const total = data.transaction_amount;
+    const userId = data.payer.id;
     const { status } = data;
 
     const newBill = new Bill({
-      userId: 1,
+      userId,
       products,
       total,
       status,
@@ -51,22 +57,5 @@ router.post("/hook", async (req, res) => {
     next(e);
   }
 });
-// router.post("/hook", async (req, res) => {
-//   try {
-//     const products = req.body.additional_info.items;
-//     const total = req.body.transaction_amount;
-//     const { status } = req.body;
-//     res.sendStatus(200);
-
-//     const newBill = new Bill({
-//       products,
-//       total,
-//       status,
-//     });
-//     await newBill.save();
-//   } catch (e) {
-//     next(e);
-//   }
-// });
 
 module.exports = router;

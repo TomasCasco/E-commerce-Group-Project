@@ -1,15 +1,39 @@
 const { gql } = require("apollo-server");
 
 const billTypes = gql`
-  input Product {
+  input InputProduct {
+    title: String
+    unit_price: Float
+    quantity: Int
     id: ID
-    name: String
-    price: Number
-    qty: Number
+    picture_url: String
   }
 
-  type Mutation {
-    buyFromCheckout(input: [Product]): String
+  type Product {
+    id: ID
+    name: String
+    price: Float
+    qty: Int
+  }
+
+  type Bill {
+    userId: ID
+    products: [Product]
+    total: Float
+    status: String
+  }
+
+  type URLResponse {
+    url: String
+  }
+
+  type Query {
+    getBills(input: ID): [Bill]
+    buyFromCheckout(
+      cart: [InputProduct]
+      userId: ID
+      email: String
+    ): URLResponse
   }
 `;
 

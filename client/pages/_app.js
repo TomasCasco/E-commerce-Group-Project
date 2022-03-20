@@ -38,11 +38,6 @@ function MyApp({ Component, pageProps }) {
     // return () => { dispatch(editCart(JSON.parse(user), cartLocalStorage)) };
   }, []);
 
-  const alertUser = (e) => {
-    e.preventDefault();
-    e.returnValue = "holaaa";
-  };
-
   const handleSaveCartDb = async () => {
     const { data } = await client.mutate({
       mutation: mutationEditCart,
@@ -71,7 +66,6 @@ function MyApp({ Component, pageProps }) {
     // window.addEventListener("beforeunload", alertUser);
     window.addEventListener("unload", handleSaveCartDb);
     return () => {
-      // window.removeEventListener("beforeunload", alertUser);
       window.removeEventListener("unload", handleSaveCartDb);
       handleSaveCartDb();
     };

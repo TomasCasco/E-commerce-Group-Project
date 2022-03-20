@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import CardContainer from "../../components/Card/cardContainer";
+import FilterBar from "../../components/FilterBar/filterBar";
 import Footer from "../../components/Footer/Footer.tsx";
 import NavBar from "../../components/Navbar/NavBar";
 import { getAllProducts } from "../../redux/products/productsActions";
@@ -20,6 +21,7 @@ export default function Home({ category, orderBy, sortBy }) {
   return (
     <>
       <NavBar />
+      <FilterBar category={category} sortBy={sortBy} orderBy={orderBy}/>
       <CardContainer />
       <Footer />
     </>

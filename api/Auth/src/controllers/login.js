@@ -10,7 +10,11 @@ const login = async (req, res, next) => {
     const user = await User.findOne({ email });
 
     if (!user) {
-      res.status(200).json({ error: "Invalid email or password" });
+      return res.status(200).json({ error: "Invalid email or password" });
+    }
+
+    if (user.status === false) {
+      return res.status(200).json({ error: "Unverified user" });
     } else {
       if (bcrypt.compareSync(password, user.password)) {
         const token = jwt.sign(

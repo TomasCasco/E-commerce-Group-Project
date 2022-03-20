@@ -3,6 +3,7 @@ import { createAutocomplete } from "@algolia/autocomplete-core";
 import { client } from "../../apolloClient/apolloClient";
 import {
   Box,
+  Button,
   Container,
   Flex,
   Heading,
@@ -12,40 +13,50 @@ import {
 } from "@chakra-ui/react";
 import { queryProducts } from "../../apolloClient/querys";
 import Link from "next/link";
+import Router from "next/router"
 
-const AutocompleteItem = ({ _id, name, price, image }) => {
-  return (
-    <Container>
-      <Link href={`/products/${_id}`}>
-        <Box
-          _hover={{ bgColor: "blue.300" }}
-          bgColor="white"
-          display="flex"
-          gap={"4"}
-          p="4"
-        >
-          <Image src={image} alt="not" w={"12"} h="12" objectFit={"contain"} />
-          <Container>
-            <Heading fontSize={"sm"}>{name}</Heading>
-            <Text fontSize={"xs"} color="gray.600">
-              ${price}
-            </Text>
-          </Container>
-        </Box>
-      </Link>
-    </Container>
-  );
-};
+
+
+
 
 export default function Search(props) {
   const [autocompleteState, setAutoCompleteState] = useState({
     collections: [],
     isOpen: false,
   });
+
+  const AutocompleteItem = ({ _id, name, price, image }) => {
+
+    const handleSearch=()=>{
+      props.onClose();
+      Router.push(`/products/${_id}`)
+    }
+    return (
+      <Container cursor={"pointer"} onClick={handleSearch}> 
+          <Box
+            _hover={{ bgColor: "blue.300" }}
+            bgColor="white"
+            display="flex"
+            gap={"4"}
+            p="4"
+          >
+            <Image src={image} alt="not" w={"12"} h="12" objectFit={"contain"} />
+            <Container>
+              <Heading fontSize={"sm"}>{name}</Heading>
+              <Text fontSize={"xs"} color="gray.600">
+                ${price}
+              </Text>
+            </Container>
+          </Box>
+      </Container>
+    );
+  };
+
   const autocomplete = useMemo(
     () =>
       createAutocomplete({
         placeholder: "Search",
+        autoFocus:"true",
         onStateChange: ({ state }) => setAutoCompleteState(state),
         getSources: () => [
           {
@@ -67,7 +78,7 @@ export default function Search(props) {
                     }
                     return returnValue;
                   });
-                  return items.slice(0, 20);
+                  return items.slice(0, 10);
                 });
             },
           },
@@ -85,10 +96,18 @@ export default function Search(props) {
     inputElement: inputRef.current,
   });
 
+  const handleSearch=()=>{
+    props.onClose();
+    Router.push(`/search?q=${inputRef.current.value}`);
+  }
+
   return (
     <Flex justify="stretch" {...autocomplete.getRootProps()} w="100%">
       <Box {...formProps} ref={formRef} width="100%">
-        <Input width={"100%"} {...inputProps} ref={inputRef} />
+        <Flex>
+        <Input width={"100%"} {...inputProps} ref={inputRef} type="text" />
+        <Button onClick={handleSearch}>Search</Button>
+        </Flex>
         {autocompleteState.isOpen && (
           <div
             position={"absolute"}

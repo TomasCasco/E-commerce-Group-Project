@@ -42,7 +42,7 @@ app.get("/products/:id", async (req, res) => {
     const products = await Product.findById(id);
     res.json(products);
   } catch (err) {
-    console.log(err);
+    res.json(null)
   }
 });
 

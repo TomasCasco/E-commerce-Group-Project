@@ -41,7 +41,11 @@ const productsReducer = (state = initialState, action) => {
         ...state,
         suggestions: action.payload,
       };
-
+    case "RESET_PRODUCT_BY_ID":
+      return {
+        ...state,
+        productById:[]
+      }  
     default:
       return state;
   }

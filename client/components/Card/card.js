@@ -131,7 +131,7 @@ export default function Card({ data }) {
             alignContent="center"
             textAlign={"center"}
           >
-            <Box fontSize="xl" fontWeight="semibold" lineHeight="5">
+            <Box fontWeight="semibold" lineHeight="5" maxH={"70%"}>
               {data.name}
             </Box>
           </Flex>

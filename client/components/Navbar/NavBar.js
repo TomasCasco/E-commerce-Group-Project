@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Flex } from "@chakra-ui/react";
 import DarkModeSwitch from "../DarkModeSwitch/DarkModeSwitch";
 import Products from "./Products";

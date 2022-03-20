@@ -10,9 +10,11 @@ import {
   getAllBrands,
   getAllCategories,
   getCart,
-  editCart
+  editCart,
 } from "../redux/products/productsActions";
 import Head from "next/head";
+import { client } from "../apolloClient/apolloClient";
+import { mutationEditCart } from "../apolloClient/mutations";
 
 function MyApp({ Component, pageProps }) {
   const dispatch = useDispatch();
@@ -33,7 +35,46 @@ function MyApp({ Component, pageProps }) {
     dispatch(getAllBrands());
     dispatch(getAllCategories());
 
-    return () => { dispatch(editCart(JSON.parse(user), cartLocalStorage)) };
+    // return () => { dispatch(editCart(JSON.parse(user), cartLocalStorage)) };
+  }, []);
+
+  const alertUser = (e) => {
+    e.preventDefault();
+    e.returnValue = "holaaa";
+  };
+
+  const handleSaveCartDb = async () => {
+    const { data } = await client.mutate({
+      mutation: mutationEditCart,
+      variables: {
+        userId: JSON.parse(Cookie.get("user")).id,
+        products: JSON.parse(localStorage.getItem("cart")).map((p) => {
+          return {
+            product: {
+              name: p.product.name,
+              price: p.product.price,
+              category: p.product.category,
+              description: p.product.description,
+              brand: p.product.brand,
+              image: p.product.image,
+              stock: p.product.stock,
+            },
+            qty: p.qty,
+          };
+        }),
+      },
+    });
+    console.log(data.editCart);
+  };
+
+  useEffect(() => {
+    // window.addEventListener("beforeunload", alertUser);
+    window.addEventListener("unload", handleSaveCartDb);
+    return () => {
+      // window.removeEventListener("beforeunload", alertUser);
+      window.removeEventListener("unload", handleSaveCartDb);
+      handleSaveCartDb();
+    };
   }, []);
 
   return (

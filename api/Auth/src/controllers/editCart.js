@@ -10,14 +10,20 @@ const editCart = async (req, res, next) => {
   try {
     if (userId && (await User.findById(userId))) {
       let cart = await Cart.findOne({ userId });
-      await Cart.updateOne({ userId, products: product });
+      if (!cart) {
+        cart = new Cart({ userId });
+      }
+      cart.products = product;
+      await cart.save();
 
       const { products } = cart;
       res.status(200).json({ userId, products });
     } else {
+      console.log("user not found");
       throw new Error("User not found");
     }
   } catch (error) {
+    console.log(error);
     next(error);
   }
 };

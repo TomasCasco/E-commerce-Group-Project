@@ -37,6 +37,8 @@ router.post("/hook", async (req, res, next) => {
     );
 
     const data = request.data;
+    console.log("----------------hook---------------");
+    console.log(data);
 
     const products = data.additional_info.items;
     const total = data.transaction_amount;

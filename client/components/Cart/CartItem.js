@@ -64,7 +64,7 @@ export default function CartItem({ itemProduct }) {
         <Flex direction="colum" justifyContent="center" mt="4" mb="2">
           <Box
             cursor="pointer"
-            onClick={dispatchAddItemQty}
+            onClick={dispatchSubstracItemQty}
             fontSize="x-large"
             pl="3"
             pr="3"
@@ -77,7 +77,7 @@ export default function CartItem({ itemProduct }) {
             backgroundColor={"#44B8FC"}
             height="35px"
           >
-            <FaChevronUp />
+            <FaChevronDown />
           </Box>
           <Box
             pl="3"
@@ -93,7 +93,7 @@ export default function CartItem({ itemProduct }) {
           </Box>
           <Box
             cursor="pointer"
-            onClick={dispatchSubstracItemQty}
+            onClick={dispatchAddItemQty}
             fontSize="x-large"
             pl="3"
             pr="3"
@@ -106,7 +106,7 @@ export default function CartItem({ itemProduct }) {
             backgroundColor={"#44B8FC"}
             height="35px"
           >
-            <FaChevronDown />
+            <FaChevronUp />
           </Box>
         </Flex>
         <Box onClick={dispatchRemoveFromCart} color="#c53030" fontSize="large">

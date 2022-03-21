@@ -165,9 +165,9 @@ const summary = () => {
           </Button>
         </Box>
 
-        <Flex mt="20px" align="center" justify="center" fontWeight="semibold">
-          <Link href={"/products/[filterName]"} as={"/products/teclado"}>
-            or Continue shopping
+        <Flex mt="8" align="center" justify="center" fontWeight="semibold">
+          <Link href={"/products"} as={"/products"}>
+            Continue shopping
           </Link>
         </Flex>
       </Box>

@@ -4,6 +4,7 @@ import CardContainer from "../../components/Card/cardContainer";
 import FilterBar from "../../components/FilterBar/filterBar";
 import Footer from "../../components/Footer/Footer.tsx";
 import NavBar from "../../components/Navbar/NavBar";
+import Nav from "../../components/Navbar/NavResponsive";
 import { getAllProducts } from "../../redux/products/productsActions";
 
 export default function Home({ brand, orderBy, sortBy }) {
@@ -12,17 +13,17 @@ export default function Home({ brand, orderBy, sortBy }) {
   useEffect(() => {
     const filterQuery = {
       brands: brand,
-      orderBy:orderBy,
-      sortBy:sortBy
+      orderBy: orderBy,
+      sortBy: sortBy,
     };
     dispatch(getAllProducts(filterQuery));
-  }, [dispatch, brand,orderBy,sortBy]);
-
+  }, [dispatch, brand, orderBy, sortBy]);
 
   return (
     <>
       <NavBar />
-      <FilterBar brand={brand} sortBy={sortBy} orderBy={orderBy}/>
+      <Nav />
+      <FilterBar brand={brand} sortBy={sortBy} orderBy={orderBy} />
       <CardContainer />
       <Footer />
     </>

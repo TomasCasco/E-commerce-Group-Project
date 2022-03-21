@@ -27,6 +27,7 @@ router.post("/hook", async (req, res, next) => {
     const {
       data: { id },
     } = req.body;
+    console.log("pago terminado-----------------");
     const request = await axios.get(
       `https://api.mercadopago.com/v1/payments/${id}`,
       {
@@ -37,7 +38,6 @@ router.post("/hook", async (req, res, next) => {
     );
 
     const data = request.data;
-    console.log("----------------hook---------------");
     console.log(data);
 
     const products = data.additional_info.items;

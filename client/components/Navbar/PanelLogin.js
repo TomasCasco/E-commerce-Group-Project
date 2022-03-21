@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Icon } from "@chakra-ui/react";
+import { Box, Button, Flex, Icon, Text } from "@chakra-ui/react";
 import React from "react";
 import { MdLogin, MdLogout } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
@@ -68,7 +68,11 @@ export default function PanelLogin() {
           }}
           onClick={handleLogOut}
         >
-          <Icon fontSize="large" mt="5px">
+          <Icon
+            fontSize="large"
+            mt="5px"
+            display={["none", "none", "flex", "flex", "flex"]}
+          >
             <MdLogout />
           </Icon>
           Logout
@@ -83,6 +87,7 @@ export default function PanelLogin() {
         display="flex"
         alignItems="center"
         p="2px"
+        ml="10px"
         _active={{
           backgroundColor: "none",
         }}
@@ -100,7 +105,7 @@ export default function PanelLogin() {
         <Icon fontSize="large" mt="5px">
           <MdLogin />
         </Icon>
-        Login
+        <Text>Login</Text>
       </Button>
     );
   }

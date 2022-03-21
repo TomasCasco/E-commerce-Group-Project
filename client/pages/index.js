@@ -8,7 +8,6 @@ import theme from "../styles/theme";
 import { ColorModeScript } from "@chakra-ui/react";
 import Popup from "../components/Chat/Popup/Popup";
 import { Flex } from "@chakra-ui/react";
-import Nav from "../components/Navbar/NavResponsive.js";
 
 export default function Home() {
   return (

@@ -1,6 +1,6 @@
 import React from "react";
 import Card from "./card";
-import { Grid, Flex, Box, Button } from "@chakra-ui/react";
+import { Grid, Flex, Box, Button, SimpleGrid } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 
 import SpinnerComponent from "../Spinner/Spinner";
@@ -21,17 +21,17 @@ export default function CardContainer(props) {
     <Box padding={"100px"}>
       <Flex justify={"center"} flexDir={"column"} align="flex-end">
         <Box w="100%">
-          <Grid templateColumns="repeat(3,1fr)" templateRows="repeat(2,1fr)">
+          <SimpleGrid minChildWidth="300px">
             {data
               ? data.map((data) => {
                   return (
-                    <div key={data._id}>
+                    <Grid key={data._id}>
                       <Card data={data} />
-                    </div>
+                    </Grid>
                   );
                 })
               : null}
-          </Grid>
+          </SimpleGrid>
         </Box>
       </Flex>
     </Box>

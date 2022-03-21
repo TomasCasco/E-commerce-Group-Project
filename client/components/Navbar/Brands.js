@@ -27,12 +27,12 @@ export default function Brands() {
           borderRadius={5}
           _hover={{ color: "white" }}
           aria-label="Courses"
-          fontSize={"20px"}
+          fontSize="13px"
           color="white"
           lineHeight="21px"
           fontStyle={"inherit"}
           letterSpacing={"0.56px"}
-          fontWeight="600"
+          fontWeight="700"
           onMouseEnter={onOpen}
           onMouseLeave={onClose}
         >

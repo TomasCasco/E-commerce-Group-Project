@@ -12,16 +12,12 @@ import {
 import { FaArrowRight } from "react-icons/fa";
 import Link from "next/link";
 import { buyFromCheckout } from "../../redux/checkout/checkoutActions";
-import jwtDecode from "jwt-decode";
-import Cookie from "js-cookie";
-
-const token = Cookie.get("token");
-const { userId, email } = jwtDecode(token);
 
 const summary = () => {
   const [discountCode, setDiscountCode] = useState();
   const [discountPercent, setDiscountPercent] = useState();
   const [discountToShow, setdiscountToShow] = useState(0);
+  const { id, email } = useSelector((state) => state.usersReducer.user);
 
   const dispatch = useDispatch();
 

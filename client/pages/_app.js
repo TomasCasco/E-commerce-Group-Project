@@ -9,6 +9,8 @@ import { setLogged, setUser } from "../redux/user/usersActions";
 import {
   getAllBrands,
   getAllCategories,
+  getCart,
+  editCart
 } from "../redux/products/productsActions";
 import Head from "next/head";
 
@@ -30,6 +32,8 @@ function MyApp({ Component, pageProps }) {
     }
     dispatch(getAllBrands());
     dispatch(getAllCategories());
+
+    return () => { dispatch(getCart(user, cartLocalStorage)) };
   }, []);
 
   return (

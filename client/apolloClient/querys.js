@@ -75,6 +75,9 @@ export const queryGetCart = gql`
   query ($userId: ID, $products: [Products]) {
     getCart(userId: $userId, products: $products) {
       products
+    }
+  }
+`;
 
 export const queryBuyFromCheckout = gql`
   query BuyFromCheckout($cart: [InputProduct], $userId: ID, $email: String) {

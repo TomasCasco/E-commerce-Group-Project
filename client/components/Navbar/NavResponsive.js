@@ -52,7 +52,7 @@ export default function Nav() {
           color="white"
           borderBottom="1.5px solid #3ba5e2"
         >
-          <Box>
+          <Flex>
             <IconButton
               size={"md"}
               icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
@@ -63,7 +63,7 @@ export default function Nav() {
               onClick={isOpen ? onClose : onOpen}
             />
             <DarkModeSwitch />
-          </Box>
+          </Flex>
           <Box>
             <Logo />
           </Box>

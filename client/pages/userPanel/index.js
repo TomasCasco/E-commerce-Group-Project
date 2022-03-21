@@ -29,6 +29,7 @@ import Favorite from "../../components/Dashboard/Favorite";
 
 import { useSelector } from "react-redux";
 import Router from "next/router";
+import Nav from "../../components/Navbar/NavResponsive";
 
 export default function UserPanel() {
   const [render, setRender] = useState("profile");
@@ -37,6 +38,7 @@ export default function UserPanel() {
   return (
     <>
       <NavBar />
+      <Nav />
       <Flex
         maxH={[null, null, "100vh"]}
         maxW="2000px"

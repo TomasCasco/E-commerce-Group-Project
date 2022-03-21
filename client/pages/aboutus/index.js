@@ -13,11 +13,13 @@ import {
 } from "@chakra-ui/react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { SocialButton } from "../../components/Footer/Footer.tsx";
+import Nav from "../../components/Navbar/NavResponsive";
 
 export default function about() {
   return (
     <>
       <NavBar />
+      <Nav />
       <Flex align={"center"} flexDirection="column" h="100%" mb="20px">
         <Heading mt={20}>About Gamerland</Heading>
         <Text my={10} w="50%" fontSize="lg">

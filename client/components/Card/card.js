@@ -9,6 +9,7 @@ import {
   useToast,
   Button,
 } from "@chakra-ui/react";
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 
 import { IoMdCart } from "react-icons/io";
 import { FiHeart } from "react-icons/fi";
@@ -74,6 +75,9 @@ export default function Card({ data }) {
       showToastFav("added");
     }
   };
+  const isFavorite = () => {
+    return favorite.some((el) => el._id === data._id);
+  };
 
   return (
     <Flex w="100%" alignItems="center" justifyContent="center">
@@ -124,12 +128,16 @@ export default function Card({ data }) {
                 fontSize={".8em"}
               >
                 <button onClick={addFavourites} href={"#"} display={"flex"}>
-                  <Icon as={FiHeart} h={5} w={5} alignSelf={"center"} />
+                  <Icon
+                    as={!isFavorite() ? AiOutlineHeart : AiFillHeart}
+                    h={5}
+                    w={5}
+                  />
                 </button>
               </Tooltip>
             </Box>
             <Box fontSize="xl" color={useColorModeValue("gray.800", "white")}>
-              <Box as="span" color={"gray.600"} fontSize="sm">
+              <Box as="span" color={"gray.600"} fontSize="lg" mr={1}>
                 $
               </Box>
               {data.price}
@@ -143,7 +151,7 @@ export default function Card({ data }) {
                 fontSize={".8em"}
               >
                 <button onClick={addCart} href={"#"} display={"flex"}>
-                  <Icon as={IoMdCart} h={5} w={5} alignSelf={"center"} />
+                  <Icon as={IoMdCart} h={5} w={5} />
                 </button>
               </Tooltip>
             </Box>

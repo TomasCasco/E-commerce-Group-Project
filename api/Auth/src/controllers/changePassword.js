@@ -1,7 +1,7 @@
 const User = require("../models/User");
 const axios = require("axios");
 const jwt = require("jsonwebtoken");
-const { JWT_SECRET, JWT_EXPIRES } = process.env;
+const { JWT_SECRET, JWT_EXPIRES, EMAIL_API } = process.env;
 
 const newPass = () => {
   let pass = "";
@@ -34,7 +34,7 @@ const changePassword = async (req, res, next) => {
     user.password = newPass();
 
     // enviamos el email
-    await axios.post("http://localhost:5000/emails/change-password", {
+    await axios.post(`${EMAIL_API}/change-password`, {
       name: `${user.username}`,
       email: `${user.email}`,
       newPassword: `${user.password}`,

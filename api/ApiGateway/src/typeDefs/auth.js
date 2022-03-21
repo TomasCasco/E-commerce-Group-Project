@@ -41,7 +41,7 @@ const userTypes = gql`
   }
 
   input Products {
-    product: Product
+    product: ProductInput
     qty: Int
   }
 
@@ -124,7 +124,7 @@ const userTypes = gql`
 
   type Mutation {
     registerUser(input: userData): responseRegister
-    editCart(userId: ID, products: [ProductsCart]) : ProductResponse
+    editCart(userId: ID, products: [ProductsCart]): ProductResponse
   }
 `;
 

@@ -5,18 +5,18 @@ import { Text, Flex } from "@chakra-ui/react";
 export default function AboutUs() {
   return (
     <Flex className="nav-items" bg={"none !important"}>
-      <Link href="/aboutUs">
+      <Link href="/aboutus">
         <Text
           py={[1, 2, 2]}
           px={4}
           borderRadius={5}
           aria-label="Courses"
-          fontSize={"20px"}
+          fontSize={"13px"}
           color="white"
           lineHeight="21px"
           fontStyle={"inherit"}
           letterSpacing={"0.56px"}
-          fontWeight="600"
+          fontWeight="700"
           cursor={"pointer"}
           className="chakra-menu__menu-button css-ez1frj"
         >

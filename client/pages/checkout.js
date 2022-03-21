@@ -1,5 +1,5 @@
 import { Box, Link } from "@chakra-ui/react";
-import NavBar from "../components/Navbar/navBar";
+import NavBar from "../components/Navbar/NavBar";
 import Checkout from "../components/Cart/Checkout";
 
 export default function Home() {

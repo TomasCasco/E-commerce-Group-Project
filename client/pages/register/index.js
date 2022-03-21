@@ -12,8 +12,8 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
-import { Logo } from "./Logo";
-import { PasswordField } from "./PasswordField.js";
+import { Logo } from "../../components/Register/Logo";
+import { PasswordField } from "../../components/Register/PasswordField.js";
 import { client } from "../../apolloClient/apolloClient";
 import { useRouter } from "next/router";
 import { mutationUserRegister } from "../../apolloClient/mutations";
@@ -21,12 +21,23 @@ import { mutationUserRegister } from "../../apolloClient/mutations";
 export default function App() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordCheck, setPasswordCheck] = useState("");
   const [username, setUsername] = useState("");
   const router = useRouter();
   const toast = useToast();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (password!==passwordCheck){
+     return  toast({
+        title: "Error!",
+        position: "top",
+        description: "Password fields do not match",
+        status: "error",
+        duration: 2000,
+        isClosable: true,
+      });
+    }
     const inputValue = {
       email: email,
       password: password,
@@ -66,6 +77,7 @@ export default function App() {
     }
     setEmail("");
     setPassword("");
+    setPasswordCheck("");
     setUsername("");
   };
   return (
@@ -113,8 +125,15 @@ export default function App() {
                     />
                     <PasswordField
                       borderColor={"gray"}
+                      labelName="Password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <PasswordField
+                      labelName="Repeat password"
+                      borderColor={"gray"}
+                      value={passwordCheck}
+                      onChange={(e) => setPasswordCheck(e.target.value)}
                     />
                   </FormControl>
                   <Stack spacing="6">
@@ -126,14 +145,6 @@ export default function App() {
                     </Button>
                   </Stack>
                 </form>
-                {/* <HStack>
-                <Divider />
-                <Text fontSize="sm" whiteSpace="nowrap" color="muted">
-                  or continue with
-                </Text>
-                <Divider />
-              </HStack>
-              <OAuthButtonGroup /> */}
               </Stack>
             </Stack>
           </Box>

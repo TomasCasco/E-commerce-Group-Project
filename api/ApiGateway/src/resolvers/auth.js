@@ -6,11 +6,20 @@ const userResolvers = {
     infoUser(_, {}, { token, dataSources }) {
       return dataSources.UsersApi.infoUser(token);
     },
+    confirmChangePassword(_, { email }, { dataSources }) {
+      return dataSources.UsersApi.confirmChangePassword(email);
+    },
+    getCart(_, { userId }, { dataSources }) {
+      return dataSources.UsersApi.getCart(userId, products)
+    }
   },
   Mutation: {
     registerUser(_, { input }, { dataSources }) {
       return dataSources.UsersApi.registerUser(input);
     },
+    editCart(_, { userId, products }, { dataSources }) {
+      return dataSources.UsersApi.editCart(userId, products)
+    }
   },
 };
 

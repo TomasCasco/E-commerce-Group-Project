@@ -16,8 +16,8 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
-import { Logo } from "./Logo";
-import { PasswordField } from "./PasswordField.js";
+import { Logo } from "../../components/Login/Logo";
+import { PasswordField } from "../../components/Login/PasswordField.js";
 import { client } from "../../apolloClient/apolloClient";
 import { queryInfoUser, queryLogin } from "../../apolloClient/querys";
 import Cookies from "js-cookie";
@@ -43,6 +43,7 @@ export default function Login() {
       variables: {
         input: inputValue,
       },
+      fetchPolicy: "network-only",
     });
     const token = response.data.loginUser.token;
     const errorResponse = response.data.loginUser.error;
@@ -57,7 +58,6 @@ export default function Login() {
           },
         },
       });
-
       Cookies.set("user", JSON.stringify(user.data.infoUser), { expires: 3 });
       dispatch(setUser(user.data.infoUser));
       dispatch(setLogged(true));
@@ -130,7 +130,12 @@ export default function Login() {
                     />
                   </FormControl>
                   <HStack justify="space-between">
-                    <Button variant="link" colorScheme="blue" size="sm">
+                    <Button
+                      variant="link"
+                      colorScheme="blue"
+                      size="sm"
+                      onClick={() => router.push("/forget")}
+                    >
                       Forgot password?
                     </Button>
                   </HStack>

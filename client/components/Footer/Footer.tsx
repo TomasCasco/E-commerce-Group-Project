@@ -9,6 +9,7 @@ import {
   useColorModeValue,
   VisuallyHidden,
   chakra,
+  Flex,
 } from "@chakra-ui/react";
 import { FaGithub } from "react-icons/fa";
 import Logo from "../Navbar/Logo";
@@ -22,7 +23,7 @@ const ListHeader = ({ children }: { children: ReactNode }) => {
   );
 };
 
-const SocialButton = ({
+export  const SocialButton = ({
   children,
   label,
   href,
@@ -41,6 +42,7 @@ const SocialButton = ({
       as={"a"}
       href={href}
       display={"inline-flex"}
+      target='_blank'
       alignItems={"center"}
       justifyContent={"center"}
       transition={"background 0.3s ease"}
@@ -56,10 +58,14 @@ const SocialButton = ({
 
 export default function Footer() {
   return (
+<>
     <Box
       bg={useColorModeValue("gray.50", "gray.900")}
       color={useColorModeValue("gray.700", "gray.200")}
       boxShadow="0px 0px 1px 1px #999"
+      display={["none", "none", "none", "flex", "flex"]}
+      flexDirection="column"
+      
     >
       <Container as={Stack} maxW={"6xl"} py={10}>
         <SimpleGrid
@@ -73,30 +79,30 @@ export default function Footer() {
           </Stack>
           <Stack align={"flex-start"}>
             <ListHeader>Products</ListHeader>
-            <Link href={"/products/[filterName]"} as={"/products/teclado"}>
+            <Link href={"/products/[filterName]"} as={"/products?category=Gaming%20Keyboards"}>
               Gaming Keyboards
             </Link>
-            <Link href={"/products/[filterName]"} as={"/products/microfono"}>
+            <Link href={"/products/[filterName]"} as={"/products?category=Microphone"}>
               Microphones
             </Link>
-            <Link href={"/products/[filterName]"} as={"/products/mouse"}>
+            <Link href={"/products/[filterName]"} as={"/products?category=Gaming%20Mouses"}>
               Gaming Mouse
             </Link>
-            <Link href={"/products/[filterName]"} as={"/products/mousepad"}>
+            <Link href={"/products/[filterName]"} as={"/products?category=Mouse%20Pads"}>
               Mouse Pads
             </Link>
           </Stack>
           <Stack align={"flex-start"}>
             <ListHeader>Company</ListHeader>
-            <Link href={"#"}>About Us</Link>
-            <Link href={"#"}>Developers</Link>
-            <Link href={"#"}>Contact Us</Link>
+            <Link href={"/aboutUs"}>About Us</Link>
+            <Link href={"/aboutUs"}>Developers</Link>
+            
           </Stack>
           <Stack align={"flex-start"}>
             <ListHeader>Support</ListHeader>
-            <Link href={"#"}>Help Center</Link>
-            <Link href={"#"}>Safety Center</Link>
-            <Link href={"#"}>Community Guidelines</Link>
+            <Link href={"/support"}>Help Center</Link>
+            <Link href={"/support"}>Contact Us</Link>
+            
           </Stack>
         </SimpleGrid>
       </Container>
@@ -104,7 +110,7 @@ export default function Footer() {
         borderTopWidth={1}
         borderStyle={"solid"}
         borderColor={useColorModeValue("gray.200", "gray.700")}
-      >
+        >
         <Container
           as={Stack}
           maxW={"6xl"}
@@ -114,7 +120,7 @@ export default function Footer() {
           justify={{ md: "space-between" }}
           align={{ md: "center" }}
         >
-          <Text>© 2020 Gamerland. All rights reserved</Text>
+          <Text>© 2022 Gamerland. All rights reserved</Text>
           <Stack direction={"row"} spacing={6}>
             <SocialButton
               label={"GitHub"}
@@ -126,5 +132,33 @@ export default function Footer() {
         </Container>
       </Box>
     </Box>
+    <Flex  
+        display={["flex", "flex", "flex", "none", "none"]} 
+        w='100%' bg={useColorModeValue("gray.50", "gray.900")}  
+        borderColor={useColorModeValue("gray.200", "gray.700")}  
+        borderTopWidth={1}
+        borderStyle={"solid"} 
+        justifyContent={'space-between'}
+        py={3}
+        align="center"
+
+        >
+          
+
+   
+        
+          <Text ml={7}>© 2022 Gamerland. All rights reserved</Text>
+          <Stack  mr={7}>
+            <SocialButton
+              label={"GitHub"}
+              href={"https://github.com/TomasCasco/E-commerce-Group-Project"}
+            >
+              <FaGithub />
+            </SocialButton>
+          </Stack>
+        
+      
+        </Flex>
+  </>
   );
 }

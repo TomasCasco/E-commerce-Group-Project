@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Icon } from "@chakra-ui/react";
+import { Box, Button, Flex, Icon, Text } from "@chakra-ui/react";
 import React from "react";
 import { MdLogin, MdLogout } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,6 +6,7 @@ import { setLogged, setUser } from "../../redux/user/usersActions";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import { BsPersonFill } from "react-icons/bs";
+import { client } from "../../apolloClient/apolloClient";
 
 export default function PanelLogin() {
   const userInfo = useSelector((state) => state.usersReducer.user);
@@ -18,6 +19,7 @@ export default function PanelLogin() {
     dispatch(setUser({}));
     Cookies.remove("token");
     Cookies.remove("user");
+    client.resetStore();
     router.push("/");
   };
 
@@ -66,7 +68,11 @@ export default function PanelLogin() {
           }}
           onClick={handleLogOut}
         >
-          <Icon fontSize="large" mt="5px">
+          <Icon
+            fontSize="large"
+            mt="5px"
+            display={["none", "none", "flex", "flex", "flex"]}
+          >
             <MdLogout />
           </Icon>
           Logout
@@ -81,6 +87,7 @@ export default function PanelLogin() {
         display="flex"
         alignItems="center"
         p="2px"
+        ml="10px"
         _active={{
           backgroundColor: "none",
         }}
@@ -98,7 +105,7 @@ export default function PanelLogin() {
         <Icon fontSize="large" mt="5px">
           <MdLogin />
         </Icon>
-        Login
+        <Text>Login</Text>
       </Button>
     );
   }

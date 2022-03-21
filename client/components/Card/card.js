@@ -13,17 +13,36 @@ import {
 import { IoMdCart } from "react-icons/io";
 import { FiHeart } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
-import { addItemQty, addToCart } from "../../redux/cart/cartActions";
+import { addItemQty, addToCart, editCart } from "../../redux/cart/cartActions";
+import {
+  removeFromFavorites,
+  addToFavorites,
+} from "../../redux/favorites/favoritesActions";
 
 import Router from "next/router";
 
+import { useEffect } from "react";
+
+import jwtDecode from 'jwt-decode'
+import Cookie from "js-cookie";
+
+const token = Cookie.get('token')
+if (token) {
+  const { userId } = jwtDecode(token)
+}
+
 export default function Card({ data }) {
+  const favorite = useSelector((state) => state.favoritesReducer.favorites);
   const cart = useSelector((state) => state.cartReducer.cart);
   const toast = useToast();
 
   const dispatch = useDispatch();
 
-  const showToast = () => {
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
+
+  const showToastCart = () => {
     return toast({
       title: "Success!",
       position: "top-right",
@@ -33,24 +52,40 @@ export default function Card({ data }) {
       isClosable: true,
     });
   };
+  const showToastFav = (action) => {
+    return toast({
+      title: "Success!",
+      position: "top-right",
+      description: `Item ${action} to favorites!`,
+      status: "success",
+      duration: 2000,
+      isClosable: true,
+    });
+  };
 
   const addCart = () => {
     if (cart.some((el) => el.product._id === data._id)) {
       dispatch(addItemQty(data._id));
-      showToast();
+      showToastCart();
     } else {
       dispatch(addToCart(data));
-      showToast();
+      dispatch(editCart(userId, cart));
+      showToastCart();
+    }
+  };
+
+  const addFavourites = () => {
+    if (favorite.some((el) => el._id === data._id)) {
+      dispatch(removeFromFavorites(data._id));
+      showToastFav("removed");
+    } else {
+      dispatch(addToFavorites(data));
+      showToastFav("added");
     }
   };
 
   return (
-    <Flex
-      w="full"
-      alignItems="center"
-      justifyContent="center"
-      position={"relative"}
-    >
+    <Flex w="100%" alignItems="center" justifyContent="center">
       <Box
         m="5"
         bg={useColorModeValue("white", "gray.800")}
@@ -65,13 +100,7 @@ export default function Card({ data }) {
         justifyContent={"space-between"}
         position="relative"
       >
-        <Image
-          src={data.image}
-          roundedTop="lg"
-          maxH={"30%"}
-          margin="0 auto"
-          borderRadius={"1rem"}
-        />
+        <Image src={data.image} maxH={"30%"} margin="0 auto" />
         <Button
           onClick={() => Router.push(`/products/${data._id}`)}
           maxWidth={"100px"}
@@ -82,34 +111,31 @@ export default function Card({ data }) {
           +Info
         </Button>
         <Box p="6">
-          <Flex mt="1" justifyContent="space-between" alignContent="center">
+          <Flex mt="1" justifyContent="space-between" overflowY="clip">
             <Box
-              fontSize="x-large"
-              fontWeight={"bold"}
+              fontSize="xl"
+              fontWeight={"semibold"}
               lineHeight="5"
               fontFamily={"sans-serif"}
-              margin="10px auto"
+              textTransform="capitalize"
             >
-              {data.brand}
-            </Box>
-          </Flex>
-
-          <Flex
-            mt="1"
-            justifyContent="space-between"
-            alignContent="center"
-            textAlign={"center"}
-          >
-            <Box fontSize="xl" fontWeight="semibold" lineHeight="5">
               {data.name}
             </Box>
           </Flex>
 
           <Flex mt="5" justify={"space-between"} alignContent="center">
             <Box fontSize="xl" color={useColorModeValue("")}>
-              <button href={"#"} display={"flex"}>
-                <Icon as={FiHeart} h={5} w={5} alignSelf={"center"} />
-              </button>
+              <Tooltip
+                label="Add to favorite"
+                bg="white"
+                placement={"top"}
+                color={"gray.800"}
+                fontSize={".8em"}
+              >
+                <button onClick={addFavourites} href={"#"} display={"flex"}>
+                  <Icon as={FiHeart} h={5} w={5} alignSelf={"center"} />
+                </button>
+              </Tooltip>
             </Box>
             <Box fontSize="xl" color={useColorModeValue("gray.800", "white")}>
               <Box as="span" color={"gray.600"} fontSize="sm">

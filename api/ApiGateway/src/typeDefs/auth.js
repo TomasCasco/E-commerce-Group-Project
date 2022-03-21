@@ -119,7 +119,7 @@ const userTypes = gql`
     loginUser(input: userLogin): responseLogin
     infoUser: responseInfoUser
     confirmChangePassword(email: String): responseConfirmChangePassword
-    getCart(userId: ID, products: [ProductsCart]) : ProductResponse
+    getCart(userId: ID, products: [ProductsCart]): ProductResponse
   }
 
   type Mutation {

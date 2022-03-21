@@ -1,6 +1,6 @@
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
-const { JWT_SECRET, JWT_EXPIRES } = process.env;
+const { JWT_SECRET, JWT_EXPIRES, EMAIL_API } = process.env;
 const axios = require("axios");
 const { v4: uuid } = require("uuid");
 
@@ -30,7 +30,7 @@ const register = async (req, res, next) => {
     });
 
     // enviamos email confirmacion de cuenta
-    await axios.post("http://localhost:5000/emails/signup", {
+    await axios.post(`${EMAIL_API}/signup`, {
       name: `${newUser.username}`,
       email: `${newUser.email}`,
       token,

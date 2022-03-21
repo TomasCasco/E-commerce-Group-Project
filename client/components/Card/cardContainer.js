@@ -21,7 +21,7 @@ export default function CardContainer(props) {
     <Box padding={"100px"}>
       <Flex justify={"center"} flexDir={"column"} align="flex-end">
         <Box w="100%">
-          <SimpleGrid minChildWidth="300px">
+          <SimpleGrid minChildWidth="300px" spacing={30}>
             {data
               ? data.map((data) => {
                   return (

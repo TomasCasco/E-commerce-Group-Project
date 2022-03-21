@@ -11,12 +11,12 @@ export default function AboutUs() {
           px={4}
           borderRadius={5}
           aria-label="Courses"
-          fontSize={"20px"}
+          fontSize={"13px"}
           color="white"
           lineHeight="21px"
           fontStyle={"inherit"}
           letterSpacing={"0.56px"}
-          fontWeight="600"
+          fontWeight="700"
           cursor={"pointer"}
           className="chakra-menu__menu-button css-ez1frj"
         >

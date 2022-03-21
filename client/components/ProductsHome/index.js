@@ -35,18 +35,18 @@ export default function ProductsHome() {
   return (
     <Flex
       justifyContent="center"
-      padding={"70px"}
       flexDir={"column"}
       align="center"
+      h="100%"
+      mt={20}
+      mb={10}
     >
-      <Flex>
-        <Heading pt={"10px"} pb="20px">
-          Destacados
-        </Heading>
+      <Flex mb={10}>
+        <Heading>Destacados</Heading>
       </Flex>
-      <Flex>
+      <Flex flexWrap="wrap" justifyContent="center" rounded={10}>
         {data.length > 0 &&
-          getRandom(data, 3).map((data) => {
+          getRandom(data, 4).map((data) => {
             return (
               <Box key={data._id}>
                 <Card data={data} />

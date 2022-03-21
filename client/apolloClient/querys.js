@@ -36,19 +36,19 @@ export const queryInfoUser = gql`
 `;
 
 export const ALL_BRANDS = gql`
-  query getAllBrands {
+  query GetAllBrands {
     getAllBrands
   }
 `;
 
 export const queryCategories = gql`
-  query getAllCategories {
+  query GetAllCategories {
     getAllCategories
   }
 `;
 
 export const queryProductById = gql`
-  query ($input: String) {
+  query GetProductById($input: String) {
     getProductById(input: $input) {
       _id
       brand
@@ -57,6 +57,7 @@ export const queryProductById = gql`
       price
       image
       description
+      stock
     }
   }
 `;
@@ -66,6 +67,33 @@ export const CONFIRM_CHANGE_PASSWORD = gql`
     confirmChangePassword(email: $email) {
       message
       error
+    }
+  }
+`;
+
+export const queryGetCart = gql`
+  query ($userId: ID, $products: [Products]) {
+    getCart(userId: $userId, products: $products) {
+      products
+    }
+  }
+`;
+
+export const queryBuyFromCheckout = gql`
+  query BuyFromCheckout($cart: [InputProduct], $userId: ID, $email: String) {
+    buyFromCheckout(cart: $cart, userId: $userId, email: $email) {
+      url
+    }
+  }
+`;
+
+export const queryBills = gql`
+  query GetBills($input: ID) {
+    getBills(input: $input) {
+      userId
+      products
+      total
+      status
     }
   }
 `;

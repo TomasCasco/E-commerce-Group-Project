@@ -10,6 +10,8 @@ import {
   Portal,
   Icon,
   Container,
+  useColorModeValue,
+  Text,
 } from "@chakra-ui/react";
 import { MdFavorite } from "react-icons/md";
 import Favorites from "../Favorites/Favorites";
@@ -38,7 +40,7 @@ export default function FavoritesButton() {
           <Icon fontSize="large" mt="5px">
             <MdFavorite />
           </Icon>
-          Favorites
+          <Text>My Favorites</Text>
         </Button>
       </PopoverTrigger>
       <Portal>

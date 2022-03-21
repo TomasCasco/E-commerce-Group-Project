@@ -100,4 +100,27 @@ const changePassword = async (req, res) => {
   }
 };
 
-module.exports = { Signup, confirmChangePassword, changePassword };
+// bills
+const bills = async (req, res) => {
+  const { email, products, total, status } = req.body;
+
+  // reemplazamos plantilla con datos del usuario
+  let template = fs.readFileSync(__dirname + "/templates/Bills.html", "utf8");
+  template = template.replace("{user}", email ? email : "Guest");
+  template = template.replace("{total}", total ? total : "000");
+
+  try {
+    // enviamos el email
+    await transporter.sendMail({
+      from: "Gamerland",
+      to: email, // a quien mandamos el email
+      subject: "Bill", // tema o titulo
+      html: template, // mensaje
+    });
+    res.json({ message: `bill sent to ${email}` });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+module.exports = { Signup, confirmChangePassword, changePassword, bills };

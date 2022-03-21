@@ -63,8 +63,9 @@ const summary = () => {
 
   const handleCheckout = async (e) => {
     e.preventDefault();
-    const response = await buyFromCheckout({ cart, userId, email });
-    console.log(response);
+    const response = await dispatch(
+      buyFromCheckout({ cart, userId: id, email })
+    );
     window.open(response.data.buyFromCheckout.url);
   };
 

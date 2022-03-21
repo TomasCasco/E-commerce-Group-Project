@@ -8,3 +8,10 @@ export const mutationUserRegister = gql`
     }
   }
 `;
+export const mutationEditCart = gql`
+  mutation EditCart($userId: ID, $products: [Products]) {
+    editCart(userId: $userId, products: $products) {
+      products
+    }
+  }
+`;

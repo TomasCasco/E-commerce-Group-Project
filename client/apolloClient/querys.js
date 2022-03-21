@@ -57,6 +57,7 @@ export const queryProductById = gql`
       price
       image
       description
+      stock
     }
   }
 `;
@@ -66,6 +67,14 @@ export const CONFIRM_CHANGE_PASSWORD = gql`
     confirmChangePassword(email: $email) {
       message
       error
+    }
+  }
+`;
+
+export const queryGetCart = gql`
+  query ($userId: ID, $products: [Products]) {
+    getCart(userId: $userId, products: $products) {
+      products
     }
   }
 `;

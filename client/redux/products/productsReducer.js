@@ -14,7 +14,7 @@ const productsReducer = (state = initialState, action) => {
         ...state,
         products: action.payload.products,
       };
-
+      
     case "SET_LOADING_PRODUCTS":
       return {
         ...state,

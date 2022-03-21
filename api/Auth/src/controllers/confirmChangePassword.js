@@ -1,7 +1,7 @@
 const User = require("../models/User");
 const axios = require("axios");
 const jwt = require("jsonwebtoken");
-const { JWT_SECRET, JWT_EXPIRES } = process.env;
+const { JWT_SECRET, JWT_EXPIRES, EMAIL_API } = process.env;
 
 const confirmChangePassword = async (req, res, next) => {
   // obtenemos el email
@@ -17,7 +17,7 @@ const confirmChangePassword = async (req, res, next) => {
     // generamos un token
     const token = getToken({ email: `${user.email}`, id: `${user._id}` });
 
-    await axios.post("http://localhost:5000/emails/confirm-change-password", {
+    await axios.post(`${EMAIL_API}/confirm-change-password`, {
       name: `${user.username}`,
       email: `${user.email}`,
       token,

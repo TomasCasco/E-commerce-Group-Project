@@ -44,7 +44,7 @@ const productsReducer = (state = initialState, action) => {
     case "RESET_PRODUCT_BY_ID":
       return {
         ...state,
-        productById:[]
+        productById:{}
       }  
     default:
       return state;

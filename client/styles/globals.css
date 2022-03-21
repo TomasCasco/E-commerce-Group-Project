@@ -38,7 +38,7 @@ a {
 
 .nav-items:not(:last-child) {
   margin-right: 1.5em;
-  background-color: #160606;
+  background-color: #3ba5e2;
 }
 
 .sidebar-items:not(:last-child) {
@@ -55,7 +55,7 @@ a {
 }
 
 .sidebar-items {
-  color: gray;
+  color: rgb(52, 97, 223);
   font-size: large;
 }
 

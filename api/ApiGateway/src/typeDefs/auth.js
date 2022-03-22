@@ -41,7 +41,7 @@ const userTypes = gql`
   }
 
   input Products {
-    product: Product
+    product: ProductInput
     qty: Int
   }
 

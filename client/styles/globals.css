@@ -10,7 +10,6 @@ body::-webkit-scrollbar {
   min-width: 0.8em;
   border-radius: "2rem";
 }
-
 body::-webkit-scrollbar-track {
   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   width: "6px";
@@ -39,7 +38,7 @@ a {
 
 .nav-items:not(:last-child) {
   margin-right: 1.5em;
-  background-color: #160606;
+  background-color: #3ba5e2;
 }
 
 .sidebar-items:not(:last-child) {
@@ -47,13 +46,16 @@ a {
 }
 
 @media only screen and (max-width: 767px) {
+  body {
+    width: 100vh;
+  }
   .sidebar-items {
     margin-bottom: 0 !important;
   }
 }
 
 .sidebar-items {
-  color: gray;
+  color: rgb(52, 97, 223);
   font-size: large;
 }
 

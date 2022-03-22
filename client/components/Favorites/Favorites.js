@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import FavoritesItem from "./FavoritesItem";
 
-import { Flex, Box } from "@chakra-ui/react";
+import { Flex, Box, Text, Divider } from "@chakra-ui/react";
 
 const Favorites = () => {
   const data = useSelector((state) => state.favoritesReducer.favorites);
@@ -16,13 +16,9 @@ const Favorites = () => {
       maxWidth="900px"
       padding={"10px"}
     >
-      <Box
-        fontSize="xx-large"
-        fontWeight="semibold"
-        paddingBottom="20px"
-        lineHeight="5"
-      >
+      <Box fontSize="2xl" fontWeight="bold" paddingBottom="20px" lineHeight="5">
         Favorites
+        <Divider mt="10px" w="95%" />
       </Box>
 
       <Flex justify="center" align="center" direction="column">
@@ -43,15 +39,17 @@ const Favorites = () => {
             },
           }}
         >
-          {data.length !== 0
-            ? data.map((product, index) => {
-                return (
-                  <Box m="20" key={index} margin="0" marginBottom={"20px"}>
-                      <FavoritesItem itemProduct={product} />
-                  </Box>
-                );
-              })
-            : null}
+          {data.length !== 0 ? (
+            data.map((product, index) => {
+              return (
+                <Box m="20" key={index} margin="0" marginBottom={"20px"}>
+                  <FavoritesItem itemProduct={product} />
+                </Box>
+              );
+            })
+          ) : (
+            <Text fontWeight="semibold">Add products to favorite</Text>
+          )}
         </Box>
       </Flex>
     </Flex>
@@ -59,4 +57,3 @@ const Favorites = () => {
 };
 
 export default Favorites;
-

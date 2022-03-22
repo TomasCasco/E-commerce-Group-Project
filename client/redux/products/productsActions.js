@@ -39,16 +39,36 @@ export const getAllProducts = (inputFilter) => {
 
 export const getProductById = (id) => {
   return async function (dispatch) {
-    const product = await client.query({
-      query: queryProductById,
-      variables: {
-        input: id,
-      },
-    });
-    return dispatch({
-      type: "GET_PRODUCT_BY_ID",
-      payload: product.data.getProductById,
-    });
+    try {
+      dispatch({
+        type: "SET_LOADING_PRODUCTS",
+        payload: true,
+      });
+      const product = await client.query({
+        query: queryProductById,
+        variables: {
+          input: id,
+        },
+      });
+      dispatch({
+        type: "GET_PRODUCT_BY_ID",
+        payload: product.data.getProductById,
+      });
+      setTimeout(() => {
+        return dispatch({
+          type: "SET_LOADING_PRODUCTS",
+          payload: false,
+        });
+      }, 500);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const resetProductById = () => {
+  return {
+    type: "RESET_PRODUCT_BY_ID",
   };
 };
 

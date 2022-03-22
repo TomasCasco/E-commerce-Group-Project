@@ -13,6 +13,7 @@ import {
   Portal,
   MenuButton,
   Icon,
+  Text,
 } from "@chakra-ui/react";
 import Cart from "../Cart/Cart";
 import { IoMdCart } from "react-icons/io";
@@ -22,9 +23,9 @@ export default function CartButton() {
     <Popover>
       <PopoverTrigger>
         <Button
-          display="flex"
           alignItems="center"
           p="2px"
+          ml="10px"
           _active={{
             backgroundColor: "none",
           }}
@@ -41,7 +42,9 @@ export default function CartButton() {
           <Icon fontSize="large" mt="5px">
             <IoMdCart />
           </Icon>
-          My Cart
+          <Text display={["none", "none", "flex", "flex", "flex"]}>
+            My Cart
+          </Text>
         </Button>
       </PopoverTrigger>
       <Portal>

@@ -16,11 +16,9 @@ router.post("/mercadopago", async (req, res, next) => {
     const preference = {
       items,
       payer: {
-        phone:{
-          number:userId
-        },
         email,
       },
+      metadata:{userId}
     };
     console.log(preference);
     const response = await mercadopago.preferences.create(preference);
@@ -50,7 +48,7 @@ router.post("/hook", async (req, res, next) => {
 
     const products = data.additional_info.items;
     const total = data.transaction_amount;
-    const userId = data.payer.phone.number;
+    const userId = data.metadata.userId;
     const email = data.payer.email;
     const { status } = data;
 

@@ -49,7 +49,7 @@ router.post("/hook", async (req, res, next) => {
     const products = data.additional_info.items;
     const total = data.transaction_amount;
     const userId = data.metadata.user_id;
-    const email = data.metadata.email;
+    const email = data.payer.email;
     const { status } = data;
 
     const newBill = new Bill({

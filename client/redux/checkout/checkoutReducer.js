@@ -9,6 +9,12 @@ const checkoutReducer = (state = initialState, action) => {
         ...state,
         bills: action.payload,
       };
+      case "GET_DETAIL_BILLS":
+      return {
+        ...state,
+        bills: action.payload,
+      };
+
 
     default:
       return { ...state };

@@ -3,6 +3,12 @@ const mercadopago = require("../config/mercadopago");
 
 const router = Router();
 
+router.get("/get-bill/:id", async (req, res) => {
+  const { id } = req.params;
+  const allBills = await Bill.find({userId: id}, {userId: true, products: true, total: true, status: true});
+  return res.json(allBills);
+});
+
 router.post("/mercadopago", async (req, res, next) => {
   const { total } = req.body;
   try {

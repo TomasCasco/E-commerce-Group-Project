@@ -15,10 +15,9 @@ router.post("/mercadopago", async (req, res, next) => {
     const { items, userId, email } = req.body;
     const preference = {
       items,
-      payer: {
-        email,
+      metadata: {
+        userId
       },
-      metadata:{userId}
     };
     console.log(preference);
     const response = await mercadopago.preferences.create(preference);

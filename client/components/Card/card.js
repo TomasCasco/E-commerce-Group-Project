@@ -8,6 +8,7 @@ import {
   Tooltip,
   useToast,
   Button,
+  Text,
 } from "@chakra-ui/react";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 
@@ -115,8 +116,9 @@ export default function Card({ data }) {
           +Info
         </Button>
         <Box p="6">
-          <Flex mt="1" justifyContent="space-between" overflowY="clip">
-            <Box
+          <Flex mt="1" justifyContent="space-between">
+            <Text
+              noOfLines={3}
               fontSize="xl"
               fontWeight={"semibold"}
               lineHeight="5"
@@ -124,7 +126,7 @@ export default function Card({ data }) {
               textTransform="capitalize"
             >
               {data.name}
-            </Box>
+            </Text>
           </Flex>
 
           <Flex mt="5" justify={"space-between"} alignContent="center">

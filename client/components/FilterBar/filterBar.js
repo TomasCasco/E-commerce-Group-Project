@@ -3,19 +3,18 @@ import React, { useEffect, useRef, useState } from "react";
 import FilterItem from "./filterItem";
 import Router from "next/router";
 
-
 export default function FilterBar(props) {
   const [url, setStateUrl] = useState({
     orderBy: null,
     sortBy: null,
   });
-  const filterSortBy=useRef();
-  const filterOrderBy=useRef();
+  const filterSortBy = useRef();
+  const filterOrderBy = useRef();
 
-  useEffect(()=>{
-      filterOrderBy.current.setDefaultValue()
-      filterSortBy.current.setDefaultValue()
-  },[props.category,props.brand])
+  useEffect(() => {
+    filterOrderBy.current.setDefaultValue();
+    filterSortBy.current.setDefaultValue();
+  }, [props.category, props.brand]);
 
   const setUrl = (value, title) => {
     setStateUrl({
@@ -37,8 +36,6 @@ export default function FilterBar(props) {
       Router.push(`/products?orderBy=${url.orderBy}&sortBy=${url.sortBy}`);
     }
   };
-
-
 
   return (
     <Flex

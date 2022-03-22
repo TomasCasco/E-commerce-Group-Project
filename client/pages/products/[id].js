@@ -47,9 +47,6 @@ export default function Home({ id }) {
     dispatch(getProductById(id));
   }, [id]);
 
-  useEffect(() => {
-    return () => dispatch(resetProductById());
-  }, []);
 
   useEffect(() => {
     return () => dispatch(resetProductById());

@@ -11,9 +11,9 @@ const billTypes = gql`
 
   type Product {
     id: ID
-    name: String
-    price: Float
-    qty: Int
+    title: String
+    unit_price: Float
+    quantity: Int
   }
 
   type Bill {
@@ -21,6 +21,7 @@ const billTypes = gql`
     products: [Product]
     total: Float
     status: String
+    createdAt: String
   }
 
   type URLResponse {

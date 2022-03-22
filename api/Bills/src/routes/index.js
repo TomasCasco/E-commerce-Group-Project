@@ -6,7 +6,7 @@ const router = Router();
 
 router.get("/get-bill/:id", async (req, res) => {
   const { id } = req.params;
-  const allBills = await Bill.find({userId: id}, {userId: true, products: true, total: true, status: true});
+  const allBills = await Bill.find({ userId: id });
   return res.json(allBills);
 });
 

@@ -4,12 +4,13 @@ const User = require("../models/User");
 const editCart = async (req, res, next) => {
   const { userId } = req.params;
 
-  const { arrayProducts } = req.body;
+  const product = req.body;
+  console.log(req.body);
+
   try {
     if (userId && (await User.findById(userId))) {
       let cart = await Cart.findOne({ userId });
-      cart.products = arrayProducts;
-      await cart.save();
+      await Cart.updateOne({ userId, products: product });
 
       const { products } = cart;
       res.status(200).json({ userId, products });

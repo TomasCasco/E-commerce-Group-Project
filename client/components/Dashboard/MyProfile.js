@@ -17,7 +17,7 @@ export default function MyProfile() {
           <Box
             m="1"
             bg={useColorModeValue("white", "blue")}
-            maxW="lg"
+            maxW="650"
             h={"-webkit-fit-content"}
             w={[1000]}
             padding="100px"
@@ -44,14 +44,14 @@ export default function MyProfile() {
                   </Center>
                 
                   <Text as='u' color="blue.500"> Username:</Text> {user.username} 
-                  <Text d="inline">
+                  {/* <Text d="inline">
                     <Link> <Icon as={FiEdit2} fontSize="medium" color={"#44b8fc !important"}/></Link>
-                  </Text>
+                  </Text> */}
                     <br />        
                   <Text as='u' color="blue.500"> email:</Text> {user.email} 
-                  <Text d="inline">
+                  {/* <Text d="inline">
                     <Link> <Icon as={FiEdit2} fontSize="medium" color={"#44b8fc !important"}/></Link>
-                  </Text>
+                  </Text> */}
                                      
                 </Box>
             </Flex>

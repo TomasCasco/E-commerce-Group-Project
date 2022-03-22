@@ -20,6 +20,7 @@
     "@react-icons/all-files": "^4.1.0",
     "apollo-link": "^1.2.14",
     "apollo-link-rest": "^0.9.0-rc.1",
+    "axios": "^0.26.1",
     "cookie-cutter": "^0.2.0",
     "embla-carousel-autoplay": "^6.2.0",
     "embla-carousel-react": "^6.2.0",

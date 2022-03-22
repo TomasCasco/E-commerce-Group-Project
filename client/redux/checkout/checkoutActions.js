@@ -33,3 +33,17 @@ export const getBills = (userId) => {
     payload: userId,
   };
 };
+
+export function getDetailBills (id) {
+  return async function (dispatch) {
+    try {
+      var json = await axios.get("http://localhost:3003/bills/get-bill/" + id);
+      return dispatch({
+        type: "GET_DETAIL_BILLS",
+        payload: json.data,
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  };
+}

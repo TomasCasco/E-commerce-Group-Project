@@ -16,7 +16,9 @@ router.post("/mercadopago", async (req, res, next) => {
     const preference = {
       items,
       payer: {
-        id: userId,
+        phone:{
+          number:userId
+        },
         email,
       },
     };

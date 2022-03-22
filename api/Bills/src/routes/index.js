@@ -17,7 +17,7 @@ router.post("/mercadopago", async (req, res, next) => {
       items,
       metadata: {
         userId,
-        email
+        email,
       },
     };
     console.log(preference);

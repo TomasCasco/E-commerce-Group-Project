@@ -1,14 +1,34 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Container, Flex, Text, Icon, Box, useColorModeValue, Center} from "@chakra-ui/react";
 import { FiShoppingBag } from "react-icons/fi";
 import Cookie from "js-cookie";
 import { getDetailBills } from "../../redux/checkout/checkoutActions"
+import { getBills } from "../../redux/checkout/checkoutActions";
+import { client } from "../../apolloClient/apolloClient";
+import { queryBills } from "../../apolloClient/querys";
 
 export default function Orders() {
   const bills = useSelector(state=>state.checkoutReducer?.bills);
-  
+  const [bill, setBill] = useState([]);
+
   const dispatch = useDispatch();
+
+  const handleGetBill = async () => {
+    const { data } = await client.query({
+      query: queryBills,
+      variables: {
+        userId: JSON.parse(Cookie.get("user")).id 
+      }
+        {
+          userId,
+          products,
+          status,
+          total,
+        }
+    });
+
+  };
 
   useEffect(() => {
     dispatch(getDetailBills(JSON.parse(Cookie.get("user")).id));

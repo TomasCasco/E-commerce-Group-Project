@@ -60,7 +60,7 @@ router.post("/hook", async (req, res, next) => {
     });
 
     await newBill.save();
-    await axios.post("http://localhost:5000/emails/bills", {
+    await axios.post("https://emails-gamerland.herokuapp.com/emails/bills", {
       email,
       products,
       total,

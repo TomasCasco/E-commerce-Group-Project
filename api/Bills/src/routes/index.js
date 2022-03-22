@@ -4,6 +4,12 @@ const Bill = require("../models/Bill");
 const axios = require("axios");
 const router = Router();
 
+router.get("/get-bill/:id", async (req, res) => {
+  const { id } = req.params;
+  const bill = await Bill.find({ userId: id });
+  res.json(bill);
+});
+
 router.post("/mercadopago", async (req, res, next) => {
   try {
     const { items, userId, email } = req.body;

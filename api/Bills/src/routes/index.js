@@ -6,7 +6,10 @@ const router = Router();
 
 router.get("/get-bill/:id", async (req, res) => {
   const { id } = req.params;
-  const allBills = await Bill.find({userId: id}, {userId: true, products: true, total: true, status: true});
+  const allBills = await Bill.find(
+    { userId: id },
+    { userId: true, products: true, total: true, status: true }
+  );
   return res.json(allBills);
 });
 
@@ -15,10 +18,11 @@ router.post("/mercadopago", async (req, res, next) => {
     const { items, userId, email } = req.body;
     const preference = {
       items,
-      payer: {
+      payer: { email },
+      metadata: {
+        userId,
         email,
       },
-      metadata:{userId}
     };
     console.log(preference);
     const response = await mercadopago.preferences.create(preference);
@@ -48,8 +52,8 @@ router.post("/hook", async (req, res, next) => {
 
     const products = data.additional_info.items;
     const total = data.transaction_amount;
-    const userId = data.metadata.userId;
-    const email = data.payer.email;
+    const userId = data.metadata.user_id;
+    const email = data.metadata.email;
     const { status } = data;
 
     const newBill = new Bill({

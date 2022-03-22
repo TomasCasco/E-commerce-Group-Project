@@ -16,9 +16,9 @@ router.post("/mercadopago", async (req, res, next) => {
     const preference = {
       items,
       payer: {
-        id: userId,
         email,
       },
+      metadata:{userId}
     };
     console.log(preference);
     const response = await mercadopago.preferences.create(preference);
@@ -48,7 +48,7 @@ router.post("/hook", async (req, res, next) => {
 
     const products = data.additional_info.items;
     const total = data.transaction_amount;
-    const userId = data.payer.id;
+    const userId = data.metadata.userId;
     const email = data.payer.email;
     const { status } = data;
 
@@ -60,7 +60,7 @@ router.post("/hook", async (req, res, next) => {
     });
 
     await newBill.save();
-    await axios.post("http://localhost:5000/emails/bills", {
+    await axios.post("https://emails-gamerland.herokuapp.com/emails/bills", {
       email,
       products,
       total,

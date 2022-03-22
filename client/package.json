@@ -36,7 +36,8 @@
     "react-simple-chatbot": "^0.6.1",
     "react-slick": "^0.28.1",
     "redux": "^4.1.2",
-    "redux-thunk": "^2.4.1"
+    "redux-thunk": "^2.4.1",
+    "styled-components": "^5.3.3"
   },
   "devDependencies": {
     "@types/react-slick": "^0.23.8",

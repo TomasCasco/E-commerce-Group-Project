@@ -42,7 +42,7 @@ app.get("/products/:id", async (req, res) => {
     const products = await Product.findById(id);
     res.json(products);
   } catch (err) {
-    res.json(null)
+    res.json(null);
   }
 });
 
@@ -165,6 +165,17 @@ app.post("/products/create-api", async (req, res) => {
 
   await Product.collection.insertMany(meliApi);
   res.json("productos creados...");
+});
+
+app.put("/products/stock/:id", async (req, res) => {
+  try {
+    const { quantity } = req.body;
+    const { id } = req.params;
+    await Product.findByIdAndUpdate(id, { $inc: { stock: -quantity } });
+    res.sendStatus(204);
+  } catch (e) {
+    console.log(e);
+  }
 });
 
 module.exports = app;

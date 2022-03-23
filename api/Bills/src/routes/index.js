@@ -67,6 +67,18 @@ router.post("/hook", async (req, res, next) => {
       total,
       status,
     });
+
+    const stockHandler = products.map(({ id, quantity }) =>
+      axios.put(
+        `https://products-gamerland.herokuapp.com/products/stock/${id}`,
+        {
+          quantity,
+        }
+      )
+    );
+    Promise.all(stockHandler)
+      .then(console.log("Stock bajado"))
+      .catch((e) => console.log(e));
     res.sendStatus(200);
   } catch (e) {
     next(e);

@@ -69,7 +69,7 @@ router.post("/hook", async (req, res, next) => {
     });
 
     const stockHandler = products.map(({ id, quantity }) =>
-      axios.post(
+      axios.put(
         `https://products-gamerland.herokuapp.com/products/stock/${id}`,
         {
           quantity,

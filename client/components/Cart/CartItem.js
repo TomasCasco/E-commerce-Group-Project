@@ -93,7 +93,7 @@ export default function CartItem({ itemProduct }) {
           </Box>
           <Box
             cursor="pointer"
-            onClick={dispatchAddItemQty}
+            onClick={product.stock > qty ? dispatchAddItemQty : null}
             fontSize="x-large"
             pl="3"
             pr="3"

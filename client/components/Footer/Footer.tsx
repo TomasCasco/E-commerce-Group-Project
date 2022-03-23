@@ -102,6 +102,7 @@ export default function Footer() {
             <ListHeader>Support</ListHeader>
             <Link href={"/support"}>Help Center</Link>
             <Link href={"/support"}>Contact Us</Link>
+            <Link href={"/support/terms"}>Terms of Service</Link>
             
           </Stack>
         </SimpleGrid>

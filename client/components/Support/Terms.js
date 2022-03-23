@@ -10,26 +10,26 @@ import {
   AccordionPanel,
   AccordionIcon,
 } from "@chakra-ui/react";
-import FAQ_LIST from "./faq.json";
+import TERM_LIST from "./term.json";
 
-export const Faqs = ({ index, setIndex, currentFaqId, setCurrentFaqId }) => {
+export const Terms = ({ index, setIndex, currentTermId, setCurrentTermId }) => {
   return (
     <Flex direction="column" p={4} mb={15}>
       <Box mt="10" mb={10}>
-        <Heading size="xl">Frequently Asked Questions</Heading>
+        <Heading size="xl">Terms and conditions</Heading>
       </Box>
       <Accordion allowToggle index={index}>
-        {FAQ_LIST.map((faq) => (
-          <AccordionItem key={faq.id} name={`accordion-button-${faq.id}`}>
+        {TERM_LIST.map((term) => (
+          <AccordionItem key={term.id} name={`accordion-button-${term.id}`}>
             <AccordionButton
               onClick={() => {
-                if (faq.id === currentFaqId) {
+                if (term.id === currentTermId) {
                   console.log("True");
-                  setCurrentFaqId(null);
+                  setCurrentTermId(null);
                   setIndex(null);
                 } else {
-                  setCurrentFaqId(faq.id);
-                  setIndex(faq.id - 1);
+                  setCurrentTermId(term.id);
+                  setIndex(term.id - 1);
                 }
               }}
             >
@@ -38,11 +38,11 @@ export const Faqs = ({ index, setIndex, currentFaqId, setCurrentFaqId }) => {
                 textAlign="left"
                 fontSize={{ base: "2xl", md: "lg" }}
               >
-                <Text fontWeight="semibold">{faq.question}</Text>
+                <Text fontWeight="semibold">{term.question}</Text>
               </Box>
               <AccordionIcon />
             </AccordionButton>
-            <AccordionPanel pb={4}>{faq.answer}</AccordionPanel>
+            <AccordionPanel px={4}>{term.answer}</AccordionPanel>
           </AccordionItem>
         ))}
       </Accordion>

@@ -88,12 +88,9 @@ export const queryBuyFromCheckout = gql`
 `;
 
 export const queryBills = gql`
-  query GetBills($input: ID) {
   query ($input: ID) {
     getBills(input: $input) {
       userId
-      products
-      total
       status
       total
       products {

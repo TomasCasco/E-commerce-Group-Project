@@ -25,7 +25,6 @@ export default function CartButton() {
         <Button
           alignItems="center"
           p="2px"
-          ml="10px"
           _active={{
             backgroundColor: "none",
           }}

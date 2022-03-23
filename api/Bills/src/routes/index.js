@@ -6,7 +6,7 @@ const router = Router();
 
 router.get("/get-bill/:id", async (req, res) => {
   const { id } = req.params;
-  const allBills = await Bill.find({userId: id});
+  const allBills = await Bill.find({ userId: id });
   return res.json(allBills);
 });
 
@@ -15,8 +15,9 @@ router.post("/mercadopago", async (req, res, next) => {
     const { items, userId, email } = req.body;
     const preference = {
       items,
-      payer: {
-        id: userId,
+      payer: { email },
+      metadata: {
+        userId,
         email,
       },
     };
@@ -48,8 +49,8 @@ router.post("/hook", async (req, res, next) => {
 
     const products = data.additional_info.items;
     const total = data.transaction_amount;
-    const userId = data.payer.id;
-    const email = data.payer.email;
+    const userId = data.metadata.user_id;
+    const email = data.metadata.email;
     const { status } = data;
 
     const newBill = new Bill({
@@ -60,7 +61,7 @@ router.post("/hook", async (req, res, next) => {
     });
 
     await newBill.save();
-    await axios.post("http://localhost:5000/emails/bills", {
+    await axios.post("https://emails-gamerland.herokuapp.com/emails/bills", {
       email,
       products,
       total,

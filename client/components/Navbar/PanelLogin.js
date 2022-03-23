@@ -27,7 +27,7 @@ export default function PanelLogin() {
     return (
       <Flex align={"center"} justify="center">
         <Button
-          display="flex"
+          display={["none", "none", "flex", "flex", "flex"]}
           alignItems="center"
           p="2px"
           _active={{
@@ -49,7 +49,7 @@ export default function PanelLogin() {
           </Icon>
           {`Hi, ${userInfo.username}`}
         </Button>
-        |
+        <Text display={["none", "none", "flex", "flex", "flex"]}>|</Text>
         <Button
           display="flex"
           alignItems="center"
@@ -70,12 +70,26 @@ export default function PanelLogin() {
         >
           <Icon
             fontSize="large"
-            mt="5px"
+            mt="4px"
             display={["none", "none", "flex", "flex", "flex"]}
+            alignSelf="center"
           >
             <MdLogout />
           </Icon>
-          Logout
+          <Text
+            display={["none", "none", "flex", "flex", "flex"]}
+            alignSelf="center"
+          >
+            Logout
+          </Text>
+          <Text
+            display={["flex", "flex", "none", "none", "none"]}
+            py={[1, 2, 2]}
+            px={4}
+            borderRadius={5}
+          >
+            Logout
+          </Text>
         </Button>
       </Flex>
     );
@@ -87,7 +101,6 @@ export default function PanelLogin() {
         display="flex"
         alignItems="center"
         p="2px"
-        ml="10px"
         _active={{
           backgroundColor: "none",
         }}
@@ -102,10 +115,39 @@ export default function PanelLogin() {
         }}
         onClick={() => router.push("/login")}
       >
-        <Icon fontSize="large" mt="5px">
+        <Icon
+          fontSize="large"
+          mt="5px"
+          alignSelf="center"
+          display={["none", "none", "flex", "flex", "flex"]}
+        >
           <MdLogin />
         </Icon>
-        <Text>Login</Text>
+        <Text
+          alignSelf="center"
+          display={["none", "none", "flex", "flex", "flex"]}
+        >
+          Login
+        </Text>
+        <Flex className="nav-items" bg={"none !important"}>
+          <Text
+            display={["block", "block", "none", "none", "none"]}
+            py={[1, 2, 2]}
+            px={4}
+            borderRadius={5}
+            aria-label="Courses"
+            fontSize={"13px"}
+            color="white"
+            lineHeight="21px"
+            fontStyle={"inherit"}
+            letterSpacing={"0.56px"}
+            fontWeight="700"
+            cursor={"pointer"}
+            className="chakra-menu__menu-button css-ez1frj"
+          >
+            LOGIN
+          </Text>
+        </Flex>
       </Button>
     );
   }

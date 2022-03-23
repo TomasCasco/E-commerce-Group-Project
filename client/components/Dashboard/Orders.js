@@ -62,6 +62,7 @@ export default function Orders() {
           shadow="lg"
           display={"flex"}
           justifyContent={"center"}
+          bgColor={useColorModeValue("white", "#15171C")}
         >
           <Flex
             mt="1"
@@ -72,6 +73,7 @@ export default function Orders() {
             alignItems="center"
             w={"-webkit-max-content"}
             height="-webkit-fit-content"
+            bgColor={useColorModeValue("white", "#15171C")}
           >
             <Box fontSize="3xl" fontWeight="semibold" lineHeight="10">
               <Center>
@@ -122,3 +124,4 @@ export default function Orders() {
     </Container>
   );
 }
+

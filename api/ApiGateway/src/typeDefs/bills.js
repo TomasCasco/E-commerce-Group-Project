@@ -15,7 +15,6 @@ const billTypes = gql`
     unit_price: Float
     quantity: Int
   }
-
   type Bill {
     userId: ID
     products: [Product]

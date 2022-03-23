@@ -16,16 +16,16 @@ const myLoader = ({ src, width, quality }) => {
 const MyImage = (props) => {
   return (
     <Image loader={myLoader} src={robot} alt="Picture" width={33} height={34} />
-  );
+  ); 
 };
 
 const Answers = (props) => {
   const { steps } = props;
   const question = steps.question.value;
   const answer = question;
-  let result;
+  let result
 
-  if (answer.toLowerCase().includes("sucursal")) {
+ if (answer.toLowerCase().includes('branch')) {
     return <Sucursales />;
   } else if (
     answer.toLowerCase().includes("horario") ||
@@ -52,6 +52,117 @@ const Answers = (props) => {
         <div className={styles.botMessage}>{result}</div>
       </div>
     </div>
+  );
+};
+
+// -----------------
+
+const Monitors = () => {
+  return (
+      <div>
+          <div className={styles.flex}>
+              <div className={styles.botIcon}><MyImage /></div>
+              <div className={styles.botMessage}>
+              <a style={{ textDecoration: "none" }} href={`/products?category=Monitors`} >
+                <p style={{ cursor: "default" }}>
+                  To see all our Monitors, please <b style={{ cursor: "pointer" }}>click here!</b>  
+                </p>
+              </a>
+              </div>
+          </div>
+      </div>
+  );
+};
+// -----------------
+
+const Microphone = () => {
+  return (
+      <div>
+          <div className={styles.flex}>
+              <div className={styles.botIcon}><MyImage /></div>
+              <div className={styles.botMessage}>
+              <a style={{ textDecoration: "none" }} href={`/products?category=Microphone`} >
+                <p style={{ cursor: "default" }}>
+                  To see all our Microphones, please <b style={{ cursor: "pointer" }}>click here!</b>  
+                </p>
+              </a>
+              </div>
+          </div>
+      </div>
+  );
+};
+// -----------------
+
+const GamingMouses = () => {
+  return ( 
+      <div>
+          <div className={styles.flex}>
+              <div className={styles.botIcon}><MyImage /></div>
+              <div className={styles.botMessage}>
+              <a style={{ textDecoration: "none" }} href={`/products?category=Gaming%20Mouses`} >
+                <p style={{ cursor: "default" }}>
+                  To see all our Gaming Mouses, please <b style={{ cursor: "pointer" }}>click here!</b>  
+                </p>
+              </a>
+              </div>
+          </div>
+      </div>
+  );
+};
+// -----------------
+
+const MousePads = () => {
+  return (
+      <div>
+          <div className={styles.flex}>
+              <div className={styles.botIcon}><MyImage /></div>
+              <div className={styles.botMessage}>
+              <a style={{ textDecoration: "none" }} href={`/products?category=Mouse%20Pads`} >
+                <p style={{ cursor: "default" }}>
+                  To see all our Mouse Pads, please <b style={{ cursor: "pointer" }}>click here!</b>  
+                </p>
+              </a>
+              </div>
+          </div>
+      </div>
+  );
+};
+
+// -----------------
+
+const GamingKeyboards = () => {
+  return (
+      <div>
+          <div className={styles.flex}>
+              <div className={styles.botIcon}><MyImage /></div>
+              <div className={styles.botMessage}>
+              <a style={{ textDecoration: "none" }} href={`/products?category=Gaming%20Keyboards`} >
+                <p style={{ cursor: "default" }}>
+                  To see all our Gaming Keyboards, please <b style={{ cursor: "pointer" }}>click here!</b>  
+                </p>
+              </a>
+              </div>
+          </div>
+      </div>
+  );
+};
+
+// -----------------
+
+const AllProducts = (answer) => {
+  return (
+      <div>
+          <div className={styles.flex}>
+              <div className={styles.botIcon}><MyImage /></div>
+              <div className={styles.botMessage}>
+              <a style={{ textDecoration: "none" }} href={`/products?category=${answer}`} >
+                <p style={{ cursor: "default" }}>
+                  To see all our products, please <b style={{ cursor: "pointer" }}>click here!</b>  
+                </p>
+              </a>
+              </div>
+          </div>
+      </div>
   );
 };
 

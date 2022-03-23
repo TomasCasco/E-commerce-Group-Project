@@ -74,63 +74,58 @@ export default function UserPanel() {
                   "center",
                   "center",
                   "center",
-                  "flex-start",
-                  "flex-start",
+                  
                 ]}
                 wrap={["wrap", "wrap", "nowrap", "nowrap", "nowrap"]}
                 justifyContent="center"
               >
-                <Flex className="sidebar-items" mr={[2, 6, 0, 0, 0]}>
-                  <Link
-                    href="/"
-                    display={["none", "none", "flex", "flex", "flex"]}
-                  >
-                    <Icon
-                      as={FiHome}
-                      fontSize="2xl"
-                      color={"#44b8fc !important"}
-                    />
-                  </Link>
-                  <LinkNext href="/">
-                    <Box as="button">
-                      <Text className="active">Home</Text>
-                    </Box>
-                  </LinkNext>
+
+              <Flex className="sidebar-items" mr={[2, 6, 0, 0, 0]}>
+                <Button leftIcon={<FiUser />} 
+                  fontSize="2xl"
+                  colorScheme="white" 
+                  variant='#44b8fc'
+                  onClick={() => setRender("profile")}
+                  _hover={{
+                    background: "white",
+                    color: "#44b8fc",
+                    border: "2px solid",
+                    borderColor: "#44b8fc",
+                  }}>
+                  Your Profile
+                </Button>
+              </Flex>  
+
+              <Flex className="sidebar-items" mr={[2, 6, 0, 0, 0]}>
+                <Button leftIcon={<FiShoppingCart />} 
+                  fontSize="2xl"
+                  colorScheme="white" 
+                  variant='#44b8fc'
+                  onClick={() => setRender("orders")}
+                  _hover={{
+                    background: "white",
+                    color: "#44b8fc",
+                    border: "2px solid",
+                    borderColor: "#44b8fc",
+                  }}>
+                  Orders
+                </Button>
                 </Flex>
+
                 <Flex className="sidebar-items" mr={[2, 6, 0, 0, 0]}>
-                  <Icon
-                    as={FiShoppingCart}
+                  <Button leftIcon={<FiHeart />} 
                     fontSize="2xl"
-                    color={"#44b8fc !important"}
-                  />
-                  <Box as="button" onClick={() => setRender("orders")}>
-                    <Text>Orders</Text>
-                  </Box>
-                  {/* -------render -------------- */}
-                </Flex>
-                <Flex className="sidebar-items" mr={[2, 6, 0, 0, 0]}>
-                  <Link display={["none", "none", "flex", "flex", "flex"]}>
-                    <Icon
-                      as={FiHeart}
-                      fontSize="2xl"
-                      color={"#44b8fc !important"}
-                    />
-                  </Link>
-                  <Box as="button" onClick={() => setRender("favorite")}>
-                    <Text>Favorites</Text>
-                  </Box>
-                </Flex>
-                <Flex className="sidebar-items" mr={[2, 6, 0, 0, 0]}>
-                  <Link display={["none", "none", "flex", "flex", "flex"]}>
-                    <Icon
-                      as={FiUser}
-                      fontSize="2xl"
-                      color={"#44b8fc !important"}
-                    />
-                  </Link>
-                  <Box as="button" onClick={() => setRender("profile")}>
-                    <Text>Your Profile</Text>
-                  </Box>
+                    colorScheme="white" 
+                    variant='#44b8fc'
+                    onClick={() => setRender("favorite")}
+                    _hover={{
+                      background: "white",
+                      color: "#44b8fc",
+                      border: "2px solid",
+                      borderColor: "#44b8fc",
+                    }}>
+                    Favorites
+                  </Button>
                 </Flex>
               </Flex>
             </Flex>

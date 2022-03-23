@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import FavoritesItem from "../Favorites/FavoritesItem";
 import { Container, Flex, Heading, Avatar, Text, Icon, Link, Box, useColorModeValue, Button, Center} from "@chakra-ui/react";
 import { FiUser, FiEdit2, FiSmile, FiShoppingBag } from "react-icons/fi";
-import { Dashboard } from "./Dashboard.js";
+
 
 
 export default function Favorite() {

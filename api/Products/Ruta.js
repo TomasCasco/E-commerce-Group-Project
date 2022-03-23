@@ -172,6 +172,7 @@ app.put("/products/stock/:id", async (req, res) => {
     const { quantity } = req.body;
     const { id } = req.params;
     await Product.findByIdAndUpdate(id, { $inc: { stock: -quantity } });
+    res.sendStatus(204);
   } catch (e) {
     console.log(e);
   }

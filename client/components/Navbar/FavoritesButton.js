@@ -12,6 +12,8 @@ import {
   Container,
   useColorModeValue,
   Text,
+  Box,
+  Flex,
 } from "@chakra-ui/react";
 import { MdFavorite } from "react-icons/md";
 import Favorites from "../Favorites/Favorites";
@@ -37,10 +39,41 @@ export default function FavoritesButton() {
             bgColor: "none",
           }}
         >
-          <Icon fontSize="large" mt="5px">
+          <Icon
+            fontSize="large"
+            mt="5px"
+            alignSelf="center"
+            display={["none", "none", "flex", "flex", "flex"]}
+          >
             <MdFavorite />
           </Icon>
-          <Text>My Favorites</Text>
+
+          <Text
+            alignSelf="center"
+            display={["none", "none", "flex", "flex", "flex"]}
+          >
+            My Favorites
+          </Text>
+          <Flex className="nav-items" bg={"none !important"}>
+            <Text
+              display={["block", "block", "none", "none", "none"]}
+              py={[1, 2, 2]}
+              px={4}
+              borderRadius={5}
+              aria-label="Courses"
+              fontSize={"13px"}
+              color="white"
+              lineHeight="21px"
+              fontStyle={"inherit"}
+              letterSpacing={"0.56px"}
+              ml="-45px"
+              fontWeight="700"
+              cursor={"pointer"}
+              className="chakra-menu__menu-button css-ez1frj"
+            >
+              FAVORITES
+            </Text>
+          </Flex>
         </Button>
       </PopoverTrigger>
       <Portal>

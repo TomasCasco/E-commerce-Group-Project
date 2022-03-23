@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { DotButton, PrevButton, NextButton } from "./CarouselButtons";
+import { Box, Image } from "@chakra-ui/react";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 
@@ -39,27 +40,27 @@ export default function Carousel({ slides }) {
   }, [embla, setScrollSnaps, onSelect]);
 
   return (
-    <>
-      <div className="embla">
-        <div className="embla__viewport" ref={viewportRef}>
-          <div className="embla__container">
+    <Box>
+      <Box className="embla" h={{ base: "250px", md: "100%" }}>
+        <Box className="embla__viewport" ref={viewportRef} h="100%">
+          <Box className="embla__container" h="100%">
             {slides.map((url) => (
-              <div className="embla__slide" key={url + 1}>
-                <div className="embla__slide__inner">
-                  <img
+              <Box className="embla__slide" key={url + 1} h="100%">
+                <Box className="embla__slide__inner" h="100%">
+                  <Image
                     className="embla__slide__img"
                     src={url}
                     alt="A cool cat."
                   />
-                </div>
-              </div>
+                </Box>
+              </Box>
             ))}
-          </div>
-        </div>
+          </Box>
+        </Box>
         <PrevButton onClick={scrollPrev} enabled={prevBtnEnabled} />
         <NextButton onClick={scrollNext} enabled={nextBtnEnabled} />
-      </div>
-      <div className="embla__dots">
+      </Box>
+      <Box className="embla__dots">
         {scrollSnaps.map((_, index) => (
           <DotButton
             key={index}
@@ -67,7 +68,7 @@ export default function Carousel({ slides }) {
             onClick={() => scrollTo(index)}
           />
         ))}
-      </div>
-    </>
+      </Box>
+    </Box>
   );
 }

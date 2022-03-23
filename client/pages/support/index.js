@@ -3,7 +3,7 @@ import Footer from "../../components/Footer/Footer.tsx";
 
 import NavBar from "../../components/Navbar/NavBar";
 import Nav from "../../components/Navbar/NavResponsive";
-import ContactUsForm from "../../components/Support/Contactus";
+
 import { Faqs } from "../../components/Support/Faqs";
 import { Terms } from "../../components/Support/Terms";
 
@@ -27,7 +27,7 @@ export default function Support() {
         currentTermId={currentTermId}
         setCurrentTermId={setCurrentTermId}
       />
-      {/* <ContactUsForm /> */}
+      
       <Footer />
     </>
   );

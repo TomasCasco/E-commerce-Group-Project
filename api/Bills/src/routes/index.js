@@ -76,7 +76,9 @@ router.post("/hook", async (req, res, next) => {
         }
       )
     );
-    Promise.all(stockHandler).then(console.log("Stock bajado"));
+    Promise.all(stockHandler)
+      .then(console.log("Stock bajado"))
+      .catch((e) => console.log(e));
     res.sendStatus(200);
   } catch (e) {
     next(e);

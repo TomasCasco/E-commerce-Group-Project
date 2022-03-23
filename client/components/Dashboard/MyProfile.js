@@ -26,19 +26,22 @@ export default function MyProfile() {
             shadow="lg"
             display={"flex"}
             justifyContent={"center"}
+            bgColor={useColorModeValue("white", "#15171C")}
             
           >
             <Flex
                 mt="1"
                 justifyContent="space-between"
                 alignContent="center"
-                textAlign={"center"}
+                textAlign={"initial"}
                 flexDir="column"
                 alignItems="center"
-                w={"-webkit-max-content"}
+                w={"1100"}
                 height="-webkit-fit-content"
+                bgColor={useColorModeValue("white", "#15171C")}
+                
               >
-                <Box fontSize="3xl" fontWeight="semibold" lineHeight="10" >
+                <Box fontSize="2xl" fontWeight="semibold" lineHeight="10" w={"-moz-max-content"}>
                   <Center>
                     <Icon as={FiSmile} mb="10" fontSize="6xl" color="blue.200" alignItems={"center"}/>
                   </Center>

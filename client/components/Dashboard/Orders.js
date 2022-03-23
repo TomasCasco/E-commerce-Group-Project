@@ -24,30 +24,10 @@ import { client } from "../../apolloClient/apolloClient";
 import { queryBills } from "../../apolloClient/querys";
 
 export default function Orders() {
-<<<<<<< HEAD
-  const bills = useSelector(state=>state.checkoutReducer?.bills);
-=======
   const bills = useSelector((state) => state.checkoutReducer?.bills);
->>>>>>> a12aced9285e08691cbf69da08ba94fc98788593
   const [bill, setBill] = useState([]);
 
   const dispatch = useDispatch();
-
-  const handleGetBill = async () => {
-    const { data } = await client.query({
-      query: queryBills,
-      variables: {
-        userId: JSON.parse(Cookie.get("user")).id 
-      }
-        {
-          userId,
-          products,
-          status,
-          total,
-        }
-    });
-
-  };
 
   useEffect(() => {
     const getBillById = async () => {
@@ -82,6 +62,7 @@ export default function Orders() {
           shadow="lg"
           display={"flex"}
           justifyContent={"center"}
+          bgColor={useColorModeValue("white", "#15171C")}
         >
           <Flex
             mt="1"
@@ -92,6 +73,7 @@ export default function Orders() {
             alignItems="center"
             w={"-webkit-max-content"}
             height="-webkit-fit-content"
+            bgColor={useColorModeValue("white", "#15171C")}
           >
             <Box fontSize="3xl" fontWeight="semibold" lineHeight="10">
               <Center>
@@ -142,3 +124,4 @@ export default function Orders() {
     </Container>
   );
 }
+

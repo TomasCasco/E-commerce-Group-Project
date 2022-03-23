@@ -9,7 +9,7 @@ import AboutUs from "./AboutUs";
 import PanelLogin from "./PanelLogin";
 import CartButton from "./CartButton";
 import FavoritesButton from "./FavoritesButton";
-import Home from "./Home";
+
 import SearchModal from "../Search/SearchModal";
 
 export default function NavBar() {

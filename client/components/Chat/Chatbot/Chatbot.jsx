@@ -9,8 +9,6 @@ import Image from "next/image";
 import { ThemeProvider } from "styled-components";
 import { background } from "@chakra-ui/react";
 
-import { useSelector } from "react-redux";
-
 const myLoader = ({ src, width, quality }) => {
   return `${src}?w=${width}&q=${quality || 75}`;
 };
@@ -18,7 +16,7 @@ const myLoader = ({ src, width, quality }) => {
 const MyImage = (props) => {
   return (
     <Image loader={myLoader} src={robot} alt="Picture" width={33} height={34} />
-  );
+  ); 
 };
 
 const Answers = (props) => {
@@ -26,8 +24,6 @@ const Answers = (props) => {
   const question = steps.question.value;
   const answer = question;
   let result
-
-  const categories = useSelector((state) => state.productsReducer.categories);
 
  if (answer.toLowerCase().includes('branch')) {
     return <Sucursales />;
@@ -132,7 +128,7 @@ const Microphone = () => {
 // -----------------
 
 const GamingMouses = () => {
-  return (
+  return ( 
       <div>
           <div className={styles.flex}>
               <div className={styles.botIcon}><MyImage /></div>

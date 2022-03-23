@@ -24,11 +24,9 @@ import { client } from "../../apolloClient/apolloClient";
 import { queryBills } from "../../apolloClient/querys";
 
 export default function Orders() {
-<<<<<<< HEAD
-  const bills = useSelector(state=>state.checkoutReducer?.bills);
-=======
+
   const bills = useSelector((state) => state.checkoutReducer?.bills);
->>>>>>> a12aced9285e08691cbf69da08ba94fc98788593
+
   const [bill, setBill] = useState([]);
 
   const dispatch = useDispatch();

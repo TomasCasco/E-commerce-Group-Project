@@ -16,7 +16,7 @@ const myLoader = ({ src, width, quality }) => {
 const MyImage = (props) => {
   return (
     <Image loader={myLoader} src={robot} alt="Picture" width={33} height={34} />
-  );
+  ); 
 };
 
 const Answers = (props) => {

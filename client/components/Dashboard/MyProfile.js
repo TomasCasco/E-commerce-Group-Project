@@ -60,6 +60,7 @@ export default function MyProfile() {
             </Flex>
       </Box>
     </Flex>
+  
     </Container>
   );
 }

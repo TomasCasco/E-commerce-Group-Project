@@ -34,8 +34,7 @@ export default function Orders() {
       const { data } = await client.query({
         query: queryBills,
         variables: {
-          // input: JSON.parse(Cookie.get("user")).id,
-          input: "263920173",
+          input: JSON.parse(Cookie.get("user")).id,
         },
       });
       setBill(data.getBills);

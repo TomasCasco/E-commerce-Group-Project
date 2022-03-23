@@ -14,13 +14,16 @@ const billTypes = gql`
     name: String
     price: Float
     qty: Int
+    title: String
+    unit_price: Float
+    quantity: Int
   }
-
   type Bill {
     userId: ID
     products: [Product]
     total: Float
     status: String
+    createdAt: String
   }
 
   type URLResponse {

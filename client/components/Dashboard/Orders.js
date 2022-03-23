@@ -1,10 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Container, Flex, Text, Icon, Box, useColorModeValue, Center} from "@chakra-ui/react";
+import {
+  Container,
+  Flex,
+  Text,
+  Icon,
+  Box,
+  useColorModeValue,
+  Center,
+  Table,
+  Thead,
+  Tbody,
+  Tfoot,
+  Tr,
+  Th,
+  Td,
+  TableCaption,
+} from "@chakra-ui/react";
 import { FiShoppingBag } from "react-icons/fi";
 import Cookie from "js-cookie";
-import { getDetailBills } from "../../redux/checkout/checkoutActions"
-import { getBills } from "../../redux/checkout/checkoutActions";
+import { getDetailBills } from "../../redux/checkout/checkoutActions";
 import { client } from "../../apolloClient/apolloClient";
 import { queryBills } from "../../apolloClient/querys";
 

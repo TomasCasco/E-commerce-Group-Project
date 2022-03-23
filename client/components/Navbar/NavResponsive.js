@@ -79,7 +79,7 @@ export default function Nav() {
         <Flex>
           {isOpen ? (
             <HStack flexDir="column">
-              <Stack as={"nav"} spacing={4}>
+              <Stack as={"nav"} spacing={4} color="white">
                 <Products /> <Brands /> <Support /> <AboutUs />
                 <FavoritesButton />
                 <PanelLogin />

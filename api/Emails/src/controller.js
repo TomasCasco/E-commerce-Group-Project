@@ -103,13 +103,24 @@ const changePassword = async (req, res) => {
 // bills
 const bills = async (req, res) => {
   const { email, products, total, status } = req.body;
-
-  // reemplazamos plantilla con datos del usuario
-  let template = fs.readFileSync(__dirname + "/templates/Bills.html", "utf8");
-  template = template.replace("{user}", email ? email : "Guest");
-  template = template.replace("{total}", total ? total : "000");
+  console.log(req.body);
 
   try {
+    // reemplazamos plantilla con datos del usuario
+    const date = new Date();
+    let fecha = `${date.getDate() + 1}/${
+      date.getMonth() + 1
+    }/${date.getFullYear()}`;
+    let nameProducts = "";
+    products.forEach((p) => (nameProducts += " | " + p.title));
+
+    let template = fs.readFileSync(__dirname + "/templates/Bills.html", "utf8");
+    template = template.replace("{user}", email ? email : "Guest");
+    template = template.replace("{total}", total ? total : "");
+    template = template.replace("{status}", status ? status : "");
+    template = template.replace("{products}", nameProducts);
+    template = template.replace("{date}", fecha);
+
     // enviamos el email
     await transporter.sendMail({
       from: "Gamerland",

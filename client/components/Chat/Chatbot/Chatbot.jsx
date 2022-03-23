@@ -128,7 +128,7 @@ const Microphone = () => {
 // -----------------
 
 const GamingMouses = () => {
-  return (
+  return ( 
       <div>
           <div className={styles.flex}>
               <div className={styles.botIcon}><MyImage /></div>

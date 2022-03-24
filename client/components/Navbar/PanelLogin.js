@@ -25,9 +25,13 @@ export default function PanelLogin() {
 
   function UserIsLogged() {
     return (
-      <Flex align={"center"} justify="center">
+      <Flex
+        align={"center"}
+        justify="center"
+        flexDir={{ base: "column", md: "row" }}
+        ml={{ base: "13px", md: "0px" }}
+      >
         <Button
-          display={["none", "none", "flex", "flex", "flex"]}
           alignItems="center"
           p="2px"
           _active={{
@@ -44,7 +48,11 @@ export default function PanelLogin() {
           }}
           onClick={() => router.push("/userPanel")}
         >
-          <Icon fontSize="large" mt="5px">
+          <Icon
+            fontSize="lg"
+            mt="4px"
+            display={["none", "none", "flex", "flex", "flex"]}
+          >
             <BsPersonFill />
           </Icon>
           {`Hi, ${userInfo.username}`}
@@ -86,6 +94,7 @@ export default function PanelLogin() {
             display={["flex", "flex", "none", "none", "none"]}
             py={[1, 2, 2]}
             px={4}
+            ml="-55"
             borderRadius={5}
           >
             Logout

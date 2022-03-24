@@ -13,6 +13,7 @@ import {
   Heading,
   HStack,
   Text,
+  Checkbox,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { Logo } from "../../components/Register/Logo";
@@ -22,6 +23,7 @@ import { useRouter } from "next/router";
 import { mutationUserRegister } from "../../apolloClient/mutations";
 import NavBar from "../../components/Navbar/NavBar";
 import Nav from "../../components/Navbar/NavResponsive";
+import Link from "next/link";
 
 export default function App() {
   const [email, setEmail] = useState("");
@@ -180,6 +182,19 @@ export default function App() {
                         mb={5}
                         id="password2"
                       />
+                      <Flex
+                        align="center"
+                        flexDir="row"
+                        mb={5}
+                        fontSize="sm"
+                        textDecoration="underline"
+                        fontWeight="semibold"
+                      >
+                        <Checkbox required borderColor={"gray"} mr={2} />
+                        <Link href="/support/terms" target="_blank">
+                          I read and agree to the terms and conditions.
+                        </Link>
+                      </Flex>
                     </FormControl>
                     <Stack spacing="6">
                       <Button variant="primary" type="submit">

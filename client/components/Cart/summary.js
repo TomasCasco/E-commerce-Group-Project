@@ -18,6 +18,16 @@ import Router from "next/router";
 
 const summary = () => {
   const toast = useToast();
+  const noItems = () => {
+    return toast({
+      title: "No items!",
+      position: "top-right",
+      description: "Add products to cart to continue checkout!",
+      status: "error",
+      duration: 2000,
+      isClosable: true,
+    });
+  };
   const invalidCode = () => {
     return toast({
       title: "Invalid Code!",
@@ -175,7 +185,7 @@ const summary = () => {
             size="lg"
             fontSize="md"
             rightIcon={<FaArrowRight />}
-            onClick={handleCheckout}
+            onClick={total ? handleCheckout : noItems}
           >
             Checkout
           </Button>

@@ -105,16 +105,14 @@ export default function Card({ data }) {
         justifyContent={"space-between"}
         position="relative"
       >
-        <Image src={data.image} maxH={"30%"} margin="0 auto" />
-        <Button
+        <Image
+          src={data.image}
+          maxH={"30%"}
+          margin=" auto"
           onClick={() => Router.push(`/products/${data._id}`)}
-          maxWidth={"100px"}
-          m="auto"
-          mt={"30px"}
-          padding="10px"
-        >
-          +Info
-        </Button>
+          cursor="pointer"
+        />
+
         <Box p="6">
           <Flex mt="1" justifyContent="space-between">
             <Text
@@ -124,6 +122,8 @@ export default function Card({ data }) {
               lineHeight="5"
               fontFamily={"sans-serif"}
               textTransform="capitalize"
+              onClick={() => Router.push(`/products/${data._id}`)}
+              cursor="pointer"
             >
               {data.name}
             </Text>

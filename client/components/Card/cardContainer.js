@@ -1,9 +1,10 @@
 import React from "react";
 import Card from "./card";
-import { Grid, Flex, Box, Button, SimpleGrid } from "@chakra-ui/react";
+import { Grid, Flex, Box, Button, SimpleGrid, Text } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 
 import SpinnerComponent from "../Spinner/Spinner";
+import Link from "next/link";
 
 export default function CardContainer(props) {
   const loadingData = useSelector((state) => state.productsReducer.loading);
@@ -14,7 +15,18 @@ export default function CardContainer(props) {
   }
 
   if (!loadingData && data.length === 0) {
-    return <Box padding={"100px"}>Products not found</Box>;
+    return (
+      <>
+        <Box mx={20} my={20} h={"45vh"}>
+          <Text fontSize="2em" mb={20}>
+            The product you are looking for is not available
+          </Text>
+          <Link href="/products">
+            <Button bg="#44b8fc">go back to products</Button>
+          </Link>
+        </Box>
+      </>
+    );
   }
 
   return (

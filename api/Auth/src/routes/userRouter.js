@@ -9,6 +9,7 @@ const auth = require("../middlewares/auth");
 const confirmEmail = require("../controllers/confirmEmail");
 const changePassword = require("../controllers/changePassword");
 const confirmChangePassword = require("../controllers/confirmChangePassword");
+const changeCustomPassword = require("../controllers/changeCustomPassword");
 
 const router = Router();
 
@@ -21,5 +22,6 @@ router.get("/:userId/cart", auth, getCart);
 router.get("/confirm-email/:token", confirmEmail);
 router.get("/change-password/:token", changePassword);
 router.put("/:userId/cart", auth, editCart);
+router.post("/edit-password", changeCustomPassword);
 
 module.exports = router;

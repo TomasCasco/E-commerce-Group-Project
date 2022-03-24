@@ -4,10 +4,15 @@ const initialState = {
 
 const favoritesReducer = (state = initialState, action) => {
   switch (action.type) {
+    case "SET_FAVS_LOCAL_STORAGE":
+      return {
+        ...state,
+        favorites: action.payload,
+      };
     case "ADD_TO_FAVORITES":
       return {
         ...state,
-        favorites: [...state.favorites, action.payload]
+        favorites: [...state.favorites, action.payload],
       };
     case "REMOVE_FROM_FAVORITES":
       const favoriteFiltered = [
@@ -15,13 +20,11 @@ const favoritesReducer = (state = initialState, action) => {
       ];
       return {
         ...state,
-        favorites: favoriteFiltered
+        favorites: favoriteFiltered,
       };
-      default:
-        return state;
+    default:
+      return state;
   }
 };
 
 export default favoritesReducer;
-
-

@@ -13,9 +13,9 @@ import {
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 
 import { IoMdCart } from "react-icons/io";
-import { FiHeart } from "react-icons/fi";
+
 import { useDispatch, useSelector } from "react-redux";
-import { addItemQty, addToCart, editCart } from "../../redux/cart/cartActions";
+import { addItemQty, addToCart } from "../../redux/cart/cartActions";
 import {
   removeFromFavorites,
   addToFavorites,
@@ -25,16 +25,8 @@ import Router from "next/router";
 
 import { useEffect } from "react";
 
-import jwtDecode from "jwt-decode";
-import Cookie from "js-cookie";
-
-const token = Cookie.get("token");
-if (token) {
-  const { userId } = jwtDecode(token);
-}
-
 export default function Card({ data }) {
-  const favorite = useSelector((state) => state.favoritesReducer.favorites);
+  const favorites = useSelector((state) => state.favoritesReducer.favorites);
   const cart = useSelector((state) => state.cartReducer.cart);
   const toast = useToast();
 
@@ -42,7 +34,8 @@ export default function Card({ data }) {
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
-  }, [cart]);
+    localStorage.setItem("favs", JSON.stringify(favorites));
+  }, [cart, favorites]);
 
   const showToastCart = () => {
     return toast({
@@ -71,13 +64,12 @@ export default function Card({ data }) {
       showToastCart();
     } else {
       dispatch(addToCart(data));
-      dispatch(editCart(userId, cart));
       showToastCart();
     }
   };
 
   const addFavourites = () => {
-    if (favorite.some((el) => el._id === data._id)) {
+    if (favorites.some((el) => el._id === data._id)) {
       dispatch(removeFromFavorites(data._id));
       showToastFav("removed");
     } else {
@@ -86,7 +78,7 @@ export default function Card({ data }) {
     }
   };
   const isFavorite = () => {
-    return favorite.some((el) => el._id === data._id);
+    return favorites.some((el) => el._id === data._id);
   };
 
   return (

@@ -206,7 +206,7 @@ export default function UserPanel() {
 
 export function getServerSideProps(context) {
   if (!context.req.headers.cookie.includes("token")) {
-    context.res.writeHead(302, { Location: "/" });
+    context.res.writeHead(302, { Location: "/login" });
     context.res.end();
     return { props: {} };
   }

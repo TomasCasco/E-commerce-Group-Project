@@ -11,7 +11,6 @@ export const buyFromCheckout = async ({ cart, userId, email }) => {
       quantity: product.qty,
     };
   });
-
   try {
     const response = await client.query({
       query: queryBuyFromCheckout,

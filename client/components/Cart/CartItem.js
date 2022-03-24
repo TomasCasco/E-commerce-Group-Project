@@ -1,5 +1,12 @@
 import React from "react";
-import { Flex, Box, Button, Image, useColorModeValue } from "@chakra-ui/react";
+import {
+  Flex,
+  Box,
+  Button,
+  Image,
+  useColorModeValue,
+  useToast,
+} from "@chakra-ui/react";
 import { FaTrash, FaChevronUp, FaChevronDown } from "react-icons/fa";
 import Router from "next/router";
 import { useDispatch } from "react-redux";
@@ -10,6 +17,17 @@ import {
 } from "../../redux/cart/cartActions";
 
 export default function CartItem({ itemProduct }) {
+  const toast = useToast();
+  const noStockToast = () => {
+    return toast({
+      title: "No stock!",
+      position: "top-right",
+      description: "Can't add more items. This product is out of stock!",
+      status: "error",
+      duration: 2000,
+      isClosable: true,
+    });
+  };
   const dispatch = useDispatch();
 
   const { product, qty } = itemProduct;
@@ -102,7 +120,7 @@ export default function CartItem({ itemProduct }) {
           </Box>
           <Button
             cursor="pointer"
-            onClick={product.stock > qty ? dispatchAddItemQty : null}
+            onClick={product.stock > qty ? dispatchAddItemQty : noStockToast}
             fontSize="x-large"
             pl="3"
             pr="3"

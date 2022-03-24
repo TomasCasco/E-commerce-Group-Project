@@ -47,6 +47,17 @@ export default function Card({ data }) {
       isClosable: true,
     });
   };
+  const noStockToast = () => {
+    return toast({
+      title: "No stock!",
+      position: "top-right",
+      description: "This product is out of stock!",
+      status: "error",
+      duration: 2000,
+      isClosable: true,
+    });
+  };
+
   const showToastFav = (action) => {
     return toast({
       title: "Success!",
@@ -153,7 +164,11 @@ export default function Card({ data }) {
                 color={"gray.800"}
                 fontSize={".8em"}
               >
-                <button onClick={addCart} href={"#"} display={"flex"}>
+                <button
+                  onClick={data.stock ? addCart : noStockToast}
+                  href={"#"}
+                  display={"flex"}
+                >
                   <Icon as={IoMdCart} h={5} w={5} />
                 </button>
               </Tooltip>

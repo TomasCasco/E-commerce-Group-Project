@@ -47,7 +47,6 @@ export default function Home({ id }) {
     dispatch(getProductById(id));
   }, [id]);
 
-
   useEffect(() => {
     return () => dispatch(resetProductById());
   }, []);
@@ -81,6 +80,7 @@ export default function Home({ id }) {
       isClosable: true,
     });
   };
+
   const showToastFav = (action) => {
     return toast({
       title: "Success!",
@@ -102,7 +102,7 @@ export default function Home({ id }) {
     return toast({
       title: "No stock!",
       position: "top-right",
-      description: `This product is out of stock!`,
+      description: "This product is out of stock!",
       status: "error",
       duration: 2000,
       isClosable: true,
@@ -212,42 +212,18 @@ export default function Home({ id }) {
                     Add to Favorites
                   </Button>
                 </SimpleGrid>
-                <Popover>
-                  <PopoverTrigger>
-                    <Button
-                      onClick={stockValidate() ? addCart : null}
-                      bg={useColorModeValue("#44b8fc", "#0b3852")}
-                      color={useColorModeValue("white", "gray.200")}
-                      _hover={{
-                        transform: "translateY(1px)",
-                        boxShadow: "md",
-                      }}
-                    >
-                      Add to Cart
-                    </Button>
-                  </PopoverTrigger>
-                  {!stockValidate() ? (
-                    <PopoverContent>
-                      <PopoverArrow />
-                      <PopoverCloseButton />
-                      <PopoverHeader>No Stock available!</PopoverHeader>
-                      <PopoverBody>
-                        <Flex justify="space-evenly" direction="column">
-                          Do you want to be notified if it becomes available
-                          again?
-                          <Box mt={5}>
-                            <Button colorScheme="blue">yes</Button>
-                            <Button ml={3} colorScheme="orange">
-                              no
-                            </Button>
-                          </Box>
-                        </Flex>
-                      </PopoverBody>
-                    </PopoverContent>
-                  ) : (
-                    addCart
-                  )}
-                </Popover>
+
+                <Button
+                  onClick={stockValidate() ? addCart : noStockToast}
+                  bg={useColorModeValue("#44b8fc", "#0b3852")}
+                  color={useColorModeValue("white", "gray.200")}
+                  _hover={{
+                    transform: "translateY(1px)",
+                    boxShadow: "md",
+                  }}
+                >
+                  Add to Cart
+                </Button>
               </Stack>
             </SimpleGrid>
             <Stack

@@ -8,6 +8,7 @@ import {
   useColorModeValue,
   Input,
   Divider,
+  useToast,
 } from "@chakra-ui/react";
 import { FaArrowRight } from "react-icons/fa";
 import Link from "next/link";
@@ -16,6 +17,17 @@ import { resetCart } from "../../redux/cart/cartActions";
 import Router from "next/router";
 
 const summary = () => {
+  const toast = useToast();
+  const invalidCode = () => {
+    return toast({
+      title: "Invalid Code!",
+      position: "top-right",
+      description: "The dicount code you tried to apply is not valid. ",
+      status: "error",
+      duration: 2000,
+      isClosable: true,
+    });
+  };
   const [discountCode, setDiscountCode] = useState();
   const [discountPercent, setDiscountPercent] = useState();
   const [discountToShow, setdiscountToShow] = useState(0);
@@ -31,28 +43,30 @@ const summary = () => {
   const onClick = (e) => {
     e.preventDefault();
 
-    if (discountCode === "gamerland10") {
+    if (discountCode === "logiday") {
       setdiscountToShow(10);
       setDiscountPercent(0.1);
-    }
-    if (discountCode === "gamerland15") {
+    } else if (discountCode === "gamerland10") {
+      setdiscountToShow(10);
+      setDiscountPercent(0.1);
+    } else if (discountCode === "gamerland15") {
       setdiscountToShow(15);
       setDiscountPercent(0.15);
-    }
-    if (discountCode === "gamerland20") {
+    } else if (discountCode === "gamerland20") {
       setdiscountToShow(20);
       setDiscountPercent(0.2);
-    }
-    if (discountCode === "gamerland25") {
+    } else if (discountCode === "gamerland25") {
       setdiscountToShow(25);
       setDiscountPercent(0.25);
-    }
-    if (discountCode === "gamerland30") {
+    } else if (discountCode === "gamerland30") {
       setdiscountToShow(30);
       setDiscountPercent(0.3);
-    }
-    if (subtotal === 0) {
+    } else if (subtotal === 0) {
       setdiscountToShow(0);
+    } else {
+      invalidCode();
+      setdiscountToShow(0);
+      setDiscountPercent(0);
     }
 
     setDiscountCode("");
@@ -101,6 +115,7 @@ const summary = () => {
           focusBorderColor="#44B8FC"
           placeholder="Discount code"
           onChange={onChange}
+          value={discountCode}
         />
         <Button
           onClick={onClick}

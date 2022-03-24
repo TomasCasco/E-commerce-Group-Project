@@ -1,7 +1,7 @@
 export const addToFavorites = (product) => {
   return {
     type: "ADD_TO_FAVORITES",
-    payload: product
+    payload: product,
   };
 };
 
@@ -14,4 +14,9 @@ export const removeFromFavorites = (itemID) => {
   };
 };
 
-
+export const setFavsFromLocalStorage = (favs) => {
+  return {
+    type: "SET_FAVS_LOCAL_STORAGE",
+    payload: favs,
+  };
+};

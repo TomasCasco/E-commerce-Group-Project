@@ -2,27 +2,31 @@ import "../styles/globals.css";
 import React, { useEffect } from "react";
 import { wrapper } from "../redux/store";
 import { ChakraProvider } from "@chakra-ui/react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setCartFromLocalStorage } from "../redux/cart/cartActions";
 import Cookie from "js-cookie";
 import { setLogged, setUser } from "../redux/user/usersActions";
 import {
   getAllBrands,
   getAllCategories,
-  getCart,
-  editCart,
 } from "../redux/products/productsActions";
 import Head from "next/head";
-import { client } from "../apolloClient/apolloClient";
-import { mutationEditCart } from "../apolloClient/mutations";
+import { setFavsFromLocalStorage } from "../redux/favorites/favoritesActions";
 
 function MyApp({ Component, pageProps }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
     const cartLocalStorage = localStorage.getItem("cart");
+    const favsLocalStorage = localStorage.getItem("favs");
     const token = Cookie.get("token");
     const user = Cookie.get("user");
+    if (favsLocalStorage) {
+      dispatch(setFavsFromLocalStorage(JSON.parse(favsLocalStorage)));
+    }
+    else {
+      localStorage.setItem("favs",JSON.stringify([]))
+    }
     if (cartLocalStorage) {
       dispatch(setCartFromLocalStorage(JSON.parse(cartLocalStorage)));
     } else {
@@ -34,41 +38,6 @@ function MyApp({ Component, pageProps }) {
     }
     dispatch(getAllBrands());
     dispatch(getAllCategories());
-
-    // return () => { dispatch(editCart(JSON.parse(user), cartLocalStorage)) };
-  }, []);
-
-  const handleSaveCartDb = async () => {
-    const { data } = await client.mutate({
-      mutation: mutationEditCart,
-      variables: {
-        userId: JSON.parse(Cookie.get("user")).id,
-        products: JSON.parse(localStorage.getItem("cart")).map((p) => {
-          return {
-            product: {
-              name: p.product.name,
-              price: p.product.price,
-              category: p.product.category,
-              description: p.product.description,
-              brand: p.product.brand,
-              image: p.product.image,
-              stock: p.product.stock,
-            },
-            qty: p.qty,
-          };
-        }),
-      },
-    });
-    console.log(data.editCart);
-  };
-
-  useEffect(() => {
-    // window.addEventListener("beforeunload", alertUser);
-    window.addEventListener("unload", handleSaveCartDb);
-    return () => {
-      window.removeEventListener("unload", handleSaveCartDb);
-      handleSaveCartDb();
-    };
   }, []);
 
   return (

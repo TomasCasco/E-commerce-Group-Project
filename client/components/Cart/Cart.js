@@ -1,12 +1,34 @@
 import React from "react";
-import { Button, Flex, Box, useColorModeValue } from "@chakra-ui/react";
+import {
+  Button,
+  Flex,
+  Box,
+  useColorModeValue,
+  useToast,
+} from "@chakra-ui/react";
 import { FaArrowRight } from "react-icons/fa";
-import Link from "next/link";
 import CartItem from "./CartItem";
 import { useSelector } from "react-redux";
+import Router from "next/router";
 
 export default function Cart() {
   const data = useSelector((state) => state.cartReducer.cart);
+  const userIsLogged = useSelector((state) => state.usersReducer.isLogged);
+  const toast = useToast();
+
+  const handleCheckout = () => {
+    if (userIsLogged) {
+      return Router.push("/checkout");
+    }
+    toast({
+      title: "Attention !",
+      description: "You must be logged in",
+      status: "warning",
+      position:"top",
+      duration: 3000,
+      isClosable: true,
+    });
+  };
 
   return (
     <Flex
@@ -89,29 +111,27 @@ export default function Cart() {
                 {`$` +
                   data
                     .map((el) => el.qty * el.product.price)
-                    .reduce((prev, curr) => prev + curr, 0) +
-                  `.00 `}
+                    .reduce((prev, curr) => prev + curr, 0)}
               </Box>
             </Flex>
             <Box fontSize="x-large">
-              <Link href="/checkout" _hover={{ textDecoration: "none" }}>
-                <Button
-                  background="#44B8FC"
-                  color="white"
-                  _hover={{
-                    background: "transparent",
-                    color: "#44B8FC",
-                    border: "2px solid",
-                    borderColor: "#44B8FC",
-                  }}
-                  w="300px"
-                  size="md"
-                  fontSize="md"
-                  rightIcon={<FaArrowRight />}
-                >
-                  Go to Cart
-                </Button>
-              </Link>
+              <Button
+                background="#44B8FC"
+                color="white"
+                _hover={{
+                  background: "transparent",
+                  color: "#44B8FC",
+                  border: "2px solid",
+                  borderColor: "#44B8FC",
+                }}
+                w="300px"
+                size="md"
+                fontSize="md"
+                rightIcon={<FaArrowRight />}
+                onClick={handleCheckout}
+              >
+                Go to Cart
+              </Button>
             </Box>
           </Box>
         </Box>

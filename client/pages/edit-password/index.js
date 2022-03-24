@@ -4,30 +4,24 @@ import {
   Container,
   Flex,
   FormControl,
-  useToast,
-  FormLabel,
-  Input,
   Stack,
   useBreakpointValue,
   useColorModeValue,
-  Heading,
-  HStack,
-  Text,
+  useToast,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
-import { Logo } from "../../components/Register/Logo";
-import { PasswordField } from "../../components/Register/PasswordField.js";
-import { client } from "../../apolloClient/apolloClient";
 import { useRouter } from "next/router";
-import { mutationUserRegister } from "../../apolloClient/mutations";
+import { useState } from "react";
 import NavBar from "../../components/Navbar/NavBar";
 import Nav from "../../components/Navbar/NavResponsive";
+import Logo from "../../components/Navbar/Logo";
+import { PasswordField } from "../../components/Register/PasswordField";
+import { useSelector } from "react-redux";
+import axios from "axios";
 
-export default function App() {
-  const [email, setEmail] = useState("");
+export default function EditPassword() {
+  const user = useSelector((state) => state.usersReducer.user);
   const [password, setPassword] = useState("");
   const [passwordCheck, setPasswordCheck] = useState("");
-  const [username, setUsername] = useState("");
   const router = useRouter();
   const toast = useToast();
 
@@ -43,30 +37,13 @@ export default function App() {
         isClosable: true,
       });
     }
-    const inputValue = {
-      email: email,
-      password: password,
-      username: username,
-    };
-    const response = await client.mutate({
-      mutation: mutationUserRegister,
-      variables: {
-        input: inputValue,
-      },
-    });
+    const response = await axios.post(
+      "https://users-gamerland.herokuapp.com/users/edit-password",
+      { userId: user.id, newPassword: password }
+    );
 
-    const errorResponse = response.data.registerUser.error;
-    const messageResponse = response.data.registerUser.message;
-    if (errorResponse) {
-      toast({
-        title: "Error!",
-        position: "top",
-        description: errorResponse,
-        status: "error",
-        duration: 2000,
-        isClosable: true,
-      });
-    }
+    const messageResponse = response.data.msg;
+
     if (messageResponse) {
       toast({
         title: "Success!",
@@ -80,10 +57,8 @@ export default function App() {
         router.push("/");
       }, 1000);
     }
-    setEmail("");
     setPassword("");
     setPasswordCheck("");
-    setUsername("");
   };
   return (
     <>
@@ -110,21 +85,6 @@ export default function App() {
               >
                 <Logo />
               </Flex>
-              <Stack spacing={{ base: "2", md: "3" }} textAlign="center">
-                <Heading size={useBreakpointValue({ base: "xs", md: "sm" })}>
-                  Create a new account
-                </Heading>
-                <HStack spacing="1" justify="center">
-                  <Text color="muted">Already registered?</Text>
-                  <Button
-                    variant="link"
-                    colorScheme="blue"
-                    onClick={() => router.push("/login")}
-                  >
-                    Sign in
-                  </Button>
-                </HStack>
-              </Stack>
             </Stack>
             <Box
               py={{ base: "0", sm: "8" }}
@@ -140,50 +100,28 @@ export default function App() {
                 <Stack spacing="5">
                   <form onSubmit={handleSubmit}>
                     <FormControl>
-                      <FormLabel htmlFor="email">Email</FormLabel>
-                      <Input
-                        id="email"
-                        type="email"
-                        placeholder="mail@mail.com"
-                        borderColor={"gray"}
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                        mb={5}
-                      />
-                      <FormLabel htmlFor="email">Username</FormLabel>
-                      <Input
-                        placeholder="UserName"
-                        id="username"
-                        type="text"
-                        borderColor={"gray"}
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                        required
-                        mb={5}
-                      />
                       <PasswordField
+                        id="password1"
                         borderColor={"gray"}
                         labelname="Password"
                         placeholder="*******"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         mb={5}
-                        id="password1"
                       />
                       <PasswordField
+                        id="password2"
                         labelname="Repeat password"
                         placeholder="*******"
                         borderColor={"gray"}
                         value={passwordCheck}
                         onChange={(e) => setPasswordCheck(e.target.value)}
                         mb={5}
-                        id="password2"
                       />
                     </FormControl>
                     <Stack spacing="6">
                       <Button variant="primary" type="submit">
-                        Sign up
+                        Submit
                       </Button>
                       <Button
                         variant="primary"
@@ -201,13 +139,4 @@ export default function App() {
       </Container>
     </>
   );
-}
-
-export function getServerSideProps(context) {
-  if (context.req.headers.cookie?.includes("token")) {
-    context.res.writeHead(302, { Location: "/" });
-    context.res.end();
-    return { props: {} };
-  }
-  return { props: {} };
 }

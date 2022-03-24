@@ -12,12 +12,15 @@ import {
 import { FaArrowRight } from "react-icons/fa";
 import Link from "next/link";
 import { buyFromCheckout } from "../../redux/checkout/checkoutActions";
+import { resetCart } from "../../redux/cart/cartActions";
+import Router from "next/router";
 
 const summary = () => {
   const [discountCode, setDiscountCode] = useState();
   const [discountPercent, setDiscountPercent] = useState();
   const [discountToShow, setdiscountToShow] = useState(0);
   const { id, email } = useSelector((state) => state.usersReducer.user);
+  const cart = useSelector((state) => state.cartReducer.cart);
 
   const dispatch = useDispatch();
 
@@ -55,8 +58,6 @@ const summary = () => {
     setDiscountCode("");
   };
 
-  const cart = useSelector((state) => state.cartReducer.cart);
-
   const subtotal = cart
     .map((el) => el.qty * el.product.price)
     .reduce((prev, curr) => prev + curr, 0);
@@ -65,6 +66,8 @@ const summary = () => {
     e.preventDefault();
     const response = await buyFromCheckout({ cart, userId: id, email });
     window.open(response.data.buyFromCheckout.url);
+    dispatch(resetCart());
+    Router.push("/");
   };
 
   const discountValue = subtotal * discountPercent;

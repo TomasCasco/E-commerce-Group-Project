@@ -28,32 +28,34 @@ export default function ProductsHome() {
     dispatch(getAllProducts());
   }, []);
 
-  if (loadingData) {
+
+  if (!loadingData && data.length>3){
+    return (
+      <Flex
+        justifyContent="center"
+        flexDir={"column"}
+        align="center"
+        h="100%"
+        mt={20}
+        mb={10}
+      >
+        <Flex mb={10}>
+          <Heading>Destacados</Heading>
+        </Flex>
+        <Flex flexWrap="wrap" justifyContent="center" rounded={10}>
+          {
+            getRandom(data, 4).map((data) => {
+              return (
+                <Box key={data._id}>
+                  <Card data={data} />
+                </Box>
+              );
+            })}
+        </Flex>
+      </Flex>
+    );
+  }
+  else {
     return <SpinnerComponent />;
   }
-
-  return (
-    <Flex
-      justifyContent="center"
-      flexDir={"column"}
-      align="center"
-      h="100%"
-      mt={20}
-      mb={10}
-    >
-      <Flex mb={10}>
-        <Heading>Destacados</Heading>
-      </Flex>
-      <Flex flexWrap="wrap" justifyContent="center" rounded={10}>
-        {data.length > 0 &&
-          getRandom(data, 4).map((data) => {
-            return (
-              <Box key={data._id}>
-                <Card data={data} />
-              </Box>
-            );
-          })}
-      </Flex>
-    </Flex>
-  );
 }

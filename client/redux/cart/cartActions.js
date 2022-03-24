@@ -1,5 +1,5 @@
-import { client } from '../../apolloClient/apolloClient'
-import { mutationEditCart } from '../../apolloClient/mutations'
+import { client } from "../../apolloClient/apolloClient";
+import { mutationEditCart } from "../../apolloClient/mutations";
 
 export const addToCart = (product) => {
   return {
@@ -36,40 +36,8 @@ export const subtractItemQty = (itemId) => {
   };
 };
 
-/*  export const loadCurrentItem = (item) => {
-    return {
-      type: 'LOAD_CURRENT_ITEM',
-      payload: item,
-    };
-  };   */
-
-  export const editCart = (userId, products) => async () => {
-  try {
-    await client.mutate({
-      mutation: mutationEditCart,
-      variables: {
-        userId,
-        products
-      }
-    })
-  }
-  catch (e){
-    console.log(JSON.stringify(e, null, 2));
-  }
-}
-
-export const getCart = (userId, productss) => {
-  return async function (dispatch) {
-    const products = await client.query({
-      query: queryGetCart,
-      variables: {
-        userId: userId,
-        products: productss
-      },
-    });
-    return dispatch({
-      type: "GET_CART",
-      payload: products.data.getCart,
-    });
+export const resetCart = () => {
+  return {
+    type: "RESET_CART",
   };
 };

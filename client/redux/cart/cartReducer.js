@@ -9,6 +9,11 @@ const cartReducer = (state = initialState, action) => {
         ...state,
         cart: [...state.cart, { product: action.payload, qty: 1 }],
       };
+    case "RESET_CART":
+      return {
+        ...state,
+        cart: [],
+      };
     case "SET_CART_LOCAL_STORAGE":
       return {
         ...state,

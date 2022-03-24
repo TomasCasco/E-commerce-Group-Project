@@ -21,13 +21,7 @@ export default function Support() {
         currentFaqId={currentFaqId}
         setCurrentFaqId={setCurrentFaqId}
       />
-      <Terms
-        index={index}
-        setIndex={setIndex}
-        currentTermId={currentTermId}
-        setCurrentTermId={setCurrentTermId}
-      />
-      {/* <ContactUsForm /> */}
+      <ContactUsForm />
       <Footer />
     </>
   );

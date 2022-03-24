@@ -12,7 +12,7 @@
   {
     "id": 3,
     "question": "How can I pay for my order?",
-    "answer": "We support Mercado Pago as a unique pay metod."
+    "answer": "You need to add at least a Product in your cart, then go to the cart section. Press checkout and i will be redirected to the Mercado Pago checkout page."
   },
   {
     "id": 4,
@@ -26,12 +26,8 @@
   },
   {
     "id": 6,
-    "question": "What is the Cancellation Policy?",
+    "question": "There is a Cancellation Policy?",
     "answer": "You can cancel an order when it is in packed or shipped status, as long as the cancel option is available on App or Website."
-  },
-  {
-    "id": 7,
-    "question": "How do I cancel my Order?",
-    "answer": "Tap on \"My Orders\" section under the main menu of your App or Website and then select the item or order you want to cancel"
   }
+ 
 ]

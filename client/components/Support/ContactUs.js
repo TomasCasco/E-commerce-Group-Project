@@ -39,6 +39,8 @@ export default function ContactUsForm() {
           console.log(error.text);
         }
       );
+    e.target.reset();
+    showToastForm();
   };
   return (
     <Container
@@ -53,11 +55,7 @@ export default function ContactUsForm() {
             <Text fontSize="24px">Your question was not answered?</Text>
             <Text fontSize="22px"> Contact Us</Text>
             <Stack spacing="5">
-              <form
-                align="center"
-                ref={form}
-                onSubmit={(sendEmail, showToastForm)}
-              >
+              <form align="center" ref={form} onSubmit={sendEmail}>
                 <FormControl>
                   <FormLabel htmlFor="email">Full Name</FormLabel>
                   <Input

@@ -20,6 +20,7 @@ const billTypes = gql`
     products: [Product]
     total: Float
     status: String
+    createdAt: String
   }
 
   type URLResponse {

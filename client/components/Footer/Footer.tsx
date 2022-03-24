@@ -79,23 +79,23 @@ export default function Footer() {
           </Stack>
           <Stack align={"flex-start"}>
             <ListHeader>Products</ListHeader>
-            <Link href={"/products/[filterName]"} as={"/products?category=Gaming%20Keyboards"}>
+            <Link href={"/products?category=Gaming%20Keyboards"}>
               Gaming Keyboards
             </Link>
-            <Link href={"/products/[filterName]"} as={"/products?category=Microphone"}>
+            <Link href={"/products?category=Microphone"}>
               Microphones
             </Link>
-            <Link href={"/products/[filterName]"} as={"/products?category=Gaming%20Mouses"}>
+            <Link href={"/products?category=Gaming%20Mouses"}>
               Gaming Mouse
             </Link>
-            <Link href={"/products/[filterName]"} as={"/products?category=Mouse%20Pads"}>
+            <Link href={"/products?category=Mouse%20Pads"}>
               Mouse Pads
             </Link>
           </Stack>
           <Stack align={"flex-start"}>
             <ListHeader>Company</ListHeader>
-            <Link href={"/aboutUs"}>About Us</Link>
-            <Link href={"/aboutUs"}>Developers</Link>
+            <Link href={"/aboutus"}>About Us</Link>
+            <Link href={"/aboutus"}>Developers</Link>
             
           </Stack>
           <Stack align={"flex-start"}>

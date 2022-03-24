@@ -12,7 +12,7 @@ class BillsApi extends RESTDataSource {
   }
 
   async getBills(id) {
-    return await this.get(`/${id}`);
+    return await this.get(`/get-bill/${id}`);
   }
 }
 

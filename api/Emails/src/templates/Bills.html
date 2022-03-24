@@ -1,6 +1,27 @@
-<h1 style="text-align: center">user: {user}</h1>
+<h3
+  style="
+    text-align: center;
+    padding: 5px 10px;
+    border: 2px solid #000;
+    border-radius: 15px;
+  "
+>
+  {user}
+</h3>
 <div>
-  <p style="display: block; text-align: center; padding: 15px 0">
-    Total of your purchase {total}
-  </p>
+  <table style="width: 100%">
+    <tr style="background: #000">
+      <td style="color: #fff; font-size: 15px">PRODUCT</td>
+      <td style="color: #fff; font-size: 15px">TOTAL</td>
+      <td style="color: #fff; font-size: 15px">STATUS</td>
+      <td style="color: #fff; font-size: 15px">DATE</td>
+    </tr>
+
+    <tr style="background: #ddd">
+      <td style="font-size: 15px">{products}</td>
+      <td style="font-size: 15px">{total}</td>
+      <td style="font-size: 15px">{status}</td>
+      <td style="font-size: 15px">{date}</td>
+    </tr>
+  </table>
 </div>

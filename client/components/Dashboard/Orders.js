@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   Container,
@@ -8,19 +8,39 @@ import {
   Box,
   useColorModeValue,
   Center,
+  Table,
+  Thead,
+  Tbody,
+  Tfoot,
+  Tr,
+  Th,
+  Td,
+  TableCaption,
 } from "@chakra-ui/react";
 import { FiShoppingBag } from "react-icons/fi";
 import Cookie from "js-cookie";
 import { getDetailBills } from "../../redux/checkout/checkoutActions";
+import { client } from "../../apolloClient/apolloClient";
+import { queryBills } from "../../apolloClient/querys";
 
 export default function Orders() {
   const bills = useSelector((state) => state.checkoutReducer?.bills);
+  const [bill, setBill] = useState([]);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getDetailBills(JSON.parse(Cookie.get("user")).id));
-  }, [dispatch]);
+    const getBillById = async () => {
+      const { data } = await client.query({
+        query: queryBills,
+        variables: {
+          input: JSON.parse(Cookie.get("user")).id,
+        },
+      });
+      setBill(data.getBills);
+    };
+    getBillById();
+  }, []);
 
   return (
     <Container>
@@ -55,51 +75,49 @@ export default function Orders() {
             height="-webkit-fit-content"
             bgColor={useColorModeValue("white", "#15171C")}
           >
-            <Flex
-              mt="1"
-              justifyContent="space-between"
-              alignContent="center"
-              textAlign={"center"}
-              flexDir="column"
-              alignItems="center"
-              w={"-webkit-max-content"}
-              height="-webkit-fit-content"
-            >
-              <Box fontSize="3xl" fontWeight="semibold" lineHeight="10">
-                <Center>
-                  <Icon
-                    as={FiShoppingBag}
-                    mb="10"
-                    fontSize="6xl"
-                    color="blue.200"
-                    alignItems={"center"}
-                  />
-                </Center>
-                <Text as="u" color="blue.500">
-                  {" "}
-                  ID:
-                </Text>{" "}
-                {bills?.userId}
-                <br />
-                <Text as="u" color="blue.500">
-                  {" "}
-                  Products:
-                </Text>{" "}
-                {bills?.products}
-                <br />
-                <Text as="u" color="blue.500">
-                  {" "}
-                  Total:
-                </Text>{" "}
-                {bills?.products.total}
-                <br />
-                <Text as="u" color="blue.500">
-                  {" "}
-                  Status:
-                </Text>{" "}
-                {bills?.products.status}
-              </Box>
-            </Flex>
+            <Box fontSize="3xl" fontWeight="semibold" lineHeight="10">
+              <Center>
+                <Icon
+                  as={FiShoppingBag}
+                  mb="10"
+                  fontSize="6xl"
+                  color="blue.200"
+                  alignItems={"center"}
+                />
+              </Center>
+
+              {/* tabla bills */}
+              <Table variant="simple">
+                <TableCaption>Bills</TableCaption>
+                <Thead>
+                  <Tr bg={"#000"}>
+                    <Th color={"#fff"} w={"400px"}>
+                      Product Title
+                    </Th>
+                    <Th color={"#fff"}>Total Price</Th>
+                    <Th color={"#fff"}>Status</Th>
+                    <Th color={"#fff"}>Quantity</Th>
+                    <Th color={"#fff"}>Date</Th>
+                  </Tr>
+                </Thead>
+                <Tbody>
+                  {bill?.map((b) => (
+                    <Tr>
+                      <Td fontSize={"16px"} w={"400px"}>
+                        {b.products.map((p) => p.title + " ")}
+                      </Td>
+                      <Td fontSize={"16px"}>${b.total}</Td>
+                      <Td fontSize={"16px"}>{b.status}</Td>
+                      <Td fontSize={"16px"}>
+                        {b.products.map((p) => p.quantity)}
+                      </Td>
+                      <Td fontSize={"16px"}>{b.createdAt.split("T")[0]}</Td>
+                    </Tr>
+                  ))}
+                </Tbody>
+              </Table>
+              {/* fin de la tabla */}
+            </Box>
           </Flex>
         </Box>
       </Flex>
